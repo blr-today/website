@@ -1,0 +1,18 @@
+---
+---
+{
+  "type": "FeatureCollection",
+  "features": [{% for event in site.data.geo_events %}
+    {
+      "type": "Feature",
+      "properties": {
+      	"shorttitle": {{event.name | truncate:20| jsonify}},
+        "id": "{{event.url}}"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [{{event.lng}},{{event.lat}}]
+      }
+    }{% if forloop.rindex > 1 %},{%endif%}{% endfor %}
+  ]
+}

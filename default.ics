@@ -1,0 +1,6 @@
+---
+layout: icalendar
+title: BLR.Today Curated Calendar
+description: A curated calendar from blr.today
+---
+{{content}}

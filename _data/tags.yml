@@ -1,0 +1,58 @@
+- id: MAP
+  title: Musuem of Art & Photograph
+  description: BLR.today calendar for Musuem of Art & Photography, Bengaluru
+- id: T.IS
+  title: Tonight.is
+  description: BLR.today calendar for events curated by Tonight.is
+- id: BHAAGOINDIA
+  title: Bhaago India
+  description: BLR.today calendar for events listed on Bhaago India
+- id: FITNESS
+  title: BLR.today Fitness
+  description: BLR.Today calendar for various fitness events
+- id: CREATIVEMORNINGS
+  title: Creative Mornings
+  description: Creative Mornings Bangalore event calendar
+- id: TOGETHER
+  title: Together.Buzz events
+  description: Together.Buzz event calendar
+- id: KOOTA
+  title: Courtyard Koota Events calendar
+  description: BLR.today calendar for events hosted at Courtyard Koota
+- id: BIC
+  title: Bangalore International Center
+  description: BLR.today calendar for events hosted by BIC
+- id: CARBON
+  title: Carbon Science Gallery
+  description: BLR.today calendar for events hosted by the Carbon Science Gallery
+- id: CHAMPACA
+  title: Champaca Bookstore Library & Cafe
+  description: BLR.today calendar for events hosted by the Champaca bookstore
+- id: ATTAGALATTA
+  title: Atta Galatta
+  description: BLR.today calendar for events hosted by Atta Galatta, Indiranagar
+- id: GULLYTOURS
+  title: Gully Tours
+  description: BLR.today calendar for events hosted by gully.tours
+- id: SUMUKHA
+  title: Sumukha Exhibition
+  description: BLR.today calendar for exhibitions at Gallery Sumukha
+- id: ADIDAS
+  title: Adidas Runners
+  description: BLR.today calendar for events hosted by the Adidas Runners Bangalore community
+- id: QUIZ
+  title: BLR.Today Quizzing Calendar
+  description: BLR.today calendar for various quizes
+  tags: ["QUIZ", "KQA"]
+- id: URBANAUT
+  title: Urbanaut
+  description: BLR.today calendar events listed on the Urbanaut website.
+- id: COURTYARD
+  title: The Courtyard
+  description: BLR.today calendar events hosted at The Courtyard, Shanthinagar
+- id: VENN
+  title: Venn / Putting Scenes
+  description: BLR.today calendar events curated by Venn (earlier Putting Scenes)
+- id: WINDMILLS
+  title: Windmills
+  description: BLR.today calendar (mainly music) events hosted at Windmills

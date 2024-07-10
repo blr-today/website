@@ -1,0 +1,2 @@
+{% capture domain%}{{include.url | remove:'https://' | remove:'http://' | split:'/' | first }}{%endcapture%}
+{% if site.data.tags[domain] %}<span class=tag>{{site.data.tags[domain]}}</span>{%endif%}

@@ -1,0 +1,61 @@
+---
+layout: default
+---
+
+<h3>Address</h3>
+{{page.address1}}
+{{page.address2}}
+{{page.address3}}
+{{page.cityName}}
+
+LAT: {{page.latitude}}
+LNG: {{page.longitude}}
+
+OTHERS:
+{{telephone}}
+{{caretakerContactNo}}
+<img src="{{page.miv}}">
+<table>
+<thead>
+	<tr>
+		<th>Movie</th>
+		<th>Screen</th>
+		<th>Language</th>
+		<th>Availability</th>
+		<td>Date</td>
+		<td>Time</td>
+	</tr>
+</thead>
+<tbody>
+{% for movie in site.data.pvr.movies %}
+{% for session in movie[1].sessions %}
+{% if session.theatreId == page.theatreId %}
+<tr>
+	
+	<td><a href="{{movie[1].info.imdb_url}}">{{movie[1].info.title}}</a></td>
+
+	
+	<td>{{session.screenName}}</td>
+
+	
+	<td>{{session.language}}
+		{% if session.subtitle %}
+		with subtitles
+		{% endif %}
+	</td>
+
+	
+	<td>{{session.availableSeats}} left</td>
+
+	
+	<td>{{session.startTime| date: "%d %B"}}</td>
+
+	
+	<td>{{session.startTime|date: "%H%M"}} - {{session.endTime|date: "%H%M"}}</td>
+
+</tr>
+{% endif %}
+{% endfor %}
+{% endfor %}
+</tbody>
+</table>

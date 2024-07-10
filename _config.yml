@@ -1,0 +1,109 @@
+title: BLR.today
+description: >- # this means to ignore newlines until "baseurl:"
+  Semi-curated event listings for Bangalore
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://blr.today" # the base hostname & protocol for your site, e.g. http://example.com
+plugins:
+  - jekyll_sqlite
+  - jekyll-datapage-generator
+page_gen:
+- data: tags
+  template: icalendar
+  dir: cal
+  index_files: false
+  name: id
+  title: title
+  extension: .ics
+
+- data: tags
+  template: events
+  dir: tags
+  index_files: true
+  name: id
+  title: title
+
+- data: pvr.cinemas
+  template: cinema
+  dir: cinemas
+  index_files: false
+  name: theatreId
+  title: name
+sqlite:
+- data: tags.events
+  file: events.db
+  query: |
+    SELECT event_json, event_json -> '$.keywords' as keywords from events
+      WHERE EXISTS (SELECT 1 FROM json_each(keywords) WHERE value = :id)
+
+- data: geo_events
+  file: events.db
+  query: |
+    SELECT url, 
+    event_json->'$.location.geo.latitude' as lat, 
+    event_json->'$.location.geo.longitude' as lng, 
+    event_json-> '$.location.name' as name
+    from events WHERE event_json -> '$.location.geo' IS NOT NULL
+
+- data: events
+  file: events.db
+  query: |
+    SELECT substr(url, 9, instr(substr(url, 9), '/') - 1) AS domain,
+      url,
+      json_extract(event_json, '$.name') AS name,
+      json_extract(event_json, '$.description') AS description,
+      json_extract(event_json, '$.keywords') AS keywords,
+      json_extract(event_json, '$.startDate') AS startDate,
+      json_extract(event_json, '$.eventStatus') AS eventStatus,
+      json_extract(event_json, '$.location.name') AS location,
+      json_extract(event_json, '$.organizer.name') AS organizer
+      
+    FROM events WHERE
+    (
+      (
+        keywords NOT LIKE '%karaoke%' AND name not like '%karaoke%' AND -- MUSIC
+        keywords NOT LIKE '%dj night%' AND name not like '%dj night%' AND -- MUSIC
+        keywords NOT LIKE '%bollywood night%' AND name not like '%bollywood night%' AND -- MUSIC
+        keywords NOT LIKE '%ladies night%' AND name not like '%ladies night%' AND -- MUSIC
+        keywords NOT LIKE '%ft. %' AND name not like '%ft. %' AND -- MUSIC
+        keywords NOT LIKE '%camping%' AND name not like '%camping%' AND -- TRIP
+        keywords NOT LIKE '%trek%' AND name not like '%trek%' AND -- TRIP
+        keywords NOT LIKE '%techno%' AND name not like '%techno%' AND -- MUSIC
+        description NOT LIKE '%karaoke%' AND -- MUSIC
+        keywords NOT LIKE '%tipsy%' AND name not like '%tipsy%' AND -- MUSIC
+        keywords NOT LIKE '%summer camp%' AND name not like '%summer camp%' AND -- KIDS
+        description NOT LIKE '%get sloshed%' AND -- DRINKING
+        description NOT LIKE '%magic mocktails%' AND -- DRINKING
+        name NOT LIKE '%jollywood%' AND -- ADS
+        name NOT LIKE '%thrifty x%' AND -- DATING
+        name NOT LIKE '% vs %' AND -- SPORTS
+        name NOT LIKE '% admissions %' AND -- ADS
+        keywords NOT LIKE '%parties%' AND -- MUSIC
+        name NOT LIKE '%deck gigs%' AND -- MUSIC
+        name NOT LIKE '%5 day program%' AND -- LONG
+        name NOT GLOB '*IPL*' AND -- SPORTS
+        name NOT GLOB '*GP*' AND -- SPORTS
+        name NOT GLOB '*F1*' AND -- SPORTS
+        name NOT GLOB '*T20*' AND -- SPORTS
+        name NOT GLOB '*RCB*' AND -- SPORTS
+        name NOT GLOB '*MI*' AND -- SPORTS
+        name NOT LIKE '%pet paw%' AND -- PETS
+        keywords NOT LIKE '%summer vacation%' AND -- KIDS
+        (organizer NOT LIKE 'Odyssey vibes' OR organizer IS NULL) AND -- TRIP
+        (organizer NOT LIKE '%Medicine%' OR organizer IS NULL) AND -- CONFERENCE
+        (location NOT LIKE 'Small World' OR location IS NULL) AND -- BADRATING
+        (organizer NOT LIKE '%sheena - banjara%' OR organizer IS NULL) AND -- TRIP
+        (location NOT LIKE '%HeyBrewty Wellness Studio%' OR location is NULL) AND -- WOOWOO
+        (location NOT LIKE '%blue butterfly%' OR location is NULL) AND -- MUSIC
+        (description NOT LIKE '%techno%') AND -- MUSIC
+        (name NOT LIKE '%DnBIndia presents%') AND -- MUSIC
+        
+    --    Not sure about these events: https://insider.in/search?q=burgerman
+    --    (organizer NOT LIKE '%burgerman%' OR organizer IS NULL) AND 
+            
+        -- See https://insider.in/search?q=boche%20club
+        (organizer NOT LIKE '%brewcraft hospitality%' OR organizer IS NULL) AND  -- MUSIC 
+        description not LIKE '%happy hour%' -- MUSIC
+      )
+      OR (keywords IS NULL OR description IS NULL OR url LIKE '%sumukha%')
+    )
+    ORDER BY startDate ASC

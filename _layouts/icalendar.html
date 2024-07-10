@@ -1,0 +1,22 @@
+---
+---
+BEGIN:VCALENDAR
+VERSION:2.0
+METHOD:PUBLISH
+PRODID:blr.today{{page.slug}}
+CALSCALE:GREGORIAN
+X-WR-CALNAME:{{page.title  | strip_newlines}}
+X-ORIGINAL-URL:{{page.url | absolute_url}}
+X-WR-CALDESC:{{page.description | strip_newlines}}
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:index
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+{%for row in page.events %}{{row.event_json|to_ical}}{%endfor%}END:VCALENDAR

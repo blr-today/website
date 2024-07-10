@@ -1,0 +1,24 @@
+---
+layout: default
+title: blr.today
+permalink: /cinemas/
+---
+<table>
+	<thead>
+		<th>
+			Name
+		</th>
+		<th>
+			Address
+		</th>
+	</thead>
+	<trow>
+{% for x in site.data.pvr.cinemas %}
+{% assign e=x[1] %}
+<tr>
+	<td><a href="/cinemas/{{e.theatreId}}">{{e.name}}</a></td>
+	<td>{{e.address2}}</td>
+</tr>
+{% endfor %}
+</trow>
+</table>
