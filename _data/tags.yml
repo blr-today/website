@@ -56,3 +56,21 @@
 - id: WINDMILLS
   title: Windmills
   description: BLR.today calendar (mainly music) events hosted at Windmills
+- id: BSF
+  title: Bengaluru Sustainability Forum
+  description: Events curated by the Bengaluru Sustainability Forum
+- id: BLUETOKAI
+  title:: Blue Tokai
+  description: Coffe workshops and events hosted by Blue Tokai Coffe Roasters.
+- id: GOETHE
+  title: Goethe Institut, Max Mueller Bhavan
+  description: Events hosted by the Max Mueller Bhavan, Indiranagar
+- id: SOFAR
+  title: Sofar Sounds
+  description: Intimate concerts by Sofar Sounds
+- id: TROVE
+  title: Trove Experiences
+  description: Events hosted by Trove Experiences
+- id: ZOMATO
+  title: Zomato Live
+  description: Events hosted by Zomato Live
