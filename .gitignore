@@ -5,3 +5,4 @@ _site
 vendor
 events.db
 node_modules
+assets/bundle.js

@@ -1,0 +1,3 @@
+# cache all ics files for 30 minutes
+/**.ics
+	cache-control: max-age=1800, no-transform, stale-while-revalidate, stale-if-error

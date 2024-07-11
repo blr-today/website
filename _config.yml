@@ -6,6 +6,23 @@ url: "https://blr.today" # the base hostname & protocol for your site, e.g. http
 plugins:
   - jekyll_sqlite
   - jekyll-datapage-generator
+exclude:
+  - .editorconfig
+  - .gitignore
+  - Gemfile*
+  - vendor
+  - .jekyll-cache
+  - rollup.config.js
+  - package*
+  - js # this is built into assets/bundle.js
+  - netlify.toml
+  - README.md
+  - events.db
+  # TODO: fixme
+  - default.ics
+include:
+  - _headers
+  - _redirects
 page_gen:
 - data: tags
   template: icalendar
@@ -28,6 +45,7 @@ page_gen:
   index_files: false
   name: theatreId
   title: name
+
 sqlite:
 - data: tags.events
   file: events.db

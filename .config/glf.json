@@ -1,0 +1,18 @@
+{
+  "inputs": ["./package.json"],
+  "output": "assets/third-party-licenses.txt",
+  "lineEnding": "lf",
+
+  // Manual includes for some third-party packages we use outside of NPM
+  "append": [
+    ".config/third-party/classless-css-license.txt"
+  ],
+
+  // We use the fullcalendar/adaptive premium plugin, which is available
+  // to us under the GPL as this is a GPL project.
+  "replace": {
+    "@fullcalendar/adaptive": ".config/third-party/fullcalendar-license.txt",
+    "@fullcalendar/premium-common": ".config/third-party/fullcalendar-license.txt"
+  },
+  "omitVersion": false
+}

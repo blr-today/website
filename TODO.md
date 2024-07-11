@@ -30,6 +30,8 @@ permalink: /roadmap/
 	  See if we can get away with it.
 - [ ] Fork fullcalendar/icalendar so we can add support for event colors.
 - [ ] Add full map support.
+- [ ] Set a visible range based on the calendar to only show relevant dates.
+      https://fullcalendar.io/docs/visibleRange
 
 # Ingestion
 - [ ] Tag UC events, and other cool hosts

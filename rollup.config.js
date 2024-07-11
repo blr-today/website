@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 export default {
 	input: 'js/calendar-render.js',
 	output: {
-		file: 'bundle.js',
+		file: 'assets/bundle.js',
 		format: 'es'
 	},
 	plugins: [

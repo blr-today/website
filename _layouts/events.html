@@ -5,16 +5,22 @@ title: blr.today
 
 View: <select id=cal-changer>
 	<option value=listYear>List</option>
-	<option value=timeGridDay>Calendar</option>
+	<option value=multiMonthYear>Calendar</option>
 	<option value=dayGridWeek>Week</option>
+	<option value=dayGridTwoDays>2 Day TimeGrid</option>
+	<option value=timeGridTwoDays>2 Day TimeGrid</option>
 </select>
 
-<a href="webcal://blr.today/cal/{{page.id|downcase}}.ics" class=button>Subscribe</a>
+
+<a class=fake-button href="webcal://blr.today/cal/{{page.id|downcase}}.ics" >Subscribe</a>
 <div id=calendar></div>
 
 <script type="module">
-import { renderCalendar } from "/bundle.js";
+import { renderCalendar } from "/assets/bundle.js";
 var cal = renderCalendar("/cal/{{page.id|downcase}}.ics");
+
+cal.updateSize()
+
 document.getElementById("cal-changer").onchange = function() {
 	cal.changeView(this.value);
 };

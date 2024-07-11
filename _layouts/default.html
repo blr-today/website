@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head data-theme=pure>
     {% include head.html %}
 </head>
-<body>
+<body id=top>
     <header>
-        <h1>{{page.title}}</h1>
-        <nav>
+        <!-- <h1>{{page.title}}</h1> -->
+        <nav class=noprint>
             <a href="/">Home</a> /
             <a href="/about/">About</a> /
-            <a href="/roadmap">Roadmap</a> /
+            <!-- <a href="/roadmap">Roadmap</a> / -->
             <!-- <a href="https://geojson.io/">Map</a> / -->
             <!-- <a href="/cinemas">Cinemas</a> / -->
-            <a href="https://github.com/blr-today">Source</a> /
+            <a href="/license">Source</a> /
         </nav>
     </header>
-    {{content}}
+    <main>
+        <article>
+            <h1 style="margin-top: 0px">{{page.title}}</h1>
+            {{content}}
+        </article>
+    </main>
 </body>
 </html>

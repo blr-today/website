@@ -1,7 +1,4 @@
----
-permalink: /about/
-title: blr.today
----
+# blr.today
 
 * The codebase for the website is available at https://github.com/blr-today/website
 * The website code is under the AGPL-3.0-or-later license.
