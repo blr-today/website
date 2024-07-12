@@ -4,5 +4,5 @@ publish = "_site"
 command = """
 wget https://github.com/blr-today/dataset/releases/latest/download/events.db -O events.db
 npm run build
-bundle exec jekyll build
+bundle exec jekyll build --trace
 """

@@ -39,12 +39,13 @@ page_gen:
   name: id
   title: title
 
-- data: pvr.cinemas
-  template: cinema
-  dir: cinemas
-  index_files: false
-  name: theatreId
-  title: name
+# - data: pvr.cinemas
+#   template: cinema
+#   dir: cinemas
+#   index_files: false
+#   name: theatreId
+#   title: name
+#   debug: true
 
 sqlite:
 - data: tags.events
