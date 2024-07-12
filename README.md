@@ -1,4 +1,4 @@
-# blr.today
+# blr.today [![Netlify Status](https://api.netlify.com/api/v1/badges/22e12fee-effc-43e9-a409-2c0d2e8d7602/deploy-status)](https://app.netlify.com/sites/blr-today/deploys)
 
 * The codebase for the website is available at https://github.com/blr-today/website
 * The website code is under the AGPL-3.0-or-later license.
