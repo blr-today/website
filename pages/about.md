@@ -45,8 +45,7 @@ You can see my TODO list for the project at [/roadmap](/roadmap).
 This project is born out of a [very old idea of mine][idea],
 when it was called `gardencity.events`[^4]. The original idea was to create a
 Bangalore specific clone of [we build! sg][wb] [^1], which was a website
-automatically curating maker events in Singapore. My first attempt [in 2018]
-(https://github.com/captn3m0/gardencity.events) went nowhere. It was further
+automatically curating maker events in Singapore. My first attempt [in 2018](https://github.com/captn3m0/gardencity.events) went nowhere. It was further
 pushed by the success of [Putting Scenes (now Venn)][venn] - event curation
 seemed like an interesting problem to solve.
 
