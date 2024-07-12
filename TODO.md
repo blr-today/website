@@ -3,7 +3,6 @@ layout: default
 permalink: /roadmap/
 ---
 # TODO
-
 - [ ] Set default view for each tag
 - [ ] Add combination tag support
 - [ ] Make subscribe into a button
@@ -34,5 +33,6 @@ permalink: /roadmap/
       https://fullcalendar.io/docs/visibleRange
 
 # Ingestion
+- [ ] Remove past events from BIC
 - [ ] Tag UC events, and other cool hosts
 - [ ] Nominatim (+cache) to add GeoCoordinates to every Place
