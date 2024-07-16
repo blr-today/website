@@ -6,6 +6,7 @@ url: "https://blr.today" # the base hostname & protocol for your site, e.g. http
 plugins:
   - jekyll_sqlite
   - jekyll-datapage-generator
+  - jekyll-sitemap
 exclude:
   - .editorconfig
   - .gitignore
