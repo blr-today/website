@@ -1,25 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head data-theme=pure>
-    {% include head.html %}
-</head>
-<body id=top>
-    <header>
-        <!-- <h1>{{page.title}}</h1> -->
-        <nav class=noprint>
-            <a href="/">Home</a> /
-            <a href="/about/">About</a> /
-            <!-- <a href="/roadmap">Roadmap</a> / -->
-            <!-- <a href="https://geojson.io/">Map</a> / -->
-            <!-- <a href="/cinemas">Cinemas</a> / -->
-            <a href="/license">Source</a> /
-        </nav>
-    </header>
-    <main>
-        <article>
-            <h1 style="margin-top: 0px">{{page.title}}</h1>
-            {{content}}
-        </article>
-    </main>
-</body>
+    <head data-theme="pure">
+        {% include head.html %}
+    </head>
+    <body id="top">
+        <header>
+            <!-- <h1>{{page.title}}</h1> -->
+            <nav class="noprint">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/license">Source</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <article>
+                <h1 style="margin-top: 0px">{{page.title}}</h1>
+                {{content}}
+            </article>
+        </main>
+        <footer style="margin-top: 2rem">
+            <hr />
+            <p>Last Updated at {{site.time | date: "%d %b / %H:%M %p"}}</p>
+        </footer>
+    </body>
 </html>

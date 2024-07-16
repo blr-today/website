@@ -2,6 +2,8 @@
 layout: default
 title: blr.today
 ---
+**curating events in bengaluru**
+
 <ul>
 {% for tag in site.data.tags %}
 <li>
