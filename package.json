@@ -6,7 +6,9 @@
   "repository": "github:blr-today/website",
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "license": "npx generate-license-file --input package.json --output assets/third-party-licenses.txt --overwrite --ci --no-spinner"
+    "license": "npx generate-license-file --config .config/glf.json",
+    "fetch-calendar": "rm -f events.db && wget -q https://github.com/blr-today/dataset/releases/latest/download/events.db -O events.db",
+    "stat": "sqlite3 --header --csv  events.db \"SELECT substr(url, 9, instr(substr(url, 9), '/') - 1) AS domain, COUNT(*) as count FROM events GROUP by domain ORDER BY count DESC\""
   },
   "dependencies": {
     "@fullcalendar/adaptive": "^6.1.14",

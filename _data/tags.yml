@@ -1,76 +1,108 @@
 - id: MAP
-  title: Musuem of Art & Photograph
+  title: Musuem of Art & Photograph [Venue]
   description: BLR.today calendar for Musuem of Art & Photography, Bengaluru
+
 - id: T.IS
-  title: Tonight.is
-  description: BLR.today calendar for events curated by Tonight.is
+  title: Tonight.is [Curated]
+  description: Clubbing Events curated by Tonight.is
+
 - id: BHAAGOINDIA
-  title: Bhaago India
-  description: BLR.today calendar for events listed on Bhaago India
+  title: Bhaago India [Curated]
+  description: Running events listed on Bhaago India
+
 - id: FITNESS
-  title: BLR.today Fitness
-  description: BLR.Today calendar for various fitness events
+  title: Fitness [Curated]
+  description: Combined Fitness events from various sources
+
 - id: CREATIVEMORNINGS
-  title: Creative Mornings
+  title: Creative Mornings [Organizer]
   description: Creative Mornings Bangalore event calendar
+
 - id: TOGETHER
-  title: Together.Buzz events
+  title: Together.Buzz [Organizer]
   description: Together.Buzz event calendar
+
 - id: KOOTA
-  title: Courtyard Koota Events calendar
-  description: BLR.today calendar for events hosted at Courtyard Koota
+  title: Courtyard Koota [Venue]
+  description: Events hosted at Courtyard Koota
+
 - id: BIC
-  title: Bangalore International Center
-  description: BLR.today calendar for events hosted by BIC
+  title: Bangalore International Center [Venue]
+  description: Events hosted by BIC
+
 - id: CARBON
-  title: Carbon Science Gallery
-  description: BLR.today calendar for events hosted by the Carbon Science Gallery
+  title: Carbon Science Gallery [Organizer]
+  description: Events hosted by the Carbon Science Gallery
+
 - id: CHAMPACA
-  title: Champaca Bookstore Library & Cafe
-  description: BLR.today calendar for events hosted by the Champaca bookstore
+  title: Champaca Bookstore Library & Cafe [Organizer]
+  description: Events hosted by the Champaca bookstore
+
 - id: ATTAGALATTA
-  title: Atta Galatta
-  description: BLR.today calendar for events hosted by Atta Galatta, Indiranagar
+  title: Atta Galatta [Organizer]
+  description: Events hosted by Atta Galatta, Indiranagar
+
 - id: GULLYTOURS
-  title: Gully Tours
-  description: BLR.today calendar for events hosted by gully.tours
+  title: Gully Tours [Organizer]
+  description: Bangalore city tours hosted by gully.tours
+
 - id: SUMUKHA
-  title: Sumukha Exhibition
-  description: BLR.today calendar for exhibitions at Gallery Sumukha
+  title: Sumukha Exhibition [Venue]
+  description: Exhibitions at Gallery Sumukha
+
 - id: ADIDAS
-  title: Adidas Runners
-  description: BLR.today calendar for events hosted by the Adidas Runners Bangalore community
+  title: Adidas Runners [Organizer]
+  description: Running events hosted by the Adidas Runners Bangalore community
+
 - id: QUIZ
   title: BLR.Today Quizzing Calendar
-  description: BLR.today calendar for various quizes
+  description: BLR.today calendar for various quizes. Currently tracks Ace Of Pubs quizes only
   tags: ["QUIZ", "KQA"]
+
 - id: URBANAUT
-  title: Urbanaut
-  description: BLR.today calendar events listed on the Urbanaut website.
+  title: Urbanaut [Aggregator]
+  description: Events listed on the Urbanaut platform.
+
 - id: COURTYARD
-  title: The Courtyard
-  description: BLR.today calendar events hosted at The Courtyard, Shanthinagar
+  title: The Courtyard [Venue]
+  description: Venue - The Courtyard, Shanthinagar
+
 - id: VENN
-  title: Venn / Putting Scenes
-  description: BLR.today calendar events curated by Venn (earlier Putting Scenes)
+  title: Venn / Putting Scenes [Curated]
+  description: Venn (earlier Putting Scenes) curated events
+
 - id: WINDMILLS
-  title: Windmills
-  description: BLR.today calendar (mainly music) events hosted at Windmills
+  title: Windmills [Venue]
+  description: Events (mainly music) hosted at Windmills
+
 - id: BSF
-  title: Bengaluru Sustainability Forum
+  title: Bengaluru Sustainability Forum [Curated]
   description: Events curated by the Bengaluru Sustainability Forum
+
 - id: BLUETOKAI
-  title: Blue Tokai
-  description: Coffe workshops and events hosted by Blue Tokai Coffe Roasters.
+  title: Blue Tokai [Organizer]
+  description: Coffee workshops and events hosted by Blue Tokai Coffe Roasters.
+
 - id: GOETHE
-  title: Goethe Institut, Max Mueller Bhavan
+  title: Goethe Institut, Max Mueller Bhavan [Organizer]
   description: Events hosted by the Max Mueller Bhavan, Indiranagar
+
 - id: SOFAR
-  title: Sofar Sounds
-  description: Intimate concerts by Sofar Sounds
+  title: Sofar Sounds [Organizer]
+  description: Intimate music gigs by Sofar Sounds
+
 - id: TROVE
-  title: Trove Experiences
-  description: Events hosted by Trove Experiences
+  title: Trove Experiences [Organizer]
+  description: Trove Experiences - New age lifestyle experiences for the urban curious.
+
 - id: ZOMATO
-  title: Zomato Live
-  description: Events hosted by Zomato Live
+  title: Zomato Live [Aggregator]
+  description: Events listed on Zomato.
+
+- id: UNDERLINE
+  title: Underline Center [Venue]
+  description: Events hosted at Underline Center, Indiranagar
+
+- id: SISTERSINSWEAT
+  title: Sisters In Sweat [Organizer]
+  description: Events hosted by Sisters In Sweat - Women only community

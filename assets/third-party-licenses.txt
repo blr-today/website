@@ -1133,6 +1133,18 @@ SOFTWARE.
 
 -----------
 
+Open-source projects that are fully GPLv3-compliant may use FullCalendar Premium freely under the GPLv3 license
+
+This project is AGPL licensed, and as such, uses a FullCalendar premium
+plugin (adaptive) under the GPL license. The complete license text
+is attached above.
+
+The `schedulederLicenseKey` is set to GPL-My-Project-Is-Open-Source
+at https://github.com/blr-today/website/blob/main/js/calendar-render.js#L45-L47
+to confirm the same.
+
+-----------
+
 This website uses classlesscss https://github.com/emareg/classlesscss/
 
 under the
