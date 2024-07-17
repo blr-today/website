@@ -1,0 +1,48 @@
+html[data-theme="pure"] {
+    --navpos: absolute;
+    --width: 768px;
+    --rem: 18px;
+    --font-p: 1em/1.6 Helvetica, Arial, sans-serif;
+    --font-h: 1em/1.6 Helvetica, Arial, sans-serif;
+    --font-c: 86%/1.4 monospace;
+    --ornament: "‹‹‹ ›››";
+    --border: 1px solid var(--cmed);
+    /* foreground   | background color */
+    --cfg: #777;
+    --cbg: #fff;
+    --cdark: #777;
+    --clight: #f8f8ff;
+    --cmed: #e6e6e6;
+    --clink: #3b8bba;
+    --cemph: #1f8dd6;
+    --cemphbg: #1f8dd610;
+}
+table {
+    display: table !important;
+}
+
+a.fake-button {
+    font: var(--font-h);
+    border-radius: 4px;
+    border: 1.5px solid var(--cmed);
+    padding: 0.4em 0.8em;
+    color: var(--cfg);
+    background-color: var(--clight);
+    padding: 0.5em 1em;
+    font-size: 85%;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0.5em;
+    border: 1.5px solid var(--clink);
+}
+
+article h2:before,
+article h1:before {
+    display: none;
+}
+
+td.fc-list-event-title {
+    text-align: left;
+    white-space: wrap;
+}

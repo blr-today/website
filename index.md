@@ -4,10 +4,13 @@ title: blr.today
 ---
 **curating events in bengaluru**
 
+<h2>Event Calendars</h2>
 <ul>
-{% for tag in site.data.tags %}
+{% for page in site.html_pages %}
+{% if page.layout == 'events' %}
 <li>
-	<a href="/tags/{{tag.id|downcase}}/">{{tag.title}}</a>
+	<a href="{{page.url}}">{{page.title}}</a>
 </li>
+{% endif %}
 {% endfor %}
 </ul>

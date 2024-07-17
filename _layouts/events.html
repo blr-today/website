@@ -3,25 +3,37 @@ layout: default
 title: blr.today
 ---
 
-View: <select id=cal-changer>
-	<option value=listYear>List</option>
-	<option value=multiMonthYear>Calendar</option>
-	<option value=dayGridWeek>Week</option>
-	<option value=dayGridTwoDays>2 Day TimeGrid</option>
-	<option value=timeGridTwoDays>2 Day TimeGrid</option>
+{{content}}
+<select id="cal-changer">
+    <option value="listYear">List</option>
+    <option value="multiMonthYear">Calendar</option>
+    <option value="dayGridWeek">Week</option>
+    <option value="dayGridTwoDays">2 Day TimeGrid</option>
+    <option value="timeGridTwoDays">2 Day TimeGrid</option>
 </select>
 
-
-<a class=fake-button href="webcal://blr.today/cal/{{page.id|downcase}}.ics" >Subscribe</a>
-<div id=calendar></div>
+<a class="fake-button" href="webcal://blr.today/cal/{{page.id|downcase}}.ics"
+    >Subscribe</a
+>
+<div id="calendar"></div>
 
 <script type="module">
-import { renderCalendar } from "/assets/bundle.js";
-var cal = renderCalendar("/cal/{{page.id|downcase}}.ics");
+    import { renderCalendar } from "/assets/bundle.js";
+    var cal = renderCalendar("{{page.url}}cal.ics");
 
-cal.updateSize()
+    cal.updateSize();
 
-document.getElementById("cal-changer").onchange = function() {
-	cal.changeView(this.value);
-};
+    document.getElementById("cal-changer").onchange = function () {
+        cal.changeView(this.value);
+    };
 </script>
+
+<ul>
+    {% for e in page.events %} {% assign E =e.event_json | parse_json %}
+    <li>
+        <a href="{{E.url}}">{{E.name}}</a> | {{E.startDate | date: "%b %d"}}
+    </li>
+    {% endfor %}
+</ul>
+
+{% include sources.html tags=page.tags %}

@@ -1,0 +1,11 @@
+<footer style="margin-top: 2rem">
+    <hr />
+    <p>
+        Last Updated at {{site.time | date: "%d %b / %H:%M %p"}}. {% if
+        page.layout == "events" %} Help improve this page
+        <a href="https://github.com/blr-today/website/edit/main/{{page.path}}">
+            on GitHub
+        </a>
+        {% endif %}
+    </p>
+</footer>
