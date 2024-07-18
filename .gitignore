@@ -6,3 +6,4 @@ vendor
 events.db
 node_modules
 assets/bundle.js
+.rollup.cache

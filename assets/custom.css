@@ -1,6 +1,6 @@
-html[data-theme="pure"] {
+:root, html {
     --navpos: absolute;
-    --width: 768px;
+    --width: 100%;
     --rem: 18px;
     --font-p: 1em/1.6 Helvetica, Arial, sans-serif;
     --font-h: 1em/1.6 Helvetica, Arial, sans-serif;
@@ -42,7 +42,8 @@ article h1:before {
     display: none;
 }
 
-td.fc-list-event-title {
+.fc-list-event-title, .fc-event-title {
     text-align: left;
     white-space: wrap;
+    text-wrap: wrap;
 }

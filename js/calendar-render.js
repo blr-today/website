@@ -24,6 +24,9 @@ function renderCalendar(url){
       endTime: '23:59', // an end time (6pm in this example)
     },
     firstDay: 1,
+    eventMaxStack: 200,
+    dayMaxEventRows: 200,
+    dayMaxEvents: 200,
     expandRows: true,
     views: {
       dayGridTwoDays: {
