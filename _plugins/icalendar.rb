@@ -10,6 +10,8 @@ require 'date'
 # color spec reuses the X11 list, which was already being used for SVG
 # wikipedia says: Extended colors are the result of merging specifications
 # from HTML 4.01, CSS 2.0, SVG 1.0 and CSS3 User Interfaces (CSS3 UI).[6] 
+
+# Current list is at https://www.w3.org/TR/css-color-3/#svg-color
 COLOR_MAP = {
   # Default Color should be neutral
   "Event" => "dodgerblue",
@@ -28,7 +30,7 @@ COLOR_MAP = {
   "DanceEvent" => "tomato",
   "ExhibitionEvent" => "lightsalmon" ,
   "Festival" => "lightsalmon",
-  "FoodEvent" => "yellowgreen",
+  "FoodEvent" => "orangered",
   "LiteraryEvent" => "mediumpurple",
   "MusicEvent" => "darkslateblue",
   "ScreeningEvent" => "lightskyblue",
