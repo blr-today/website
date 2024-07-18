@@ -52,6 +52,25 @@ defaults:
             )
             ORDER BY event_json -> '$.startDate'
             ;
+        - data: today
+          file: events.db
+          query: |
+            SELECT event_json, url, date(json_extract(event_json,'$.startDate')) as startDate, date(json_extract(event_json,'$.endDate')) as endDate
+            FROM events
+            WHERE EXISTS (
+                SELECT 1
+                FROM json_each(:tags) AS tags
+                WHERE tags.value IN (
+                    SELECT value
+                    FROM json_each(event_json->'$.keywords')
+                )
+            ) AND (
+              (startDate >= date('now', 'localtime') AND endDate <= date('now', 'localtime'))
+              OR 
+              (startDate <= date('now', 'localtime') AND endDate >= date('now', '+1 day', 'localtime'))
+            )
+            ORDER by startDate;
+        
         - data: tomorrow
           file: events.db
           query: |
@@ -67,9 +86,9 @@ defaults:
             --  Find all events either starting and ending tomorrow
             -- or starting today or earlier, and end ending after tomorrow
             ) AND (
-              (startDate >= date('now', '+1 day') AND endDate <= date('now', '+1 day'))
+              (startDate >= date('now', '+1 day', 'localtime') AND endDate <= date('now', '+1 day', 'localtime'))
               OR 
-              (startDate <= date('now', '+1 day') AND endDate >= date('now', "+2 day"))
+              (startDate <= date('now', '+1 day', 'localtime') AND endDate >= date('now', '+2 day', 'localtime'))
             )
             ORDER by startDate
 sqlite:

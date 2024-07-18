@@ -8,22 +8,32 @@
 <link href="{{ site.url }}{{page.url}}" rel="self"/>
 <link href="{{ site.url }}/"/>
 <updated>{{ site.time | date_to_xmlschema }}</updated>
-<id>{{ site.url }}</id>
+<id>{{ site.url }}{{page.url}}</id>
 {% assign hour = site.time |  date:"%H" | to_integer %}
-{% assign count = page.tomorrow | size %}
-{% if hour > 20 and count > 0 %}
+{% if hour >= 20 and page.tomorrow %}
+  {% assign date = site.time | date:"%s" | plus:86400 %}
+  {% assign events = page.tomorrow %}
+  {% assign published = date | date:  "%Y-%m-%dT20:00:00+05:30" %}
+{% elsif page.today and hour < 20 %}
+  {% assign date = site.time | date: "%s" %}
+  {% assign events = page.today %}
+  {% assign published = site.time | date:"%s"  | minus:86400 | date:"%Y-%m-%dT20:00:00+05:30" %}
+{% endif %}
+
+{% if events %}
 <entry>
-  {% assign tomorrow = site.time | date:"%s" | plus:86400 %}
-<title>{{tomorrow | date:"%b %d %a"}} | blr.today (Daily)</title>
-<published>{{ site.time | date:"%Y-%m-%dT20:00:00+05:30" }}</published>
+<title>{{date | date:"%b %d %a"}} | blr.today (Daily)</title>
+<published>{{published}}</published>
+<updated>{{published}}</updated>
+<author>
+   <name>Nemo</name>
+   <email>{{page.title | slugify}}@blr.today</email>
+ </author>
 <link href="{{ page.url }}"/>
-<id>{{page.url}}@{{site.time | date:"%Y%m%d%H%m"}}</id>
+<id>{{site.url}}{{page.url}}@{{site.time | date:"%Y%m%d%H%m"}}</id>
 
 {% capture rss %}
-
-{% for e in page.tomorrow %} {% assign E = e.event_json | parse_json %}
-
-
+{% for e in events %} {% assign E = e.event_json | parse_json %}
 <h2>
   {% assign dateSize = E.startDate | size %}
   {% if dateSize == 10 %}
@@ -33,7 +43,6 @@
   {% endif %}
 </h2>
   <p>{{E.description|truncatewords: 300}}</p>
-
 <h3>Venue: {{E.location.name}} </h3>
 <hr>
 
@@ -43,6 +52,5 @@
 </entry>
 {% endif %}
 
- 
 
 </feed>
