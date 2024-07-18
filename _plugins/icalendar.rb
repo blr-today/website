@@ -1,5 +1,6 @@
 require 'json'
 require 'icalendar'
+require 'date'
 
 # If you are curious, how we can use named colors here, RFC 7986 passes the
 # buck to W3C's css-color-3 specification
@@ -76,6 +77,16 @@ def get_location_as_text(location) # takes schema.org/Event.location
   base
 end
 
+
+def parse_datetime(s)
+  return nil if s.nil?
+  if s.length == 10
+    return Icalendar::Values::Date.new Date.parse(s)
+  else
+    return Icalendar::Values::DateTime.new DateTime.parse(s)
+  end
+end
+
 # Converts a valid schema.org/Event (or subclass)
 # to a ICALENDAR object.
 module Jekyll
@@ -98,8 +109,9 @@ module Jekyll
       ics.summary = event['name']
       ics.transp = "TRANSPARENT"
       ics.ip_class = "PUBLIC"
-      ics.dtstart = Time.parse(event['startDate'])
-      ics.dtend = Time.parse(event['endDate']) if event['endDate']
+
+      ics.dtstart = parse_datetime(event['startDate'])
+      ics.dtend = parse_datetime(event['endDate'])
       # TODO: Improve
       ics.uid = "blr.today/#{event['url']}"
 
