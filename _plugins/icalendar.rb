@@ -1,11 +1,14 @@
 require 'json'
 require 'icalendar'
-# tomato
-# darkviolet
-# deeppink
-# deepskyblue
-# gold
-# yellowgreen
+
+# If you are curious, how we can use named colors here, RFC 7986 passes the
+# buck to W3C's css-color-3 specification
+# https://icalendar.org/New-Properties-for-iCalendar-RFC-7986/5-9-color-property.html
+# The value is a case-insensitive color name taken from the CSS3 set of
+# names, defined in Section 4.3 of [W3C.REC-css3-color-20110607] The CSS3
+# color spec reuses the X11 list, which was already being used for SVG
+# wikipedia says: Extended colors are the result of merging specifications
+# from HTML 4.01, CSS 2.0, SVG 1.0 and CSS3 User Interfaces (CSS3 UI).[6] 
 COLOR_MAP = {
   # Default Color should be neutral
   "Event" => "dodgerblue",
