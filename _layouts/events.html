@@ -12,8 +12,15 @@ title: blr.today
     <option value="timeGridTwoDays">2 Day TimeGrid</option>
 </select>
 
-<a class="fake-button" href="webcal://blr.today/{{page.url}}cal.ics"
+<link rel="alternate" type="application/atom+xml" href="https://blr.today{{page.url}}agenda.xml" />
+<a class="fake-button" href="webcal://blr.today{{page.url}}cal.ics"
     >Subscribe</a
+>
+<a class="fake-button" href="https://blr.today{{page.url}}agenda.xml"
+    >Daily RSS</a
+>
+<a class="fake-button" href="mailto:add@rssby.email?body=https://blr.today{{page.url}}agenda.xml&subject=please-subscribe"
+    >Daily Email</a
 >
 <div id="calendar"></div>
 
