@@ -1,0 +1,51 @@
+{
+  "name": "@fullcalendar/icalendar",
+  "version": "6.1.15",
+  "title": "FullCalendar iCalendar Plugin",
+  "description": "Display events from a public iCalendar feed",
+  "keywords": [
+    "icalendar",
+    "ics"
+  ],
+  "homepage": "https://fullcalendar.io/docs/icalendar",
+  "peerDependencies": {
+    "@fullcalendar/core": "~6.1.15",
+    "ical.js": "^1.4.0"
+  },
+  "devDependencies": {
+    "@fullcalendar/core": "~6.1.15",
+    "@fullcalendar-scripts/standard": "*",
+    "ical.js": "^1.4.0"
+  },
+  "scripts": {
+    "build": "standard-scripts pkg:build",
+    "clean": "standard-scripts pkg:clean",
+    "lint": "eslint ."
+  },
+  "type": "module",
+  "tsConfig": {
+    "extends": "@fullcalendar-scripts/standard/config/tsconfig.browser.json",
+    "compilerOptions": {
+      "rootDir": "./src",
+      "outDir": "./dist/.tsout"
+    },
+    "include": [
+      "./src/**/*"
+    ]
+  },
+  "buildConfig": {
+    "exports": {
+      ".": {
+        "iife": true
+      }
+    },
+    "iifeGlobals": {
+      ".": "FullCalendar.ICalendar",
+      "ical.js": "ICAL"
+    }
+  },
+  "publishConfig": {
+    "directory": "./dist",
+    "linkDirectory": true
+  }
+}
