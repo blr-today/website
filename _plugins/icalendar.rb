@@ -8,7 +8,7 @@ require 'icalendar'
 # yellowgreen
 COLOR_MAP = {
   # Default Color should be neutral
-  "Event" => "ghostwhite",
+  "Event" => "dodgerblue",
   # These are unused event types
   "DeliveryEvent" => "ghostwhite",
   "EventSeries" => "ghostwhite",
