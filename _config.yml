@@ -32,8 +32,10 @@ defaults:
       layout: events
       permalink: /:path/:basename/
       layouts:
-        - layout: icalendar
+        - layout: icalendar.ics
           permalink: /:path/:basename/cal.ics
+        - layout: agenda.rss
+          permalink: /:path/:basename/agenda.xml
       sqlite:
         - data: events
           file: events.db
@@ -50,6 +52,26 @@ defaults:
             )
             ORDER BY event_json -> '$.startDate'
             ;
+        - data: tomorrow
+          file: events.db
+          query: |
+            SELECT event_json, url, date(json_extract(event_json,'$.startDate')) as startDate, date(json_extract(event_json,'$.endDate')) as endDate
+            FROM events
+            WHERE EXISTS (
+                SELECT 1
+                FROM json_each(:tags) AS tags
+                WHERE tags.value IN (
+                    SELECT value
+                    FROM json_each(event_json->'$.keywords')
+                )
+            --  Find all events either starting and ending tomorrow
+            -- or starting today or earlier, and end ending after tomorrow
+            ) AND (
+              (startDate >= date('now', '+1 day') AND endDate <= date('now', '+1 day'))
+              OR 
+              (startDate <= date('now', '+1 day') AND endDate >= date('now', "+2 day"))
+            )
+            ORDER by startDate
 sqlite:
   - data: tags.events
     file: events.db

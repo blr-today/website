@@ -1,0 +1,48 @@
+---
+---
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+<title>{{ page.title }} | blr.today (What's happening tomorrow)</title>
+<link href="{{ site.url }}{{page.url}}" rel="self"/>
+<link href="{{ site.url }}/"/>
+<updated>{{ site.time | date_to_xmlschema }}</updated>
+<id>{{ site.url }}</id>
+{% assign hour = site.time |  date:"%H" | to_integer %}
+{% assign count = page.tomorrow | size %}
+{% if hour > 20 and count > 0 %}
+<entry>
+  {% assign tomorrow = site.time | date:"%s" | plus:86400 %}
+<title>{{tomorrow | date:"%b %d %a"}} | blr.today (Daily)</title>
+<published>{{ site.time | date:"%Y-%m-%dT20:00:00+05:30" }}</published>
+<link href="{{ page.url }}"/>
+<id>{{page.url}}@{{site.time | date:"%Y%m%d%H%m"}}</id>
+
+{% capture rss %}
+
+{% for e in page.tomorrow %} {% assign E = e.event_json | parse_json %}
+
+
+<h2>
+  {% assign dateSize = E.startDate | size %}
+  {% if dateSize == 10 %}
+  <a href="{{E.url}}">{{E.name}}</a>
+  {% else %}
+  <a href="{{E.url}}">{{E.name}} {{dateSize}}</a> | {{E.startDate | date: "%l:%m%P"}}
+  {% endif %}
+</h2>
+  <p>{{E.description|truncatewords: 300}}</p>
+
+<h3>Venue: {{E.location.name}} </h3>
+<hr>
+
+{% endfor %}
+{% endcapture %}
+<content type="html">{{rss | xml_escape}}</content>
+</entry>
+{% endif %}
+
+ 
+
+</feed>
