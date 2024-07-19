@@ -5,11 +5,10 @@ title: blr.today
 
 {{content}}
 <select id="cal-changer">
-    <option value="listYear">List</option>
-    <option value="multiMonthYear">Calendar</option>
+    <option value="listYear">Complete List</option>
+    <option value="dayGridMonth">Month</option>
     <option value="dayGridWeek">Week</option>
-    <option value="dayGridTwoDays">2 Day TimeGrid</option>
-    <option value="timeGridTwoDays">2 Day TimeGrid</option>
+    <option value="dayGrid">Day</option>
 </select>
 
 <link rel="alternate" type="application/atom+xml" href="https://blr.today{{page.url}}agenda.xml" />
@@ -35,12 +34,15 @@ title: blr.today
     };
 </script>
 
+<noscript>
 <ul>
     {% for e in page.events %} {% assign E =e.event_json | parse_json %}
     <li>
         <a href="{{E.url}}">{{E.name}}</a> | {{E.startDate | date: "%b %d"}}
+        <script type="application/ld+json">{{e.event_json}}</script>
     </li>
+    
     {% endfor %}
 </ul>
-
+</noscript>
 {% include sources.html tags=page.tags %}

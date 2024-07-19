@@ -24,25 +24,16 @@ function renderCalendar(url){
       startTime: '00:00', 
       endTime: '23:59', 
     },
-    validRange: function(nowDate) {
-      return {
-        start: nowDate
-      };
-    },
+    
     firstDay: 1, // Mon
     eventMaxStack: 200,
     dayMaxEventRows: 200,
     dayMaxEvents: 200,
     expandRows: true,
-    views: {
-      dayGridTwoDays: {
-        type: 'dayGrid',
-        duration: { days: 2 }
-      },
-      timeGridTwoDays: {
-        type: 'timeGrid',
-        duration: { days: 2 }
-      }
+    validRange: function(nowDate) {
+      return {
+        start: nowDate
+      };
     },
     showNonCurrentDates: false,
     weekends: true,
