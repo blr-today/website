@@ -1,6 +1,6 @@
 :root, html {
     --navpos: absolute;
-    --width: 100%;
+    --width: 60rem;
     --rem: 18px;
     --font-p: 1em/1.6 Helvetica, Arial, sans-serif;
     --font-h: 1em/1.6 Helvetica, Arial, sans-serif;

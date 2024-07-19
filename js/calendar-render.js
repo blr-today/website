@@ -18,12 +18,18 @@ function renderCalendar(url){
       multiMonthPlugin,
       adaptivePlugin
     ],
+    // We use business hours to highlight weekends
     businessHours: {
-      daysOfWeek: [ 6,7 ], // Sat - Sun
-      startTime: '00:00', // a start time (10am in this example)
-      endTime: '23:59', // an end time (6pm in this example)
+      daysOfWeek: [ 6,0 ],
+      startTime: '00:00', 
+      endTime: '23:59', 
     },
-    firstDay: 1,
+    validRange: function(nowDate) {
+      return {
+        start: nowDate
+      };
+    },
+    firstDay: 1, // Mon
     eventMaxStack: 200,
     dayMaxEventRows: 200,
     dayMaxEvents: 200,
