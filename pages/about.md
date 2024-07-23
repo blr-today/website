@@ -7,14 +7,14 @@ title: blr.today / about
 blr.today is an [open-source](/license) project by [Nemo][nemo] that curates events happening in Bangalore.
 
 It curates events from multiple sources, cleans them up, then curates them further by tagging them nicely, and 
-making all event data available as calendares you can subscribe to.
+makes all event data available as calendars you can subscribe to.
 
 ## Core Thesis
 
 My attempt at explaining why I think this is worth doing:
 
 1. The vast majority of events in aggregator websites are low-quality, and
-often filled with spam[^2] The aggregators make money by listing lots of
+often filled with spam[^2]. The aggregators make money by listing lots of
 events.
 
 2. Small venues hosting cool events will not always publicize them on the
@@ -45,8 +45,7 @@ You can see my TODO list for the project at [/roadmap](/roadmap).
 This project is born out of a [very old idea of mine][idea],
 when it was called `gardencity.events`[^4]. The original idea was to create a
 Bangalore specific clone of [we build! sg][wb] [^1], which was a website
-automatically curating maker events in Singapore. My first attempt [in 2018]
-(https://github.com/captn3m0/gardencity.events) went nowhere. It was further
+automatically curating maker events in Singapore. My first attempt [in 2018](https://github.com/captn3m0/gardencity.events) went nowhere. It was further
 pushed by the success of [Putting Scenes (now Venn)][venn] - event curation
 seemed like an interesting problem to solve.
 
