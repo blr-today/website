@@ -15,7 +15,7 @@ exclude:
   - .jekyll-cache
   - rollup.config.js
   - package*
-  - js # this is built into assets/bundle.js
+  - js # this is built into assets/js/
   - netlify.toml
   - README.md
   - events.db

@@ -1,6 +1,6 @@
 import { EventInput } from '@fullcalendar/core'
 import { EventSourceDef, DateRange, addDays } from '@fullcalendar/core/internal'
-import * as ICAL from 'ical.js'
+import ICAL from 'ical.js'
 import { IcalExpander } from './ical-expander/IcalExpander.js'
 
 interface ICalFeedMeta {
