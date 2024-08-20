@@ -43,7 +43,7 @@ COLOR_MAP = {
 def append_address_if_needed(str, obj, key)
   return unless obj.is_a? Hash
   if obj.has_key? key
-    v = obj[key].to_s
+    v = obj[key]
     if v.is_a? String and v!="NA"
       # No point in adding KA/IN
       return if key == 'addressCountry' and v.length == 2
