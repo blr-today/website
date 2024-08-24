@@ -1,0 +1,69 @@
+{% comment %}
+
+Assume the following structure inside links
+
+links:
+- url: https://bangaloreinternationalcentre.org/subscribe/
+  icon: email
+- url: https://bangaloreinternationalcentre.org/events/?ical=1
+  type: calendar
+- url: https://x.com/bicblr
+  type: x
+- url: https://www.facebook.com/BICBlr
+  type: facebook
+- url: https://www.youtube.com/bangaloreinternationalcentre
+  type: youtube
+- url: https://www.instagram.com/BICBlr/
+  type: instagram
+- url: https://whatsapp.com/channel/0029Va70SHL4inozroTrn61h
+  type: whatsapp
+  
+Possible icon names:
+imdb slack signal spotify snapchat steam telegram threads whatsapp youtube
+reddit pixelfed overcast openstreetmap meetup matrix mastodon liberapay
+email instagram google_podcasts google_maps bandcamp discord bluesky
+
+image path is <img src="./node_modules/super-tiny-icons/images/svg/{{iconname}}.svg" />
+{% endcomment %}
+{% assign links = include.links %}
+{% if links %}
+  <div class="social">
+    <ul>
+      {% for link in links %}
+        <li>
+          <a href="{{ link.url }}" target="_blank" title="{{link.title}}">
+          {% if link.icon == "newsletter" %}
+            <img aria-hidden="true" src="/img/bootstrap-icons/envelope-paper.svg" />
+          {% elsif link.icon =="calendar" %}
+            <img aria-hidden="true" src="/img/bootstrap-icons/calendar3.svg" />
+          {% else %}
+            <img aria-hidden="true" src="/img/simple-icons/{{ link.icon }}.svg" />
+          {% endif %}
+          </a>
+
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+<style>
+.social {
+  margin: 0 auto;
+  text-align: center;
+  width: 600px;
+  align-content: center;
+}
+.social ul {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+}
+.social li {
+  display: inline-block;
+  margin: 0 10px;
+}
+.social img {
+  width: 32px;
+  color: black;
+}
+</style>

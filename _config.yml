@@ -7,6 +7,10 @@ plugins:
   - jekyll_sqlite
   - jekyll-datapage-generator
   - jekyll-sitemap
+
+include:
+  - _headers
+  - _redirects
 exclude:
   - .editorconfig
   - .gitignore
@@ -21,9 +25,7 @@ exclude:
   - events.db
   # TODO: fixme
   - default.ics
-include:
-  - _headers
-  - _redirects
+  - node_modules
 timezone: Asia/Kolkata
 defaults:
   - scope:

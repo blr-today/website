@@ -3,7 +3,10 @@ layout: default
 title: blr.today
 ---
 
-{{content}}
+<div class="calendar-description">
+  {{content | extract_element:'blockquote' | first | extract_element:'p' }}
+</div>
+
 <select id="cal-changer">
     <option value="listYear">Complete List</option>
     <option value="dayGridMonth">Month</option>
@@ -22,6 +25,12 @@ title: blr.today
     >Daily Email</a
 >
 <div id="calendar"></div>
+
+<div class="extra-text">
+  {{ content | remove_first_element:'blockquote' }}
+</div>
+
+{% include social.html links = page.links %}
 
 <script type="module">
     import { renderCalendar } from "/assets/js/calendar-render.js";
@@ -45,4 +54,6 @@ title: blr.today
     {% endfor %}
 </ul>
 </noscript>
+
+
 {% include sources.html tags=page.tags %}
