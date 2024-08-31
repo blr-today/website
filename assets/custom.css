@@ -17,9 +17,6 @@
     --cemph: #1f8dd6;
     --cemphbg: #1f8dd610;
 }
-table {
-    display: table !important;
-}
 
 a.fake-button {
     font: var(--font-h);
