@@ -1,4 +1,4 @@
 ---
 title: Ace of Pubs
-tags: '["QUIZ"]'
+tags: '["ACEOFPUBS"]'
 ---
