@@ -1,6 +1,12 @@
 ---
-title: Adidas Runners [Organizer]
+title: Adidas Runners
 tags: '["ADIDAS"]'
+links:
+- url: https://www.facebook.com/groups/148320232244164
+  icon: facebook
+  title: Adidas Runners Bangalore Facebook Group
 --- 
-Running events hosted by the Adidas Runners Bangalore community 
- 
+> [Adidas Runners](https://www.adidas.co.in/adidasrunners/community/bengaluru) is a 
+> community of runners in Bangalore, hosting events in partnership with Adidas.
+
+The events on this page are sourced from the list of upcoming events at <https://www.adidas.co.in/adidasrunners/community/bengaluru>.

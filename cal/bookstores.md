@@ -1,5 +1,5 @@
 ---
-title: Bookstores [Venue]
+title: Bookstores
 tags: '["CHAMPACA", "ATTAGALATTA"]'
 --- 
-Events hosted by various bookstores.b
+Events hosted by various bookstores.

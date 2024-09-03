@@ -1,5 +1,5 @@
 ---
-title: Bangalore International Center [Venue]
+title: Bangalore International Center
 tags: '["BIC"]'
 links:
 - url: https://bangaloreinternationalcentre.org/subscribe/

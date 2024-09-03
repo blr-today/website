@@ -1,29 +1,12 @@
 {% comment %}
 
-Assume the following structure inside links
-
-links:
-- url: https://bangaloreinternationalcentre.org/subscribe/
-  icon: email
-- url: https://bangaloreinternationalcentre.org/events/?ical=1
-  type: calendar
-- url: https://x.com/bicblr
-  type: x
-- url: https://www.facebook.com/BICBlr
-  type: facebook
-- url: https://www.youtube.com/bangaloreinternationalcentre
-  type: youtube
-- url: https://www.instagram.com/BICBlr/
-  type: instagram
-- url: https://whatsapp.com/channel/0029Va70SHL4inozroTrn61h
-  type: whatsapp
-  
 Possible icon names:
 imdb slack signal spotify snapchat steam telegram threads whatsapp youtube
 reddit pixelfed overcast openstreetmap meetup matrix mastodon liberapay
-email instagram google_podcasts google_maps bandcamp discord bluesky
+email instagram google_podcasts google_maps bandcamp discord bluesky eventbrite
 
-image path is <img src="./node_modules/super-tiny-icons/images/svg/{{iconname}}.svg" />
+Icons are picked from bootstrap-icons for special cases, otherwise simple-icons
+
 {% endcomment %}
 {% assign links = include.links %}
 {% if links %}
@@ -36,6 +19,8 @@ image path is <img src="./node_modules/super-tiny-icons/images/svg/{{iconname}}.
             <img aria-hidden="true" src="/img/bootstrap-icons/envelope-paper.svg" />
           {% elsif link.icon =="calendar" %}
             <img aria-hidden="true" src="/img/bootstrap-icons/calendar3.svg" />
+          {% elsif link.icon =="blog" %}
+            <img aria-hidden="true" src="/img/bootstrap-icons/paragraph.svg" />
           {% else %}
             <img aria-hidden="true" src="/img/simple-icons/{{ link.icon }}.svg" />
           {% endif %}
