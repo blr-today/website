@@ -5,6 +5,9 @@ links:
 - url: https://www.bengalurusustainabilityforum.org/events/
   icon: calendar
   title: Bengaluru Sustainability Forum Events Calendar (Web)
+- url: https://bengalurusustainabilityforum.us19.list-manage.com/subscribe?u=19d8f091a156dfe0d1534fc96&id=742d6f5a5b
+  icon: newsletter
+  title: Bengaluru Sustainability Forum Newsletter
 - url: https://www.instagram.com/sustainBLR/
   icon: instagram
   title: Bengaluru Sustainability Forum Instagram Account
