@@ -3,7 +3,7 @@
     <summary>Sources {{c}}</summary>
     <ul>
         {% for tag in tags %}
-        <li><a href="/cal/{{tag|downcase}}/">{{tag | downcase}}</a></li>
+        <li><a href="/cal/{{tag|split:'/'|first|downcase}}/">{{tag | downcase}}</a></li>
         {% endfor %}
     </ul>
 </details>
