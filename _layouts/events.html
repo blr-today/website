@@ -2,10 +2,14 @@
 layout: default
 title: blr.today
 ---
-
-<div class="calendar-description">
+{% if page.url=="/cal/curated/" %}
+<div class="calendar-description card hint">
+    <p>IndiaFOSS?</p>
   {{content | extract_element:'blockquote' | first | extract_element:'p' }}
 </div>
+{% else %}
+{{content | extract_element:'blockquote' | first | extract_element:'p' }}
+{%endif%}
 
 <select id="cal-changer">
     <option value="listYear">Complete List</option>
