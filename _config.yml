@@ -51,6 +51,7 @@ defaults:
                     SELECT value
                     FROM json_each(event_json->'$.keywords')
                 )
+                AND tags.value NOT IN ("WOOWOO", "BUSINESS", "LOW-QUALITY")
             )
             ORDER BY event_json -> '$.startDate'
             ;
@@ -71,6 +72,7 @@ defaults:
               OR 
               (startDate <= date('now', 'localtime') AND endDate >= date('now', '+1 day', 'localtime'))
             )
+            AND tags.value NOT IN ("WOOWOO", "BUSINESS", "LOW-QUALITY")
             ORDER by startDate;
         
         - data: tomorrow
@@ -92,6 +94,7 @@ defaults:
               OR 
               (startDate <= date('now', '+1 day', 'localtime') AND endDate >= date('now', '+2 day', 'localtime'))
             )
+            AND tags.value NOT IN ("WOOWOO", "BUSINESS", "LOW-QUALITY")
             ORDER by startDate
 sqlite:
   - data: tags.events
