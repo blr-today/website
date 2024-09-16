@@ -19,4 +19,8 @@ links:
   , children's library and cafe in the heart of Bengaluru. It focuses on
     diverse stories, and choosing the books they stock with great care.
 
+{: .warning}
+> Champaca is currently closed for stock-taking from 16th September to 20th
+  September. Check back in on the 21st!
+
 Sourced from the [Champaca Blog Events category](https://champaca.in/blogs/events).
