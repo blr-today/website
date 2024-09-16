@@ -2,21 +2,17 @@
 layout: default
 title: blr.today
 ---
-{% if page.url=="/cal/curated/" %}
-<div class="calendar-description card hint">
-    <p>IndiaFOSS?</p>
-  {{content | extract_element:'blockquote' | first | extract_element:'p' }}
-</div>
-{% else %}
 {{content | extract_element:'blockquote' | first | extract_element:'p' }}
-{%endif%}
+{% assign eventCount = page.events | size %}
 
+{% if eventCount>0 %}
 <select id="cal-changer">
     <option value="listYear">Complete List</option>
     <option value="dayGridMonth">Month</option>
     <option value="dayGridWeek">Week</option>
     <option value="dayGrid">Day</option>
 </select>
+{% endif %}
 
 <link rel="alternate" type="application/atom+xml" href="https://blr.today{{page.url}}agenda.xml" />
 <a class="fake-button" href="webcal://blr.today{{page.url}}cal.ics"
@@ -28,7 +24,11 @@ title: blr.today
 <a class="fake-button" href="mailto:add@rssby.email?body=https://blr.today{{page.url}}agenda.xml&subject=please-subscribe"
     >Daily Email</a
 >
+{% if eventCount>0 %}
 <div id="calendar"></div>
+{% else %}
+<p>There are no events to display.</p>
+{% endif %}
 
 <div class="extra-text">
   {{ content | remove_first_element:'blockquote' }}
@@ -36,6 +36,7 @@ title: blr.today
 
 {% include social.html links = page.links %}
 
+{% if eventCount > 0 %}
 <script type="module">
     import { renderCalendar } from "/assets/js/calendar-render.js";
     var cal = renderCalendar("{{page.url}}cal.ics");
@@ -58,6 +59,6 @@ title: blr.today
     {% endfor %}
 </ul>
 </noscript>
-
+{% endif %}
 
 {% include sources.html tags=page.tags %}
