@@ -1,23 +1,27 @@
 ---
 title: Unwanted Events
 tags: '["LOW-QUALITY", "NOTINBLR", "WOOWOO", "DANDIYA", "BUSINESS"]'
-subscribe: false
 sqlite:
 - data: events
   file: events.db
   query: |
+    WITH 
+    allowlist_tags AS (
+      SELECT value FROM json_each(:tags)
+    )
     SELECT *
     FROM events
     WHERE EXISTS (
         SELECT 1
-        FROM json_each(:tags) AS tags
-        WHERE tags.value IN (
-            SELECT value
-            FROM json_each(event_json->'$.keywords')
-        )
-    )
-    ORDER BY event_json -> '$.startDate'
-    ;
+        FROM allowlist_tags
+        WHERE allowlist_tags.value IN (
+        SELECT value
+        FROM json_each(event_json->'$.keywords')
+    ))
+    ORDER BY event_json -> '$.startDate';
+subscribe: false
+# This is such a trash event page, that we don't want links here to impact our rankings
+noindex: true
 --- 
 This is a meta calendar that lists events that have been excluded
 from other calendars. This is primarily meant for debugging.

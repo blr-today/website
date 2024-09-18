@@ -51,6 +51,7 @@ title: blr.today
 </script>
 
 <noscript>
+<h3>{{eventCount}} Events</h3>
 <ul>
     {% for e in page.events %} {% assign E =e.event_json | parse_json %}
     <li>

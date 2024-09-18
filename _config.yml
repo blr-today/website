@@ -34,6 +34,11 @@ defaults:
       layout: events
       permalink: /:path/:basename/
       subscribe: true
+      # While this is available under the page
+      # this is dynamic, and not available for use
+      # in sql queries, or copied to external layouts
+      # TODO: Fix jekyll-sqlite and multi-page layouts to support this
+      excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO"]'
       layouts:
         - layout: icalendar.ics
           permalink: /:path/:basename/cal.ics
@@ -43,65 +48,37 @@ defaults:
         - data: events
           file: events.db
           query: |
+            WITH 
+            allowlist_tags AS (
+              SELECT value FROM json_each(:tags)
+            ),
+            denylist_tags AS (
+              SELECT value FROM json_each('["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO"]')
+            )
             SELECT *
             FROM events
-            WHERE EXISTS (
+            WHERE 
+              -- Check if no denylist tags are present
+              NOT EXISTS (
                 SELECT 1
-                FROM json_each(:tags) AS tags
-                WHERE tags.value IN (
-                    SELECT value
-                    FROM json_each(event_json->'$.keywords')
+                FROM denylist_tags
+                WHERE denylist_tags.value IN (
+                  SELECT value
+                  FROM json_each(event_json->'$.keywords')
                 )
-                AND tags.value NOT IN ("WOOWOO", "LOW-QUALITY", "BUSINESS", "NOTINBLR", "DANDIYA")
-            )
-            ORDER BY event_json -> '$.startDate'
-            ;
-        - data: today
-          file: events.db
-          query: |
-            SELECT event_json, url, date(json_extract(event_json,'$.startDate')) as startDate, date(json_extract(event_json,'$.endDate')) as endDate
-            FROM events
-            WHERE EXISTS (
+              )
+              AND
+              -- Check if at least one allowlist tag is present
+              EXISTS (
                 SELECT 1
-                FROM json_each(:tags) AS tags
-                WHERE tags.value IN (
-                    SELECT value
-                    FROM json_each(event_json->'$.keywords')
+                FROM allowlist_tags
+                WHERE allowlist_tags.value IN (
+                  SELECT value
+                  FROM json_each(event_json->'$.keywords')
                 )
-            ) AND (
-              (startDate >= date('now', 'localtime') AND endDate <= date('now', 'localtime'))
-              OR 
-              (startDate <= date('now', 'localtime') AND endDate >= date('now', '+1 day', 'localtime'))
-            )
-            ORDER by startDate;
-        
-        - data: tomorrow
-          file: events.db
-          query: |
-            SELECT event_json, url, date(json_extract(event_json,'$.startDate')) as startDate, date(json_extract(event_json,'$.endDate')) as endDate
-            FROM events
-            WHERE EXISTS (
-                SELECT 1
-                FROM json_each(:tags) AS tags
-                WHERE tags.value IN (
-                    SELECT value
-                    FROM json_each(event_json->'$.keywords')
-                )
-            --  Find all events either starting and ending tomorrow
-            -- or starting today or earlier, and end ending after tomorrow
-            ) AND (
-              (startDate >= date('now', '+1 day', 'localtime') AND endDate <= date('now', '+1 day', 'localtime'))
-              OR 
-              (startDate <= date('now', '+1 day', 'localtime') AND endDate >= date('now', '+2 day', 'localtime'))
-            )
-            ORDER by startDate
+              )
+            ORDER BY event_json -> '$.startDate';
 sqlite:
-  - data: tags.events
-    file: events.db
-    query: |
-      SELECT event_json, event_json -> '$.keywords' as keywords from events
-        WHERE EXISTS (SELECT 1 FROM json_each(keywords) WHERE value = :id)
-
   - data: geo_events
     file: events.db
     query: |
@@ -110,67 +87,3 @@ sqlite:
       event_json->'$.location.geo.longitude' as lng,
       event_json-> '$.location.name' as name
       from events WHERE event_json -> '$.location.geo' IS NOT NULL
-
-  - data: events
-    file: events.db
-    query: |
-      SELECT substr(url, 9, instr(substr(url, 9), '/') - 1) AS domain,
-        url,
-        json_extract(event_json, '$.name') AS name,
-        json_extract(event_json, '$.description') AS description,
-        json_extract(event_json, '$.keywords') AS keywords,
-        json_extract(event_json, '$.startDate') AS startDate,
-        json_extract(event_json, '$.eventStatus') AS eventStatus,
-        json_extract(event_json, '$.location.name') AS location,
-        json_extract(event_json, '$.organizer.name') AS organizer
-
-      FROM events WHERE
-      (
-        (
-          keywords NOT LIKE '%karaoke%' AND name not like '%karaoke%' AND -- MUSIC
-          keywords NOT LIKE '%dj night%' AND name not like '%dj night%' AND -- MUSIC
-          keywords NOT LIKE '%bollywood night%' AND name not like '%bollywood night%' AND -- MUSIC
-          keywords NOT LIKE '%ladies night%' AND name not like '%ladies night%' AND -- MUSIC
-          keywords NOT LIKE '%ft. %' AND name not like '%ft. %' AND -- MUSIC
-          keywords NOT LIKE '%camping%' AND name not like '%camping%' AND -- TRIP
-          keywords NOT LIKE '%trek%' AND name not like '%trek%' AND -- TRIP
-          keywords NOT LIKE '%techno%' AND name not like '%techno%' AND -- MUSIC
-          description NOT LIKE '%karaoke%' AND -- MUSIC
-          keywords NOT LIKE '%tipsy%' AND name not like '%tipsy%' AND -- MUSIC
-          keywords NOT LIKE '%summer camp%' AND name not like '%summer camp%' AND -- KIDS
-          description NOT LIKE '%get sloshed%' AND -- DRINKING
-          description NOT LIKE '%magic mocktails%' AND -- DRINKING
-          name NOT LIKE '%jollywood%' AND -- ADS
-          name NOT LIKE '%thrifty x%' AND -- DATING
-          name NOT LIKE '% vs %' AND -- SPORTS
-          name NOT LIKE '% admissions %' AND -- ADS
-          keywords NOT LIKE '%parties%' AND -- MUSIC
-          name NOT LIKE '%deck gigs%' AND -- MUSIC
-          name NOT LIKE '%5 day program%' AND -- LONG
-          name NOT GLOB '*IPL*' AND -- SPORTS
-          name NOT GLOB '*GP*' AND -- SPORTS
-          name NOT GLOB '*F1*' AND -- SPORTS
-          name NOT GLOB '*T20*' AND -- SPORTS
-          name NOT GLOB '*RCB*' AND -- SPORTS
-          name NOT GLOB '*MI*' AND -- SPORTS
-          name NOT LIKE '%pet paw%' AND -- PETS
-          keywords NOT LIKE '%summer vacation%' AND -- KIDS
-          (organizer NOT LIKE 'Odyssey vibes' OR organizer IS NULL) AND -- TRIP
-          (organizer NOT LIKE '%Medicine%' OR organizer IS NULL) AND -- CONFERENCE
-          (location NOT LIKE 'Small World' OR location IS NULL) AND -- BADRATING
-          (organizer NOT LIKE '%sheena - banjara%' OR organizer IS NULL) AND -- TRIP
-          (location NOT LIKE '%HeyBrewty Wellness Studio%' OR location is NULL) AND -- WOOWOO
-          (location NOT LIKE '%blue butterfly%' OR location is NULL) AND -- MUSIC
-          (description NOT LIKE '%techno%') AND -- MUSIC
-          (name NOT LIKE '%DnBIndia presents%') AND -- MUSIC
-
-      --    Not sure about these events: https://insider.in/search?q=burgerman
-      --    (organizer NOT LIKE '%burgerman%' OR organizer IS NULL) AND
-
-          -- See https://insider.in/search?q=boche%20club
-          (organizer NOT LIKE '%brewcraft hospitality%' OR organizer IS NULL) AND  -- MUSIC
-          description not LIKE '%happy hour%' -- MUSIC
-        )
-        OR (keywords IS NULL OR description IS NULL OR url LIKE '%sumukha%')
-      )
-      ORDER BY startDate ASC

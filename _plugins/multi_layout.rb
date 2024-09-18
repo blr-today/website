@@ -25,6 +25,11 @@ module Jekyll
         dir = File.dirname(page.relative_path)
         Page.new(page.site, page.site.source, dir, page.name).tap do |new_page|
           new_page.data = page.data.clone
+          # Default configuration is not copied, but dynamically
+          # applied. We need to copy this somehow as well.
+          # new_page.data.default_proc = proc do |_, key|
+          #   site.frontmatter_defaults.find(relative_path, type, key)
+          # end
           new_page.data["layout"] = config["layout"]
           new_page.data["permalink"] = config["permalink"]
         end

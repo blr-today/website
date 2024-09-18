@@ -95,7 +95,13 @@ module Jekyll
   module ToIcal
     def to_ical(event_json)
       ics = Icalendar::Event.new
-      event = JSON.parse event_json
+      begin
+        event = JSON.parse event_json
+      rescue StandardError => e
+        print("Could not parse")
+        print(event_json)
+        return ""
+      end
       ics.color = COLOR_MAP[event['@type']]
       ics.description = event['description']
       # set geolocation if available in schema.org/Place
