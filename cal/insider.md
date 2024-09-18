@@ -1,6 +1,6 @@
 ---
 title: Zomato Insider
-tags: '["LOW-QUALITY", "NOTINBLR", "WOOWOO", "DANDIYA", "BUSINESS"]'
+tags: '["INSIDER"]'
 links:
 - url: https://www.instagram.com/insider.in/
   icon: instagram

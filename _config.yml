@@ -33,6 +33,7 @@ defaults:
     values:
       layout: events
       permalink: /:path/:basename/
+      subscribe: true
       layouts:
         - layout: icalendar.ics
           permalink: /:path/:basename/cal.ics
