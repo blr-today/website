@@ -1,5 +1,5 @@
 ---
-title: Zomato Insider
+title: Insider
 tags: '["INSIDER"]'
 links:
 - url: https://www.instagram.com/insider.in/
@@ -20,5 +20,4 @@ links:
 subscribe: false
 --- 
 
-> [Zomato Insider](https://insider.in/) is a event aggregating platform, earlier owned by Paytm.
-
+> Zomato [Insider](https://insider.in/) is a event aggregating platform, earlier owned by Paytm.
