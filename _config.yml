@@ -51,7 +51,7 @@ defaults:
                     SELECT value
                     FROM json_each(event_json->'$.keywords')
                 )
-                AND tags.value NOT IN ("WOOWOO", "LOW-QUALITY", "BUSINESS")
+                AND tags.value NOT IN ("WOOWOO", "LOW-QUALITY", "BUSINESS", "NOTINBLR", "DANDIYA")
             )
             ORDER BY event_json -> '$.startDate'
             ;

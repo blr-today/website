@@ -1,6 +1,7 @@
 ---
 title: Unwanted Events
-tags: '["LOW-QUALITY", "NOTINBLR", "WOOWOO", "DANDIYA"]'
+tags: '["LOW-QUALITY", "NOTINBLR", "WOOWOO", "DANDIYA", "BUSINESS"]'
+subscribe: false
 --- 
 This is a meta calendar that lists events that have been excluded
 from other calendars. This is primarily meant for debugging.
