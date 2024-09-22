@@ -1,6 +1,5 @@
 ---
 title: Sumukha Exhibition [Venue]
+type: museum
 tags: '["SUMUKHA"]'
 --- 
-Exhibitions at Gallery Sumukha 
- 

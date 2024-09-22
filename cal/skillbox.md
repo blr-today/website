@@ -19,7 +19,6 @@ links:
 subscribe: false
 ---
 
-> [AllEvents](https://allevents.in/) is a event aggregating platform.
+> [Skillbox](https://www.skillboxes.com/) is a event aggregating platform.
 
-This page sources events from [Bangalore](https://allevents.in/bangalore/all)
-page on the AllEvents website
+This page sources events from Bangalore events listed on the Skillbox website
