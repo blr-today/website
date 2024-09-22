@@ -1,5 +1,6 @@
 ---
-title: Adidas Runners
+title: Adidas Runners 👟
+type: organizer
 tags: '["ADIDAS"]'
 links:
 - url: https://www.facebook.com/groups/148320232244164

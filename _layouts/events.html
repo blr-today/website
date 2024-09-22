@@ -14,15 +14,16 @@ title: blr.today
 </select>
 {% endif %}
 
+{%- assign pagePrefix = "/" | append: page.path | replace:".md", "/" -%}
 {% if page.subscribe %}
-<link rel="alternate" type="application/atom+xml" href="https://blr.today{{page.url}}agenda.xml" />
-<a class="fake-button" href="webcal://blr.today{{page.url}}cal.ics"
+<link rel="alternate" type="application/atom+xml" href="agenda.xml" />
+<a class="fake-button" href="webcal://blr.today{{pagePrefix}}cal.ics"
     >Subscribe</a
 >
-<a class="fake-button" href="https://blr.today{{page.url}}agenda.xml"
+<a class="fake-button" href="{{site.url}}{{pagePrefix}}agenda.xml"
     >Daily RSS</a
 >
-<a class="fake-button" href="mailto:add@rssby.email?body=https://blr.today{{page.url}}agenda.xml&subject=please-subscribe"
+<a class="fake-button" href="mailto:add@rssby.email?body={{site.url}}{{pagePrefix}}agenda.xml&subject=please-subscribe"
     >Daily Email</a
 >
 {% endif %}
@@ -41,7 +42,7 @@ title: blr.today
 {% if eventCount > 0 %}
 <script type="module">
     import { renderCalendar } from "/assets/js/calendar-render.js";
-    var cal = renderCalendar("{{page.url}}cal.ics");
+    var cal = renderCalendar("{{pagePrefix}}cal.ics");
 
     cal.updateSize();
 

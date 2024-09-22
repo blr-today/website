@@ -1,5 +1,6 @@
 ---
-title: Champaca Bookstore
+title: Champaca Bookstore 📚
+type: bookstore
 tags: '["CHAMPACA"]'
 links:
 - url: https://www.instagram.com/champacabooks/

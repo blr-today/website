@@ -1,5 +1,6 @@
 ---
-title: Bengaluru Sustainability Forum [Curated]
+title: Bengaluru Sustainability Forum ♻️
+type: curator
 tags: '["BSF"]'
 links:
 - url: https://www.bengalurusustainabilityforum.org/events/

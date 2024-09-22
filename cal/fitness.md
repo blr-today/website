@@ -1,5 +1,6 @@
 ---
-title: Fitness [Curated]
+title: Fitness 💪
+type: collection
 tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS"]'
 ---
 

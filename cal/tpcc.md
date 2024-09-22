@@ -1,5 +1,6 @@
 ---
-title: The Parallel Cinema Club
+title: The Parallel Cinema Club 🎦
+type: organizer
 layout: events
 tags: '["TPCC"]'
 links:

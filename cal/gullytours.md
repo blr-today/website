@@ -1,5 +1,6 @@
 ---
-title: Gully Tours [Organizer]
+title: Gully Tours
+type: organizer
 tags: '["GULLYTOURS"]'
 links:
 - url: https://www.instagram.com/gully.tours/

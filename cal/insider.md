@@ -1,5 +1,6 @@
 ---
 title: Insider
+type: aggregator
 tags: '["INSIDER"]'
 links:
 - url: https://www.instagram.com/insider.in/

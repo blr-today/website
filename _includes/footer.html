@@ -2,9 +2,8 @@
     <hr />
     {% assign eventCount = page.events | size %}
     <p>
-        {{eventCount}} events.
         Last Updated at {{site.time | date: "%d %b / %H:%M %p"}}. {% if
-        page.layout == "events" %} Help improve this page
+        page.layout == "events" %} {{eventCount}} events. Help improve this page
         <a href="https://github.com/blr-today/website/edit/main/{{page.path}}">
             on GitHub
         </a>. 

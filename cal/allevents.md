@@ -1,5 +1,6 @@
 ---
 title: AllEvents
+type: aggregator
 tags: '["ALLEVENTS"]'
 links:
 - icon: facebook

@@ -1,5 +1,6 @@
 ---
 title: Skillbox
+type: aggregator
 tags: '["SKILLBOXES"]'
 links:
 - icon: appstore

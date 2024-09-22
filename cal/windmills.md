@@ -1,5 +1,6 @@
 ---
-title: Windmills [Venue]
+title: Windmills 🎶
+type: venue
 tags: '["WINDMILLS"]'
 --- 
 Events (mainly music) hosted at Windmills 

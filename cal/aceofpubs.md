@@ -1,5 +1,6 @@
 ---
-title: Ace of Pubs
+title: Ace of Pubs 🙋🏽
+type: organizer
 tags: '["ACEOFPUBS"]'
 links:
 - url: https://www.facebook.com/aceofpub/

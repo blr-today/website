@@ -1,5 +1,6 @@
 ---
-title: Together.Buzz [Organizer]
+title: Together.Buzz
+type: organizer
 tags: '["TOGETHER"]'
 links:
 - url: https://www.instagram.com/together.buzz/

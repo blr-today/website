@@ -1,16 +1,23 @@
 ---
 layout: default
-title: blr.today
+title: "Event Calendars | blr.today"
+permalink: /calendars/
 ---
-**curating events in bengaluru**
+{%- assign calendarPagesGrouped = site.html_pages | where: "layout", "events" |group_by: "type" -%}
+{%- for group in site.data.calendar_types -%}
+{%- assign key = group[0] -%}
+## {{group[1].title}}
+<small>{{group[1].description}}</small>
 
-<h2>Event Calendars</h2>
 <ul>
-{% for page in site.html_pages %}
-{% if page.layout == 'events' %}
-<li>
-	<a href="{{page.url}}">{{page.title}}</a>
-</li>
-{% endif %}
-{% endfor %}
+{%- for group in calendarPagesGrouped -%}
+	{%- if group.name == key -%}
+	{%- for page in group.items -%}
+	<li>
+		<a href="{{page.url}}">{{page.title}}</a>
+	</li>
+	{%- endfor -%}
+	{%- endif -%}
+{%- endfor -%}
 </ul>
+{%- endfor -%}

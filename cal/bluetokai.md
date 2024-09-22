@@ -1,5 +1,6 @@
 ---
-title: Blue Tokai
+title: Blue Tokai ☕
+type: organizer
 tags: '["BLUETOKAI"]'
 links:
 - url: https://x.com/bluetokaicoffee

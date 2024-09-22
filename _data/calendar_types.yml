@@ -1,0 +1,35 @@
+collection:
+  title: Collections
+  description: Composite calendars containing events from multiple sources.
+
+organizer:
+  title: Organizers
+  description: |
+    Event Hosts and organizers.
+aggregator:
+  title: Aggregators
+  description: |
+    Event Aggregator websites that let anyone list and host events.
+
+bookstore:
+  title: Bookstores
+  description: Bookstores and libraries that host events.
+
+curator:
+  title: Curators
+  description: Organizations curating events.
+
+venue:
+  title: Venues
+  description: Event Venues within Bangalore that host events regularly.
+
+
+
+museum:
+  title: Museums
+  description: Museums in Bangalore
+
+neighbourhood:
+  title: Neighbourhoods
+  description: Neighbourhoods in Bangalore
+

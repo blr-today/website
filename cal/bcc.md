@@ -1,5 +1,6 @@
 ---
-title: Bangalore Chess Club
+title: Bangalore Chess Club ♟️
+type: organizer
 tags: '["CHESS", "BCC"]'
 links:
 - url: https://bangalorechessclub.in/events/

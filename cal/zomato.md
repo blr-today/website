@@ -1,5 +1,6 @@
 ---
 title: Zomato Live
+type: aggregator
 tags: '["ZOMATO"]'
 links:
 - url: https://www.zomato.com/live/city/bengaluru/events

@@ -1,6 +1,9 @@
 /favicon.ico /img/favicon.ico
 /dataset https://github.com/blr-today/dataset
 
+# Curated Calendar is now the homepage
+/cal/curated /
+
 # Rewrites so our fedi domain is also blr.today
 /.well-known/host-meta https://fedi.blr.today/.well-known/host-meta 200
 /.well-known/webfinger https://fedi.blr.today/.well-known/webfinger 200

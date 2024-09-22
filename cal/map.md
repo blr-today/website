@@ -1,5 +1,6 @@
 ---
-title: Musuem of Art & Photograph
+title: Musuem of Art & Photograph 📸
+type: museum
 tags: '["MAP"]'
 links:
 - url: https://map-india.org/newsletter/

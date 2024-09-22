@@ -1,5 +1,6 @@
 ---
-title: Venn / Putting Scenes
+title: Venn / Putting Scenes 🤩
+type: curator
 tags: '["VENN"]'
 links:
 - url: https://join.puttingscene.com/

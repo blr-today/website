@@ -1,5 +1,6 @@
 ---
-title: Creative Mornings
+title: Creative Mornings 🎨
+type: organizer
 tags: '["CREATIVEMORNINGS"]'
 links:
 - url: https://creativemornings.com/cities/BLR

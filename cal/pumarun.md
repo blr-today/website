@@ -1,5 +1,6 @@
 ---
-title: Puma Running
+title: Puma Running 👟
+type: organizer
 tags: '["PUMARUN"]'
 links:
 - url: https://www.eventbrite.com/o/87498853333

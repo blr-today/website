@@ -1,5 +1,6 @@
 ---
-title: Sofar Sounds
+title: Sofar Sounds 🎤
+type: organizer
 tags: '["SOFAR"]'
 links:
 - url: https://www.sofarsounds.com/cities/bangalore

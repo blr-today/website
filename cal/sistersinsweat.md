@@ -1,5 +1,6 @@
 ---
-title: Sisters In Sweat [Organizer]
+title: Sisters In Sweat 🦸🏽‍♀️
+type: organizer
 tags: '["SISTERSINSWEAT"]'
 links:
 - url: https://www.facebook.com/sistersinsweat.in/

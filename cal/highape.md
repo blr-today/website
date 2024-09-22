@@ -1,5 +1,6 @@
 ---
-title: HighApe
+title: HighApe 💃🏽
+type: aggregator
 tags: '["HIGHAPE"]'
 links:
 - url: https://apps.apple.com/in/app/highape/id6503872819

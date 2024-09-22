@@ -1,5 +1,6 @@
 ---
-title: Unwanted Events
+title: Unwanted Events 👻
+type: collection
 tags: '["LOW-QUALITY", "NOTINBLR", "WOOWOO", "DANDIYA", "BUSINESS"]'
 sqlite:
 - data: events

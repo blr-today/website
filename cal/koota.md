@@ -1,5 +1,6 @@
 ---
-title: Courtyard Koota [Venue]
+title: Courtyard Koota 🎭
+type: venue
 tags: '["KOOTA"]'
 --- 
 Events hosted at Courtyard Koota 

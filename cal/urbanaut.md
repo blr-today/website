@@ -1,5 +1,6 @@
 ---
-title: Urbanaut
+title: Urbanaut 🎟️
+type: aggregator
 tags: '["URBANAUT"]'
 links:
 - url: https://www.instagram.com/urbanaut_/
