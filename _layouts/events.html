@@ -2,7 +2,14 @@
 layout: default
 title: blr.today
 ---
-{{content | extract_element:'blockquote' | first | extract_element:'p' }}
+<div style="display: flex; align-items: right;">
+    <p style="margin-top:5px;text-align: left;">
+        {{content | extract_element:'blockquote' | first | extract_element:'p' }}
+    </p>
+    <img height=100px src="/img/apple-touch-icon.png" alt="blr.today logo" />
+</div>
+
+
 {% assign eventCount = page.events | size %}
 
 {% if eventCount>0 %}
