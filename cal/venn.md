@@ -15,6 +15,7 @@ links:
 --- 
 > [Venn](https://app.venn.buzz/) is a Social Experiences platform rethinking how
 > the tasteful & creative GenZs & Millennials hangout across metropolitan
-> cities, globally.
+> cities, globally. Venn curates third-party events, along with listing their own
+> ticketed events. Both are included on this page.
 
 Events listed here are sourced from the listings at <https://app.venn.buzz/>.
