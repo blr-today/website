@@ -7,4 +7,7 @@ tags: '["INDIRANAGAR"]'
   Rahul Dravid. It is bounded by Ulsoor, Domlur, and Byappanahalli, and is home to
   HAL, Defense Colony, ISRO, and the famous 100ft Road.
 
-This page includes events in Domlur as well.
+Events on this page are made up of:
+
+1. All known events happening in the Indiranagar Area.
+2. And not listed in the [Unwanted Events](/cal/unwanted/) calendar.
