@@ -13,7 +13,8 @@ permalink: /calendars/
 {%- for group in calendarPagesGrouped -%}
 	{%- if group.name == key -%}
 	{%- for page in group.items -%}
-	<li>
+	{% assign eventCount=page.events | size %}
+	<li data-eventcount="{{eventCount}}">
 		<a href="{{page.url}}">{{page.title}}</a>
 	</li>
 	{%- endfor -%}
