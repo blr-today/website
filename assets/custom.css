@@ -44,3 +44,9 @@ article h1:before {
     white-space: wrap;
     text-wrap: wrap;
 }
+
+
+/*change list style */
+li[data-eventcount="0"] {
+    list-style-type: circle;
+}
