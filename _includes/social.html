@@ -29,29 +29,25 @@ Icons are picked from bootstrap-icons for special cases, otherwise simple-icons
           </a>
 
         </li>
-        {%- if forloop.index == 5 -%}<br>{%- endif -%}
+        
       {% endfor %}
     </ul>
   </div>
 {% endif %}
 <style>
-.social {
-  margin: 0 auto;
-  text-align: center;
-  width: 600px;
-  align-content: center;
-}
 .social ul {
-  display: inline-block;
   list-style: none;
-  padding: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
 .social li {
-  display: inline-block;
-  margin: 0 10px;
+  margin: 5px 10px;
 }
+
 .social img {
   width: 32px;
-  color: black;
+  filter: brightness(0) saturate(100%);
 }
 </style>
