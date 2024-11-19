@@ -108,7 +108,16 @@ module Jekyll
       if event['location'].is_a?(Hash) && event['location']['geo']
         ics.geo = event['location']['geo']['latitude'].to_s + ";" + event['location']['geo']['longitude'].to_s
       end
-      ics.location = get_location_as_text(event['location']) if event['location']
+
+      if event ['location'] && event['location'].is_a?(Array)
+        if event['location'].size > 1
+          Jekyll.logger.warn "Multiple locations found for event #{event['name']}"
+        end
+        ics.location = get_location_as_text(event['location'][0])
+      elsif event['location']
+        ics.location = get_location_as_text(event['location'])
+      end
+      
 
       # if event['organizer'].is_a?(Hash) and event['organizer']['url'].is_a? String
       #   ics.organizer = Icalendar::Values::CalAddress.new(event['organizer']['url'], cn=event['organizer']['name'])
