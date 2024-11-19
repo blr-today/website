@@ -11,21 +11,21 @@
     "stat": "sqlite3 --header --csv  events.db \"SELECT substr(url, 9, instr(substr(url, 9), '/') - 1) AS domain, COUNT(*) as count FROM events GROUP by domain ORDER BY count DESC\""
   },
   "dependencies": {
-    "@fullcalendar/adaptive": "^6.1.14",
-    "@fullcalendar/core": "^6.1.14",
-    "@fullcalendar/daygrid": "^6.1.14",
-    "@fullcalendar/list": "^6.1.14",
-    "@fullcalendar/multimonth": "^6.1.14",
-    "@fullcalendar/timegrid": "^6.1.14",
-    "ical.js": "^2.0.1",
-    "simple-icons": "^13.6.0"
+    "@fullcalendar/adaptive": "^7.0.0-beta.1",
+    "@fullcalendar/core": "^7.0.0-beta.1",
+    "@fullcalendar/daygrid": "^7.0.0-beta.1",
+    "@fullcalendar/list": "^7.0.0-beta.1",
+    "@fullcalendar/multimonth": "^7.0.0-beta.1",
+    "@fullcalendar/timegrid": "^7.0.0-beta.1",
+    "ical.js": "^2.1.0",
+    "simple-icons": "^13.17.0"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "rollup": "^4.18.1",
-    "tslib": "^2.6.3",
-    "typescript": "^5.5.3"
+    "@rollup/plugin-node-resolve": "^15.3",
+    "@rollup/plugin-terser": "^0.4",
+    "@rollup/plugin-typescript": "^12.1",
+    "rollup": "^4.27",
+    "tslib": "^2.8",
+    "typescript": "^5.6"
   }
 }
