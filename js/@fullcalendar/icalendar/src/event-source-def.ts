@@ -116,8 +116,8 @@ function buildNonDateProps(iCalEvent: ICAL.Event): EventInput {
 }
 
 function extractEventUrl(iCalEvent: ICAL.Event): string {
-  let urlProp = iCalEvent.component.getFirstProperty('url')
-  return urlProp ? urlProp.getFirstValue() : ''
+  let urlProp = iCalEvent.component.getFirstProperty('url');
+  return urlProp ? String(urlProp.getFirstValue()) : ''
 }
 
 function specifiesEnd(iCalEvent: ICAL.Event) {
