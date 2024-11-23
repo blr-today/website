@@ -14,10 +14,18 @@ title: blr.today
 
 {% if eventCount>0 %}
 <select id="cal-changer">
-    <option value="listYear">Complete List</option>
-    <option value="dayGridMonth">Month</option>
-    <option value="dayGridWeek">Week</option>
-    <option value="dayGrid">Day</option>
+    <option 
+        {%if page.calView == "list"%} selected {%endif%}
+        value="listYear">Complete List</option>
+    <option
+        {%if page.calView == "month"%} selected {%endif%}
+        value="dayGridMonth">Month</option>
+    <option
+        {%if page.calView == "week"%} selected {%endif%}
+        value="dayGridWeek">Week</option>
+    <option
+        {%if page.calView == "day"%} selected {%endif%}
+        value="dayGrid">Day</option>
 </select>
 {% endif %}
 
@@ -52,6 +60,7 @@ title: blr.today
     var cal = renderCalendar("{{pagePrefix}}cal.ics");
 
     cal.updateSize();
+    cal.changeView(document.getElementById("cal-changer").value);
 
     document.getElementById("cal-changer").onchange = function () {
         cal.changeView(this.value);
