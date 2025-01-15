@@ -42,8 +42,8 @@ defaults:
       layouts:
         - layout: icalendar.ics
           permalink: /:path/:basename/cal.ics
-        - layout: agenda.rss
-          permalink: /:path/:basename/agenda.xml
+        # - layout: agenda.rss
+        #   permalink: /:path/:basename/agenda.xml
       sqlite:
         - data: events
           file: events.db
@@ -53,7 +53,7 @@ defaults:
               SELECT value FROM json_each(:tags)
             ),
             denylist_tags AS (
-              SELECT value FROM json_each('["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO"]')
+              SELECT value FROM json_each(:excludeTags)
             )
             SELECT *
             FROM events

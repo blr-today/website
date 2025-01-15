@@ -32,6 +32,7 @@ module Jekyll
           # end
           new_page.data["layout"] = config["layout"]
           new_page.data["permalink"] = config["permalink"]
+          new_page.data["excludeTags"] = config["excludeTags"]
         end
       end
     end
