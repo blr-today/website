@@ -17,7 +17,8 @@
     "@fullcalendar/list": "^7.0.0-rc.0",
     "@fullcalendar/multimonth": "^7.0.0-rc.0",
     "@fullcalendar/timegrid": "^7.0.0-rc.0",
-    "simple-icons": "^13.17.0"
+    "simple-icons": "^13.17.0",
+    "ical.js": "^2.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0",
