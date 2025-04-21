@@ -3,7 +3,7 @@ title: Bengaluru Sustainability Forum ♻️
 type: curator
 tags: '["BSF"]'
 links:
-- url: https://web.archive.org/web/20241114202031/https://www.bengalurusustainabilityforum.org/events/
+- url: https://www.bengalurusustainabilityforum.org/events/
   icon: calendar
   title: Bengaluru Sustainability Forum Events Calendar (Web)
 - url: https://bengalurusustainabilityforum.us19.list-manage.com/subscribe?u=19d8f091a156dfe0d1534fc96&id=742d6f5a5b
@@ -12,9 +12,9 @@ links:
 - url: https://www.instagram.com/sustainBLR/
   icon: instagram
   title: Bengaluru Sustainability Forum Instagram Account
-# - url: https://www.bengalurusustainabilityforum.org/#subscribe
-#   icon: newsletter
-#   title: Bengaluru Sustainability Forum Newsletter
+- url: https://www.bengalurusustainabilityforum.org/#subscribe
+  icon: newsletter
+  title: Bengaluru Sustainability Forum Newsletter
 - url: https://www.youtube.com/channel/UC1HNwXlDvetT1kEQf-jRM7w
   icon: youtube
   title: Bengaluru Sustainability Forum YouTube Channel
@@ -34,24 +34,13 @@ links:
   icon: email
   title: Email BSF
 --- 
-> [Bengaluru Sustainability Forum](https://web.archive.org/web/20241114202031/https://www.bengalurusustainabilityforum.org/) 
+> [Bengaluru Sustainability Forum](https://www.bengalurusustainabilityforum.org/) 
 > is a multi institutional effort to provide a space for interdisciplinary
   discussions and foster collaborative initiatives around sustainability and
   livability in urban and peri-urban spaces. It aims to convene and
   disseminate knowledge on various aspects of sustainability in the urban
   landscape, with a focus on Bengaluru.
 
-<div class="card warn">
- <p>Website Down</p>
- <p>
-
-    The BSF website is currently down and serving malware. As a result, there
-    are no events listed here, and links are to the archived version of the
-    website
-
-  </p>
-</div>
-
-Sourced from the [BSF Calendar](https://web.archive.org/web/20241114202031/https://www.bengalurusustainabilityforum.org/events/),
+Sourced from the [BSF Calendar](https://www.bengalurusustainabilityforum.org/events/),
 which is a curated calendar. Submissions can be made 
 [via The Green Scene form](https://docs.google.com/forms/d/e/1FAIpQLScjioAsSCwHJBdCjg_QfWVfJgxVzrJtr-bonuBp-xW1VK7pXA/viewform).
