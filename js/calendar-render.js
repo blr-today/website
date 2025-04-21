@@ -43,7 +43,7 @@ function renderCalendar(url){
       format: 'ics'
     },
     // See blr.today/license - this codebase is AGPL
-    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source'
+    schedulerLicenseKey: 'AGPL-My-Frontend-And-Backend-Is-Open-Source'
   });
   calendar.render();
   return calendar;
