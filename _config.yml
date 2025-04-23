@@ -34,10 +34,6 @@ defaults:
       layout: events
       permalink: /:path/:basename/
       subscribe: true
-      # While this is available under the page
-      # this is dynamic, and not available for use
-      # in sql queries, or copied to external layouts
-      # TODO: Fix jekyll-sqlite and multi-page layouts to support this
       excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO"]'
       layouts:
         - layout: icalendar.ics
