@@ -34,7 +34,7 @@ defaults:
       layout: events
       permalink: /:path/:basename/
       subscribe: true
-      excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO"]'
+      excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO", "SPORTS-SCREENING"]'
       layouts:
         - layout: icalendar.ics
           permalink: /:path/:basename/cal.ics
