@@ -9,4 +9,4 @@ gem "icalendar", "~> 2.10"
 gem "csv", "~> 3.3"
 gem "base64", "~> 0.2.0"
 
-gem "nokogiri", "~> 1.16"
+gem "nokogiri", "~> 1.18"
