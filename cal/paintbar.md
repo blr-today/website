@@ -5,22 +5,22 @@ tags: '["PAINTBAR"]'
 links:
 - url: https://api.whatsapp.com/send/?phone=918088170773
   icon: whatsapp
-  label: Chat with Paint Bar on WhatsApp
+  title: Chat with Paint Bar on WhatsApp
 - url: https://www.instagram.com/paintbar.in
   icon: instagram
-  label: Instagram
+  title: Instagram
 - url: https://www.facebook.com/paintbarblr
   icon: facebook
-  label: Facebook
+  title: Facebook
 - url: https://www.youtube.com/paintbarblr
   icon: youtube
-  label: YouTube
+  title: YouTube
 - url: https://www.linkedin.com/in/paintbarblr
   icon: linkedin
-  label: LinkedIn
+  title: LinkedIn
 - url: mailto:info@paintbar.in
   icon: email
-  label: Email Paint Bar
+  title: Email Paint Bar
 --- 
 
 > [Paint Bar](https://www.paintbar.in) hosts painting experiences that make

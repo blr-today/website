@@ -5,16 +5,16 @@ tags: '["COURTYARD"]'
 links:
 - url: https://www.instagram.com/thecourtyardcommunity/
   icon: instagram
-  label: Instagram
+  title: Instagram
 - url: https://www.facebook.com/thecourtyardcommunity/
   icon: facebook
-  label: Facebook
+  title: Facebook
 - url: https://chat.whatsapp.com/GBjlKQMYGzl2bhUhtCVs9X
   icon: whatsapp
-  label: WhatsApp
+  title: WhatsApp
 - url: https://goo.gl/maps/voEXfP8ioDTKcPca8
   icon: googlemaps
-  label: Directions
+  title: Directions
 --- 
 
 > [The Courtyard](https://thecourtyard.in/) is a culture project in the heart

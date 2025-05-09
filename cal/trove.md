@@ -5,10 +5,10 @@ tags: '["TROVE"]'
 links:
 - url: https://www.instagram.com/trove_experiences/
   icon: instagram
-  label: Trove Experiences Instagram Profile
+  title: Trove Experiences Instagram Profile
 - url: https://www.facebook.com/troveexperiences/
   icon: facebook
-  label: Trove Experiences Facebook Page
+  title: Trove Experiences Facebook Page
 --- 
 > [Trove](https://troveexperiences.com/) organizes new age lifestyle experiences for the urban curious. It
   collaborates with passionate artists and storytellers to present
