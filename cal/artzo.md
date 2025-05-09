@@ -24,6 +24,12 @@ links:
 - url: mailto:hello@artzo.in
   icon: email
   title: Email Artzo
+- url: tel:+919916333833
+  icon: telephone
+  title: Call Artzo
+- url: https://api.whatsapp.com/send/?phone=919916333833
+  icon: whatsapp
+  title: Chat with Artzo on WhatsApp
 --- 
 
 > [Artzo](https://www.artzo.in/) (Formerly known as Art Materials, Bangalore)
