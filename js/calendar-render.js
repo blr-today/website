@@ -1,8 +1,5 @@
 import { Calendar } from '@fullcalendar/core'
 import iCalendarPlugin from '@fullcalendar/icalendar'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import multiMonthPlugin from '@fullcalendar/multimonth'
 import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
 
@@ -13,9 +10,6 @@ function renderCalendar(url, pageTags = []){
     plugins: [
       listPlugin,
       iCalendarPlugin,
-      timeGridPlugin,
-      dayGridPlugin,
-      multiMonthPlugin,
       adaptivePlugin
     ],
     // We use business hours to highlight weekends
