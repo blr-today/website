@@ -34,24 +34,32 @@ function renderCalendar(url, pageTags = []){
     multiMonthMaxColumns: 1,
     eventDidMount: function(info) {
       // A proper keyword is in uppercase
-      let keywords = info.event.extendedProps.keywords.filter(x=>
+      let keywords = new Set([...info.event.extendedProps.keywords].filter(x=>
         x === x.toUpperCase() && x.length >=3 
-      )
+      ))
+
+      console.log(keywords)
 
       // If this page only has a single tag
       // Then we remove that tag from the list of shown tags
       // So that the Indiranagar Page does not use that tag for eg.
+      let InvisibleKeywords = new Set([
+        'HIGHAPE', 'SKILLBOXES', 'INSIDER', 
+        'MV EVENT', 'ALLEVENTS', 'DISTRICT']);
+
       if (pageTags.length == 1) {
-        keywords = keywords - [...new Set(pageTags)]
+        keywords = keywords.difference(new Set(pageTags))
       }
-      
+
+      // Some keywords are always hidden, even if available
+      keywords = keywords.difference(InvisibleKeywords)
+
       let element = info.el
       let el = element.querySelector('.fc-list-event-time')
       // Add a child element that shows the list of keywords at the very end
-      if (el && keywords.length > 0) {
+      if (el && keywords.size > 0) {
         let keywordsElement = document.createElement('div');
-        for (let i = 0; i < keywords.length; i++) {
-          let keyword = keywords[i];
+        for (let keyword of keywords) {
           let keywordElement = document.createElement('span');
           keywordElement.className = 'keyword';
           keywordElement.textContent = keyword;
