@@ -111,6 +111,7 @@ function buildNonDateProps(iCalEvent: ICAL.Event): EventInput {
       location: iCalEvent.location,
       organizer: iCalEvent.organizer,
       description: iCalEvent.description,
+      keywords: [...new Set(iCalEvent.component.getAllProperties('categories').map(x=>x.getValues())[0][0].split(","))]
     },
   }
 }

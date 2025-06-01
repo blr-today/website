@@ -17,14 +17,14 @@
     "@fullcalendar/list": "^7.0.0-rc.0",
     "@fullcalendar/multimonth": "^7.0.0-rc.0",
     "@fullcalendar/timegrid": "^7.0.0-rc.0",
-    "simple-icons": "^13.17.0",
+    "simple-icons": "^14.15.0",
     "ical.js": "^2.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0",
     "@rollup/plugin-terser": "^0.4",
     "@rollup/plugin-typescript": "^12.1",
-    "rollup": "^4.40",
+    "rollup": "^4.41",
     "tslib": "^2.8",
     "typescript": "^5.8"
   }
