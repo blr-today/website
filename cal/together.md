@@ -19,7 +19,7 @@ links:
   icon: facebook
   title: Together.Buzz Facebook Page
 --- 
-> Together is a platform to meet like-minded people through one-of-a-kind
-  experiences.
+> Together was a platform to meet like-minded people through one-of-a-kind
+  experiences. The last Together event was in 2024.
  
 Events are fetched from the [Experience listing](https://together.buzz/discovery) on the Together.Buzz website.

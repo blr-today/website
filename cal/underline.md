@@ -19,7 +19,7 @@ links:
   icon: googlemaps
   title: Underline Center on Google Maps
 ---
-> [Underline Center](https://underline.center/) is a community center for thoughtful, kind, and
-  interesting events.
+> [Underline Center](https://underline.center/) is a community center for
+  thoughtful, kind, and interesting events.
 
 Sourced from the [Underline Center calendar](https://underline.center/c/calendar/5) on their website.

@@ -26,5 +26,4 @@ links:
 > [Urbanaut](https://urbanaut.app/) curates recommendations from trustworthy local partners in 30+ cities.
 > It caters to curious and conscious travellers that want authentic experiences.
 
-
 The events on this page are sourced from the events and experiences listed at <https://urbanaut.app/?city=Bengaluru>.

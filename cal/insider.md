@@ -1,5 +1,5 @@
 ---
-title: Insider
+title: District
 type: aggregator
 tags: '["INSIDER"]'
 links:
@@ -21,4 +21,4 @@ links:
 subscribe: false
 --- 
 
-> Zomato [Insider](https://insider.in/) is a event aggregating platform, earlier owned by Paytm.
+> Zomato [Insider](https://insider.in/) (now District) is a event aggregating platform, earlier owned by Paytm.
