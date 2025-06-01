@@ -19,4 +19,3 @@ links:
 
 This page showcases events listed at <https://bluetokaicoffee.com/pages/coffee-workshop-events>,
 filtered to just Bangalore.
- 

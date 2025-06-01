@@ -11,7 +11,7 @@
   ],
 
   // We use the fullcalendar/adaptive premium plugin, which is available
-  // to us under the GPL as this is a GPL project.
+  // to us under the AGPL as this is a AGPL project.
   "replace": {
     "@fullcalendar/adaptive": "third-party/fullcalendar-license.txt",
     "@fullcalendar/premium-common": "third-party/fullcalendar-license.txt"

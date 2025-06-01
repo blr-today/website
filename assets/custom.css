@@ -16,6 +16,7 @@
     --clink: #3b8bba;
     --cemph: #1f8dd6;
     --cemphbg: #1f8dd610;
+    --pink-glamour: #fab1a0;
 }
 
 a.fake-button {
@@ -49,4 +50,11 @@ article h1:before {
 /*change list style */
 li[data-eventcount="0"] {
     list-style-type: circle;
+}
+
+
+/* Weekend should feel like weekend */
+.fc-day-sun, .fc-day-sat {
+    background-color: var(--pink-glamour);
+    color: var(--cfg);
 }

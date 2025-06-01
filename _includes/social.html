@@ -17,6 +17,8 @@ Icons are picked from bootstrap-icons for special cases, otherwise simple-icons
           <a href="{{ link.url }}" target="_blank" title="{{link.title}}">
           {% if link.icon == "newsletter" %}
             <img aria-hidden="true" src="/img/bootstrap-icons/envelope-paper.svg" />
+          {% elsif link.icon =="email" %}
+            <img aria-hidden="true" src="/img/bootstrap-icons/envelope-paper.svg" />
           {% elsif link.icon =="calendar" %}
             <img aria-hidden="true" src="/img/bootstrap-icons/calendar3.svg" />
           {% elsif link.icon =="blog" %}

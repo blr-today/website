@@ -12,23 +12,6 @@ title: blr.today
 
 {% assign eventCount = page.events | size %}
 
-{% if eventCount>0 %}
-<select id="cal-changer">
-    <option 
-        {%if page.calView == "list"%} selected {%endif%}
-        value="listYear">Complete List</option>
-    <option
-        {%if page.calView == "month"%} selected {%endif%}
-        value="dayGridMonth">Month</option>
-    <option
-        {%if page.calView == "week"%} selected {%endif%}
-        value="dayGridWeek">Week</option>
-    <option
-        {%if page.calView == "day"%} selected {%endif%}
-        value="dayGrid">Day</option>
-</select>
-{% endif %}
-
 {%- assign pagePrefix = "/" | append: page.path | replace:".md", "/" -%}
 {% if page.subscribe %}
 <link rel="alternate" type="application/atom+xml" href="agenda.xml" />
@@ -42,7 +25,7 @@ title: blr.today
     >Daily Email</a
 >
 {% endif %}
-{% if eventCount>0 %}
+{% if eventCount > 0 %}
 <div id="calendar"></div>
 {% else %}
 <p>There are no events to display.</p>
@@ -56,15 +39,12 @@ title: blr.today
 
 {% if eventCount > 0 %}
 <script type="module">
+    var tags = JSON.parse('{{page.tags}}')
     import { renderCalendar } from "/assets/js/calendar-render.js";
-    var cal = renderCalendar("{{pagePrefix}}cal.ics");
+    var cal = renderCalendar("{{pagePrefix}}cal.ics", tags);
 
     cal.updateSize();
-    cal.changeView(document.getElementById("cal-changer").value);
-
-    document.getElementById("cal-changer").onchange = function () {
-        cal.changeView(this.value);
-    };
+    cal.changeView('list');
 </script>
 
 <noscript>

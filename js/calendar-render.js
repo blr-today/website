@@ -6,7 +6,7 @@ import multiMonthPlugin from '@fullcalendar/multimonth'
 import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
 
-function renderCalendar(url){
+function renderCalendar(url, pageTags = []){
   var calendarEl = document.getElementById('calendar');
   var calendar = new Calendar(calendarEl, {
     initialView: 'listYear',
@@ -41,12 +41,20 @@ function renderCalendar(url){
     eventDidMount: function(info) {
       // A proper keyword is in uppercase
       let keywords = info.event.extendedProps.keywords.filter(x=>
-        x === x.toUpperCase()
+        x === x.toUpperCase() && x.length >=3 
       )
-      console.log(keywords, info.event.url)
+
+      // If this page only has a single tag
+      // Then we remove that tag from the list of shown tags
+      // So that the Indiranagar Page does not use that tag for eg.
+      if (pageTags.length == 1) {
+        keywords = keywords - [...new Set(pageTags)]
+      }
+      
       let element = info.el
+      let el = element.querySelector('.fc-list-event-time')
       // Add a child element that shows the list of keywords at the very end
-      if (keywords.length > 0) {
+      if (el && keywords.length > 0) {
         let keywordsElement = document.createElement('div');
         for (let i = 0; i < keywords.length; i++) {
           let keyword = keywords[i];
@@ -71,7 +79,7 @@ function renderCalendar(url){
           }
           keywordsElement.appendChild(keywordElement);
         }
-        element.querySelector('.fc-list-event-time').appendChild(keywordsElement);
+        el.appendChild(keywordsElement);
       }
     },
     events: {
