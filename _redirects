@@ -8,3 +8,6 @@
 /.well-known/host-meta https://fedi.blr.today/.well-known/host-meta 200
 /.well-known/webfinger https://fedi.blr.today/.well-known/webfinger 200
 /.well-known/nodeinfo  https://fedi.blr.today/.well-known/nodeinfo 200
+
+/cal/carbon/ /cal/scigallery/
+/cal/carbon/cal.ics /cal/scigallery/cal.ics
