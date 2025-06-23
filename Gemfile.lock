@@ -45,7 +45,7 @@ GEM
     http_parser.rb (0.8.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    icalendar (2.11.0)
+    icalendar (2.11.2)
       base64
       ice_cube (~> 0.16)
       logger
@@ -110,7 +110,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-musl)
       racc (~> 1.4)
-    ostruct (0.6.1)
+    ostruct (0.6.2)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (6.0.2)
@@ -204,7 +204,7 @@ PLATFORMS
 DEPENDENCIES
   base64 (~> 0.2.0)
   csv (~> 3.3)
-  icalendar (~> 2.10)
+  icalendar (~> 2.11)
   jekyll (~> 4.4.1)
   jekyll-datapage-generator (~> 1.4)
   jekyll-sitemap
