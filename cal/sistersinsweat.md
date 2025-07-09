@@ -17,8 +17,8 @@ links:
   title: Sisters in Sweat Community Playlist on Spotify
 ---
 
-> [Sisters In Sweat](https://sistersinsweat.in/) is a women-led women-only sport
+> [Sisters In Sweat](https://sistersinsweat.com/) is a women-led women-only sport
 > and wellness community spread across Bangalore, Mumbai, and Delhi NCR.
 
 Sourced from the
-[Sisters in Sweat Bangalore Event listings](https://sistersinsweat.in/sessions?city=4&sport=All).
+[Sisters in Sweat listings](https://sistersinsweat.com/sessions) filtered to Bangalore.

@@ -1,7 +1,7 @@
 ---
 title: Science Gallery Bengaluru [Organizer]
 type: museum
-tags: '["SCIGALLERY"]'
+tags: '["SCIGALLERY", "CARBON"]'
 links:
 - url: https://www.instagram.com/scigalleryblr/
   icon: instagram
