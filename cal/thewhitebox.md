@@ -9,7 +9,7 @@ links:
 - url: https://api.whatsapp.com/send?phone=918951662117
   icon: whatsapp
   title: Chat with TWB on WhatsApp
-- url: contact@thewhiteboxco.in
+- url: "mailto:contact@thewhiteboxco.in"
   icon: email
   title: Contact TWB over Email
 --- 
