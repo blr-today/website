@@ -31,7 +31,6 @@ function renderCalendar(url, pageTags = []){
     },
     showNonCurrentDates: false,
     weekends: true,
-    multiMonthMaxColumns: 1,
     eventDidMount: function(info) {
       // A proper keyword is in uppercase
       let keywords = new Set([...info.event.extendedProps.keywords].filter(x=>
