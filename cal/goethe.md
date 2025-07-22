@@ -24,10 +24,11 @@ links:
 - url: mailto:info-bangalore@goethe.de
   icon: newsletter
   title: Email
+- url: https://www.goethe.de/ins/in/en/ver.cfm#excluded_objectIds=26166625,26192197,25841912,26186611&adress_IDtxt=Bangalore
+  icon: calendar
+  title: Goethe-Institut Bangalore Calendar
 ---
 > The [Goethe-Institut / Max Mueller Bhavan](https://www.goethe.de/ins/in/en/sta/ban/ueb.html) is a cultural institute that offers language courses, organises cultural events and has a Library. The venue hosts film screenings, exhibitions, theatre performances, concerts, workshops and conferences. The institute also initiates and organises contacts and study tours for Indian artists, scientists and journalists who wish to go to Germany.
 
-<div class="card warn">
- <p>Incorrect Time</p>
- <p>Due to an issue with the Goethe.de website, the event time might be incorrect - please double check.</p>
-</div>
+This page tracks the [Goethe-Institut calendar](https://www.goethe.de/ins/in/en/ver.cfm#excluded_objectIds=26166625,26192197,25841912,26186611&adress_IDtxt=Bangalore)
+filtered to Bangalore.
