@@ -1,0 +1,401 @@
+/* Accordion Screensaver Styles */
+.screensaver-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.screensaver-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 0;
+    min-height: 60px;
+    position: relative;
+}
+
+.screensaver-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.screensaver-header-right {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.7;
+    text-align: right;
+    position: absolute;
+    right: 20px;
+}
+
+.event-meta-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.event-type-tag {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.countdown-timer {
+    background-color: #666;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-family: monospace;
+    flex-shrink: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.accordion-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.accordion-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-right: 2px solid #333;
+    width: 20%; /* Each item takes exactly 20% = 5 items total */
+}
+
+.accordion-item:last-child {
+    border-right: none;
+}
+
+.accordion-item.expanded {
+    width: 60%; /* Expanded item takes 60% */
+}
+
+.accordion-item.collapsed {
+    width: 10%; /* Each collapsed item takes 10% (4 × 10% = 40%) */
+}
+
+/* Collapsed state - vertical text reading bottom to top */
+.accordion-item.collapsed .event-content {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 10px 4px;
+    color: white;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.accordion-item.collapsed .event-title {
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 0.9;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+
+/* Hide expanded-only elements in collapsed view */
+.accordion-item.collapsed .event-title-container,
+.accordion-item.collapsed .event-description-container,
+.accordion-item.collapsed .event-image,
+.accordion-item.collapsed .event-qr,
+.accordion-item.collapsed .event-date-calendar,
+.accordion-item.collapsed .top-right-container {
+    display: none;
+}
+
+/* Hide collapsed-only elements in expanded view */
+.accordion-item.expanded .event-collapsed-title,
+.accordion-item.expanded .event-collapsed-calendar {
+    display: none;
+}
+
+/* Collapsed view styles */
+.accordion-item.collapsed .event-collapsed-title {
+    line-height: 0.9;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    font-size: clamp(1rem, 3vw, 2rem);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    padding: 0 2px;
+    letter-spacing: 0.05em;
+    max-height: 85%;
+}
+
+.accordion-item.collapsed .event-collapsed-calendar {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 6px;
+    padding: 6px 8px;
+    text-align: center;
+    min-width: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: auto;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+}
+
+.accordion-item.collapsed .event-collapsed-calendar .event-date-number {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #000;
+    line-height: 1;
+    margin: 0;
+}
+
+.accordion-item.collapsed .event-collapsed-calendar .event-date-month {
+    font-size: 0.6rem;
+    color: #333;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 2px 0 0 0;
+    line-height: 1;
+}
+
+/* Expanded state - horizontal layout */
+.accordion-item.expanded .event-content {
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    transform: none;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Title container with proper spacing for QR/calendar */
+.accordion-item.expanded .event-title-container {
+    height: 140px; /* Fixed height instead of percentage to prevent reflow */
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-right: 190px;
+    padding-right: 20px;
+    margin-bottom: 15px;
+}
+
+/* Old meta styling removed - now in header */
+
+/* Title styling */
+.accordion-item.expanded .event-title {
+    font-size: clamp(1rem, 6vw, 2rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    margin: 0;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+/* QR and Calendar container */
+.accordion-item.expanded .top-right-container {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+}
+
+/* Calendar-style date display */
+.accordion-item.expanded .event-date-calendar {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 5px;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.accordion-item.expanded .event-date-calendar.weekend .event-date-number {
+    color: salmon;
+}
+
+.accordion-item.expanded .event-date-number {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: #000;
+    line-height: 1;
+    margin: 0;
+}
+
+.accordion-item.expanded .event-date-month {
+    font-size: clamp(0.7rem, 1.5vw, 1rem);
+    color: #333;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 2px 0 0 0;
+    line-height: 1;
+}
+
+.accordion-item.expanded .event-time {
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    margin: 10px 0;
+    opacity: 0.9;
+}
+
+.accordion-item.expanded .event-location {
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
+    opacity: 0.7;
+    margin: 0 0 20px 0;
+}
+
+/* Description styling */
+.accordion-item.expanded .event-description {
+    font-size: clamp(1rem, 2.2vw, 1.8rem);
+    line-height: 1.4;
+    opacity: 0.8;
+    text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Color backgrounds based on event types */
+.accordion-item[data-color="dodgerblue"] { background-color: dodgerblue; }
+.accordion-item[data-color="gold"] { background-color: gold; color: #000 !important; }
+.accordion-item[data-color="deeppink"] { background-color: deeppink; }
+.accordion-item[data-color="tomato"] { background-color: tomato; }
+.accordion-item[data-color="lightsalmon"] { background-color: lightsalmon; color: #000 !important; }
+.accordion-item[data-color="orangered"] { background-color: orangered; }
+.accordion-item[data-color="mediumpurple"] { background-color: mediumpurple; }
+.accordion-item[data-color="darkslateblue"] { background-color: darkslateblue; }
+.accordion-item[data-color="lightskyblue"] { background-color: lightskyblue; color: #000 !important; }
+.accordion-item[data-color="yellowgreen"] { background-color: yellowgreen; color: #000 !important; }
+.accordion-item[data-color="darkorange"] { background-color: darkorange; }
+
+/* Override text colors for light backgrounds */
+.accordion-item[data-color="gold"] .event-content,
+.accordion-item[data-color="lightsalmon"] .event-content,
+.accordion-item[data-color="lightskyblue"] .event-content,
+.accordion-item[data-color="yellowgreen"] .event-content {
+    color: #000 !important;
+}
+
+/* No sliding animation - immediate updates only */
+
+/* Description container */
+.accordion-item.expanded .event-description-container {
+    flex: 1;
+    position: relative;
+    margin-top: 20px;
+}
+
+.accordion-item.expanded .event-description-container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Event image - float for text wrapping */
+.accordion-item.expanded .event-image {
+    float: left;
+    max-width: min(250px, 30%);
+    min-width: 150px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    margin: 0 20px 15px 0;
+    shape-outside: margin-box;
+    transition: max-width 0.3s ease;
+}
+
+/* Description text */
+.accordion-item.expanded .event-description {
+    /* Text will flow around the floated image */
+}
+
+/* Larger image when there's less text content */
+.accordion-item.expanded.short-content .event-image {
+    max-width: min(300px, 50%);
+}
+
+/* QR Code */
+.accordion-item.expanded .event-qr {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 5px;
+    border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.accordion-item.expanded .event-qr canvas {
+    width: 80px;
+    height: 80px;
+}
+
+/* Exit hint */
+.exit-hint {
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+    z-index: 10000;
+}

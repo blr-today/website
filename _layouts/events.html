@@ -26,6 +26,9 @@ title: blr.today
 >
 {% endif %}
 {% if eventCount > 0 %}
+<a class="fake-button" id="screensaver-btn" href="#" onclick="return false;">Screensaver</a>
+{% endif %}
+{% if eventCount > 0 %}
 <div id="calendar"></div>
 {% else %}
 <p>There are no events to display.</p>
@@ -38,12 +41,28 @@ title: blr.today
 {% include social.html links = page.links %}
 
 {% if eventCount > 0 %}
+<link rel="stylesheet" href="/assets/accordion-screensaver.css">
 <script type="module">
     var tags = JSON.parse('{{page.tags}}')
     import { renderCalendar } from "/assets/js/calendar-render.js";
     var cal = renderCalendar("{{pagePrefix}}cal.ics", tags);
 
     cal.updateSize();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="/js/accordion-screensaver.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const screensaver = new AccordionScreensaver();
+        const screensaverBtn = document.getElementById('screensaver-btn');
+        
+        if (screensaverBtn) {
+            screensaverBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                screensaver.show();
+            });
+        }
+    });
 </script>
 
 <noscript>

@@ -11,6 +11,7 @@ plugins:
 include:
   - _headers
   - _redirects
+  - js/accordion-screensaver.js
 exclude:
   - .editorconfig
   - .gitignore
