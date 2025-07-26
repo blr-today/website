@@ -27,3 +27,6 @@ links:
   painting easy for everyone. Their motto is "Anyone can paint🎨". They also
   host painting workshops as corporate team building events, kids birthdays,
   and dates.
+
+Events are sourced from the
+[Paint Bar website](https://www.paintbar.in/collections/paint-bar-bangalore/).
