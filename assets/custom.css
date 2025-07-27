@@ -58,8 +58,3 @@ li[data-eventcount="0"] {
     background-color: var(--pink-glamour);
     color: var(--cfg);
 }
-
-#atcb {
-    display: inline-flex !important;  
-    vertical-align: middle !important; 
-}

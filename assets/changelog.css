@@ -1,0 +1,42 @@
+/* Changelog entries */
+body > main > article ul {
+  
+  list-style: none;
+  padding-left: 0.5rem;
+}
+
+body > main > article li {
+  position: relative;
+  line-height: 1.5;
+}
+
+/* Badge styles */
+article li code {
+  display: inline-block;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0.1rem 0.4rem;
+  color: white;
+  width: 4rem;
+  text-align: center;
+}
+
+.badge-feature {
+  background: #0abde3;
+}
+.badge-new {
+  background: #10ac84;
+}
+.badge-cal {
+  background: #ff9f43;
+}
+.badge-removed {
+  background: #ee5253;
+}
+
+.badge-fixed {
+  background: #341f97;
+}

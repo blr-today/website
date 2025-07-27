@@ -19,7 +19,6 @@ Please see the complete [license text](/LICENSE.txt) for more details.
 
 |Code | LICENSE
 ------|--------
-`timezones-ical-library`|Apache-2.0
 `@fullcalendar/adaptive`|GPL3
 `@fullcalendar/premium-common` | GPL3
 `simple-icons` | CC0
@@ -27,6 +26,7 @@ Please see the complete [license text](/LICENSE.txt) for more details.
 `@fullcalendar/core` | MIT
 `@fullcalendar/list` | MIT
 `ical.js` | MPL2
+`timezones-ical-library`|Apache-2.0
 `classlesscss` | MIT
 `preact` (Via FullCalendar) | MIT
 
