@@ -1,5 +1,5 @@
 ---
-title: Conosh [Venue]
+title: Conosh 🍽️
 type: organizer
 tags: '["CONOSH"]'
 --- 
