@@ -17,9 +17,19 @@ modified source code to all users who interact with your website.
 
 Please see the complete [license text](/LICENSE.txt) for more details.
 
-The website frontend ships with various @fullcalendar packages, either under
-the GPL3 (for premium components), or under the MIT License. It also
-ships with [ical.js](https://github.com/kewisch/ical.js/) under the MPL-2.0 license.
+|Code | LICENSE
+------|--------
+`timezones-ical-library`|Apache-2.0
+`@fullcalendar/adaptive`|GPL3
+`@fullcalendar/premium-common` | GPL3
+`simple-icons` | CC0
+`add-to-calendar-button` | Elastic License
+`@fullcalendar/core` | MIT
+`@fullcalendar/list` | MIT
+`ical.js` | MPL2
+`classlesscss` | MIT
+`preact` (Via FullCalendar) | MIT
+
 Please see [/assets/third-party-licenses.txt](/assets/third-party-licenses.txt)
 for complete attribution information.
 

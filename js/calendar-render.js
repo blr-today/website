@@ -2,8 +2,10 @@ import { Calendar } from '@fullcalendar/core'
 import iCalendarPlugin from '@fullcalendar/icalendar'
 import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
+import { atcb_action } from "add-to-calendar-button";
 
 function renderCalendar(url, pageTags = []){
+
   var calendarEl = document.getElementById('calendar');
   var calendar = new Calendar(calendarEl, {
     initialView: 'listYear',
@@ -36,8 +38,6 @@ function renderCalendar(url, pageTags = []){
       let keywords = new Set([...info.event.extendedProps.keywords].filter(x=>
         x === x.toUpperCase() && x.length >=3 
       ))
-
-      console.log(keywords)
 
       // If this page only has a single tag
       // Then we remove that tag from the list of shown tags
@@ -93,5 +93,23 @@ function renderCalendar(url, pageTags = []){
   calendar.render();
   return calendar;
 }
+
+function subscribeButton (elementId, icsFile, title) {
+  const config = {
+    name: title,
+    subscribe: true,
+    icsFile: icsFile,
+    options: ['Apple','Google','iCal','Outlook.com','Yahoo','Microsoft365','MicrosoftTeams'],
+    lightMode: "system",
+    listStyle: "dropup-static",
+    trigger: "click",
+    // The branding looks weird, we instead give credit in lots of other places.
+    hideBranding: true
+  };
+  const button = document.getElementById(elementId);
+  if (button) {
+    button.addEventListener('click', () => atcb_action(config, button));
+  }
+}
   
-export { renderCalendar };
+export { renderCalendar, subscribeButton };

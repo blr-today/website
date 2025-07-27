@@ -7,3 +7,5 @@ events.db
 node_modules
 assets/js
 .rollup.cache
+# This is built and published on the website
+assets/third-party-licenses.txt

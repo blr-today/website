@@ -14,6 +14,7 @@
     "@fullcalendar/adaptive": "^7.0.0-rc.0",
     "@fullcalendar/core": "^7.0.0-rc.0",
     "@fullcalendar/list": "^7.0.0-rc.0",
+    "add-to-calendar-button": "^2.9.1",
     "ical.js": "^2.1.0",
     "simple-icons": "^14.15.0"
   },

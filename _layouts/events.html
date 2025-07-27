@@ -15,18 +15,18 @@ title: blr.today
 {%- assign pagePrefix = "/" | append: page.path | replace:".md", "/" -%}
 {% if page.subscribe %}
 <link rel="alternate" type="application/atom+xml" href="agenda.xml" />
-<a class="fake-button" href="webcal://blr.today{{pagePrefix}}cal.ics"
-    >Subscribe</a
->
-<a class="fake-button" href="{{site.url}}{{pagePrefix}}agenda.xml"
+
+<!-- <a class="fake-button" href="{{site.url}}{{pagePrefix}}agenda.xml"
     >Daily RSS</a
 >
 <a class="fake-button" href="mailto:add@rssby.email?body={{site.url}}{{pagePrefix}}agenda.xml&subject=please-subscribe"
     >Daily Email</a
->
+> -->
+<button id="screensaver-btn">Screensaver</a>
+<button id=atcb >Subscribe</button>
 {% endif %}
 {% if eventCount > 0 %}
-<a class="fake-button" id="screensaver-btn" href="#" onclick="return false;">Screensaver</a>
+
 {% endif %}
 {% if eventCount > 0 %}
 <div id="calendar"></div>
@@ -44,10 +44,11 @@ title: blr.today
 <link rel="stylesheet" href="/assets/accordion-screensaver.css">
 <script type="module">
     var tags = JSON.parse('{{page.tags}}')
-    import { renderCalendar } from "/assets/js/calendar-render.js";
+    import { renderCalendar, subscribeButton } from "/assets/js/calendar-render.js";
     var cal = renderCalendar("{{pagePrefix}}cal.ics", tags);
 
     cal.updateSize();
+    subscribeButton('atcb', "{{site.url}}{{pagePrefix}}cal.ics", "{{page.title}} Calendar | BLR.TODAY")
 </script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 <script src="/js/accordion-screensaver.js"></script>

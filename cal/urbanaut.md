@@ -2,6 +2,9 @@
 title: Urbanaut 🎟️
 type: aggregator
 tags: '["URBANAUT"]'
+# We mark lots of Urbanaut events as low-quality 
+# this ensures that they show up in the Urbanaut calendar
+excludeTags: '[]'
 links:
 - url: https://www.instagram.com/urbanaut_/
   icon: instagram
