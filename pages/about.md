@@ -6,6 +6,8 @@ title: blr.today / about
 
 blr.today is an [open-source](/license) project by [Nemo][nemo] that curates events happening in Bangalore.
 
+**We now have a [changelog](/changelog)**
+
 It curates events from multiple sources, cleans them up, then curates them further by tagging them nicely, and 
 makes all event data available as calendars you can subscribe to.
 
