@@ -4,8 +4,14 @@ permalink: /changelog/
 title: changelog
 ---
 
+## August 2025
+
+- `Fixed` [Pedal In Tandem](/cal/pedalintandem) calendar.
+- `Fixed` Dropped online events from Champaca calendar.
+
 ## July 2025
 
+- `Fixed` Shivaji-Nagar is now included in CBD.
 - `New` Added this changelog.
 - `Feature` Add to Calendar now works across multiple operating systems and devices.
 - `Cal` [Sabha BLR](/cal/sabha) calendar
