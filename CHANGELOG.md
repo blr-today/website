@@ -6,6 +6,7 @@ title: changelog
 
 ## August 2025
 
+- `Cal` Fixed and renamed Venn -> [Putting Scene](/cal/puttingscene).
 - `Fixed` [Pedal In Tandem](/cal/pedalintandem) calendar.
 - `Fixed` Dropped online events from Champaca calendar.
 
