@@ -1,0 +1,10 @@
+---
+permalink: /metrics
+---
+{%- assign P = site.pages | where: "layout", "events" -%}
+{%- for page in P -%}
+
+events_count{type="{{page.type}}", page="{{page.url|split:"/"|last}}"} {{page.events.size}}
+{% endfor %}
+total_events_count {{site.data.metrics[0].total}}
+

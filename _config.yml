@@ -84,3 +84,6 @@ sqlite:
       event_json->'$.location.geo.longitude' as lng,
       event_json-> '$.location.name' as name
       from events WHERE event_json -> '$.location.geo' IS NOT NULL
+  - data: metrics
+    file: events.db
+    query: "SELECT COUNT(*) as total FROM events"

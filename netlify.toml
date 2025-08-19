@@ -5,4 +5,9 @@ command = """
 npm run fetch-calendar
 npm run build
 bundle exec jekyll build --trace
+event_count=$(grep total_events_count _site/metrics  | cut -d ' ' -f 2)
+if [ "$event_count" -eq "0" ]; then
+  echo "No events found, exiting with error.";
+  exit 1
+fi
 """
