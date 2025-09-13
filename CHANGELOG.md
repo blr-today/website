@@ -4,6 +4,10 @@ permalink: /changelog/
 title: changelog
 ---
 
+## September
+
+- `Fixed` Updates broke for a while because my homeserver went down. Fixed mid-September.
+
 ## August 2025
 
 - `Cal` Fixed and renamed Venn -> [Putting Scene](/cal/puttingscene).
