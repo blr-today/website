@@ -23,10 +23,11 @@ links:
   title: CKSL Email
 
 --- 
-> Choe Khor Sum Ling (CKSL) is a centre for the study and practice of Buddhism
-  from the Tibetan Mahayana tradition run under the [Foundation for the
-  Preservation of the Mahayana Tradition](https://fpmt.org/). They have a quiet
-  colorful temple which is open for lectures and structured courses. Their
-  well-stocked library of Dharma books for loan is open to all.
+> [Choe Khor Sum Ling (CKSL)](https://cksl.in/) is a centre for the study and
+  practice of Buddhism from the Tibetan Mahayana tradition run under the
+  [Foundation for the Preservation of the Mahayana Tradition]
+  (https://fpmt.org/). They have a quiet colorful temple which is open for
+  lectures and structured courses. Their well-stocked library of Dharma books
+  for loan is open to all.
 
 Events are sourced from the CKSL website, dropping regular meditation sessions.
