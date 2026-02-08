@@ -1,7 +1,7 @@
 ---
 title: Fitness 💪
 type: collection
-tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS"]'
+tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS", "INDIARUNNING"]'
 ---
 
 Combined Fitness events from various sources. Currently includes the following
@@ -11,3 +11,4 @@ sources:
 2. [Bhaago India](/cal/bhaagoindia) listed runs.
 3. [Puma Run](/cal/pumarun) club.
 4. Sports events hosted by [Sisters in Sweat](/cal/sistersinsweat).
+4. Runs listed on [India Running](/cal/indiarunning).
