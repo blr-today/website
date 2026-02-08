@@ -4,7 +4,14 @@ permalink: /changelog/
 title: changelog
 ---
 
-## September
+## February 2026
+- `Fixed` Skillboxes, Goethe Institut, Putting Scene, BlrBirders, Pedal In Tandem, Sumukha calendars
+- `Cal` Added new calendar for India Running
+- `Cal` Renamed Insider to District everywhere
+- `Cal` Renamed BNGBirds to BlrBirders
+- `Cal` Removed Ace of Pubs because their website is misconfigured.
+
+## September 2025
 
 - `Fixed` Updates broke for a while because my homeserver went down. Fixed mid-September.
 
