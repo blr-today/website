@@ -48,12 +48,12 @@ This project is born out of a [very old idea of mine][idea],
 when it was called `gardencity.events`[^4]. The original idea was to create a
 Bangalore specific clone of [we build! sg][wb] [^1], which was a website
 automatically curating maker events in Singapore. My first attempt [in 2018](https://github.com/captn3m0/gardencity.events) went nowhere. It was further
-pushed by the success of [Putting Scenes (now Venn)][venn] - event curation
+pushed by the success of [Putting Scene][ps] - event curation
 seemed like an interesting problem to solve.
 
 [wb]: https://webuild.sg
 [wba]: http://web.archive.org/web/20171228002951/http://webuild.sg/
-[venn]: https://venn.buzz/
+[ps]: https://puttingscene.com/
 [idea]: https://github.com/captn3m0/ideas?tab=readme-ov-file#--bangalore-events-list
 
 [^1]: Now defunct, but see [this archived version from 2017](http://web.archive.org/web/20171228002951/http://webuild.sg/) to see a snapshot of the site when it was functional.

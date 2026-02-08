@@ -12,5 +12,10 @@
 /cal/carbon/ /cal/scigallery/
 /cal/carbon/cal.ics /cal/scigallery/cal.ics
 
+# Venn rebrand didn't work
 /cal/venn/ /cal/puttingscene/
 /cal/venn/cal.ics /cal/puttingscene/cal.ics
+
+# New website and name as well
+/cal/bngbirds/ /cal/blrbirders/
+/cal/bngbirds/cal.ics /cal/blrbirders/cal.ics
