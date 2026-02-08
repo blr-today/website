@@ -6,10 +6,11 @@ title: changelog
 
 ## February 2026
 - `Fixed` Skillboxes, Goethe Institut, Putting Scene, BlrBirders, Pedal In Tandem, Sumukha calendars
-- `Cal` Added new calendar for India Running
-- `Cal` Renamed Insider to District everywhere
-- `Cal` Renamed BNGBirds to BlrBirders
+- `Cal` Added new calendar for [India Running](/cal/indiarunning)
+- `Cal` Renamed Insider to [District](/cal/district) everywhere
+- `Cal` Renamed BNGBirds to [BlrBirders](/cal/blrbirders)
 - `Cal` Removed Ace of Pubs because their website is misconfigured.
+- `Cal` Added new [Penciljam](/cal/penciljam) calendar
 
 ## September 2025
 

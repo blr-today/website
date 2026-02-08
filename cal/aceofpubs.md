@@ -14,5 +14,9 @@ links:
 > aims to host the best pub
 > quizes. Quizzing across 16 cities across India.
 
+<div class="card warn">
+ <p>There are no events listed currently because the Ace of Pubs website is currently mis-configured.</p>
+</div>
+
 The events on this page are sourced from the Ace of Pubs Bangalore calendar
 that can be subscribed at <https://aceofpubs.com/events/category/bengaluru-pub-quiz-event/>.
