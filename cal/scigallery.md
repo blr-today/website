@@ -21,11 +21,22 @@ links:
 - url: https://www.youtube.com/c/sciencegallerybengaluru
   icon: youtube
   title: Science Gallery Bengaluru on YouTube
+- url: https://chat.whatsapp.com/EuEIRibD4P13kDAC51MSky
+  icon: whatsapp
+  title: Science Gallery Bengaluru WhatsApp Channel
+- url: https://courseware.scigalleryblr.org/en/learn
+  icon: courseware
+  title: Science Gallery Bengaluru Courseware
+- url: mailto:info@bengaluru.sciencegallery.com
+  icon: email
+  title: Email Science Gallery Bengaluru
 --- 
-> Science Gallery Bengaluru (SGB) is a not-for-profit public institution for
-research-based engagement targeted at young adults working at the intersection
-of the human, natural, and social sciences, and engineering, art, and design.
+> [Science Gallery Bengaluru (SGB)](https://bengaluru.sciencegallery.com/) is
+  a not-for-profit public institution for research-based engagement targeted
+  at young adults working at the intersection of the human, natural, and
+  social sciences, and engineering, art, and design. It is part of the
+  Science Gallery International Network.
 
-SGB's mission is to ‘bring science back into culture’. This page lists events
-under the "Sci560: Science in the City" programme - an exploration of the
-ideas, individuals, and institutions that make science in Bengaluru.
+SGB's mission is to ‘bring science back into culture’. SGB usually has an yearly refresh
+of their exhibition, the current being [Calorie](https://calorie.scigalleryblr.org/about) a
+multi-disciplinary exhibition that explores food and nutrition.
