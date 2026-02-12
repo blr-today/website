@@ -12,6 +12,7 @@ include:
   - _headers
   - _redirects
   - js/accordion-screensaver.js
+  - js/mobile-nav.js
 exclude:
   - .editorconfig
   - .gitignore
