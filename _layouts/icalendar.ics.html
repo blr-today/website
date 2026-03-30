@@ -5,6 +5,7 @@ VERSION:2.0
 METHOD:PUBLISH
 PRODID:blr.today{{page.slug}}
 CALSCALE:GREGORIAN
+NAME:{{page.title | strip_newlines}}
 X-WR-CALNAME:{{page.title  | strip_newlines}}
 X-ORIGINAL-URL:{{page.url | absolute_url}}
 X-WR-CALDESC:{{page.description | strip_newlines}}

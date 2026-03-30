@@ -19,6 +19,18 @@
     --pink-glamour: #fab1a0;
 }
 
+/* Fix mobile navigation to stay open on tap */
+@media (max-width: 40rem) {
+    nav ul:first-child.mobile-menu-open > li:not(:first-child):not(.sticky) {
+        display: block;
+        float: none !important;
+        padding: .3rem .6rem;
+    }
+    nav ul:first-child > li:first-child {
+        cursor: pointer;
+    }
+}
+
 a.fake-button {
     font: var(--font-h);
     border-radius: 4px;
