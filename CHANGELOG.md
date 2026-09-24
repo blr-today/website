@@ -4,6 +4,10 @@ permalink: /changelog/
 title: changelog
 ---
 
+## September 2026
+
+- `Fixed` The site showed no events from the end of August because the event data download broke. Fixed on 24th September.
+
 ## February 2026
 - `Fixed` Skillboxes, Goethe Institut, Putting Scene, BlrBirders, Pedal In Tandem, Sumukha calendars
 - `Cal` Added new calendar for [India Running](/cal/indiarunning)

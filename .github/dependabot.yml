@@ -11,3 +11,15 @@ updates:
       interval: "weekly"
     cooldown:
       default-days: 7
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    # core 7.1 drops the internal API our icalendar fork uses; TS 7 breaks rollup
+    ignore:
+      - dependency-name: "@fullcalendar/*"
+        versions: [">=7.1.0"]
+      - dependency-name: "typescript"
+        versions: [">=7.0.0"]
