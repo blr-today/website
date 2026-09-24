@@ -16,5 +16,5 @@ links:
 > [Lavonne Academy of Baking Science and Pastry Arts](https://www.lavonne.in/) is a baking academy and cafe in Bangalore
 > It aims to provide world-class pastry education and make patisserie a well-structured and established career choice in India. It runs long-term course, as well as short workshops across multiple venues.
 
-Sourced from the [Lavonne Weekend Calendar](https://www.lavonne.in/courses/short-term/weekend-calendar/). Longer courses are not listed here, but can
+Sourced from the [Lavonne Weekend Classes](https://lavonne.in/courses/weekend-classes). Longer courses are not listed here, but can
 be found on the Lavonne website.
