@@ -80,6 +80,7 @@ All custom Jekyll plugins are in `_plugins/` and follow standard Jekyll plugin p
 - `npm run fetch-calendar` - Download latest event database
 - `npm run stat` - Generate domain statistics from events.db
 - `npm run license` - Generate license information
+- `npm test` - Check `_site/api/events.json` is valid JSON (run after a Jekyll build)
 
 ## Data Schema
 
@@ -90,3 +91,8 @@ Events are stored as JSON in SQLite with schema.org/Event structure. Key fields:
 - `location` - schema.org/Place object
 - `keywords` - Array of uppercase tag strings
 - `url` - Event source URL
+
+## API
+
+- `/api/events.json` - Every event in `events.db` as a JSON array, from the `all_events` query in `_config.yml`
+- `/api/events.db` - Redirects to the latest [dataset](https://github.com/blr-today/dataset) release

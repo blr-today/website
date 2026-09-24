@@ -7,6 +7,8 @@ title: changelog
 ## September 2026
 
 - `Fixed` The site showed no events from the end of August because the event data download broke. Fixed on 24th September.
+- `New` All events are available as JSON at [/api/events.json](/api/events.json).
+- `New` The latest event database is at [/api/events.db](/api/events.db).
 
 ## February 2026
 - `Fixed` Skillboxes, Goethe Institut, Putting Scene, BlrBirders, Pedal In Tandem, Sumukha calendars

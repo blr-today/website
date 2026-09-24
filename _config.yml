@@ -27,6 +27,7 @@ exclude:
   # TODO: fixme
   - default.ics
   - node_modules
+  - test
 timezone: Asia/Kolkata
 defaults:
   - scope:
@@ -87,3 +88,6 @@ sqlite:
   - data: metrics
     file: events.db
     query: "SELECT COUNT(*) as total FROM events"
+  - data: all_events
+    file: events.db
+    query: "SELECT event_json FROM events ORDER BY event_json -> '$.startDate'"

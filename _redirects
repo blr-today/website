@@ -19,3 +19,6 @@
 # New website and name as well
 /cal/bngbirds/ /cal/blrbirders/
 /cal/bngbirds/cal.ics /cal/blrbirders/cal.ics
+
+# Latest dataset release, same file the site is built from
+/api/events.db https://github.com/blr-today/dataset/releases/latest/download/events.db 302
