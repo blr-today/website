@@ -1,7 +1,7 @@
 ---
 title: Fitness 💪
 type: collection
-tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS", "INDIARUNNING"]'
+tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS", "INDIARUNNING", "MAINMISSION"]'
 ---
 
 Combined Fitness events from various sources. Currently includes the following
