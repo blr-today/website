@@ -17,8 +17,7 @@ title: changelog
 - `Fixed` Club nights, pub promotions, business expos, out-of-town trips and pseudoscience events are filtered out of more calendars.
 - `Removed` PVR Cinemas 🪦 blocks all automated access. PVR INOX screenings are still covered through TicketNew.
 - `Cal` Added new calendar for [Main Mission](/cal/mainmission), also included in [Fitness](/cal/fitness).
-- `Cal` Added new calendar for [Indian Institute of World Culture](/cal/iiwc).
-- `Cal` Added new calendar for [Bangalore Astronomy Club](/cal/bac). Stargazing trips outside Bengaluru are hidden.
+- `Cal` Added new calendars for [Indian Institute of World Culture](/cal/iiwc) and [Bangalore Astronomy Club](/cal/bac), both included in [Curated](/). Stargazing trips outside Bengaluru only show on the Astronomy Club calendar.
 
 ## February 2026
 - `Fixed` Skillboxes, Goethe Institut, Putting Scene, BlrBirders, Pedal In Tandem, Sumukha calendars
