@@ -14,8 +14,9 @@ title: changelog
 - `Fixed` Underline Center no longer lists past events, and events without ticket links now link to the Underline Center page.
 - `Fixed` Science Gallery BLR now uses the new QUANTUM exhibition.
 - `Fixed` The site now picks up new events within a few minutes of every update.
-- `Improved` Club nights, pub promotions, business expos, out-of-town trips and pseudoscience events are filtered out of more calendars.
+- `Fixed` Club nights, pub promotions, business expos, out-of-town trips and pseudoscience events are filtered out of more calendars.
 - `Removed` PVR Cinemas 🪦 blocks all automated access. PVR INOX screenings are still covered through TicketNew.
+- `Cal` Added new calendar for [Main Mission](/cal/mainmission), also included in [Fitness](/cal/fitness).
 
 ## February 2026
 - `Fixed` Skillboxes, Goethe Institut, Putting Scene, BlrBirders, Pedal In Tandem, Sumukha calendars
