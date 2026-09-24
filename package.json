@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.js",
     "license": "npx generate-license-file --config .config/glf.json",
-    "fetch-calendar": "rm -f events.db && wget https://github.com/blr-today/dataset/releases/latest/download/events.db -O events.db",
+    "fetch-calendar": "rm -f events.db && node scripts/fetch-db.js",
     "stat": "sqlite3 --header --csv  events.db \"SELECT substr(url, 9, instr(substr(url, 9), '/') - 1) AS domain, COUNT(*) as count FROM events GROUP by domain ORDER BY count DESC\"",
     "test": "node --test test/*.test.js"
   },

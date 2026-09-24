@@ -28,6 +28,7 @@ exclude:
   - default.ics
   - node_modules
   - test
+  - scripts
 timezone: Asia/Kolkata
 defaults:
   - scope:

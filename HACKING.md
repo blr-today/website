@@ -77,7 +77,7 @@ All custom Jekyll plugins are in `_plugins/` and follow standard Jekyll plugin p
 ## Key NPM Scripts
 
 - `npm run build` - Build JavaScript bundles via Rollup
-- `npm run fetch-calendar` - Download latest event database
+- `npm run fetch-calendar` - Download latest `events.db` build artifact (needs a `GITHUB_TOKEN` with public repo read access), else the latest dataset release
 - `npm run stat` - Generate domain statistics from events.db
 - `npm run license` - Generate license information
 - `npm test` - Check `_site/api/events.json` is valid JSON (run after a Jekyll build)
