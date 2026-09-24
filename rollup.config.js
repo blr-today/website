@@ -24,6 +24,9 @@ export default {
           "@fullcalendar/icalendar": ["./js/@fullcalendar/icalendar/src"],
         },
         target: "ES6",
+        module: "ESNext",
+        moduleResolution: "bundler",
+        strict: false,
         lib: ["es6"]
       },
     }),
