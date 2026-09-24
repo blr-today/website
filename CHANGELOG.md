@@ -9,6 +9,13 @@ title: changelog
 - `Fixed` The site showed no events from the end of August because the event data download broke. Fixed on 24th September.
 - `New` All events are available as JSON at [/api/events.json](/api/events.json).
 - `New` The latest event database is at [/api/events.db](/api/events.db).
+- `Fixed` Atta Galatta, Adidas Runners, MAP, The White Box, Urbanaut, Lavonne, Trove, Sumukha, Sisters in Sweat, Bangalore Chess Club, Putting Scene, Creative Mornings and PUMA Runs calendars.
+- `Fixed` Pedal In Tandem rides showed up 5½ hours late.
+- `Fixed` Underline Center no longer lists past events, and events without ticket links now link to the Underline Center page.
+- `Fixed` Science Gallery BLR now uses the new QUANTUM exhibition.
+- `Fixed` The site now picks up new events within a few minutes of every update.
+- `Improved` Club nights, pub promotions, business expos, out-of-town trips and pseudoscience events are filtered out of more calendars.
+- `Removed` PVR Cinemas 🪦 blocks all automated access. PVR INOX screenings are still covered through TicketNew.
 
 ## February 2026
 - `Fixed` Skillboxes, Goethe Institut, Putting Scene, BlrBirders, Pedal In Tandem, Sumukha calendars
