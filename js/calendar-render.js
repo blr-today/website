@@ -26,6 +26,8 @@ function renderCalendar(url, pageTags = []){
     dayMaxEventRows: 200,
     dayMaxEvents: 200,
     expandRows: true,
+    // Late-night events ending before 6am stay on their start day
+    nextDayThreshold: '06:00:00',
     validRange: function(nowDate) {
       return {
         start: nowDate

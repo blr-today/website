@@ -15,6 +15,7 @@ title: changelog
 - `Fixed` Science Gallery BLR now uses the new QUANTUM exhibition.
 - `Fixed` The site now picks up new events within a few minutes of every update.
 - `Fixed` Club nights, pub promotions, business expos, out-of-town trips and pseudoscience events are filtered out of more calendars.
+- `Fixed` Late-night events that end after midnight now show once, on the day they start, with their real end time.
 - `Removed` PVR Cinemas 🪦 blocks all automated access. PVR INOX screenings are still covered through TicketNew.
 - `Cal` Added new calendar for [Main Mission](/cal/mainmission), also included in [Fitness](/cal/fitness).
 - `Cal` Added new calendars for [Indian Institute of World Culture](/cal/iiwc) and [Bangalore Astronomy Club](/cal/bac), both included in [Curated](/). Stargazing trips outside Bengaluru only show on the Astronomy Club calendar.
