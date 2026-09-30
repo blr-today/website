@@ -12,7 +12,8 @@ title: changelog
 - `Fixed` Atta Galatta, Adidas Runners, MAP, The White Box, Urbanaut, Lavonne, Trove, Sumukha, Sisters in Sweat, Bangalore Chess Club, Putting Scene, Creative Mornings and PUMA Runs calendars.
 - `Fixed` Pedal In Tandem rides showed up 5½ hours late.
 - `Fixed` Underline Center no longer lists past events, and events without ticket links now link to the Underline Center page.
-- `Fixed` Science Gallery BLR now uses the new QUANTUM exhibition.
+- `Fixed` Science Gallery BLR now uses the new QUANTUM exhibition, and its events show up on the [Science Gallery](/cal/scigallery) and [Curated](/) calendars again.
+- `Fixed` Champaca calendar was empty since it stopped putting dates in event titles.
 - `Fixed` The site now picks up new events within a few minutes of every update.
 - `Fixed` Club nights, pub promotions, business expos, out-of-town trips and pseudoscience events are filtered out of more calendars.
 - `Fixed` Late-night events that end after midnight now show once, on the day they start, with their real end time.
