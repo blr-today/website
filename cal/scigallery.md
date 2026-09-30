@@ -1,7 +1,7 @@
 ---
 title: Science Gallery Bengaluru [Organizer]
 type: museum
-tags: '["SCIGALLERY", "CARBON"]'
+tags: '["SCIGALLERY", "SCIGALLERYBLR"]'
 links:
 - url: https://www.instagram.com/scigalleryblr/
   icon: instagram
@@ -38,5 +38,5 @@ links:
   Science Gallery International Network.
 
 SGB's mission is to ‘bring science back into culture’. SGB usually has an yearly refresh
-of their exhibition, the current being [Calorie](https://calorie.scigalleryblr.org/about) a
-multi-disciplinary exhibition that explores food and nutrition.
+of their exhibition, the current being [QUANTUM](https://quantum.scigalleryblr.org/programmes), a
+multi-disciplinary exhibition that explores quantum science and technology.
