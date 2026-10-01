@@ -56,10 +56,11 @@ function renderCalendar(url, pageTags = []){
       keywords = keywords.difference(InvisibleKeywords)
 
       let element = info.el
-      let el = element.querySelector('.fc-list-event-time')
-      // Add a child element that shows the list of keywords at the very end
+      // Tags sit below the time, wrapping within the time column's width
+      let el = element.querySelector('.fc-list-event-time-outer')
       if (el && keywords.size > 0) {
         let keywordsElement = document.createElement('div');
+        keywordsElement.className = 'fc-list-event-keywords';
         for (let keyword of keywords) {
           let keywordElement = document.createElement('span');
           keywordElement.className = 'keyword';
@@ -74,12 +75,7 @@ function renderCalendar(url, pageTags = []){
           keywordElement.style.fontSize = '0.5em';
           keywordElement.style.marginRight = '5px';
           keywordElement.style.marginBottom = '2px';
-          // Use a display: block if we are in small screens
-          if( window.innerWidth < 600) {
-            keywordElement.style.display = 'inline-block';
-            // Do not take complete width
-            keywordElement.style.width = 'fit-content';
-          }
+          keywordElement.style.display = 'inline-block';
           keywordsElement.appendChild(keywordElement);
         }
         el.appendChild(keywordsElement);

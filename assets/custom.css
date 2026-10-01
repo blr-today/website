@@ -58,3 +58,16 @@ li[data-eventcount="0"] {
     background-color: var(--pink-glamour);
     color: var(--cfg);
 }
+
+/* Tags wrap below the time and never widen the time column */
+.fc-list-event-time-outer {
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.fc-list-event-keywords {
+    flex-basis: 100%;
+    contain: inline-size;
+    white-space: normal;
+    padding: 0 14px 8px;
+    line-height: 1.2;
+}
