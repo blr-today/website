@@ -61,6 +61,8 @@ li[data-eventcount="0"] {
 
 /* Tags wrap below the time and never widen the time column */
 .fc-list-event-time-outer {
+    width: var(--blr-time-width, auto) !important;
+    flex-shrink: 0;
     flex-wrap: wrap;
     align-content: flex-start;
 }

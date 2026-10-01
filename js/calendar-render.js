@@ -4,6 +4,21 @@ import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
 import { atcb_action } from "add-to-calendar-button";
 
+// FullCalendar's shared time width is unreliable, so size the column ourselves
+let alignScheduled = false
+function alignTimeColumn(calendarEl) {
+  if (alignScheduled) return
+  alignScheduled = true
+  requestAnimationFrame(() => {
+    alignScheduled = false
+    let widths = [...calendarEl.querySelectorAll('.fc-list-event-time')]
+      .map(el => el.getBoundingClientRect().width)
+    if (widths.length > 0) {
+      calendarEl.style.setProperty('--blr-time-width', Math.ceil(Math.max(...widths)) + 'px')
+    }
+  })
+}
+
 function renderCalendar(url, pageTags = []){
 
   var calendarEl = document.getElementById('calendar');
@@ -36,6 +51,7 @@ function renderCalendar(url, pageTags = []){
     showNonCurrentDates: false,
     weekends: true,
     eventDidMount: function(info) {
+      alignTimeColumn(calendarEl)
       // A proper keyword is in uppercase
       let keywords = new Set([...info.event.extendedProps.keywords].filter(x=>
         x === x.toUpperCase() && x.length >=3 
@@ -89,6 +105,7 @@ function renderCalendar(url, pageTags = []){
     schedulerLicenseKey: 'AGPL-My-Frontend-And-Backend-Is-Open-Source'
   });
   calendar.render();
+  document.fonts.ready.then(() => alignTimeColumn(calendarEl));
   return calendar;
 }
 
