@@ -1,7 +1,5 @@
 import 'add-to-calendar-button'
 
-const DESIGNS = ['Sheet', 'Split', 'Ticket', 'Spec sheet']
-const DESIGN_KEY = 'blr-event-design'
 const TZ = 'Asia/Kolkata'
 const TYPE_COLORS = {
   Event: 'dodgerblue', BusinessEvent: 'gold', CourseInstance: 'gold',
@@ -351,59 +349,22 @@ function build(fcEvent, entry, keywords) {
     section('performers', 'Performers', performers.length ? h('ul', {}, performers.map(p => h('li', {}, personLink(p)))) : null),
     section('about', 'About', paragraphs(event.description)),
     section('listings', links.length > 1 ? `Listed on ${links.length} sites` : 'Listed on',
-      h('ul', {}, links.map((u, i) => h('li', {}, h('a', { href: u, rel: 'noopener', target: '_blank', text: host(u) }), i === 0 && links.length > 1 ? ' (main listing)' : null)))),
-    h('nav', { class: 'blr-event__designs', 'aria-label': 'Popup design' },
-      h('span', { text: `Design (keys 1–${DESIGNS.length}):` }),
-      DESIGNS.map((name, i) => h('button', { type: 'button', 'data-design': i + 1, 'aria-pressed': String(design() === i + 1), title: name, text: i + 1 }))))
+      h('ul', {}, links.map((u, i) => h('li', {}, h('a', { href: u, rel: 'noopener', target: '_blank', text: host(u) }), i === 0 && links.length > 1 ? ' (main listing)' : null)))))
 
-  return { color, images: pics, image: pics[0], inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
+  return { color, images: pics, inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
 }
 
-function design() {
-  let fromUrl = Number(new URLSearchParams(location.search).get('design'))
-  if (fromUrl >= 1 && fromUrl <= DESIGNS.length) return fromUrl
-  let stored = 1
-  try { stored = Number(localStorage.getItem(DESIGN_KEY)) } catch { }
-  return stored >= 1 && stored <= DESIGNS.length ? stored : 1
-}
-
-function setDesign(n) {
-  try { localStorage.setItem(DESIGN_KEY, n) } catch { }
-  let url = new URL(location.href)
-  if (url.searchParams.has('design')) { url.searchParams.set('design', n); history.replaceState(history.state, '', url) }
-  if (dialog) {
-    dialog.dataset.design = n
-    dialog.querySelectorAll('.blr-event__designs button').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.design) === n)))
-    syncMode()
-  }
-  toast(`Popup design ${n}: ${DESIGNS[n - 1]}`)
-}
-
-// The spec sheet drawer leaves the calendar usable beside it on wide screens
-function pinned() {
-  return DESIGNS[design() - 1] === 'Spec sheet' && SIDE_BY_SIDE.matches
-}
-
+// The drawer leaves the calendar usable beside it on wide screens
 function show(d) {
-  if (pinned()) d.show()
+  if (SIDE_BY_SIDE.matches) d.show()
   else d.showModal()
 }
 
 function syncMode() {
-  if (!dialog?.open || dialog.matches(':modal') !== pinned()) return
+  if (!dialog?.open || dialog.matches(':modal') !== SIDE_BY_SIDE.matches) return
   swaps++
   dialog.close()
   show(dialog)
-}
-
-function toast(message) {
-  let el = document.querySelector('.blr-event-toast') || document.body.appendChild(h('output', { class: 'blr-event-toast', role: 'status' }))
-  if (dialog?.open && el.parentNode !== dialog) dialog.append(el)
-  if (!dialog?.open && el.parentNode !== document.body) document.body.append(el)
-  el.textContent = message
-  el.classList.add('is-visible')
-  clearTimeout(el.hideTimer)
-  el.hideTimer = setTimeout(() => el.classList.remove('is-visible'), 1600)
 }
 
 function ensureDialog() {
@@ -413,8 +374,6 @@ function ensureDialog() {
     if (e.target === dialog || e.target.closest('.blr-event__close')) dialog.close()
     let zoom = e.target.closest('.blr-event__zoom')
     if (zoom) openLightbox(dialog.images, zoom.querySelector('img').getAttribute('src'))
-    let pick = e.target.closest('.blr-event__designs button')
-    if (pick) setDesign(Number(pick.dataset.design))
   })
   dialog.addEventListener('close', () => {
     if (swaps) return swaps--
@@ -481,12 +440,10 @@ function markRow(el, color) {
 
 function openEventModal(fcEvent, keywords = [], row = null) {
   let d = ensureDialog()
-  d.dataset.design = design()
-  let { color, images, image, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
+  let { color, images, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
   d.images = images
   d.style.setProperty('--blr-event-color', color)
   markRow(row, color)
-  d.style.setProperty('--blr-event-image', image ? `url(${JSON.stringify(image)})` : 'none')
   d.replaceChildren(h('button', { type: 'button', class: 'blr-event__close', 'aria-label': 'Close', text: '×' }), inner)
   d.querySelectorAll('.blr-event__media img').forEach(img => img.addEventListener('error', () => {
     let figure = img.closest('figure')
@@ -513,11 +470,8 @@ document.addEventListener('click', e => {
 })
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && dialog?.open && !dialog.matches(':modal') && !lightbox?.open && !e.target.closest?.('[atcb-button-id]')) dialog.close()
-  if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return
-  if (e.target.closest?.('input, textarea, select, [contenteditable], .blr-lightbox')) return
-  let n = Number(e.key)
-  if (n >= 1 && n <= DESIGNS.length) setDesign(n)
+  if (e.key !== 'Escape' || !dialog?.open || dialog.matches(':modal') || lightbox?.open) return
+  if (!e.target.closest?.('[atcb-button-id]')) dialog.close()
 })
 
 export { openEventModal }
