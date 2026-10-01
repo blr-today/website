@@ -17,7 +17,7 @@ const ATTENDANCE = {
   MixedEventAttendanceMode: 'In person and online',
 }
 const AVAILABILITY = {
-  InStock: 'Available', LimitedAvailability: 'Few left', SoldOut: 'Sold out',
+  InStock: 'Available', LimitedAvailability: 'Limited', SoldOut: 'Sold out',
   PreOrder: 'Pre-booking', OutOfStock: 'Sold out', Discontinued: 'Closed',
   OnlineOnly: 'Online only', InStoreOnly: 'At the venue',
 }
@@ -116,6 +116,8 @@ function money(amount, currency) {
 
 function offers(event) {
   let seen = new Set()
+  let left = Number(event.remainingAttendeeCapacity)
+  let counted = event.remainingAttendeeCapacity !== undefined && event.remainingAttendeeCapacity !== null && !isNaN(left)
   return list(event.offers).filter(o => o && typeof o === 'object').map(o => {
     let low = money(o.lowPrice, o.priceCurrency), high = money(o.highPrice, o.priceCurrency)
     let price = low && high && low !== high ? `${low} – ${high}` : money(o.price, o.priceCurrency) || low
@@ -123,7 +125,9 @@ function offers(event) {
       name: text(o.name) || text(o.category) || null,
       price,
       value: Number(o.price ?? o.lowPrice),
-      availability: AVAILABILITY[tail(o.availability)] || null,
+      soldOut: ['SoldOut', 'OutOfStock'].includes(tail(o.availability)) || (counted && left <= 0),
+      availability: counted && left <= 0 ? 'Sold out'
+        : (counted && tail(o.availability) === 'LimitedAvailability' ? `${left} left` : AVAILABILITY[tail(o.availability)] || null),
       until: o.availabilityEnds || o.validThrough || null,
       url: safeUrl(o.url),
     }
@@ -135,7 +139,13 @@ function offers(event) {
   })
 }
 
-function priceSummary(event, tickets) {
+function strike(soldOut, content) {
+  return soldOut ? h('s', {}, content) : content
+}
+
+function priceSummary(event, all) {
+  let tickets = all.filter(t => !t.soldOut)
+  if (all.length && !tickets.length) return 'Sold out'
   let values = tickets.map(t => t.value).filter(v => !isNaN(v))
   if (event.isAccessibleForFree === true || event.isAccessibleForFree === 'true' || (values.length && Math.max(...values) === 0)) return 'Free'
   let paid = tickets.filter(t => t.value > 0).sort((a, b) => a.value - b.value)
@@ -271,7 +281,8 @@ function build(fcEvent, entry, keywords) {
     price && h('span', { class: 'blr-event__stub-price', text: price }))
 
   let media = pics.length ? h('figure', { class: 'blr-event__media' },
-    pics.map((src, i) => h('img', { src, alt: i ? '' : `Poster for ${event.name}`, loading: i ? 'lazy' : 'eager', decoding: 'async', referrerpolicy: 'no-referrer' }))) : null
+    pics.map((src, i) => h('button', { type: 'button', class: 'blr-event__zoom', 'data-index': i, 'aria-label': `View image ${i + 1} of ${pics.length}` },
+      h('img', { src, alt: i ? '' : `Poster for ${event.name}`, loading: i ? 'lazy' : 'eager', decoding: 'async', referrerpolicy: 'no-referrer' })))) : null
 
   let header = h('header', { class: 'blr-event__header' },
     h('p', { class: 'blr-event__kicker' },
@@ -289,11 +300,11 @@ function build(fcEvent, entry, keywords) {
     primary && h('a', { class: 'blr-event__button blr-event__button--primary', href: primary, rel: 'noopener', target: '_blank', text: `Open on ${host(primary)}` }),
     calendar && h('button', { type: 'button', class: 'blr-event__button blr-event__atcb', text: 'Add to calendar' }))
 
-  let ticketTable = tickets.length ? h('table', { class: 'blr-event__tickets' },
+  let ticketTable = tickets.length ? h('table', { class: 'blr-event__ticket-table' },
     h('thead', {}, h('tr', {}, h('th', { scope: 'col', text: 'Ticket' }), h('th', { scope: 'col', text: 'Price' }), h('th', { scope: 'col', text: 'Status' }))),
-    h('tbody', {}, tickets.map(t => h('tr', {},
-      h('td', {}, t.url ? h('a', { href: t.url, rel: 'noopener', target: '_blank', text: t.name || 'Tickets' }) : (t.name || 'Entry')),
-      h('td', { text: t.price || '—' }),
+    h('tbody', {}, tickets.map(t => h('tr', { class: t.soldOut ? 'is-sold-out' : null },
+      h('td', {}, strike(t.soldOut, t.url ? h('a', { href: t.url, rel: 'noopener', target: '_blank', text: t.name || 'Tickets' }) : (t.name || 'Entry'))),
+      h('td', {}, strike(t.soldOut, t.price || '—')),
       h('td', {}, t.availability || '', t.until && !isNaN(new Date(t.until)) ? h('small', {}, ' until ', h('time', { datetime: t.until, text: fmt(new Date(t.until), { day: 'numeric', month: 'short' }) })) : null))))) : null
 
   let venue = (place || virtual) ? [
@@ -332,7 +343,7 @@ function build(fcEvent, entry, keywords) {
       h('span', { text: `Design (keys 1–${DESIGNS.length}):` }),
       DESIGNS.map((name, i) => h('button', { type: 'button', 'data-design': i + 1, 'aria-pressed': String(design() === i + 1), title: name, text: i + 1 }))))
 
-  return { color, calendar, image: pics[0], inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
+  return { color, calendar, images: pics, image: pics[0], inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
 }
 
 function design() {
@@ -369,6 +380,8 @@ function ensureDialog() {
   dialog = h('dialog', { class: 'blr-event', 'aria-labelledby': 'blr-event-title' })
   dialog.addEventListener('click', e => {
     if (e.target === dialog || e.target.closest('.blr-event__close')) dialog.close()
+    let zoom = e.target.closest('.blr-event__zoom')
+    if (zoom) openLightbox(dialog.images, zoom.querySelector('img').getAttribute('src'))
     let atcb = e.target.closest('.blr-event__atcb')
     if (atcb) atcb_action(dialog.calendarConfig, atcb)
     let pick = e.target.closest('.blr-event__designs button')
@@ -378,22 +391,67 @@ function ensureDialog() {
     if (history.state?.blrEvent) history.back()
   })
   // The phone's back button closes the popup instead of leaving the page
-  window.addEventListener('popstate', () => { if (dialog.open) dialog.close() })
+  window.addEventListener('popstate', () => {
+    if (ignorePop) ignorePop = false
+    else if (lightbox?.open) lightbox.close()
+    else if (dialog.open) dialog.close()
+  })
   document.body.append(dialog)
   return dialog
+}
+
+let lightbox = null
+let ignorePop = false
+
+function openLightbox(images, current) {
+  if (!lightbox) {
+    lightbox = h('dialog', { class: 'blr-lightbox', 'aria-label': 'Event images' })
+    lightbox.addEventListener('click', e => {
+      let step = e.target.closest('[data-step]')
+      if (step) return lightbox.go(Number(step.dataset.step))
+      if (e.target.closest('.blr-lightbox__close') || !e.target.closest('img, button')) lightbox.close()
+    })
+    lightbox.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') lightbox.go(1)
+      if (e.key === 'ArrowLeft') lightbox.go(-1)
+    })
+    lightbox.addEventListener('close', () => {
+      if (history.state?.blrLightbox) { ignorePop = true; history.back() }
+    })
+    document.body.append(lightbox)
+  }
+  let track = h('ul', { class: 'blr-lightbox__track' },
+    images.map((src, i) => h('li', {}, h('img', { src, alt: `Image ${i + 1} of ${images.length}`, decoding: 'async', referrerpolicy: 'no-referrer' }))))
+  let counter = h('output', { class: 'blr-lightbox__count' })
+  let many = images.length > 1
+  lightbox.replaceChildren(track,
+    h('button', { type: 'button', class: 'blr-lightbox__close', 'aria-label': 'Close images', text: '×' }),
+    many && h('button', { type: 'button', class: 'blr-lightbox__prev', 'data-step': -1, 'aria-label': 'Previous image', text: '‹' }),
+    many && h('button', { type: 'button', class: 'blr-lightbox__next', 'data-step': 1, 'aria-label': 'Next image', text: '›' }),
+    many && counter)
+  let index = () => Math.round(track.scrollLeft / track.clientWidth)
+  let update = () => { counter.textContent = `${index() + 1} / ${images.length}` }
+  lightbox.go = step => track.scrollTo({ left: (index() + step + images.length) % images.length * track.clientWidth, behavior: 'smooth' })
+  track.addEventListener('scroll', update, { passive: true })
+  history.pushState({ blrEvent: true, blrLightbox: true }, '')
+  lightbox.showModal()
+  track.scrollLeft = Math.max(0, images.indexOf(current)) * track.clientWidth
+  update()
 }
 
 function openEventModal(fcEvent, keywords = []) {
   let d = ensureDialog()
   d.dataset.design = design()
-  let { color, calendar, image, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
+  let { color, calendar, images, image, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
   d.calendarConfig = calendar
+  d.images = images
   d.style.setProperty('--blr-event-color', color)
   d.style.setProperty('--blr-event-image', image ? `url(${JSON.stringify(image)})` : 'none')
   d.replaceChildren(h('button', { type: 'button', class: 'blr-event__close', 'aria-label': 'Close', text: '×' }), inner)
   d.querySelectorAll('.blr-event__media img').forEach(img => img.addEventListener('error', () => {
-    let figure = img.parentNode
-    img.remove()
+    let figure = img.closest('figure')
+    img.closest('button').remove()
+    d.images = d.images.filter(src => src !== img.getAttribute('src'))
     if (figure && !figure.querySelector('img')) figure.remove()
   }))
   if (!d.open) {
@@ -405,7 +463,7 @@ function openEventModal(fcEvent, keywords = []) {
 
 document.addEventListener('keydown', e => {
   if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return
-  if (e.target.closest?.('input, textarea, select, [contenteditable]')) return
+  if (e.target.closest?.('input, textarea, select, [contenteditable], .blr-lightbox')) return
   let n = Number(e.key)
   if (n >= 1 && n <= DESIGNS.length) setDesign(n)
 })
