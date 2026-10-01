@@ -2,6 +2,7 @@
 title: Bhaago India 👟
 type: curator
 tags: '["BHAAGOINDIA"]'
+domain: bhaagoindia.com
 links:
 - url: https://www.instagram.com/bhaagoindia/
   icon: instagram

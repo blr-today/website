@@ -2,6 +2,7 @@
 title: AllEvents
 type: aggregator
 tags: '["ALLEVENTS"]'
+domain: allevents.in
 links:
 - icon: facebook
   url: https://facebook.com/allevents.in

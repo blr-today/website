@@ -2,6 +2,7 @@
 title: Gully Tours
 type: organizer
 tags: '["GULLYTOURS"]'
+domain: gully.tours
 links:
 - url: https://www.instagram.com/gully.tours/
   icon: instagram

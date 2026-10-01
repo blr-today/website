@@ -8,5 +8,6 @@ Jekyll::Hooks.register :site, :post_read do |site|
     page.data["tags"] = page.data["tags"]
     page.data["excludeTags"] = page.data["excludeTags"]
     page.data["subscribe"] = page.data["subscribe"]
+    page.data["domain"] = page.data["domain"]
   end
 end

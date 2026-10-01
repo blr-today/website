@@ -2,6 +2,7 @@
 title: District
 type: aggregator
 tags: '["DISTRICT"]'
+domain: district.in
 links:
 - url: https://whatsapp.com/channel/0029VbBIuTe2Jl8LwAWPaP0e
   icon: whatsapp

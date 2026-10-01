@@ -2,6 +2,7 @@
 title: Bangalore Astronomy Club 🔭
 type: organizer
 tags: '["BAC"]'
+domain: bangaloreastronomyclub.com
 # Default exclusions minus NOTINBLR, since most BAC events are outside the city
 excludeTags: '["BUSINESS", "LOW-QUALITY", "DANDIYA", "WOOWOO", "SPORTS-SCREENING"]'
 links:

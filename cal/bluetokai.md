@@ -2,6 +2,7 @@
 title: Blue Tokai ☕
 type: organizer
 tags: '["BLUETOKAI"]'
+domain: bluetokaicoffee.com
 links:
 - url: https://x.com/bluetokaicoffee
   icon: x

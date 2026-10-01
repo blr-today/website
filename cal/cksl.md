@@ -2,6 +2,7 @@
 title: Choe Khor Sum Ling Centre 🧘🏽
 type: organizer
 tags: '["CKSL"]'
+domain: cksl.in
 links:
 - url: https://chat.whatsapp.com/Im6bL0Sfz0F3y2p4FGEKqu
   icon: whatsapp

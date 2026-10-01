@@ -2,6 +2,7 @@
 title: Artzo
 type: organizer
 tags: '["ARTZO"]'
+domain: artzo.in
 links:
 - url: https://x.com/artzoin
   icon: x

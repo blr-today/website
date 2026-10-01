@@ -2,6 +2,7 @@
 title: Main Mission 🏃
 type: organizer
 tags: '["MAINMISSION"]'
+domain: mainmission.in
 links:
 - url: https://mainmission.in/#/events
   icon: calendar

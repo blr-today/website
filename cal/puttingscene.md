@@ -2,6 +2,7 @@
 title: Putting Scenes 🤩
 type: curator
 tags: '["PUTTINGSCENE"]'
+domain: puttingscene.com
 links:
 - url: https://join.puttingscene.com/
   icon: whatsapp

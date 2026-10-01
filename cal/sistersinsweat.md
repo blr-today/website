@@ -2,6 +2,7 @@
 title: Sisters In Sweat 🦸🏽‍♀️
 type: organizer
 tags: '["SISTERSINSWEAT"]'
+domain: sistersinsweat.com
 links:
 - url: https://www.facebook.com/sistersinsweat.in/
   icon: facebook

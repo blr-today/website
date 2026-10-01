@@ -2,6 +2,7 @@
 title: Champaca Bookstore 📚
 type: bookstore
 tags: '["CHAMPACA"]'
+domain: champaca.in
 links:
 - url: https://www.instagram.com/champacabooks/
   icon: instagram

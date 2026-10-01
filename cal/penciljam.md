@@ -2,6 +2,7 @@
 title: Penciljam
 type: organizer
 tags: '["PENCILJAM"]'
+domain: penciljam.com
 links:
 - url: https://discord.gg/B4SNzqMH3
   icon: discord

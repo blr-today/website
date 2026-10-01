@@ -2,6 +2,7 @@
 title: Urbanaut 🎟️
 type: aggregator
 tags: '["URBANAUT"]'
+domain: urbanaut.app
 # We mark lots of Urbanaut events as low-quality 
 # this ensures that they show up in the Urbanaut calendar
 excludeTags: '[]'

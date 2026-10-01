@@ -2,6 +2,7 @@
 title: Atta Galatta [Organizer]
 type: bookstore
 tags: '["ATTAGALATTA"]'
+domain: attagalatta.com
 links:
 - url: https://zc1.maillist-manage.in/ua/Optin?od=1a1e3db3b4a79&zx=1df8d7de94&tD=11d1c1d88d68ee81&sD=11d1c1d88d6b3c78
   icon: newsletter

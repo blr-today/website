@@ -2,6 +2,7 @@
 title: India Running 👟
 type: curator
 tags: '["INDIARUNNING"]'
+domain: indiarunning.com
 links:
 - url: https://play.google.com/store/apps/details?id=in.indiarunning.app
   icon: googleplay

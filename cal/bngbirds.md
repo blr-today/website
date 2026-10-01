@@ -2,6 +2,7 @@
 title: Blr Birders 🐦
 type: organizer
 tags: '["BLRBIRDERS"]'
+domain: blrbirders.com
 links:
 - icon: email
   url: https://groups.io/g/bngbirds

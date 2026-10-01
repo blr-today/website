@@ -2,6 +2,7 @@
 title: Goethe Institut, Max Mueller Bhavan
 type: venue
 tags: '["GOETHE"]'
+domain: goethe.de
 links:
 - url: https://www.facebook.com/goetheinstitut.bangalore
   icon: facebook

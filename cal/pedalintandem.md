@@ -2,6 +2,7 @@
 title: Pedal In Tandem 🚴🏽
 type: organizer
 tags: '["PEDALINTANDEM"]'
+domain: pedalintandem.com
 links:
 - url: https://www.instagram.com/pedalintandem
   icon: instagram

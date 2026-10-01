@@ -2,6 +2,7 @@
 title: Trove Experiences 🎁
 type: organizer
 tags: '["TROVE"]'
+domain: troveexperiences.com
 links:
 - url: https://www.instagram.com/trove_experiences/
   icon: instagram

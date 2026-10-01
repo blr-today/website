@@ -2,6 +2,7 @@
 title: Underline Center 🌟
 type: venue
 tags: '["UNDERLINE"]'
+domain: underline.center
 links:
 - url: https://instagram.com/underline.center
   icon: instagram

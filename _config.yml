@@ -37,6 +37,7 @@ defaults:
       layout: events
       permalink: /:path/:basename/
       subscribe: true
+      domain: ""
       excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO", "SPORTS-SCREENING"]'
       layouts:
         - layout: icalendar.ics
@@ -54,9 +55,19 @@ defaults:
             denylist_tags AS (
               SELECT value FROM json_each(:excludeTags)
             )
-            SELECT *
+            SELECT url,
+              -- Merged events link to the copy on this calendar's domain, if any
+              coalesce((
+                SELECT json_set(event_json, '$.url', same_as.value)
+                FROM json_each(event_json->'$.sameAs') AS same_as
+                WHERE :domain != '' AND (
+                  same_as.value LIKE '%://' || :domain || '/%'
+                  OR same_as.value LIKE '%.' || :domain || '/%'
+                )
+                LIMIT 1
+              ), event_json) AS event_json
             FROM events
-            WHERE 
+            WHERE
               -- Check if no denylist tags are present
               NOT EXISTS (
                 SELECT 1

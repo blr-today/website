@@ -2,6 +2,7 @@
 title: Lavonne Baking Academy 🥐
 type: organizer
 tags: '["LAVONNE"]'
+domain: lavonne.in
 links:
 - url: https://www.instagram.com/lavonneacademyindia/
   icon: instagram

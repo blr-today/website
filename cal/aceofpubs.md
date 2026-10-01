@@ -2,6 +2,7 @@
 title: Ace of Pubs 🙋🏽
 type: organizer
 tags: '["ACEOFPUBS"]'
+domain: aceofpubs.com
 links:
 - url: https://www.facebook.com/aceofpub/
   icon: facebook

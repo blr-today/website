@@ -2,6 +2,7 @@
 title: Conosh 🍽️
 type: organizer
 tags: '["CONOSH"]'
+domain: conosh.com
 --- 
 > Conosh organizes global culinary events - dining experiences, local community
 events, and food related workshops. They focus on connecting people through

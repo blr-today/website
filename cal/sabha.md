@@ -2,6 +2,7 @@
 title: Sabha BLR
 type: venue
 tags: '["SABHA"]'
+domain: sabhablr.in
 links:
 - url: https://www.instagram.com/sabhablr/
   icon: instagram

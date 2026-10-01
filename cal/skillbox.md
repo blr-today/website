@@ -2,6 +2,7 @@
 title: Skillbox
 type: aggregator
 tags: '["SKILLBOXES"]'
+domain: skillboxes.com
 links:
 - icon: appstore
   url: https://apps.apple.com/in/app/skillbox-everything-live/id1437736688

@@ -2,6 +2,7 @@
 title: Indian Institute of World Culture 🏛️
 type: venue
 tags: '["IIWC"]'
+domain: iiwc.in
 links:
 - url: https://iiwc.in/events/
   icon: calendar

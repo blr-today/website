@@ -2,6 +2,7 @@
 title: Science Gallery Bengaluru [Organizer]
 type: museum
 tags: '["SCIGALLERYBLR"]'
+domain: scigalleryblr.org
 links:
 - url: https://www.instagram.com/scigalleryblr/
   icon: instagram

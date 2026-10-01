@@ -2,6 +2,7 @@
 title: Bangalore International Center 🏛️
 type: venue
 tags: '["BIC"]'
+domain: bangaloreinternationalcentre.org
 links:
 - url: https://bangaloreinternationalcentre.org/subscribe/
   icon: newsletter

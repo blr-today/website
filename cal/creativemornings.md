@@ -2,6 +2,7 @@
 title: Creative Mornings 🎨
 type: organizer
 tags: '["CREATIVEMORNINGS"]'
+domain: creativemornings.com
 links:
 - url: https://creativemornings.com/cities/BLR
   icon: newsletter

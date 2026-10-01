@@ -2,6 +2,7 @@
 title: Adidas Runners 👟
 type: organizer
 tags: '["ADIDAS"]'
+domain: adidas.co.in
 links:
 - url: https://www.facebook.com/groups/148320232244164
   icon: facebook
