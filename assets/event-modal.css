@@ -211,11 +211,6 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
 .blr-event[data-design="4"] .blr-event__facts dt { font-size: .85rem; }
 .blr-event[data-design="4"] .blr-event__designs { margin-top: 1rem; }
 .blr-event[data-design="4"]:not(:modal) { position: fixed; inset: 0 0 0 auto; z-index: 1001; }
-/* The grey sits under hovered and open rows so they show through it */
-html:has(dialog.blr-event[open]:not(:modal)) body::after {
-  content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
-  background: rgb(20 20 30 / .55);
-}
 /* The page shrinks into the space left of the drawer, so nothing hides under it */
 html:has(dialog.blr-event[open]:not(:modal)) body {
   --blr-drawer: min(30rem, 100vw);
@@ -224,9 +219,12 @@ html:has(dialog.blr-event[open]:not(:modal)) body {
   margin-left: max(0px, (100vw - var(--blr-drawer) - var(--blr-page)) / 2);
   margin-right: auto;
 }
-html:has(dialog.blr-event[open]:not(:modal)) :is(.fc-list-event:hover, .fc-list-event.blr-event-current) { position: relative; z-index: 1000; }
-html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event:hover { background-color: #f5f5f5; }
-html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event.blr-event-current { background-color: #fff; box-shadow: inset 4px 0 0 #222; }
+/* The open event lifts off the page as a white card */
+html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event.blr-event-current {
+  position: relative; z-index: 1; background-color: #fff;
+  box-shadow: inset 4px 0 0 #222, 0 4px 18px rgb(0 0 0 / .22);
+}
+html:has(dialog.blr-event[open]:not(:modal)) .blr-event-current :is(.fc-list-event-title, .fc-list-event-time) { color: #222; font-weight: 600; }
 @media (max-width: 26rem) {
   .blr-event[data-design="4"] .blr-event__section { grid-template-columns: 1fr; gap: .35rem; }
 }
