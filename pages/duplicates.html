@@ -31,8 +31,9 @@ sqlite:
     text-align: left;
     vertical-align: top;
   }
-  table.duplicates th:first-child { width: 20%; }
+  table.duplicates th:first-child { width: 11em; }
   table.duplicates th:last-child { width: 30%; }
+  table.duplicates tr.weekend { background-color: var(--pink-glamour); }
 </style>
 
 <table class="duplicates">
@@ -42,8 +43,9 @@ sqlite:
   <tbody>
   {%- for e in page.duplicates %}
     {%- assign others = e.sameAs | parse_json %}
-    <tr>
-      <td>{{ e.startDate | date: "%a %d %b, %l:%M %P" }}</td>
+    {%- assign dow = e.startDate | date: "%u" | plus: 0 %}
+    <tr{% if dow > 5 %} class="weekend"{% endif %}>
+      <td><time datetime="{{ e.startDate }}">{{ e.startDate | date: "%Y-%m-%d %H:%M" }}</time></td>
       <td>{{ e.name }}</td>
       <td>
         {%- assign urls = others | unshift: e.url %}
