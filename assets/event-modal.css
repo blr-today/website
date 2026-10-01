@@ -1,5 +1,5 @@
 /* Event popup: shared base, then one block per data-design */
-html:has(dialog.blr-event[open]) { overflow: hidden; }
+html:has(dialog.blr-event:modal) { overflow: hidden; }
 
 .blr-event {
   --ink: #222; --muted: #666; --paper: #fff; --line: #e6e6e6; --tint: #f6f6f8;
@@ -207,6 +207,15 @@ html:has(dialog.blr-event[open]) { overflow: hidden; }
 .blr-event[data-design="4"] .blr-event__facts div { display: flex; gap: .5rem; justify-content: space-between; border-bottom: 1px dotted var(--line); }
 .blr-event[data-design="4"] .blr-event__facts dt { font-size: .85rem; }
 .blr-event[data-design="4"] .blr-event__designs { margin-top: 1rem; }
+.blr-event[data-design="4"]:not(:modal) { position: fixed; inset: 0 0 0 auto; z-index: 1001; }
+/* The grey sits under hovered and open rows so they show through it */
+html:has(dialog.blr-event[open]:not(:modal)) body::after {
+  content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+  background: rgb(20 20 30 / .55);
+}
+html:has(dialog.blr-event[open]:not(:modal)) :is(.fc-list-event:hover, .fc-list-event.blr-event-current) { position: relative; z-index: 1000; }
+html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event:hover { background-color: #f5f5f5; }
+html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event.blr-event-current { background-color: #fff; box-shadow: inset 4px 0 0 #222; }
 @media (max-width: 26rem) {
   .blr-event[data-design="4"] .blr-event__section { grid-template-columns: 1fr; gap: .35rem; }
 }

@@ -76,7 +76,7 @@ function renderCalendar(url, pageTags = []){
       let e = info.jsEvent
       if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return
       e.preventDefault()
-      openEventModal(info.event, visibleKeywords(info.event, pageTags))
+      openEventModal(info.event, visibleKeywords(info.event, pageTags), info.el)
     },
     eventDidMount: function(info) {
       alignTimeColumn(calendarEl)

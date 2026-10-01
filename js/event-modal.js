@@ -1,4 +1,4 @@
-import { atcb_action } from 'add-to-calendar-button'
+import 'add-to-calendar-button'
 
 const DESIGNS = ['Sheet', 'Split', 'Ticket', 'Spec sheet']
 const DESIGN_KEY = 'blr-event-design'
@@ -22,8 +22,11 @@ const AVAILABILITY = {
   OnlineOnly: 'Online only', InStoreOnly: 'At the venue',
 }
 
+const SIDE_BY_SIDE = matchMedia('(min-width: 60rem)')
+
 let index = null
 let dialog = null
+let swaps = 0
 
 function h(tag, attrs = {}, ...children) {
   let el = document.createElement(tag)
@@ -236,7 +239,15 @@ function contact(o) {
   ]
 }
 
-function calendarConfig(event, where) {
+const BUTTON_STYLE = [
+  '--btn-background: #fff', '--btn-hover-background: #fff', '--btn-text: #222', '--btn-hover-text: #222',
+  '--btn-border: #e6e6e6', '--btn-hover-border: var(--blr-event-color)', '--btn-border-radius: .25rem',
+  '--btn-shadow: none', '--btn-hover-shadow: none', '--btn-active-shadow: none', '--btn-font-weight: 600',
+  '--btn-padding-x: 1rem', '--btn-padding-y: .75rem', '--base-font-size-l: 15px', '--base-font-size-m: 15px',
+].join('; ')
+
+// The web component, unlike atcb_action, can drop its list down below the button
+function calendarButton(event, where) {
   let start = new Date(event.startDate)
   if (isNaN(start)) return null
   let end = new Date(event.endDate)
@@ -244,14 +255,17 @@ function calendarConfig(event, where) {
   let day = d => new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(d)
   let time = d => fmt(d, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
   let allDay = isAllDay(event)
-  return {
-    name: event.name, location: where, description: event.url,
+  return h('add-to-calendar-button', {
+    class: 'blr-event__atcb', label: 'Add to calendar',
+    name: event.name, location: where || null, description: event.url,
     startDate: day(start), endDate: day(end),
-    startTime: allDay ? undefined : time(start), endTime: allDay ? undefined : time(end),
+    startTime: allDay ? null : time(start), endTime: allDay ? null : time(end),
     timeZone: TZ,
-    options: ['Apple', 'Google', 'iCal', 'Outlook.com', 'Yahoo', 'Microsoft365', 'MicrosoftTeams'],
-    listStyle: 'modal', lightMode: 'system', hideBranding: true,
-  }
+    options: "'Apple','Google','iCal','Outlook.com','Yahoo','Microsoft365','MicrosoftTeams'",
+    listStyle: matchMedia('(min-width: 40rem)').matches ? 'dropdown' : 'modal',
+    trigger: 'click', hideBackground: 'true', hideBranding: 'true', hideCheckmark: 'true',
+    lightMode: 'light', styleLight: BUTTON_STYLE,
+  })
 }
 
 function build(fcEvent, entry, keywords) {
@@ -295,10 +309,9 @@ function build(fcEvent, entry, keywords) {
     price && h('p', { class: 'blr-event__price', text: price }),
     keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => h('li', { text: k }))))
 
-  let calendar = calendarConfig(event, where.join(', '))
   let actions = h('div', { class: 'blr-event__actions' },
     primary && h('a', { class: 'blr-event__button blr-event__button--primary', href: primary, rel: 'noopener', target: '_blank', text: `Open on ${host(primary)}` }),
-    calendar && h('button', { type: 'button', class: 'blr-event__button blr-event__atcb', text: 'Add to calendar' }))
+    calendarButton(event, where.join(', ')))
 
   let ticketTable = tickets.length ? h('table', { class: 'blr-event__ticket-table' },
     h('thead', {}, h('tr', {}, h('th', { scope: 'col', text: 'Ticket' }), h('th', { scope: 'col', text: 'Price' }), h('th', { scope: 'col', text: 'Status' }))),
@@ -343,7 +356,7 @@ function build(fcEvent, entry, keywords) {
       h('span', { text: `Design (keys 1–${DESIGNS.length}):` }),
       DESIGNS.map((name, i) => h('button', { type: 'button', 'data-design': i + 1, 'aria-pressed': String(design() === i + 1), title: name, text: i + 1 }))))
 
-  return { color, calendar, images: pics, image: pics[0], inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
+  return { color, images: pics, image: pics[0], inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
 }
 
 function design() {
@@ -361,8 +374,26 @@ function setDesign(n) {
   if (dialog) {
     dialog.dataset.design = n
     dialog.querySelectorAll('.blr-event__designs button').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.design) === n)))
+    syncMode()
   }
   toast(`Popup design ${n}: ${DESIGNS[n - 1]}`)
+}
+
+// The spec sheet drawer leaves the calendar usable beside it on wide screens
+function pinned() {
+  return DESIGNS[design() - 1] === 'Spec sheet' && SIDE_BY_SIDE.matches
+}
+
+function show(d) {
+  if (pinned()) d.show()
+  else d.showModal()
+}
+
+function syncMode() {
+  if (!dialog?.open || dialog.matches(':modal') !== pinned()) return
+  swaps++
+  dialog.close()
+  show(dialog)
 }
 
 function toast(message) {
@@ -382,12 +413,12 @@ function ensureDialog() {
     if (e.target === dialog || e.target.closest('.blr-event__close')) dialog.close()
     let zoom = e.target.closest('.blr-event__zoom')
     if (zoom) openLightbox(dialog.images, zoom.querySelector('img').getAttribute('src'))
-    let atcb = e.target.closest('.blr-event__atcb')
-    if (atcb) atcb_action(dialog.calendarConfig, atcb)
     let pick = e.target.closest('.blr-event__designs button')
     if (pick) setDesign(Number(pick.dataset.design))
   })
   dialog.addEventListener('close', () => {
+    if (swaps) return swaps--
+    markRow(null)
     if (history.state?.blrEvent) history.back()
   })
   // The phone's back button closes the popup instead of leaving the page
@@ -439,11 +470,19 @@ function openLightbox(images, current) {
   update()
 }
 
-function openEventModal(fcEvent, keywords = []) {
+let currentRow = null
+
+function markRow(el) {
+  currentRow?.classList.remove('blr-event-current')
+  currentRow = el
+  el?.classList.add('blr-event-current')
+}
+
+function openEventModal(fcEvent, keywords = [], row = null) {
   let d = ensureDialog()
+  markRow(row)
   d.dataset.design = design()
-  let { color, calendar, images, image, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
-  d.calendarConfig = calendar
+  let { color, images, image, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
   d.images = images
   d.style.setProperty('--blr-event-color', color)
   d.style.setProperty('--blr-event-image', image ? `url(${JSON.stringify(image)})` : 'none')
@@ -456,12 +495,21 @@ function openEventModal(fcEvent, keywords = []) {
   }))
   if (!d.open) {
     history.pushState({ blrEvent: true }, '')
-    d.showModal()
+    show(d)
   }
   d.querySelector('.blr-event__inner').scrollTop = 0
 }
 
+SIDE_BY_SIDE.addEventListener('change', syncMode)
+
+document.addEventListener('click', e => {
+  if (!dialog?.open || dialog.matches(':modal')) return
+  if (e.target.closest('.blr-event, .blr-lightbox, .fc-event, .fc-list-event, [atcb-button-id], add-to-calendar-button')) return
+  dialog.close()
+})
+
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && dialog?.open && !dialog.matches(':modal') && !lightbox?.open && !e.target.closest?.('[atcb-button-id]')) dialog.close()
   if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return
   if (e.target.closest?.('input, textarea, select, [contenteditable], .blr-lightbox')) return
   let n = Number(e.key)
