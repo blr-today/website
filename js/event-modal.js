@@ -495,7 +495,10 @@ function openEventModal(fcEvent, keywords = [], row = null) {
   }))
   if (!d.open) {
     history.pushState({ blrEvent: true }, '')
+    // The page narrows beside the drawer, so keep the clicked row where it was
+    let top = row?.getBoundingClientRect().top
     show(d)
+    if (row && !d.matches(':modal')) scrollBy(0, row.getBoundingClientRect().top - top)
   }
   d.querySelector('.blr-event__inner').scrollTop = 0
 }
