@@ -1,0 +1,46 @@
+---
+layout: default
+title: blr.today / duplicates
+permalink: /duplicates/
+sqlite:
+  - data: duplicates
+    file: events.db
+    query: |
+      SELECT url,
+        event_json->>'$.name' AS name,
+        event_json->>'$.startDate' AS startDate,
+        event_json->>'$.sameAs' AS sameAs
+      FROM events
+      WHERE json_array_length(event_json->'$.sameAs') > 0
+        AND event_json->>'$.startDate' >= date('now')
+      ORDER BY event_json->>'$.startDate'
+---
+{% assign count = page.duplicates | size %}
+<h2>Duplicates</h2>
+<p>
+  {{ count }} upcoming events are listed on more than one site. blr.today shows
+  each of them once. Calendars for a single source link to that source's
+  listing, and the rest link to the first site below.
+</p>
+
+<table>
+  <thead>
+    <tr><th>When</th><th>Event</th><th>Listed on</th></tr>
+  </thead>
+  <tbody>
+  {%- for e in page.duplicates %}
+    {%- assign others = e.sameAs | parse_json %}
+    <tr>
+      <td>{{ e.startDate | date: "%a %d %b, %l:%M %P" }}</td>
+      <td>{{ e.name }}</td>
+      <td>
+        {%- assign urls = others | unshift: e.url %}
+        {%- for u in urls %}
+          {%- assign host = u | split: "/" | slice: 2 | first | remove_first: "www." %}
+          <a href="{{ u }}">{{ host }}</a>{% unless forloop.last %}, {% endunless %}
+        {%- endfor %}
+      </td>
+    </tr>
+  {%- endfor %}
+  </tbody>
+</table>
