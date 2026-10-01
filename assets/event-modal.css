@@ -17,6 +17,7 @@ html:has(dialog.blr-event[open]) { overflow: hidden; }
 .blr-event :is(h2, h3) { font-variant: normal; position: static; }
 .blr-event a { color: var(--clink, #07c); overflow-wrap: anywhere; }
 .blr-event ul { list-style: none; }
+.blr-event :is(li, dd) { margin: 0; }
 .blr-event address { font-style: normal; }
 .blr-event button { margin: 0; letter-spacing: normal; }
 
@@ -56,7 +57,7 @@ html:has(dialog.blr-event[open]) { overflow: hidden; }
 .blr-event__when { font-weight: 500; }
 .blr-event__duration, .blr-event__where { color: var(--muted); }
 .blr-event__price { font-weight: 600; }
-.blr-event__tags { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .25rem; }
+.blr-event__tags { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .3rem; margin-top: .25rem; }
 .blr-event__tags li { font-size: .7rem; padding: .1rem .4rem; border: 1px solid #ccc; border-radius: 3px; background: #f0f0f0; color: #555; }
 
 .blr-event__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
