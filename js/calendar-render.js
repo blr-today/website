@@ -3,6 +3,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar'
 import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
 import { atcb_action } from "add-to-calendar-button";
+import { openEventModal } from "./event-modal.js";
 
 // FullCalendar's shared time width is unreliable, so size the column ourselves
 let alignScheduled = false
@@ -17,6 +18,27 @@ function alignTimeColumn(calendarEl) {
       calendarEl.style.setProperty('--blr-time-width', Math.ceil(Math.max(...widths)) + 'px')
     }
   })
+}
+
+function visibleKeywords(event, pageTags) {
+  // A proper keyword is in uppercase
+  let keywords = new Set([...event.extendedProps.keywords].map(x => x.trim()).filter(x=>
+    x === x.toUpperCase() && x.length >=3 
+  ))
+
+  // If this page only has a single tag
+  // Then we remove that tag from the list of shown tags
+  // So that the Indiranagar Page does not use that tag for eg.
+  let InvisibleKeywords = new Set([
+    'HIGHAPE', 'SKILLBOXES', 'INSIDER', 
+    'MV EVENT', 'ALLEVENTS', 'DISTRICT']);
+
+  if (pageTags.length == 1) {
+    keywords = keywords.difference(new Set(pageTags))
+  }
+
+  // Some keywords are always hidden, even if available
+  return keywords.difference(InvisibleKeywords)
 }
 
 function renderCalendar(url, pageTags = []){
@@ -50,26 +72,15 @@ function renderCalendar(url, pageTags = []){
     },
     showNonCurrentDates: false,
     weekends: true,
+    eventClick: function(info) {
+      let e = info.jsEvent
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return
+      e.preventDefault()
+      openEventModal(info.event, visibleKeywords(info.event, pageTags))
+    },
     eventDidMount: function(info) {
       alignTimeColumn(calendarEl)
-      // A proper keyword is in uppercase
-      let keywords = new Set([...info.event.extendedProps.keywords].filter(x=>
-        x === x.toUpperCase() && x.length >=3 
-      ))
-
-      // If this page only has a single tag
-      // Then we remove that tag from the list of shown tags
-      // So that the Indiranagar Page does not use that tag for eg.
-      let InvisibleKeywords = new Set([
-        'HIGHAPE', 'SKILLBOXES', 'INSIDER', 
-        'MV EVENT', 'ALLEVENTS', 'DISTRICT']);
-
-      if (pageTags.length == 1) {
-        keywords = keywords.difference(new Set(pageTags))
-      }
-
-      // Some keywords are always hidden, even if available
-      keywords = keywords.difference(InvisibleKeywords)
+      let keywords = visibleKeywords(info.event, pageTags)
 
       let element = info.el
       // Tags sit below the time, wrapping within the time column's width

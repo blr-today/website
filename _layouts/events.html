@@ -42,6 +42,7 @@ title: blr.today
 
 {% if eventCount > 0 %}
 <link rel="stylesheet" href="/assets/accordion-screensaver.css">
+<link rel="stylesheet" href="/assets/event-modal.css">
 <script type="module">
     var tags = JSON.parse('{{page.tags}}')
     import { renderCalendar, subscribeButton } from "/assets/js/calendar-render.js";
@@ -72,7 +73,7 @@ title: blr.today
     {% for e in page.events %} {% assign E =e.event_json | parse_json %}
     <li>
         <a href="{{E.url}}">{{E.name}}</a> | {{E.startDate | date: "%b %d"}}
-        <script type="application/ld+json">{{e.event_json}}</script>
+        <script type="application/ld+json" data-url="{{e.url}}">{{e.event_json}}</script>
     </li>
     
     {% endfor %}
