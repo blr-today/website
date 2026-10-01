@@ -1,4 +1,6 @@
-const DESIGNS = ['Sheet', 'Split', 'Ticket', 'Poster', 'Spec sheet']
+import { atcb_action } from 'add-to-calendar-button'
+
+const DESIGNS = ['Sheet', 'Split', 'Ticket', 'Spec sheet']
 const DESIGN_KEY = 'blr-event-design'
 const TZ = 'Asia/Kolkata'
 const TYPE_COLORS = {
@@ -224,27 +226,22 @@ function contact(o) {
   ]
 }
 
-function icsDate(d) { return d.toISOString().replace(/[-:]|\.\d{3}/g, '') }
-
-function calendarLinks(event, where) {
+function calendarConfig(event, where) {
   let start = new Date(event.startDate)
-  if (isNaN(start)) return []
-  let end = new Date(event.endDate || start.getTime() + 2 * 3600e3)
+  if (isNaN(start)) return null
+  let end = new Date(event.endDate)
   if (isNaN(end) || end <= start) end = new Date(start.getTime() + 2 * 3600e3)
-  let details = `${event.url}`
-  let google = 'https://calendar.google.com/calendar/render?' + new URLSearchParams({
-    action: 'TEMPLATE', text: event.name, dates: `${icsDate(start)}/${icsDate(end)}`, details, location: where,
-  })
-  let esc = s => String(s).replace(/[\\;,]/g, m => '\\' + m).replace(/\n/g, '\\n')
-  let ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:blr.today', 'BEGIN:VEVENT',
-    `UID:blr.today/${event.url}`, `DTSTAMP:${icsDate(new Date())}`, `DTSTART:${icsDate(start)}`, `DTEND:${icsDate(end)}`,
-    `SUMMARY:${esc(event.name)}`, `LOCATION:${esc(where)}`, `URL:${event.url}`, `DESCRIPTION:${esc(details)}`,
-    'END:VEVENT', 'END:VCALENDAR'].join('\r\n')
-  let file = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }))
-  return [
-    h('a', { class: 'blr-event__button', href: google, rel: 'noopener', target: '_blank', text: 'Google Calendar' }),
-    h('a', { class: 'blr-event__button', href: file, download: 'event.ics', text: 'Download .ics' }),
-  ]
+  let day = d => new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(d)
+  let time = d => fmt(d, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+  let allDay = isAllDay(event)
+  return {
+    name: event.name, location: where, description: event.url,
+    startDate: day(start), endDate: day(end),
+    startTime: allDay ? undefined : time(start), endTime: allDay ? undefined : time(end),
+    timeZone: TZ,
+    options: ['Apple', 'Google', 'iCal', 'Outlook.com', 'Yahoo', 'Microsoft365', 'MicrosoftTeams'],
+    listStyle: 'modal', lightMode: 'system', hideBranding: true,
+  }
 }
 
 function build(fcEvent, entry, keywords) {
@@ -287,9 +284,10 @@ function build(fcEvent, entry, keywords) {
     price && h('p', { class: 'blr-event__price', text: price }),
     keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => h('li', { text: k }))))
 
+  let calendar = calendarConfig(event, where.join(', '))
   let actions = h('div', { class: 'blr-event__actions' },
     primary && h('a', { class: 'blr-event__button blr-event__button--primary', href: primary, rel: 'noopener', target: '_blank', text: `Open on ${host(primary)}` }),
-    calendarLinks(event, where.join(', ')))
+    calendar && h('button', { type: 'button', class: 'blr-event__button blr-event__atcb', text: 'Add to calendar' }))
 
   let ticketTable = tickets.length ? h('table', { class: 'blr-event__tickets' },
     h('thead', {}, h('tr', {}, h('th', { scope: 'col', text: 'Ticket' }), h('th', { scope: 'col', text: 'Price' }), h('th', { scope: 'col', text: 'Status' }))),
@@ -331,16 +329,18 @@ function build(fcEvent, entry, keywords) {
     section('listings', links.length > 1 ? `Listed on ${links.length} sites` : 'Listed on',
       h('ul', {}, links.map((u, i) => h('li', {}, h('a', { href: u, rel: 'noopener', target: '_blank', text: host(u) }), i === 0 && links.length > 1 ? ' (main listing)' : null)))),
     h('nav', { class: 'blr-event__designs', 'aria-label': 'Popup design' },
-      h('span', { text: 'Design (keys 1–5):' }),
+      h('span', { text: `Design (keys 1–${DESIGNS.length}):` }),
       DESIGNS.map((name, i) => h('button', { type: 'button', 'data-design': i + 1, 'aria-pressed': String(design() === i + 1), title: name, text: i + 1 }))))
 
-  return { color, image: pics[0], inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
+  return { color, calendar, image: pics[0], inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
 }
 
 function design() {
   let fromUrl = Number(new URLSearchParams(location.search).get('design'))
   if (fromUrl >= 1 && fromUrl <= DESIGNS.length) return fromUrl
-  try { return Number(localStorage.getItem(DESIGN_KEY)) || 1 } catch { return 1 }
+  let stored = 1
+  try { stored = Number(localStorage.getItem(DESIGN_KEY)) } catch { }
+  return stored >= 1 && stored <= DESIGNS.length ? stored : 1
 }
 
 function setDesign(n) {
@@ -369,11 +369,12 @@ function ensureDialog() {
   dialog = h('dialog', { class: 'blr-event', 'aria-labelledby': 'blr-event-title' })
   dialog.addEventListener('click', e => {
     if (e.target === dialog || e.target.closest('.blr-event__close')) dialog.close()
+    let atcb = e.target.closest('.blr-event__atcb')
+    if (atcb) atcb_action(dialog.calendarConfig, atcb)
     let pick = e.target.closest('.blr-event__designs button')
     if (pick) setDesign(Number(pick.dataset.design))
   })
   dialog.addEventListener('close', () => {
-    dialog.querySelectorAll('a[download]').forEach(a => URL.revokeObjectURL(a.href))
     if (history.state?.blrEvent) history.back()
   })
   // The phone's back button closes the popup instead of leaving the page
@@ -385,7 +386,8 @@ function ensureDialog() {
 function openEventModal(fcEvent, keywords = []) {
   let d = ensureDialog()
   d.dataset.design = design()
-  let { color, image, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
+  let { color, calendar, image, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
+  d.calendarConfig = calendar
   d.style.setProperty('--blr-event-color', color)
   d.style.setProperty('--blr-event-image', image ? `url(${JSON.stringify(image)})` : 'none')
   d.replaceChildren(h('button', { type: 'button', class: 'blr-event__close', 'aria-label': 'Close', text: '×' }), inner)
