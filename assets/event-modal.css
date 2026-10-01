@@ -214,17 +214,17 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
 /* The page shrinks into the space left of the drawer, so nothing hides under it */
 html:has(dialog.blr-event[open]:not(:modal)) body {
   --blr-drawer: min(30rem, 100vw);
-  --blr-page: min(var(--width), 100vw - var(--blr-drawer));
-  max-width: var(--blr-page);
-  margin-left: max(0px, (100vw - var(--blr-drawer) - var(--blr-page)) / 2);
-  margin-right: auto;
+  max-width: min(var(--width), 100vw - var(--blr-drawer));
+  margin: 0 var(--blr-drawer) 0 auto; padding-right: 0;
 }
-/* The open event lifts off the page as a white card */
+/* The open event takes its colour and runs into the drawer without a seam */
 html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event.blr-event-current {
-  position: relative; z-index: 1; background-color: #fff;
-  box-shadow: inset 4px 0 0 #222, 0 4px 18px rgb(0 0 0 / .22);
+  --blr-tint: color-mix(in srgb, var(--blr-event-color) 22%, white);
+  position: relative; z-index: 1; background-color: var(--blr-tint);
+  box-shadow: inset 4px 0 0 var(--blr-event-color), 2px 0 0 var(--blr-tint);
 }
 html:has(dialog.blr-event[open]:not(:modal)) .blr-event-current :is(.fc-list-event-title, .fc-list-event-time) { color: #222; font-weight: 600; }
+.blr-event[data-design="4"]:not(:modal) { border-left-color: color-mix(in srgb, var(--accent) 22%, white); }
 @media (max-width: 26rem) {
   .blr-event[data-design="4"] .blr-event__section { grid-template-columns: 1fr; gap: .35rem; }
 }

@@ -472,19 +472,20 @@ function openLightbox(images, current) {
 
 let currentRow = null
 
-function markRow(el) {
+function markRow(el, color) {
   currentRow?.classList.remove('blr-event-current')
   currentRow = el
   el?.classList.add('blr-event-current')
+  el?.style.setProperty('--blr-event-color', color)
 }
 
 function openEventModal(fcEvent, keywords = [], row = null) {
   let d = ensureDialog()
-  markRow(row)
   d.dataset.design = design()
   let { color, images, image, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
   d.images = images
   d.style.setProperty('--blr-event-color', color)
+  markRow(row, color)
   d.style.setProperty('--blr-event-image', image ? `url(${JSON.stringify(image)})` : 'none')
   d.replaceChildren(h('button', { type: 'button', class: 'blr-event__close', 'aria-label': 'Close', text: '×' }), inner)
   d.querySelectorAll('.blr-event__media img').forEach(img => img.addEventListener('error', () => {
