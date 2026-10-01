@@ -23,7 +23,19 @@ sqlite:
   listing, and the rest link to the first site below.
 </p>
 
-<table>
+<style>
+  table.duplicates { width: 100%; table-layout: fixed; }
+  table.duplicates th, table.duplicates td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.duplicates th:first-child { width: 20%; }
+  table.duplicates th:last-child { width: 30%; }
+</style>
+
+<table class="duplicates">
   <thead>
     <tr><th>When</th><th>Event</th><th>Listed on</th></tr>
   </thead>
