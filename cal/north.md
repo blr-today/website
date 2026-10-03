@@ -1,7 +1,7 @@
 ---
 title: North Bangalore
 type: neighbourhood
-tags: '["NORTH"]'
+tags: '["NORTHBLR"]'
 --- 
 > North Bangalore is everything past Mekhri Circle and Hebbal flyover,
 from RT Nagar and Kalyan Nagar up to Yelahanka.
