@@ -80,6 +80,13 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
 .blr-event__price { display: none; }
 .blr-event .blr-event__tags { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .3rem; margin-top: .25rem; }
 .blr-event__tags li { font-size: .7rem; padding: .1rem .4rem; border-radius: 3px; }
+/* Tap or hover a coloured tag to read what it means */
+.blr-event__tags li[data-tip] { position: relative; cursor: help; }
+.blr-event__tags li[data-tip]:is(:hover, :focus-visible, :focus)::after {
+  content: attr(data-tip); position: absolute; z-index: 2; left: 0; top: calc(100% + .3rem);
+  width: max-content; max-width: 16rem; padding: .35rem .5rem; border-radius: 3px;
+  background: #222; color: #fff; font-size: .75rem; line-height: 1.3; white-space: normal; pointer-events: none;
+}
 
 .blr-event__actions { display: flex; flex-wrap: wrap; gap: .5rem; padding-bottom: 1rem; }
 .blr-event__button {

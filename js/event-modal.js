@@ -24,6 +24,7 @@ const SIDE_BY_SIDE = matchMedia('(min-width: 60rem)')
 
 let index = null
 let cdnAllowed = null
+let tagInfo = null
 let dialog = null
 let swaps = 0
 
@@ -164,6 +165,15 @@ function cdnPrefixes() {
   if (cdnAllowed) return cdnAllowed
   try { cdnAllowed = JSON.parse(document.getElementById('blr-image-cdn')?.textContent || '[]') } catch { cdnAllowed = [] }
   return cdnAllowed
+}
+
+// Coloured tags explain themselves from _data/tags.yml
+function tagTip(tag) {
+  if (tag.kind === 'other') return null
+  if (!tagInfo) {
+    try { tagInfo = new Map(JSON.parse(document.getElementById('blr-tag-info')?.textContent || '[]').map(t => [t.id, t.description])) } catch { tagInfo = new Map() }
+  }
+  return tagInfo.get(tag.name) || null
 }
 
 const onCdn = src => cdnPrefixes().some(p => src.startsWith(p))
@@ -327,7 +337,7 @@ function build(fcEvent, entry, keywords) {
     h('p', { class: 'blr-event__when' }, whenText(event)),
     where[0] && h('p', { class: 'blr-event__where', text: where[0] }),
     price && h('p', { class: 'blr-event__price', text: price }),
-    keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => h('li', { class: `blr-tag blr-tag--${k.kind}`, 'data-tag': k.name, text: k.name }))))
+    keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => h('li', { class: `blr-tag blr-tag--${k.kind}`, 'data-tag': k.name, 'data-tip': tagTip(k), tabindex: tagTip(k) && 0, text: k.name }))))
 
   let actions = h('div', { class: 'blr-event__actions' },
     primary && h('a', { class: 'blr-event__button blr-event__button--primary', href: primary, rel: 'noopener', target: '_blank', text: `Open on ${host(primary)}` }),

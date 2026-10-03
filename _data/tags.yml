@@ -102,3 +102,48 @@
 - id: SISTERSINSWEAT
   title: Sisters In Sweat [Organizer]
   description: Events hosted by Sisters In Sweat - Women only community
+
+# Coloured tags: descriptions show as tooltips in the event popup
+- id: FREE
+  title: Free [Price]
+  description: Free to attend, with no ticket or a ₹0 ticket
+
+- id: BUDGET
+  title: Budget [Price]
+  description: Cheapest ticket is under ₹500
+
+- id: PRICEY
+  title: Pricey [Price]
+  description: Cheapest ticket is ₹2,000 or more
+
+- id: CBD
+  title: Central Bangalore [Area]
+  description: MG Road, Church Street, Ulsoor, Cubbon Park and Cox Town
+
+- id: HSR
+  title: HSR Layout [Area]
+  description: HSR Layout, between Hosur Road and Sarjapur Road
+
+- id: INDIRANAGAR
+  title: Indiranagar [Area]
+  description: Indiranagar, Domlur, Old Airport Road and HAL 3rd Stage
+
+- id: JAYANAGAR
+  title: Jayanagar [Area]
+  description: Jayanagar and Ashoka Pillar Road
+
+- id: JPNAGAR
+  title: JP Nagar [Area]
+  description: JP Nagar, South Bangalore
+
+- id: KORAMANGALA
+  title: Koramangala [Area]
+  description: Koramangala and its blocks
+
+- id: NORTHBLR
+  title: North Bangalore [Area]
+  description: Hebbal, RT Nagar, Kalyan Nagar, Hennur, Jakkur and Yelahanka
+
+- id: WHITEFIELD
+  title: Whitefield [Area]
+  description: Whitefield and East Bangalore, from KR Puram to ITPL
