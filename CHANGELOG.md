@@ -10,6 +10,10 @@ title: changelog
 - `New` The [duplicates](/duplicates/) page lists every upcoming event found on more than one site, with links to each listing.
 - `Fixed` Courtyard Koota event dates are read correctly again.
 - `Removed` The screensaver button on calendar pages.
+- `Fixed` District, AllEvents and PUMA Runs calendars.
+- `Fixed` More events are placed in a neighbourhood. Cox Town and Shanti Nagar are now part of CBD, and most of east Bangalore is under Whitefield.
+- `Cal` Added new calendar for [North Bangalore](/cal/north).
+- `Cal` [Ace of Pubs](/cal/aceofpubs) is back.
 
 ## September 2026
 
