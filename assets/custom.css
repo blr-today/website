@@ -83,16 +83,16 @@ li[data-eventcount="0"] {
 
 /* Tags: a hue per area, green for free, amber deepening with price */
 .blr-tag { --tag-bg: #f0f0f0; --tag-line: #8a8a8a; --tag-ink: #555; background: var(--tag-bg); border: 1px solid var(--tag-line); color: var(--tag-ink); }
-/* Each area has its own hue; a new area falls back to slate */
+/* Areas take their Namma Metro line colour; a new area falls back to slate */
 .blr-tag--location { --tag-bg: #e2e8f0; --tag-line: #64748b; --tag-ink: #334155; }
-.blr-tag--location[data-tag="CBD"] { --tag-bg: #fee2e2; --tag-line: #dc2626; --tag-ink: #991b1b; }
-.blr-tag--location[data-tag="JAYANAGAR"] { --tag-bg: #fce7f3; --tag-line: #db2777; --tag-ink: #9d174d; }
-.blr-tag--location[data-tag="JPNAGAR"] { --tag-bg: #fae8ff; --tag-line: #c026d3; --tag-ink: #86198f; }
+.blr-tag--location[data-tag="CBD"] { --tag-bg: #fce7f3; --tag-line: #db2777; --tag-ink: #9d174d; }
+.blr-tag--location[data-tag="JAYANAGAR"] { --tag-bg: #d1fae5; --tag-line: #059669; --tag-ink: #065f46; }
+.blr-tag--location[data-tag="JPNAGAR"] { --tag-bg: #ecfccb; --tag-line: #4d7c0f; --tag-ink: #3f6212; }
 .blr-tag--location[data-tag="INDIRANAGAR"] { --tag-bg: #ede9fe; --tag-line: #8b5cf6; --tag-ink: #5b21b6; }
 .blr-tag--location[data-tag="NORTHBLR"] { --tag-bg: #e0e7ff; --tag-line: #6366f1; --tag-ink: #3730a3; }
 .blr-tag--location[data-tag="HSR"] { --tag-bg: #dbeafe; --tag-line: #3b82f6; --tag-ink: #1e40af; }
 .blr-tag--location[data-tag="KORAMANGALA"] { --tag-bg: #cffafe; --tag-line: #0891b2; --tag-ink: #155e75; }
-.blr-tag--location[data-tag="WHITEFIELD"] { --tag-bg: #ccfbf1; --tag-line: #0d9488; --tag-ink: #115e59; }
+.blr-tag--location[data-tag="WHITEFIELD"] { --tag-bg: #f3e8ff; --tag-line: #9333ea; --tag-ink: #6b21a8; }
 .blr-tag[data-tag="FREE"] { --tag-bg: #dcfce7; --tag-line: #16a34a; --tag-ink: #166534; }
 .blr-tag[data-tag="BUDGET"] { --tag-bg: #fef3c7; --tag-line: #b45309; --tag-ink: #92400e; }
 .blr-tag[data-tag="VALUE"] { --tag-bg: #fde68a; --tag-line: #b45309; --tag-ink: #78350f; }
