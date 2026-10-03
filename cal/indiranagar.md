@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Indiranagar
 type: neighbourhood
 tags: '["INDIRANAGAR"]'

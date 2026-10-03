@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Central Bangalore District
 type: neighbourhood
 tags: '["CBD"]'

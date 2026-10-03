@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Curated 🍉
 type: collection
 permalink: /

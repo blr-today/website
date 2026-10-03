@@ -3,7 +3,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar'
 import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
 import { atcb_action } from "add-to-calendar-button";
-import { openEventModal } from "./event-modal.js";
+import { openEventModal, eventType } from "./event-modal.js";
 import { markLiked } from "./likes.js";
 
 // FullCalendar's shared time width is unreliable, so size the column ourselves
@@ -135,6 +135,10 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
     schedulerLicenseKey: 'AGPL-My-Frontend-And-Backend-Is-Open-Source'
   });
   calendar.render();
+  let filterEl = document.getElementById('blr-tag-filter')
+  let facets = e => [{ group: 'type', name: eventType(e) }].concat([...visibleKeywords(e, pageTags, onlyTags)]
+    .map(name => ({ group: tagKind(name, locationTags), name })).filter(f => f.group !== 'other'))
+  if (filterEl) import('./tag-filter.js').then(m => m.tagFilter(calendar, filterEl, facets))
   document.fonts.ready.then(() => alignTimeColumn(calendarEl));
   return calendar;
 }

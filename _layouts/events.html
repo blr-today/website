@@ -13,6 +13,7 @@ title: blr.today
 {% assign eventCount = page.events | size %}
 
 {%- assign pagePrefix = "/" | append: page.path | replace:".md", "/" -%}
+<div class="blr-page-actions">
 {% if page.subscribe %}
 <link rel="alternate" type="application/atom+xml" href="agenda.xml" />
 
@@ -24,6 +25,11 @@ title: blr.today
 > -->
 <button id=atcb>Add To Calendar</button>
 {% endif %}
+{% if page.tagFilter and eventCount > 0 %}
+<link rel="stylesheet" href="/assets/tag-filter.css">
+<div id="blr-tag-filter" class="blr-tf" hidden></div>
+{% endif %}
+</div>
 {% if eventCount > 0 %}
 
 {% endif %}

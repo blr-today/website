@@ -76,6 +76,12 @@ function findEvent(fcEvent) {
     !best || Math.abs(c.start - start) < Math.abs(best.start - start) ? c : best, null)
 }
 
+// schema.org type, read from the page data the modal already indexes
+function eventType(fcEvent) {
+  let type = findEvent(fcEvent)?.event['@type']
+  return (Array.isArray(type) ? type[0] : type) || 'Event'
+}
+
 function fmt(date, opts) {
   return new Intl.DateTimeFormat('en-IN', { timeZone: TZ, ...opts }).format(date)
 }
@@ -522,4 +528,4 @@ document.addEventListener('keydown', e => {
   if (!e.target.closest?.('[atcb-button-id]')) dialog.close()
 })
 
-export { openEventModal }
+export { openEventModal, eventType }

@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Urbanaut 🎟️
 type: aggregator
 tags: '["URBANAUT"]'
