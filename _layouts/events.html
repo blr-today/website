@@ -53,7 +53,7 @@ title: blr.today
     var cal = renderCalendar("{{pagePrefix}}cal.ics", tags, {% if page.locationTagsOnly %}locationTags{% else %}null{% endif %}, locationTags);
 
     cal.updateSize();
-    subscribeButton('atcb', "{{site.url}}{{pagePrefix}}cal.ics", "{{page.title}} Calendar | BLR.TODAY")
+    subscribeButton('atcb', "{{site.feed_url}}{{pagePrefix}}cal.ics", "{{page.title}} Calendar | BLR.TODAY")
 </script>
 
 <noscript>

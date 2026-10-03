@@ -3,6 +3,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   Semi-curated event listings for Bangalore
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blr.today" # the base hostname & protocol for your site, e.g. http://example.com
+# jekyll serve rewrites url to localhost, but subscriptions need the public https feed
+feed_url: "https://blr.today"
 plugins:
   - jekyll_sqlite
   - jekyll-datapage-generator
