@@ -23,10 +23,12 @@ function alignTimeColumn(calendarEl) {
 
 // Price tags from ingest, shown on every calendar
 const PRICE_TAG = /^(FREE|BUDGET|PRICEY)$/
+const LASTCALL = 'LASTCALL'
 
 // Picks the tag colour: location, price or other
 function tagKind(tag, locationTags) {
   if (PRICE_TAG.test(tag)) return 'price'
+  if (tag === LASTCALL) return 'lastcall'
   return locationTags.includes(tag) ? 'location' : 'other'
 }
 
@@ -49,7 +51,7 @@ function visibleKeywords(event, pageTags, onlyTags) {
   }
 
   if (onlyTags) {
-    keywords = new Set([...keywords].filter(k => onlyTags.includes(k) || PRICE_TAG.test(k)))
+    keywords = new Set([...keywords].filter(k => onlyTags.includes(k) || PRICE_TAG.test(k) || k === LASTCALL))
   }
 
   // Some keywords are always hidden, even if available
@@ -137,7 +139,7 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
   calendar.render();
   let filterEl = document.getElementById('blr-tag-filter')
   let facets = e => [{ group: 'type', name: eventType(e) }].concat([...visibleKeywords(e, pageTags, onlyTags)]
-    .map(name => ({ group: tagKind(name, locationTags), name })).filter(f => f.group !== 'other'))
+    .map(name => ({ group: tagKind(name, locationTags), name })).filter(f => ['location', 'price'].includes(f.group)))
   if (filterEl) import('./tag-filter.js').then(m => m.tagFilter(calendar, filterEl, facets))
   document.fonts.ready.then(() => alignTimeColumn(calendarEl));
   return calendar;

@@ -147,3 +147,7 @@
 - id: WHITEFIELD
   title: Whitefield [Area]
   description: Whitefield and East Bangalore, from KR Puram to ITPL
+
+- id: LASTCALL
+  title: Last call [Seats]
+  description: 8 or fewer seats left

@@ -101,5 +101,8 @@ li[data-eventcount="0"] {
     border-radius: 2px; text-decoration: none;
 }
 
+/* Few seats left: red so it stands out from area and price */
+.blr-tag--lastcall { --tag-bg: #fee2e2; --tag-line: #dc2626; --tag-ink: #991b1b; }
+
 /* Liked rows get a pink tint and a red bar */
 .fc-list-event.blr-liked { background: #fff1f2; box-shadow: inset 4px 0 0 #e11d48; }
