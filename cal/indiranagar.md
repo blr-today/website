@@ -9,5 +9,6 @@ tags: '["INDIRANAGAR"]'
 
 Events on this page are made up of:
 
-1. All known events happening in the Indiranagar Area.
-2. And not listed in the [Unwanted Events](/cal/unwanted/) calendar.
+1. Events with addresses mentioning Indiranagar, Domlur, Old Airport Road or HAL 3rd Stage.
+2. Events no other area claims, whose coordinates fall within 12.955–12.995°N, 77.625–77.665°E.
+3. And not listed in the [Unwanted Events](/cal/unwanted/) calendar.

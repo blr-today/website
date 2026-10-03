@@ -7,5 +7,6 @@ tags: '["JAYANAGAR"]'
 
 Events on this page are made up of:
 
-1. All known events happening in the Jayanagar Area.
-2. And not listed in the [Unwanted Events](/cal/unwanted/) calendar.
+1. Events with addresses mentioning Jayanagar or Ashoka Pillar Road.
+2. Events no other area claims, whose coordinates fall within 12.915–12.945°N, 77.578–77.605°E.
+3. And not listed in the [Unwanted Events](/cal/unwanted/) calendar.
