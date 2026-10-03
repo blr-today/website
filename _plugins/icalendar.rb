@@ -129,6 +129,8 @@ module Jekyll
 
       ics.dtstart = parse_datetime(event['startDate'])
       ics.dtend = parse_datetime(event['endDate'])
+      # An all-day DTEND is exclusive, but schema.org endDate is the last day
+      ics.dtend = Icalendar::Values::Date.new(ics.dtend.value + 1) if ics.dtend.is_a?(Icalendar::Values::Date)
       # TODO: Improve
       ics.uid = "blr.today/#{event['url']}"
 
