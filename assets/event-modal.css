@@ -88,7 +88,8 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
   background: #222; color: #fff; font-size: .75rem; line-height: 1.3; white-space: normal; pointer-events: none;
 }
 
-.blr-event__actions { display: flex; flex-wrap: wrap; gap: .5rem; padding-bottom: 1rem; }
+/* Equal rows keep the main button as tall as the calendar button below it */
+.blr-event__actions { display: grid; grid-template-columns: auto 1fr; grid-auto-rows: 1fr; gap: .5rem; padding-bottom: 1rem; }
 .blr-event__button {
   display: inline-flex; align-items: center; min-height: 2.5rem; padding: .5rem 1rem;
   border: 1.5px solid var(--line); border-radius: .25rem; text-decoration: none !important;
@@ -96,7 +97,8 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
   color: var(--ink) !important; background: var(--paper); font-weight: 600; font-size: .9rem;
 }
 .blr-event__button:hover { filter: none; border-color: var(--accent); }
-.blr-event__button--primary { background: #222; border-color: #222; color: #fff !important; flex: 1 1 100%; justify-content: center; }
+.blr-event__button--primary { background: #222; border-color: #222; color: #fff !important; grid-column: 1 / -1; justify-content: center; }
+.blr-event__like { grid-column: -2; justify-content: center; font-size: 1.4rem; line-height: 1; }
 
 .blr-event__section {
   display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: .75rem;
