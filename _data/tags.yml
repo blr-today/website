@@ -150,4 +150,4 @@
 
 - id: LASTCALL
   title: Last call [Seats]
-  description: 8 or fewer seats left
+  description: A tenth of the seats or fewer left, or 8 or fewer when the total is unknown
