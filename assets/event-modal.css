@@ -140,8 +140,12 @@ html:has(dialog.blr-event[open]:not(:modal)) .blr-event-current :is(.fc-list-eve
   display: flex; height: 100%; margin: 0; padding: 0; list-style: none; width: 100%;
   overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain;
 }
-.blr-lightbox__track li { flex: 0 0 100%; scroll-snap-align: center; display: grid; place-items: center; padding: 3.5rem .5rem; }
-.blr-lightbox__track img { max-width: 100%; max-height: 100%; object-fit: contain; margin: 0; }
+/* Tall images keep their size and scroll; auto margins centre the short ones */
+.blr-lightbox__track li {
+  flex: 0 0 100%; scroll-snap-align: center; display: flex; padding: 3.5rem .5rem;
+  overflow-y: auto; overscroll-behavior: contain;
+}
+.blr-lightbox__track img { flex: none; max-width: 100%; height: auto; max-height: none; object-fit: contain; margin: auto; }
 .blr-lightbox button {
   position: absolute; margin: 0; padding: 0; border: 0; border-radius: 50%;
   width: 2.75rem; height: 2.75rem; background: rgb(255 255 255 / .15); color: #fff;
