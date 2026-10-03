@@ -20,10 +20,14 @@ function alignTimeColumn(calendarEl) {
   })
 }
 
+// Price tags from ingest, shown on every calendar
+const PRICE_TAG = /^(FREE|₹+)$/
+
 function visibleKeywords(event, pageTags, onlyTags) {
-  // A proper keyword is in uppercase
+  // A proper keyword is in uppercase, price tags are ₹ to ₹₹₹
+  // Sub-tags like SISTERSINSWEAT/SPORTS only route events to calendars
   let keywords = new Set([...event.extendedProps.keywords].map(x => x.trim()).filter(x=>
-    x === x.toUpperCase() && x.length >=3 
+    x === x.toUpperCase() && (x.length >= 3 || PRICE_TAG.test(x)) && !x.includes('/')
   ))
 
   // If this page only has a single tag
@@ -38,7 +42,7 @@ function visibleKeywords(event, pageTags, onlyTags) {
   }
 
   if (onlyTags) {
-    keywords = keywords.intersection(new Set(onlyTags))
+    keywords = new Set([...keywords].filter(k => onlyTags.includes(k) || PRICE_TAG.test(k)))
   }
 
   // Some keywords are always hidden, even if available
