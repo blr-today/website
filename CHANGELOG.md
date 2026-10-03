@@ -6,6 +6,11 @@ title: changelog
 
 ## October 2026
 
+- `New` Clicking an event opens its details beside the calendar, with posters, tickets and an Add to Calendar button.
+- `New` Like events with ♥. Likes stay in your browser and liked events are highlighted on every calendar.
+- `New` Filter large calendars like [Curated](/) by event type, area and price.
+- `New` Coloured area and price tags, and a "seats left" ribbon on events that are almost full.
+- `New` Calendars list the next twelve months, so events after New Year show up.
 - `New` Events listed on several sites (a venue's own site, District, Urbanaut, Putting Scene and others) now show up once. Calendars for a single site link to that site's listing, while [Curated](/) and other calendars prefer the venue's or organiser's own page.
 - `New` The [duplicates](/duplicates/) page lists every upcoming event found on more than one site, with links to each listing.
 - `Fixed` Courtyard Koota event dates are read correctly again.
