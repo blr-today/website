@@ -60,7 +60,18 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
 
   var calendarEl = document.getElementById('calendar');
   var calendar = new Calendar(calendarEl, {
-    initialView: 'listYear',
+    // One rolling year from today, so events across new year stay listed
+    initialView: 'listUpcoming',
+    views: {
+      listUpcoming: {
+        type: 'list',
+        visibleRange: now => {
+          let start = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+          return { start, end: new Date(start.getFullYear() + 1, start.getMonth(), start.getDate()) }
+        },
+      },
+    },
+    headerToolbar: false,
     plugins: [
       listPlugin,
       iCalendarPlugin,
