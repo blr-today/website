@@ -9,6 +9,7 @@ title: changelog
 - `New` Events listed on several sites (a venue's own site, District, Urbanaut, Putting Scene and others) now show up once. Calendars for a single site link to that site's listing, while [Curated](/) and other calendars prefer the venue's or organiser's own page.
 - `New` The [duplicates](/duplicates/) page lists every upcoming event found on more than one site, with links to each listing.
 - `Fixed` Courtyard Koota event dates are read correctly again.
+- `Removed` The screensaver button on calendar pages.
 
 ## September 2026
 
