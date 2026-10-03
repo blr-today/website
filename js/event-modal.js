@@ -133,6 +133,20 @@ function money(amount, currency) {
   } catch { return `${currency || ''} ${amount}`.trim() }
 }
 
+// Seats left in this slot, read like ingest's LASTCALL check
+function seatsLeft(event) {
+  let count = v => {
+    let n = parseInt(typeof v === 'object' && v ? v.value : v)
+    return isNaN(n) ? null : n
+  }
+  let left = count(event.remainingAttendeeCapacity)
+  if (left !== null) return left
+  let all = list(event.offers).filter(o => o && typeof o === 'object')
+  let counts = all.map(o => tail(o.availability) === 'SoldOut' ? 0 : count(o.remainingAttendeeCapacity ?? o.inventoryLevel))
+  if (!all.length || counts.includes(null)) return null
+  return counts.reduce((sum, n) => sum + (n || 0), 0)
+}
+
 function offers(event) {
   let seen = new Set()
   let left = Number(event.remainingAttendeeCapacity)
@@ -342,9 +356,12 @@ function build(fcEvent, entry, keywords) {
     isAllDay(event) ? null : h('span', { class: 'blr-event__time', text: fmt(start, { hour: 'numeric', minute: '2-digit' }) }),
     price && h('span', { class: 'blr-event__stub-price', text: price }))
 
-  let media = pics.length ? h('figure', { class: 'blr-event__media' },
+  let seats = keywords.some(k => k.name === 'LASTCALL') ? seatsLeft(event) : undefined
+  let ribbon = seats === undefined || seats === 0 ? null
+    : h('span', { class: 'blr-event__ribbon', text: seats ? `${seats} ${seats === 1 ? 'seat' : 'seats'} left` : 'Last few seats' })
+  let media = pics.length ? h('div', { class: 'blr-event__media-wrap' }, h('figure', { class: 'blr-event__media' },
     pics.map((src, i) => h('button', { type: 'button', class: 'blr-event__zoom', 'data-index': i, 'aria-label': `View image ${i + 1} of ${pics.length}` },
-      h('img', { src: thumb(src), 'data-original': src, alt: i ? '' : `Poster for ${event.name}`, loading: i ? 'lazy' : 'eager', decoding: 'async', referrerpolicy: 'no-referrer' })))) : null
+      h('img', { src: thumb(src), 'data-original': src, alt: i ? '' : `Poster for ${event.name}`, loading: i ? 'lazy' : 'eager', decoding: 'async', referrerpolicy: 'no-referrer' })))), ribbon) : null
 
   let header = h('header', { class: 'blr-event__header' },
     h('p', { class: 'blr-event__kicker' },
@@ -502,7 +519,7 @@ function openEventModal(fcEvent, keywords = [], row = null) {
     let figure = img.closest('figure')
     img.closest('button').remove()
     d.images = d.images.filter(src => src !== original)
-    if (figure && !figure.querySelector('img')) figure.remove()
+    if (figure && !figure.querySelector('img')) figure.parentElement.remove()
   }))
   if (!d.open) {
     history.pushState({ blrEvent: true }, '')

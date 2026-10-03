@@ -54,7 +54,13 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
 }
 
 /* Fixed image boxes, so loading images never push the text down */
-.blr-event__media { display: flex; gap: .5rem; margin: 1rem 1rem 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.blr-event__media-wrap { position: relative; overflow: hidden; margin: 1rem 1rem 0; }
+.blr-event__media { display: flex; gap: .5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.blr-event__ribbon {
+  position: absolute; top: 1.6rem; right: -3rem; z-index: 2; width: 12rem; rotate: 45deg; pointer-events: none;
+  padding: .35rem 0; background: #dc2626; color: #fff; text-align: center; text-transform: uppercase;
+  font: 700 .75rem/1 system-ui, sans-serif; letter-spacing: .05em; box-shadow: 0 2px 6px rgb(0 0 0 / .35);
+}
 .blr-event__zoom {
   flex: 0 0 40%; height: 10rem; scroll-snap-align: start; display: block;
   padding: 0; border: 0; border-radius: 0; background: none; cursor: zoom-in;
