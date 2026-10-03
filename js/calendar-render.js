@@ -4,6 +4,7 @@ import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
 import { atcb_action } from "add-to-calendar-button";
 import { openEventModal } from "./event-modal.js";
+import { markLiked } from "./likes.js";
 
 // FullCalendar's shared time width is unreliable, so size the column ourselves
 let alignScheduled = false
@@ -110,6 +111,7 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
       let keywords = tagged(visibleKeywords(info.event, pageTags, onlyTags))
 
       let element = info.el
+      markLiked(element, info.event)
       // Tags sit below the time, wrapping within the time column's width
       let el = element.querySelector('.fc-list-event-time-outer')
       if (el && keywords.length > 0) {

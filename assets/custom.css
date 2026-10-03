@@ -100,3 +100,6 @@ li[data-eventcount="0"] {
     display: inline-block; font-size: .5em; padding: 2px; margin: 0 5px 2px 0;
     border-radius: 2px; text-decoration: none;
 }
+
+/* Liked rows get a pink tint and a red bar */
+.fc-list-event.blr-liked { background: #fff1f2; box-shadow: inset 4px 0 0 #e11d48; }

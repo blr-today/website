@@ -1,4 +1,5 @@
 import 'add-to-calendar-button'
+import { likeKey, isLiked, toggleLike } from './likes.js'
 
 const TZ = 'Asia/Kolkata'
 const TYPE_COLORS = {
@@ -77,6 +78,15 @@ function findEvent(fcEvent) {
 
 function fmt(date, opts) {
   return new Intl.DateTimeFormat('en-IN', { timeZone: TZ, ...opts }).format(date)
+}
+
+function likeButton(fcEvent) {
+  if (!likeKey(fcEvent)) return null
+  let paint = (el, liked) => Object.assign(el, { textContent: liked ? '♥' : '♡', title: liked ? 'Unlike' : 'Like' }).setAttribute('aria-pressed', liked)
+  let el = h('button', { type: 'button', class: 'blr-event__button blr-event__like', 'aria-label': 'Like' })
+  paint(el, isLiked(likeKey(fcEvent)))
+  el.addEventListener('click', () => paint(el, toggleLike(fcEvent)))
+  return el
 }
 
 function dateOnly(s) { return typeof s === 'string' && s.length === 10 }
@@ -344,7 +354,7 @@ function build(fcEvent, entry, keywords) {
   let actions = h('div', { class: 'blr-event__actions' },
     primary && h('a', { class: 'blr-event__button blr-event__button--primary', href: primary, rel: 'noopener', target: '_blank', text: `Open on ${host(primary)}` }),
     calendarButton(event, where.join(', ')),
-    h('button', { type: 'button', class: 'blr-event__button blr-event__like', 'aria-label': 'Like', text: '♡' }))
+    likeButton(fcEvent))
 
   let ticketTable = tickets.length ? h('table', { class: 'blr-event__ticket-table' },
     h('thead', {}, h('tr', {}, h('th', { scope: 'col', text: 'Ticket' }), h('th', { scope: 'col', text: 'Price' }), h('th', { scope: 'col', text: 'Status' }))),
@@ -409,7 +419,6 @@ function ensureDialog() {
     if (e.target === dialog || e.target.closest('.blr-event__close')) dialog.close()
     let zoom = e.target.closest('.blr-event__zoom')
     if (zoom) openLightbox(dialog.images, zoom.querySelector('img').dataset.original)
-    if (e.target.closest('.blr-event__like')) alert('Likes are not implemented yet')
   })
   dialog.addEventListener('close', () => {
     if (swaps) return swaps--

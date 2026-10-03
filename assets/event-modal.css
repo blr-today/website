@@ -99,6 +99,7 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
 .blr-event__button:hover { filter: none; border-color: var(--accent); }
 .blr-event__button--primary { background: #222; border-color: #222; color: #fff !important; grid-column: 1 / -1; justify-content: center; }
 .blr-event__like { grid-column: -2; justify-content: center; font-size: 1.4rem; line-height: 1; }
+.blr-event__like[aria-pressed="true"] { color: #e11d48 !important; }
 
 .blr-event__section {
   display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: .75rem;
@@ -139,6 +140,9 @@ html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event.blr-event-current {
   box-shadow: inset 4px 0 0 var(--blr-event-color), 2px 0 0 var(--blr-tint);
 }
 html:has(dialog.blr-event[open]:not(:modal)) .blr-event-current :is(.fc-list-event-title, .fc-list-event-time) { color: #222; font-weight: 600; }
+html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event.blr-event-current.blr-liked {
+  --blr-tint: #fecdd3; box-shadow: inset 6px 0 0 #e11d48, 2px 0 0 var(--blr-tint);
+}
 
 .blr-lightbox {
   width: 100%; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
