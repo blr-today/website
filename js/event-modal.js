@@ -23,6 +23,7 @@ const AVAILABILITY = {
 const SIDE_BY_SIDE = matchMedia('(min-width: 60rem)')
 
 let index = null
+let cdnAllowed = null
 let dialog = null
 let swaps = 0
 
@@ -157,6 +158,27 @@ function priceSummary(event, all) {
 function images(event) {
   let urls = list(event.image).map(i => typeof i === 'string' ? i : (i?.url || i?.contentUrl)).map(safeUrl).filter(Boolean)
   return [...new Set(urls)]
+}
+
+function cdnPrefixes() {
+  if (cdnAllowed) return cdnAllowed
+  try { cdnAllowed = JSON.parse(document.getElementById('blr-image-cdn')?.textContent || '[]') } catch { cdnAllowed = [] }
+  return cdnAllowed
+}
+
+const onCdn = src => cdnPrefixes().some(p => src.startsWith(p))
+
+function thumb(src) {
+  if (!onCdn(src) || ['localhost', '127.0.0.1'].includes(location.hostname)) return src
+  return `/.netlify/images?url=${encodeURIComponent(src)}&w=600`
+}
+
+function reportUncached() {
+  let missed = new Set()
+  for (let entries of loadIndex().values()) {
+    for (let { event } of entries) images(event).filter(src => !onCdn(src)).forEach(src => missed.add(src))
+  }
+  if (missed.size) console.error(`blr.today: ${missed.size} event image(s) not in _data/image_cdn.yml, served unresized:`, [...missed])
 }
 
 function addressLines(place) {
@@ -294,7 +316,7 @@ function build(fcEvent, entry, keywords) {
 
   let media = pics.length ? h('figure', { class: 'blr-event__media' },
     pics.map((src, i) => h('button', { type: 'button', class: 'blr-event__zoom', 'data-index': i, 'aria-label': `View image ${i + 1} of ${pics.length}` },
-      h('img', { src, alt: i ? '' : `Poster for ${event.name}`, loading: i ? 'lazy' : 'eager', decoding: 'async', referrerpolicy: 'no-referrer' })))) : null
+      h('img', { src: thumb(src), 'data-original': src, alt: i ? '' : `Poster for ${event.name}`, loading: i ? 'lazy' : 'eager', decoding: 'async', referrerpolicy: 'no-referrer' })))) : null
 
   let header = h('header', { class: 'blr-event__header' },
     h('p', { class: 'blr-event__kicker' },
@@ -373,7 +395,7 @@ function ensureDialog() {
   dialog.addEventListener('click', e => {
     if (e.target === dialog || e.target.closest('.blr-event__close')) dialog.close()
     let zoom = e.target.closest('.blr-event__zoom')
-    if (zoom) openLightbox(dialog.images, zoom.querySelector('img').getAttribute('src'))
+    if (zoom) openLightbox(dialog.images, zoom.querySelector('img').dataset.original)
   })
   dialog.addEventListener('close', () => {
     if (swaps) return swaps--
@@ -446,9 +468,11 @@ function openEventModal(fcEvent, keywords = [], row = null) {
   markRow(row, color)
   d.replaceChildren(h('button', { type: 'button', class: 'blr-event__close', 'aria-label': 'Close', text: '×' }), inner)
   d.querySelectorAll('.blr-event__media img').forEach(img => img.addEventListener('error', () => {
+    let original = img.dataset.original
+    if (img.getAttribute('src') !== original) return img.setAttribute('src', original)
     let figure = img.closest('figure')
     img.closest('button').remove()
-    d.images = d.images.filter(src => src !== img.getAttribute('src'))
+    d.images = d.images.filter(src => src !== original)
     if (figure && !figure.querySelector('img')) figure.remove()
   }))
   if (!d.open) {
@@ -462,6 +486,7 @@ function openEventModal(fcEvent, keywords = [], row = null) {
 }
 
 SIDE_BY_SIDE.addEventListener('change', syncMode)
+;(window.requestIdleCallback || setTimeout)(reportUncached)
 
 document.addEventListener('click', e => {
   if (!dialog?.open || dialog.matches(':modal')) return

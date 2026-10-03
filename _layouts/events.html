@@ -43,6 +43,7 @@ title: blr.today
 {% if eventCount > 0 %}
 <link rel="stylesheet" href="/assets/accordion-screensaver.css">
 <link rel="stylesheet" href="/assets/event-modal.css">
+<script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
 <script type="module">
     var tags = JSON.parse('{{page.tags}}')
     import { renderCalendar, subscribeButton } from "/assets/js/calendar-render.js";
