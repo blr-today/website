@@ -180,7 +180,9 @@ const onCdn = src => cdnPrefixes().some(p => src.startsWith(p))
 
 function thumb(src) {
   if (!onCdn(src) || ['localhost', '127.0.0.1'].includes(location.hostname)) return src
-  return `/.netlify/images?url=${encodeURIComponent(src)}&w=600`
+  // The /img/600/ rewrite in netlify.toml cannot carry a query or escapes in the source URL
+  if (/[?%#]/.test(src)) return `/.netlify/images?url=${encodeURIComponent(src)}&w=600`
+  return `/img/600/${src.slice('https://'.length)}`
 }
 
 function reportUncached() {
