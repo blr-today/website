@@ -79,6 +79,7 @@ function renderCalendar(url, pageTags = [], onlyTags = null){
       };
     },
     showNonCurrentDates: false,
+    displayEventEnd: false,
     weekends: true,
     eventClick: function(info) {
       let e = info.jsEvent
