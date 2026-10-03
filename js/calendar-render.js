@@ -21,7 +21,7 @@ function alignTimeColumn(calendarEl) {
 }
 
 // Price tags from ingest, shown on every calendar
-const PRICE_TAG = /^(FREE|BUDGET|VALUE|PRICEY)$/
+const PRICE_TAG = /^(FREE|BUDGET|PRICEY)$/
 
 // Picks the tag colour: location, price or other
 function tagKind(tag, locationTags) {

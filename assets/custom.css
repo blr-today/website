@@ -81,7 +81,7 @@ li[data-eventcount="0"] {
     padding-left: 6px;
 }
 
-/* Tags: a hue per area, green for free, amber deepening with price */
+/* Tags: a hue per area, green for free, pale amber budget, deep amber pricey */
 .blr-tag { --tag-bg: #f0f0f0; --tag-line: #8a8a8a; --tag-ink: #555; background: var(--tag-bg); border: 1px solid var(--tag-line); color: var(--tag-ink); }
 /* Areas take their Namma Metro line colour; a new area falls back to slate */
 .blr-tag--location { --tag-bg: #e2e8f0; --tag-line: #64748b; --tag-ink: #334155; }
@@ -95,7 +95,6 @@ li[data-eventcount="0"] {
 .blr-tag--location[data-tag="WHITEFIELD"] { --tag-bg: #f3e8ff; --tag-line: #9333ea; --tag-ink: #6b21a8; }
 .blr-tag[data-tag="FREE"] { --tag-bg: #dcfce7; --tag-line: #16a34a; --tag-ink: #166534; }
 .blr-tag[data-tag="BUDGET"] { --tag-bg: #fef3c7; --tag-line: #b45309; --tag-ink: #92400e; }
-.blr-tag[data-tag="VALUE"] { --tag-bg: #fde68a; --tag-line: #b45309; --tag-ink: #78350f; }
 .blr-tag[data-tag="PRICEY"] { --tag-bg: #fbbf24; --tag-line: #b45309; --tag-ink: #451a03; }
 .fc-list-event-keywords .blr-tag {
     display: inline-block; font-size: .5em; padding: 2px; margin: 0 5px 2px 0;
