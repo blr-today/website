@@ -20,7 +20,7 @@ function alignTimeColumn(calendarEl) {
   })
 }
 
-function visibleKeywords(event, pageTags) {
+function visibleKeywords(event, pageTags, onlyTags) {
   // A proper keyword is in uppercase
   let keywords = new Set([...event.extendedProps.keywords].map(x => x.trim()).filter(x=>
     x === x.toUpperCase() && x.length >=3 
@@ -37,11 +37,15 @@ function visibleKeywords(event, pageTags) {
     keywords = keywords.difference(new Set(pageTags))
   }
 
+  if (onlyTags) {
+    keywords = keywords.intersection(new Set(onlyTags))
+  }
+
   // Some keywords are always hidden, even if available
   return keywords.difference(InvisibleKeywords)
 }
 
-function renderCalendar(url, pageTags = []){
+function renderCalendar(url, pageTags = [], onlyTags = null){
 
   var calendarEl = document.getElementById('calendar');
   var calendar = new Calendar(calendarEl, {
@@ -76,11 +80,11 @@ function renderCalendar(url, pageTags = []){
       let e = info.jsEvent
       if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return
       e.preventDefault()
-      openEventModal(info.event, visibleKeywords(info.event, pageTags), info.el)
+      openEventModal(info.event, visibleKeywords(info.event, pageTags, onlyTags), info.el)
     },
     eventDidMount: function(info) {
       alignTimeColumn(calendarEl)
-      let keywords = visibleKeywords(info.event, pageTags)
+      let keywords = visibleKeywords(info.event, pageTags, onlyTags)
 
       let element = info.el
       // Tags sit below the time, wrapping within the time column's width
