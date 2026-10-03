@@ -47,14 +47,11 @@ title: blr.today
 <script type="module">
     var tags = JSON.parse('{{page.tags}}')
     import { renderCalendar, subscribeButton } from "/assets/js/calendar-render.js";
-    {%- if page.locationTagsOnly %}
     {%- assign locationTags = "" | split: "" %}
     {%- assign hoods = site.html_pages | where: "type", "neighbourhood" %}
     {%- for hood in hoods %}{% assign hoodTags = hood.tags | parse_json %}{% assign locationTags = locationTags | concat: hoodTags %}{% endfor %}
-    var cal = renderCalendar("{{pagePrefix}}cal.ics", tags, {{ locationTags | jsonify }});
-    {%- else %}
-    var cal = renderCalendar("{{pagePrefix}}cal.ics", tags);
-    {%- endif %}
+    var locationTags = {{ locationTags | jsonify }}
+    var cal = renderCalendar("{{pagePrefix}}cal.ics", tags, {% if page.locationTagsOnly %}locationTags{% else %}null{% endif %}, locationTags);
 
     cal.updateSize();
     subscribeButton('atcb', "{{site.url}}{{pagePrefix}}cal.ics", "{{page.title}} Calendar | BLR.TODAY")

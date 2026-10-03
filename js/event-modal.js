@@ -327,7 +327,7 @@ function build(fcEvent, entry, keywords) {
     h('p', { class: 'blr-event__when' }, whenText(event)),
     where[0] && h('p', { class: 'blr-event__where', text: where[0] }),
     price && h('p', { class: 'blr-event__price', text: price }),
-    keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => h('li', { text: k }))))
+    keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => h('li', { class: `blr-tag blr-tag--${k.kind}`, 'data-tag': k.name, text: k.name }))))
 
   let actions = h('div', { class: 'blr-event__actions' },
     primary && h('a', { class: 'blr-event__button blr-event__button--primary', href: primary, rel: 'noopener', target: '_blank', text: `Open on ${host(primary)}` }),

@@ -21,13 +21,19 @@ function alignTimeColumn(calendarEl) {
 }
 
 // Price tags from ingest, shown on every calendar
-const PRICE_TAG = /^(FREE|₹+)$/
+const PRICE_TAG = /^(FREE|BUDGET|VALUE|PRICEY)$/
+
+// Picks the tag colour: location, price or other
+function tagKind(tag, locationTags) {
+  if (PRICE_TAG.test(tag)) return 'price'
+  return locationTags.includes(tag) ? 'location' : 'other'
+}
 
 function visibleKeywords(event, pageTags, onlyTags) {
-  // A proper keyword is in uppercase, price tags are ₹ to ₹₹₹
+  // A proper keyword is in uppercase
   // Sub-tags like SISTERSINSWEAT/SPORTS only route events to calendars
   let keywords = new Set([...event.extendedProps.keywords].map(x => x.trim()).filter(x=>
-    x === x.toUpperCase() && (x.length >= 3 || PRICE_TAG.test(x)) && !x.includes('/')
+    x === x.toUpperCase() && x.length >= 3 && !x.includes('/')
   ))
 
   // If this page only has a single tag
@@ -49,7 +55,8 @@ function visibleKeywords(event, pageTags, onlyTags) {
   return keywords.difference(InvisibleKeywords)
 }
 
-function renderCalendar(url, pageTags = [], onlyTags = null){
+function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
+  let tagged = keywords => [...keywords].map(name => ({ name, kind: tagKind(name, locationTags) }))
 
   var calendarEl = document.getElementById('calendar');
   var calendar = new Calendar(calendarEl, {
@@ -85,33 +92,23 @@ function renderCalendar(url, pageTags = [], onlyTags = null){
       let e = info.jsEvent
       if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return
       e.preventDefault()
-      openEventModal(info.event, visibleKeywords(info.event, pageTags, onlyTags), info.el)
+      openEventModal(info.event, tagged(visibleKeywords(info.event, pageTags, onlyTags)), info.el)
     },
     eventDidMount: function(info) {
       alignTimeColumn(calendarEl)
-      let keywords = visibleKeywords(info.event, pageTags, onlyTags)
+      let keywords = tagged(visibleKeywords(info.event, pageTags, onlyTags))
 
       let element = info.el
       // Tags sit below the time, wrapping within the time column's width
       let el = element.querySelector('.fc-list-event-time-outer')
-      if (el && keywords.size > 0) {
+      if (el && keywords.length > 0) {
         let keywordsElement = document.createElement('div');
         keywordsElement.className = 'fc-list-event-keywords';
-        for (let keyword of keywords) {
+        for (let { name, kind } of keywords) {
           let keywordElement = document.createElement('span');
-          keywordElement.className = 'keyword';
-          keywordElement.textContent = keyword;
-          // Style it to be shown like a tag
-          keywordElement.style.backgroundColor = '#f0f0f0';
-          keywordElement.style.border = '1px solid #ccc';
-          // no underlines
-          keywordElement.style.textDecoration = 'none';
-          keywordElement.style.borderRadius = '2px';
-          keywordElement.style.padding = '2px 2px';
-          keywordElement.style.fontSize = '0.5em';
-          keywordElement.style.marginRight = '5px';
-          keywordElement.style.marginBottom = '2px';
-          keywordElement.style.display = 'inline-block';
+          keywordElement.className = `keyword blr-tag blr-tag--${kind}`;
+          keywordElement.dataset.tag = name;
+          keywordElement.textContent = name;
           keywordsElement.appendChild(keywordElement);
         }
         el.appendChild(keywordsElement);

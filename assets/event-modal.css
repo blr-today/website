@@ -79,7 +79,7 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
 .blr-event__duration, .blr-event__where { color: var(--muted); }
 .blr-event__price { display: none; }
 .blr-event .blr-event__tags { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .3rem; margin-top: .25rem; }
-.blr-event__tags li { font-size: .7rem; padding: .1rem .4rem; border: 1px solid #ccc; border-radius: 3px; background: #f0f0f0; color: #555; }
+.blr-event__tags li { font-size: .7rem; padding: .1rem .4rem; border-radius: 3px; }
 
 .blr-event__actions { display: flex; flex-wrap: wrap; gap: .5rem; padding-bottom: 1rem; }
 .blr-event__button {
