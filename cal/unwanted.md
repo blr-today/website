@@ -25,8 +25,8 @@ subscribe: false
 # This is such a trash event page, that we don't want links here to impact our rankings
 noindex: true
 --- 
-This is a meta calendar that lists events that have been excluded
-from other calendars. This is primarily meant for debugging.
+> This is a meta calendar that lists events that have been excluded
+> from other calendars. This is primarily meant for debugging.
 
 If you find an event you think is worth curating, but in this list
 ,please let me know. Explanations for the tags:

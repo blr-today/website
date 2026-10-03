@@ -4,4 +4,4 @@ type: venue
 tags: '["KOOTA"]'
 domain: courtyardkoota.com
 --- 
-Events hosted at Courtyard Koota 
+> Events hosted at Courtyard Koota.

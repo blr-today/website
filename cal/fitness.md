@@ -4,8 +4,9 @@ type: collection
 tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS", "INDIARUNNING", "MAINMISSION"]'
 ---
 
-Combined Fitness events from various sources. Currently includes the following
-sources:
+> Combined Fitness events from various sources.
+
+Currently includes the following sources:
 
 1. [Adidas Running Events](/cal/adidas), organized by Adidas Runners Club.
 2. [Bhaago India](/cal/bhaagoindia) listed runs.
