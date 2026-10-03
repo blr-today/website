@@ -3,9 +3,9 @@ layout: default
 title: blr.today
 ---
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
-    <p style="margin-top:5px;text-align: left;flex: 1;">
+    <div style="margin-top:5px;text-align: left;flex: 1;">
         {{content | extract_element:'blockquote' | first | extract_element:'p' }}
-    </p>
+    </div>
     <img height=100px src="/img/apple-touch-icon.png" alt="blr.today logo" />
 </div>
 
