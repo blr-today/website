@@ -1,7 +1,8 @@
 ---
-title: Bookstores 📚
+title: Books 📚
 type: collection
-tags: '["CHAMPACA", "ATTAGALATTA", "BOOKWORM", "BBB"]'
+tags: '["CHAMPACA", "ATTAGALATTA", "BBB", "BOOKS"]'
 --- 
-> Events hosted by various bookstores and bookish-spaces. Currently includes
-> Champaca and Atta Galatta, and the Broke Bibliophiles Bangalore book club.
+> Events hosted by bookstores and bookish spaces, like Champaca and Atta
+> Galatta, plus book clubs, launches and readings listed anywhere else,
+> including the Broke Bibliophiles Bangalore book club.
