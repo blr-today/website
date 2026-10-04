@@ -7,6 +7,7 @@ title: changelog
 ## October 2026
 
 - `New` Clicking an event opens its details beside the calendar, with posters, tickets and an Add to Calendar button.
+- `New` Send feedback from the menu, the footer, the filter or an event popup.
 - `New` Like events with ♥. Likes stay in your browser and liked events are highlighted on every calendar.
 - `New` Filter large calendars like [Curated](/) by event type, area and price.
 - `New` Coloured area and price tags, and a "seats left" ribbon on events that are almost full.
