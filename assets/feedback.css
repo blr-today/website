@@ -1,0 +1,13 @@
+/* Quick feedback popup opened from the nav, footer, tag filter and event popup */
+.blr-feedback { width: min(30rem, calc(100% - 2rem)); margin: auto; padding: 1.5rem; border: var(--border); color: var(--cfg); background: var(--cbg); }
+.blr-feedback::backdrop { background: rgb(20 20 30 / .45); }
+.blr-feedback form { display: grid; gap: 1rem; }
+.blr-feedback :is(h2, p) { margin: 0; }
+.blr-feedback h2 { font-size: 1.6em; }
+.blr-feedback label { display: grid; gap: .25rem; }
+.blr-feedback small { color: var(--cdark); }
+.blr-feedback :is(textarea, input) { width: 100%; margin: 0; }
+.blr-feedback textarea { resize: vertical; }
+.blr-feedback__vote, .blr-feedback__actions { display: flex; flex-wrap: wrap; align-items: center; margin: 0 -.5em; }
+.blr-feedback__vote [aria-pressed="true"], .blr-feedback__vote [aria-pressed="true"]:hover { color: var(--cbg); background: var(--clink); border-color: var(--clink); }
+.blr-feedback__status { flex: 1; margin: 0 .5em; }

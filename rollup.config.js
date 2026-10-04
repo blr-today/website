@@ -7,7 +7,7 @@ import typescript from "@rollup/plugin-typescript";
 import terser from '@rollup/plugin-terser';
 
 export default {
-  input: "js/calendar-render.js",
+  input: ["js/calendar-render.js", "js/feedback.js"],
   output: {
     dir: "assets/js",
     format: "es",

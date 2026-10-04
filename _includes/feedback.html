@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/assets/feedback.css">
+<dialog class="blr-feedback" aria-labelledby="blr-feedback-title">
+    <form name="feedback" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="feedback">
+        <input type="hidden" name="from">
+        <input type="hidden" name="about">
+        <input type="hidden" name="page">
+        <p hidden><label>Leave this empty <input name="bot-field"></label></p>
+        <h2 id="blr-feedback-title">Feedback</h2>
+        <input type="hidden" name="vote">
+        <div class="blr-feedback__vote" role="group" aria-label="Do you like it?">
+            <button type="button" value="like" aria-pressed="false">👍 I like it</button>
+            <button type="button" value="dislike" aria-pressed="false">👎 I don't like it</button>
+        </div>
+        <label>What could be better? <textarea name="message" rows="4"></textarea></label>
+        <label>Email <small>optional, if you'd like a reply</small> <input type="email" name="email" autocomplete="email"></label>
+        <div class="blr-feedback__actions">
+            <span class="blr-feedback__status" role="status"></span>
+            <button type="button" class="blr-feedback__cancel">Cancel</button>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</dialog>
+<script type="module" src="/assets/js/feedback.js"></script>

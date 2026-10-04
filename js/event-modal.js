@@ -417,7 +417,8 @@ function build(fcEvent, entry, keywords) {
     section('performers', 'Performers', performers.length ? h('ul', {}, performers.map(p => h('li', {}, personLink(p)))) : null),
     section('about', 'About', paragraphs(event.description)),
     section('listings', links.length > 1 ? `Listed on ${links.length} sites` : 'Listed on',
-      h('ul', {}, links.map((u, i) => h('li', {}, h('a', { href: u, rel: 'noopener', target: '_blank', text: host(u) }), i === 0 && links.length > 1 ? ' (main listing)' : null)))))
+      h('ul', {}, links.map((u, i) => h('li', {}, h('a', { href: u, rel: 'noopener', target: '_blank', text: host(u) }), i === 0 && links.length > 1 ? ' (main listing)' : null)))),
+    h('p', { class: 'blr-event__feedback' }, h('button', { type: 'button', 'data-feedback': 'event', 'data-feedback-about': event.name, text: 'Send feedback' })))
 
   return { color, images: pics, inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
 }
@@ -536,13 +537,13 @@ SIDE_BY_SIDE.addEventListener('change', syncMode)
 
 document.addEventListener('click', e => {
   if (!dialog?.open || dialog.matches(':modal')) return
-  if (e.target.closest('.blr-event, .blr-lightbox, .fc-event, .fc-list-event, [atcb-button-id], add-to-calendar-button')) return
+  if (e.target.closest('.blr-event, .blr-lightbox, .blr-feedback, .fc-event, .fc-list-event, [atcb-button-id], add-to-calendar-button')) return
   dialog.close()
 })
 
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape' || !dialog?.open || dialog.matches(':modal') || lightbox?.open) return
-  if (!e.target.closest?.('[atcb-button-id]')) dialog.close()
+  if (!e.target.closest?.('[atcb-button-id], .blr-feedback')) dialog.close()
 })
 
 export { openEventModal, eventType }
