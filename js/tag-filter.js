@@ -1,9 +1,7 @@
 // Must tags OR within a group and AND across groups; any never tag hides an event
-const UI = 'blr-tag-ui'
 const LABEL = { 1: 'Must', 0: 'Any', '-1': 'Never' }
 const CLS = { 1: 'must', 0: 'any', '-1': 'never' }
 const GROUPS = { type: 'Event type', location: 'Area', price: 'Price' }
-const STYLES = { 1: 'Chips', 2: 'Switches', 3: 'Columns', 4: 'Thumbs' }
 const PRICE_ORDER = ['FREE', 'BUDGET', 'VALUE', 'PRICEY']
 const PRICE_WORDS = { FREE: 'free', BUDGET: 'under ₹500', PRICEY: 'at least ₹2,000' }
 
@@ -72,8 +70,6 @@ function tagFilter(calendar, root, facetsOf) {
   let storeKey = `blr-tag-filter ${location.pathname}`
   let state = new Map()
   let events = [], tags = [], keysOf = new Map(), hidden = new Set()
-  let variant = String(load(UI, 1))
-  if (!/^[1-4]$/.test(variant)) variant = '1'
   let areas = areaNames()
   let words = {
     type: t => t.label.toLowerCase(),
@@ -128,43 +124,20 @@ function tagFilter(calendar, root, facetsOf) {
   }
 
   let label = t => [h('span', { class: 'blr-tf__name', text: t.label }), h('small', { text: t.count })]
-  let chip = (t, ...rest) => h('span', { class: `blr-tf__chip is-${CLS[get(t.key)]}`, 'data-group': t.group }, ...rest)
-  let grouped = render => Object.entries(GROUPS).map(([g, title]) => {
+  // Tap a chip to cycle any, must, never
+  let chips = () => Object.entries(GROUPS).map(([g, title]) => {
     let ts = tags.filter(t => t.group === g)
-    return ts.length > 0 && h('div', { class: 'blr-tf__group' }, h('h4', { text: title }), render(ts))
-  })
-
-  let variants = {
-    // Tap a chip to cycle any, must, never
-    1: () => grouped(ts => h('div', { class: 'blr-tf__chips' }, ts.map(t => h('button', {
+    return ts.length > 0 && h('div', { class: 'blr-tf__group' }, h('h4', { text: title }), h('div', { class: 'blr-tf__chips' }, ts.map(t => h('button', {
       type: 'button', class: `blr-tf__chip is-${CLS[get(t.key)]}`, 'data-group': t.group, title: `${t.label}: ${LABEL[get(t.key)]}`,
       onclick: () => set(t.key, { 0: 1, 1: -1, '-1': 0 }[get(t.key)]),
-    }, { 1: '★ ', '-1': '⊘ ' }[get(t.key)], label(t))))),
-    2: () => grouped(ts => h('div', { class: 'blr-tf__rows' }, ts.map(t => h('div', { class: 'blr-tf__row' },
-      h('span', {}, label(t)),
-      h('span', { class: 'blr-tf__seg', role: 'radiogroup', 'aria-label': t.label }, [-1, 0, 1].map(v => h('button', {
-        type: 'button', role: 'radio', 'aria-checked': String(get(t.key) === v), class: `is-${CLS[v]}`,
-        onclick: () => set(t.key, v), text: LABEL[v],
-      }))))))),
-    3: () => h('div', { class: 'blr-tf__buckets' }, [1, 0, -1].map(v => h('div', { class: `blr-tf__bucket is-${CLS[v]}` },
-      h('h4', { text: { 1: 'Must have', 0: 'Either way', '-1': 'Never' }[v] }),
-      tags.filter(t => get(t.key) === v).map(t => chip(t,
-        v < 1 && h('button', { type: 'button', 'aria-label': `Move ${t.label} left`, onclick: () => set(t.key, v + 1), text: '◀' }),
-        label(t),
-        v > -1 && h('button', { type: 'button', 'aria-label': `Move ${t.label} right`, onclick: () => set(t.key, v - 1), text: '▶' })))))),
-    4: () => grouped(ts => h('div', { class: 'blr-tf__chips' }, ts.map(t => chip(t,
-      h('button', { type: 'button', 'aria-pressed': String(get(t.key) === 1), 'aria-label': `Must have ${t.label}`, onclick: () => set(t.key, get(t.key) === 1 ? 0 : 1), text: '👍' }),
-      label(t),
-      h('button', { type: 'button', 'aria-pressed': String(get(t.key) === -1), 'aria-label': `Never show ${t.label}`, onclick: () => set(t.key, get(t.key) === -1 ? 0 : -1), text: '👎' }))))),
-  }
+    }, { 1: '★ ', '-1': '⊘ ' }[get(t.key)], label(t)))))
+  }).filter(Boolean)
 
   function draw() {
-    panel.dataset.variant = variant
-    panel.replaceChildren(...[variants[variant]()].flat(), h('p', { class: 'blr-tf__foot' },
+    panel.replaceChildren(...chips(), h('p', { class: 'blr-tf__foot' },
       h('span', { text: hidden.size ? `${hidden.size} of ${events.length} events hidden` : `All ${events.length} events shown` }),
       state.size > 0 && h('button', { type: 'button', class: 'blr-tf__reset', onclick: () => { state.clear(); set(':', 0) }, text: 'Reset' }),
-      h('label', { class: 'blr-tf__style' }, 'Style ', h('select', { onchange: e => setVariant(e.target.value) },
-        Object.entries(STYLES).map(([n, name]) => h('option', { value: n, selected: n === variant, text: `${n} · ${name}` }))))))
+      h('button', { type: 'button', class: 'blr-tf__feedback', 'data-feedback': 'tag-filter', text: 'Feedback' })))
   }
 
   function init() {
@@ -186,18 +159,6 @@ function tagFilter(calendar, root, facetsOf) {
     for (let [key, v] of Object.entries(load(storeKey, {}))) if (counts.has(key) && (v === 1 || v === -1)) state.set(key, v)
     root.hidden = tags.length === 0
     apply()
-    draw()
-  }
-
-  document.addEventListener('keydown', e => {
-    if (e.ctrlKey || e.metaKey || e.altKey || e.target.closest?.('input, textarea, select, [contenteditable]')) return
-    if (!/^[1-4]$/.test(e.key)) return
-    setVariant(e.key)
-  })
-
-  function setVariant(n) {
-    variant = n
-    save(UI, Number(variant))
     draw()
   }
 
