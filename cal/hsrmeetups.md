@@ -12,9 +12,6 @@ links:
 - url: https://chat.whatsapp.com/K6Sbn9dA4oa6iHA4YdrfzU
   icon: whatsapp
   title: HSR Meetups WhatsApp group
-- url: https://www.eventbrite.com/o/hsr-meetups-68705192193
-  icon: calendar
-  title: HSR Meetups on Eventbrite
 - url: https://www.meetup.com/hsrmeetups/
   icon: meetup
   title: HSR Meetups on Meetup
@@ -31,5 +28,6 @@ links:
 </div>
 
 This page lists events from the HSR Meetups
-[Eventbrite page](https://www.eventbrite.com/o/hsr-meetups-68705192193)
-and [AllEvents page](https://allevents.in/org/hsr-meetups/25535050).
+[Meetup group](https://www.meetup.com/hsrmeetups/).
+Meetup only shares their next 10 events, about three weeks ahead,
+so check the Meetup group for later dates.
