@@ -6,36 +6,26 @@ title: changelog
 
 ## October 2026
 
-- `New` The [map](/map/) shows upcoming events by venue, coloured by event type, with curated events highlighted.
-- `Fixed` More events have a location: Urbanaut, Bangalore International Centre, Science Gallery, Lavonne, Sisters in Sweat and Adidas Runners venues. Events at venues still "to be announced" no longer get a made-up location.
+- `New` The [map](/map/) shows upcoming events by venue, coloured by event type, with curated events highlighted. Improved location of several venues.
 - `New` Clicking an event opens its details beside the calendar, with posters, tickets and an Add to Calendar button.
 - `New` Send feedback from the menu, the footer, the filter or an event popup.
 - `New` Like events with ♥. Likes stay in your browser and liked events are highlighted on every calendar.
 - `New` Filter large calendars like [Curated](/) by event type, area and price.
-- `New` Coloured area and price tags, and a "seats left" ribbon on events that are almost full.
-- `New` Calendars list the next twelve months, so events after New Year show up.
-- `New` Events listed on several sites (a venue's own site, District, Urbanaut, Putting Scene and others) now show up once. Calendars for a single site link to that site's listing, while [Curated](/) and other calendars prefer the venue's or organiser's own page.
-- `New` The [duplicates](/duplicates/) page lists every upcoming event found on more than one site, with links to each listing.
+- `New` Events are deduplicated. The [duplicates](/duplicates/) page lists such combinations.
 - `Fixed` Courtyard Koota event dates are read correctly again.
 - `Removed` The screensaver button on calendar pages.
 - `Fixed` District, AllEvents and PUMA Runs calendars.
-- `Fixed` More events are placed in a neighbourhood. Cox Town and Shanti Nagar are now part of CBD, and most of east Bangalore is under Whitefield.
 - `Cal` Added new calendar for [North Bangalore](/cal/north).
-- `Cal` [Ace of Pubs](/cal/aceofpubs) is back.
 
 ## September 2026
 
 - `Fixed` The site showed no events from the end of August because the event data download broke. Fixed on 24th September.
-- `New` All events are available as JSON at [/api/events.json](/api/events.json).
-- `New` The latest event database is at [/api/events.db](/api/events.db).
+- `New` All events are available as JSON at [/api/events.json](/api/events.json) and as SQLite at [/api/events.db](/api/events.db). Please prefer the [dataset](/dataset/) over this.
 - `Fixed` Atta Galatta, Adidas Runners, MAP, The White Box, Urbanaut, Lavonne, Trove, Sumukha, Sisters in Sweat, Bangalore Chess Club, Putting Scene, Creative Mornings and PUMA Runs calendars.
 - `Fixed` Pedal In Tandem rides showed up 5½ hours late.
 - `Fixed` Underline Center no longer lists past events, and events without ticket links now link to the Underline Center page.
 - `Fixed` Science Gallery BLR now uses the new QUANTUM exhibition, and its events show up on the [Science Gallery](/cal/scigallery) and [Curated](/) calendars again.
 - `Fixed` Champaca calendar was empty since it stopped putting dates in event titles.
-- `Fixed` The site now picks up new events within a few minutes of every update.
-- `Fixed` Club nights, pub promotions, business expos, out-of-town trips and pseudoscience events are filtered out of more calendars.
-- `Fixed` Late-night events that end after midnight now show once, on the day they start, with their real end time.
 - `Removed` PVR Cinemas 🪦 blocks all automated access. PVR INOX screenings are still covered through TicketNew.
 - `Cal` Added new calendar for [Main Mission](/cal/mainmission), also included in [Fitness](/cal/fitness).
 - `Cal` Added new calendars for [Indian Institute of World Culture](/cal/iiwc) and [Bangalore Astronomy Club](/cal/bac), both included in [Curated](/). Stargazing trips outside Bengaluru only show on the Astronomy Club calendar.
