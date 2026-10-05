@@ -1,18 +1,62 @@
 ---
+# Same tags as the cal/unwanted.md calendar
+unwantedTags: '["LOW-QUALITY", "NOTINBLR", "WOOWOO", "DANDIYA", "BUSINESS"]'
+sqlite:
+  - data: events
+    file: events.db
+    query: |
+      WITH e AS (
+        SELECT url,
+          event_json->>'$.name' AS name,
+          event_json->>'$.startDate' AS start,
+          coalesce(event_json->>'$."@type"[0]', event_json->>'$."@type"', 'Event') AS type,
+          event_json->>'$.location.name' AS venue,
+          coalesce(event_json->'$.keywords', '[]') AS keywords,
+          round(CAST(nullif(event_json->>'$.location.geo.latitude', '') AS REAL), 5) AS lat,
+          round(CAST(nullif(event_json->>'$.location.geo.longitude', '') AS REAL), 5) AS lng,
+          EXISTS (
+            SELECT 1 FROM json_each(event_json->'$.keywords')
+            WHERE value IN (SELECT value FROM json_each(:unwantedTags))
+          ) AS unwanted
+        FROM events
+        WHERE event_json->>'$.endDate' >= date('now')
+      )
+      SELECT *, lat || ',' || lng AS pos,
+        CASE
+          WHEN unwanted THEN 'unwanted'
+          WHEN lat IS NULL OR lng IS NULL THEN 'nogeo'
+          WHEN lat NOT BETWEEN 12.75 AND 13.25 OR lng NOT BETWEEN 77.40 AND 77.85 THEN 'outside'
+          ELSE 'shown'
+        END AS status
+      FROM e
+      ORDER BY start
 ---
+{%- assign curated = site.pages | where: "path", "cal/curated.md" | first -%}
+{%- assign shown = page.events | where: "status", "shown" -%}
+{%- assign places = shown | group_by: "pos" | sort: "size" | reverse -%}
 {
   "type": "FeatureCollection",
-  "features": [{% for event in site.data.geo_events %}
+  "curated": { "tags": {{ curated.tags }}, "excludeTags": {{ curated.excludeTags }} },
+  "counts": {
+    "upcoming": {{ page.events | size }},
+    "shown": {{ shown | size }},
+    "unwanted": {{ page.events | where: "status", "unwanted" | size }},
+    "nogeo": {{ page.events | where: "status", "nogeo" | size }},
+    "outside": {{ page.events | where: "status", "outside" | size }}
+  },
+  "features": [{% for place in places %}
     {
       "type": "Feature",
       "properties": {
-      	"shorttitle": {{event.name | truncate:20| jsonify}},
-        "id": "{{event.url}}"
+        "venue": {{ place.items.first.venue | jsonify }},
+        "events": [{% for e in place.items %}
+          { "name": {{ e.name | jsonify }}, "url": {{ e.url | jsonify }}, "start": {{ e.start | jsonify }}, "type": {{ e.type | jsonify }}, "keywords": {{ e.keywords }} }{% unless forloop.last %},{% endunless %}{% endfor %}
+        ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [{{event.lng}},{{event.lat}}]
+        "coordinates": [{{ place.items.first.lng }}, {{ place.items.first.lat }}]
       }
-    }{% if forloop.rindex > 1 %},{%endif%}{% endfor %}
+    }{% unless forloop.last %},{% endunless %}{% endfor %}
   ]
 }

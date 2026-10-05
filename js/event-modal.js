@@ -1,15 +1,8 @@
 import 'add-to-calendar-button'
 import { likeKey, isLiked, toggleLike } from './likes.js'
+import { TYPE_COLORS } from './event-types.js'
 
 const TZ = 'Asia/Kolkata'
-const TYPE_COLORS = {
-  Event: 'dodgerblue', BusinessEvent: 'gold', CourseInstance: 'gold',
-  EducationEvent: 'gold', Hackathon: 'gold', ChildrensEvent: 'deeppink',
-  ComedyEvent: 'tomato', DanceEvent: 'tomato', ExhibitionEvent: 'lightsalmon',
-  Festival: 'lightsalmon', FoodEvent: 'orangered', LiteraryEvent: 'mediumpurple',
-  MusicEvent: 'darkslateblue', ScreeningEvent: 'lightskyblue', SocialEvent: 'yellowgreen',
-  SportsEvent: 'darkorange', TheaterEvent: 'lightskyblue', VisualArtsEvent: 'lightskyblue',
-}
 const ATTENDANCE = {
   OfflineEventAttendanceMode: 'In person', offline: 'In person',
   OnlineEventAttendanceMode: 'Online', online: 'Online',

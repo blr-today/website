@@ -5,9 +5,10 @@ import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 // minify the bundle
 import terser from '@rollup/plugin-terser';
+import { readFileSync } from "node:fs";
 
 export default {
-  input: ["js/calendar-render.js", "js/feedback.js"],
+  input: ["js/calendar-render.js", "js/feedback.js", "js/map.js"],
   output: {
     dir: "assets/js",
     format: "es",
@@ -30,6 +31,12 @@ export default {
         lib: ["es6"]
       },
     }),
-    terser()
+    terser(),
+    {
+      name: "leaflet-css",
+      generateBundle() {
+        this.emitFile({ type: "asset", fileName: "leaflet.css", source: readFileSync("node_modules/leaflet/dist/leaflet.css") });
+      }
+    }
   ],
 };

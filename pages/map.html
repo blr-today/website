@@ -1,0 +1,20 @@
+---
+layout: default
+title: blr.today / map
+permalink: /map/
+---
+<link rel="stylesheet" href="/assets/js/leaflet.css" />
+<style>
+  #map { height: 70vh; min-height: 400px; }
+  .map-popup ul { max-height: 260px; overflow-y: auto; margin: 0.5em 0 0; padding: 0; list-style: none; }
+  .map-popup li { margin-bottom: 0.3em; padding: 0.2em 0.4em; border-left: 3px solid transparent; }
+  .map-popup li.is-curated { background: #fff6d6; border-left-color: #e0a800; }
+  .map-badge { margin-left: 0.4em; padding: 0 0.4em; font-size: 0.75em; border-radius: 3px; background: #e0a800; color: #fff; }
+  .map-dot { display: inline-block; width: 0.7em; height: 0.7em; margin-right: 0.4em; border-radius: 50%; }
+  #map-legend { display: flex; flex-wrap: wrap; gap: 0.3em 1.2em; padding: 0; list-style: none; font-size: 0.9em; }
+</style>
+<p id="map-summary">Loading events…</p>
+<div id="map"></div>
+<p>Circles are coloured by the most common event type at the venue, and get bigger with more events. Curated events are highlighted in the list.</p>
+<ul id="map-legend"></ul>
+<script type="module" src="/assets/js/map.js"></script>

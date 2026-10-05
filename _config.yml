@@ -90,14 +90,6 @@ defaults:
               )
             ORDER BY event_json -> '$.startDate';
 sqlite:
-  - data: geo_events
-    file: events.db
-    query: |
-      SELECT url,
-      event_json->'$.location.geo.latitude' as lat,
-      event_json->'$.location.geo.longitude' as lng,
-      event_json-> '$.location.name' as name
-      from events WHERE event_json -> '$.location.geo' IS NOT NULL
   - data: metrics
     file: events.db
     query: "SELECT COUNT(*) as total FROM events"

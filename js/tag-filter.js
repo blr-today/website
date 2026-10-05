@@ -1,3 +1,5 @@
+import { typeLabel } from './event-types.js'
+
 // Must tags OR within a group and AND across groups; any never tag hides an event
 const LABEL = { 1: 'Must', 0: 'Any', '-1': 'Never' }
 const CLS = { 1: 'must', 0: 'any', '-1': 'never' }
@@ -26,13 +28,6 @@ function load(key, fallback) {
 
 function save(key, value) {
   try { localStorage.setItem(key, JSON.stringify(value)) } catch {}
-}
-
-function typeLabel(type) {
-  if (type === 'Event') return 'Uncategorized'
-  if (type === 'ChildrensEvent') return "Children's"
-  if (type === 'CourseInstance') return 'Course'
-  return type.replace(/Event$/, '').replace(/([a-z])([A-Z])/g, '$1 $2')
 }
 
 function list(items, word) {
