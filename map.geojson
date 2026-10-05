@@ -10,7 +10,11 @@ sqlite:
           event_json->>'$.name' AS name,
           event_json->>'$.startDate' AS start,
           coalesce(event_json->>'$."@type"[0]', event_json->>'$."@type"', 'Event') AS type,
-          event_json->>'$.location.name' AS venue,
+          coalesce(
+            event_json->>'$.location.name',
+            event_json->>'$.location.address.streetAddress',
+            CASE json_type(event_json, '$.location.address') WHEN 'text' THEN event_json->>'$.location.address' END
+          ) AS venue,
           coalesce(event_json->'$.keywords', '[]') AS keywords,
           round(CAST(nullif(event_json->>'$.location.geo.latitude', '') AS REAL), 5) AS lat,
           round(CAST(nullif(event_json->>'$.location.geo.longitude', '') AS REAL), 5) AS lng,
