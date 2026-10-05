@@ -75,6 +75,11 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
       },
     },
     headerToolbar: false,
+    listDayFormat: ({ date }) => {
+      let fmt = opts => date.marker.toLocaleDateString('en-US', { timeZone: 'UTC', ...opts })
+      return `${fmt({ month: 'long', day: 'numeric', year: 'numeric' })} (${fmt({ weekday: 'short' })})`
+    },
+    listDaySideFormat: false,
     plugins: [
       listPlugin,
       iCalendarPlugin,
