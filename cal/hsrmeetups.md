@@ -9,6 +9,9 @@ links:
 - url: https://www.instagram.com/hsrmeetups/
   icon: instagram
   title: HSR Meetups Instagram
+- url: https://chat.whatsapp.com/K6Sbn9dA4oa6iHA4YdrfzU
+  icon: whatsapp
+  title: HSR Meetups WhatsApp group
 - url: https://www.eventbrite.com/o/hsr-meetups-68705192193
   icon: calendar
   title: HSR Meetups on Eventbrite
@@ -23,4 +26,9 @@ links:
 This page lists events from the HSR Meetups
 [Eventbrite page](https://www.eventbrite.com/o/hsr-meetups-68705192193)
 and [AllEvents page](https://allevents.in/org/hsr-meetups/25535050).
-Their board game events are also on the curated calendar.
+
+**The dates listed here are often wrong.** For now, check
+[Instagram @hsrmeetups](https://www.instagram.com/hsrmeetups/) or join their
+[WhatsApp group](https://chat.whatsapp.com/K6Sbn9dA4oa6iHA4YdrfzU)
+for the latest dates and bookings. Their events are left out of the
+curated calendar until this is fixed.
