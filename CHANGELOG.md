@@ -6,6 +6,8 @@ title: changelog
 
 ## October 2026
 
+- `New` The [map](/map/) shows upcoming events by venue, coloured by event type, with curated events highlighted.
+- `Fixed` More events have a location: Urbanaut, Bangalore International Centre, Science Gallery, Lavonne, Sisters in Sweat and Adidas Runners venues. Events at venues still "to be announced" no longer get a made-up location.
 - `New` Clicking an event opens its details beside the calendar, with posters, tickets and an Add to Calendar button.
 - `New` Send feedback from the menu, the footer, the filter or an event popup.
 - `New` Like events with ♥. Likes stay in your browser and liked events are highlighted on every calendar.
