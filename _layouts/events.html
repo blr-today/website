@@ -9,6 +9,8 @@ title: blr.today
     <img height=100px src="/img/apple-touch-icon.png" alt="blr.today logo" />
 </div>
 
+{{ content | extract_element:'.card.warn' | first }}
+
 
 {% assign eventCount = page.events | size %}
 
@@ -40,7 +42,7 @@ title: blr.today
 {% endif %}
 
 <div class="extra-text">
-  {{ content | remove_first_element:'blockquote' }}
+  {{ content | remove_first_element:'blockquote' | remove_first_element:'.card.warn' }}
 </div>
 
 {% include social.html links = page.links %}
