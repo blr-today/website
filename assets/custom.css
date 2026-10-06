@@ -106,3 +106,13 @@ li[data-eventcount="0"] {
 
 /* Liked rows get a pink tint and a red bar */
 .fc-list-event.blr-liked { background: #fff1f2; box-shadow: inset 4px 0 0 #e11d48; }
+
+/* Bluesky and fediverse follow buttons, see _includes/follow-buttons.html */
+a.blr-follow {
+  display: inline-flex; align-items: center; gap: .4em; padding: .35em .8em;
+  border-radius: 999px; color: #fff; text-decoration: none; font-size: 85%; font-weight: 600; white-space: nowrap;
+}
+a.blr-follow:hover { color: #fff; filter: brightness(110%); }
+a.blr-follow svg { flex: none; width: 1.1em; height: 1.1em; min-width: 1.1em; fill: currentColor; }
+a.blr-follow--bsky { background: #1185fe; }
+a.blr-follow--fedi { background: #6364ff; }

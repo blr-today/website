@@ -27,6 +27,7 @@ title: blr.today
 > -->
 <button id=atcb>Add To Calendar</button>
 {% endif %}
+{% include follow-buttons.html atproto=page.atproto fedi=page.fedi %}
 {% if page.tagFilter and eventCount > 0 %}
 <link rel="stylesheet" href="/assets/tag-filter.css">
 <div id="blr-tag-filter" class="blr-tf" hidden></div>
