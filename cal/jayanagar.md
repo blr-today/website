@@ -4,7 +4,8 @@ type: neighbourhood
 fedi: jayanagar@fedi.blr.today
 tags: '["JAYANAGAR"]'
 --- 
-> Jayanagar is Jayanagar.
+> Jayanagar is Jayanagar. One of the oldest planned neighbourhoods in South Bangalore,
+  home to the 4th Block shopping complex and the Ashoka Pillar.
 
 Events on this page are made up of:
 

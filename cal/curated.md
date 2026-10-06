@@ -13,3 +13,4 @@ excludeTags: '["BSF/MULTIDAY", "WOOWOO", "BUSINESS", "LOW-QUALITY", "NOTINBLR", 
 ---
 
 > This is an open-source semi-curated event calendar for Bangalore.
+  It brings together hand-picked venues, organizers and communities, and leaves out the aggregator noise.

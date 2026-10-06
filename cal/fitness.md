@@ -5,7 +5,8 @@ fedi: fitness@fedi.blr.today
 tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS", "INDIARUNNING", "MAINMISSION"]'
 ---
 
-> Combined Fitness events from various sources.
+> Combined Fitness events from various sources: runs, rides and workouts
+  from Bangalore's running clubs and fitness communities.
 
 Currently includes the following sources:
 

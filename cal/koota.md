@@ -4,4 +4,5 @@ type: venue
 tags: '["KOOTA"]'
 domain: courtyardkoota.com
 --- 
-> Events hosted at Courtyard Koota.
+> [Courtyard Koota](https://courtyardkoota.com/) is a culture and community space in Bangalore.
+  This calendar lists the performances, workshops and gatherings it hosts.
