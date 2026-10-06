@@ -4,7 +4,7 @@ import digest from "../../_data/digest.json" with { type: "json" };
 const OPTIONS = new Set(digest.groups.flatMap((g) => g.options.map((o) => o.id)));
 const EMAIL = /^[^\s@"'<>\\]{1,64}@[a-z0-9.-]{1,253}\.[a-z]{2,}$/i;
 const TOKEN = /^(\d{1,10})\.([0-9a-f-]{36})$/;
-const SENT = "Thanks! Keep an eye on your inbox for an email from us.";
+const SENT = "Thanks! Keep an eye on your inbox for an email from blr.today.";
 
 export function parsePrefs(body) {
   const pick = (list) => [...new Set(Array.isArray(list) ? list : [])].filter((id) => OPTIONS.has(id)).sort();
@@ -130,7 +130,7 @@ export async function handle(request, env, fetchImpl = fetch) {
     if (action === "prefs") return await prefs(api, env, body, request.method);
   } catch (err) {
     console.error(err);
-    return json(502, { error: "Something broke on our end. Please try again in a bit." });
+    return json(502, { error: "Something went wrong. Please try again in a bit." });
   }
   return json(405, { error: "Not allowed." });
 }

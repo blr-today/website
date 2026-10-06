@@ -4,7 +4,7 @@ title: blr.today / email
 permalink: /subscribe/
 ---
 <p id="digest-intro">
-  Signup for event newsletters from blr.today. We send out 2 emails: Monday morning's covers the week ahead,
+  Signup for event newsletters from blr.today. There are 2 emails: Monday morning's covers the week ahead,
   and Friday morning's covers the weekend. You can customize what events you care about:
 </p>
 <ul>
@@ -79,7 +79,7 @@ permalink: /subscribe/
   {%- endfor %}
   <div id="digest-preview" hidden>
     <p id="digest-describe"></p>
-    <p>If we sent them today, you'd get:</p>
+    <p>If they went out today, you'd get:</p>
     <div class="digest-totals">
       <div><b id="digest-weekdays"></b>events on Monday morning, for the days up to Friday evening</div>
       <div><b id="digest-weekend"></b>events on Friday morning, for the weekend</div>
@@ -103,7 +103,7 @@ permalink: /subscribe/
 <p id="digest-status" role="status"></p>
 
 <details id="digest-link-box">
-  <summary>Already signed up? We'll email you a link to change your choices</summary>
+  <summary>Already signed up? Send an email with a link to change your choices</summary>
   <form class="digest-email" id="digest-link">
     <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
     <button type="submit">Send me the link</button>
@@ -136,7 +136,7 @@ permalink: /subscribe/
 
   async function call(action, body) {
     const res = await fetch(`/api/digest/${action}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
-    const data = await res.json().catch(() => ({ error: "Something broke on our end. Please try again in a bit." }));
+    const data = await res.json().catch(() => ({ error: "Something went wrong. Please try again in a bit." }));
     show(data.message || data.error, !res.ok);
   }
 
@@ -152,7 +152,7 @@ permalink: /subscribe/
       document.getElementById("digest-intro").prepend(`These are the choices for ${data.email}. `);
       for (const [value, ids] of [["always", data.always], ["never", data.never]])
         for (const id of ids) { const input = document.getElementById(`${id}-${value}`); if (input) input.checked = true; }
-      if (!data.subscribed) show("One more step: click the link in the email we sent you, or we can't start sending.", true);
+      if (!data.subscribed) show("One more step: click the link in the confirmation email to start getting these emails.", true);
     } else show(data.error || "That link didn't work. Grab a fresh one below.", true);
   }
 
