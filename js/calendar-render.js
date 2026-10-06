@@ -2,7 +2,7 @@ import { Calendar } from '@fullcalendar/core'
 import iCalendarPlugin from '@fullcalendar/icalendar'
 import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
-import { atcb_action } from "add-to-calendar-button";
+import { subscribeButton } from "./subscribe.js";
 import { openEventModal, eventType } from "./event-modal.js";
 import { markLiked } from "./likes.js";
 
@@ -150,22 +150,4 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
   return calendar;
 }
 
-function subscribeButton (elementId, icsFile, title) {
-  const config = {
-    name: title,
-    subscribe: true,
-    icsFile: icsFile,
-    options: ['Apple','Google','iCal','Outlook.com','Yahoo','Microsoft365','MicrosoftTeams'],
-    lightMode: "system",
-    listStyle: "dropup-static",
-    trigger: "click",
-    // The branding looks weird, we instead give credit in lots of other places.
-    hideBranding: true
-  };
-  const button = document.getElementById(elementId);
-  if (button) {
-    button.addEventListener('click', () => atcb_action(config, button));
-  }
-}
-  
 export { renderCalendar, subscribeButton };

@@ -2,6 +2,8 @@
 tagFilter: true
 title: Indiranagar
 type: neighbourhood
+atproto: indiranagar.blr.today
+fedi: indiranagar@fedi.blr.today
 tags: '["INDIRANAGAR"]'
 --- 
 > Indiranagar is the residential neighbourhood, famously known for its gunda

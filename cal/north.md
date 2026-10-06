@@ -1,6 +1,7 @@
 ---
 title: North Bangalore
 type: neighbourhood
+fedi: north@fedi.blr.today
 tags: '["NORTHBLR"]'
 --- 
 > North Bangalore is everything past Mekhri Circle and Hebbal flyover,

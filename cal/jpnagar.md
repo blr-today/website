@@ -1,6 +1,7 @@
 ---
 title: JP Nagar
 type: neighbourhood
+fedi: jpnagar@fedi.blr.today
 tags: '["JPNAGAR"]'
 --- 
 > JP Nagar, is a affluent upscale residential neighbourhood in South Bangalore.

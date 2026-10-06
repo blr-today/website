@@ -8,7 +8,7 @@ import terser from '@rollup/plugin-terser';
 import { readFileSync } from "node:fs";
 
 export default {
-  input: ["js/calendar-render.js", "js/feedback.js", "js/map.js"],
+  input: ["js/calendar-render.js", "js/feedback.js", "js/map.js", "js/subscribe.js"],
   output: {
     dir: "assets/js",
     format: "es",

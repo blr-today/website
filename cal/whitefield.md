@@ -1,6 +1,7 @@
 ---
 title: Whitefield
 type: neighbourhood
+fedi: whitefield@fedi.blr.today
 tags: '["WHITEFIELD"]'
 --- 
 > Whitefield is a town outside of Bangalore that joined BLR proper only in

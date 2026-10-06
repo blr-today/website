@@ -1,6 +1,7 @@
 ---
 title: Science Gallery Bengaluru [Organizer]
 type: museum
+fedi: scigallery@fedi.blr.today
 tags: '["SCIGALLERYBLR"]'
 domain: scigalleryblr.org
 links:

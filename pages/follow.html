@@ -4,81 +4,58 @@ title: blr.today / follow
 permalink: /follow/
 ---
 <p>
-  Subscribe to a calendar in your calendar app, or follow accounts on
-  <a href="https://bsky.app">Bluesky</a> or the fediverse (Mastodon and friends).
-  Accounts share each event 2–7 days before it happens, between 10am and 7pm.
+  Subscribe to a calendar in your calendar app, or follow it on Bluesky or the fediverse
+  (Mastodon and friends). Accounts share each event 2–7 days before it happens.
+  On Mastodon, search for the handle shown when you hover a button.
 </p>
 
 <style>
-  .follow li { margin-bottom: 0.4em; }
-  .follow .muted { opacity: 0.7; font-size: 0.9em; }
-  .follow .days { display: flex; align-items: flex-end; gap: 2px; height: 4rem; }
-  .follow .days span { flex: 1; background: currentColor; opacity: 0.5; min-height: 1px; }
+  .follow { width: 100%; }
+  .follow td { vertical-align: middle; }
+  .follow td:first-child { white-space: normal; }
+  .follow th[colspan] { padding-top: 1.2em; text-align: left; }
+  .follow tbody:first-of-type th[colspan] { padding-top: 0; }
+  .follow button { margin: 0; white-space: nowrap; }
+  .follow .social {
+    display: inline-flex; align-items: center; gap: .4em; padding: .35em .8em;
+    border-radius: 999px; color: #fff; text-decoration: none; font-size: 85%; font-weight: 600;
+  }
+  .follow .social:hover { color: #fff; filter: brightness(110%); }
+  .follow .social svg { flex: none; width: 1.1em; height: 1.1em; min-width: 1.1em; fill: currentColor; }
+  .follow .bsky { background: #1185fe; }
+  .follow .fedi { background: #6364ff; }
+  @media (max-width: 600px) {
+    .follow .social span { display: none; }
+    .follow .social { padding: .5em; }
+  }
 </style>
 
-{%- assign reports = site.data.scheduler -%}
-<div class="follow">
-{%- for section in site.data.follow %}
-<h3>{{ section.title }}</h3>
-<ul>
-  {%- for a in section.accounts %}
-  <li>
-    <strong>{{ a.name }}</strong>
-    {%- if a.calendar -%}
-    {%- if a.calendar == "/" %}{% assign ics = "/cal/curated/cal.ics" %}{% else %}{% assign ics = a.calendar | append: "cal.ics" %}{% endif %}
-    · <a href="{{ a.calendar }}">calendar</a> (<a href="webcal://blr.today{{ ics }}">subscribe</a>)
-    {%- endif -%}
-    {%- if a.bluesky -%}
-    {%- assign handle = a.bluesky | append: ".blr.today" -%}
-    {%- assign n = reports.bluesky.stats.reposts[handle] %}
-    · <a href="https://bsky.app/profile/{{ handle }}" title="@{{ handle }}">Bluesky</a>
-    {%- if n %} <span class="muted">({{ n }} repost{% if n != 1 %}s{% endif %})</span>{% endif -%}
-    {%- endif -%}
-    {%- if a.fedi -%}
-    {%- assign n = reports.fedi.stats.reposts[a.fedi] %}
-    · <a rel="me" href="https://fedi.blr.today/{{ a.fedi }}" title="@{{ a.fedi }}@fedi.blr.today">Fediverse</a>
-    {%- if n %} <span class="muted">({{ n }} boost{% if n != 1 %}s{% endif %})</span>{% endif -%}
-    {%- endif -%}
-    {%- if a.about %}<br /><span class="muted">{{ a.about }}</span>{% endif %}
-  </li>
+<table class="follow">
+  {%- assign social = site.html_pages | where: "layout", "events" | where_exp: "p", "p.atproto or p.fedi" | group_by: "type" -%}
+  {%- for type in site.data.calendar_types -%}
+  {%- for group in social -%}{%- if group.name == type[0] %}
+  <tbody>
+    <tr><th colspan="4">{{ type[1].title }}</th></tr>
+    {%- for p in group.items -%}
+    {%- assign prefix = "/" | append: p.path | replace: ".md", "/" -%}
+    {%- assign ics = site.feed_url | append: prefix | append: "cal.ics" -%}
+    {%- assign id = p.path | split: "/" | last | replace: ".md", "" -%}
+    {% include follow-row.html name=p.title url=p.url ics=ics id=id atproto=p.atproto fedi=p.fedi %}
+    {%- endfor %}
+  </tbody>
+  {%- endif -%}{%- endfor -%}
   {%- endfor %}
-</ul>
-{%- endfor %}
+  <tbody>
+    <tr><th colspan="4">More accounts</th></tr>
+    {%- for a in site.data.follow %}
+    {% include follow-row.html name=a.name about=a.about atproto=a.atproto fedi=a.fedi %}
+    {%- endfor %}
+  </tbody>
+</table>
 
-{%- if reports.bluesky.stats or reports.fedi.stats %}
-<h3>By the numbers</h3>
-{%- assign platforms = "bluesky,fedi" | split: "," -%}
-{%- for name in platforms -%}
-{%- assign r = reports[name] -%}
-{%- if r.stats %}
-{%- assign s = r.stats -%}
-<p>
-  <strong>{% if name == "fedi" %}Fediverse{% else %}Bluesky{% endif %}</strong>:
-  {{ s.posted }} events posted since {{ s.since | date: "%-d %b %Y" }}, {{ s.last_7_days }} in the last 7 days.
-  {% if name == "fedi" %}Posts follow the Bluesky schedule.{% else %}{{ r.pending }} queued{% if r.gap_minutes %}, one post every {{ r.gap_minutes | round }} minutes{% endif %}.{% endif %}
-  {{ s.last_calls }} Last Calls and {{ s.corrections }} corrections sent.
-</p>
-{%- assign most = 1 -%}
-{%- for d in s.by_day %}{% if d[1] > most %}{% assign most = d[1] %}{% endif %}{% endfor %}
-<div class="days" title="Posts per day over the last 30 days">
-  {%- for d in s.by_day %}<span title="{{ d[0] }}: {{ d[1] }}" style="height: {{ d[1] | times: 100 | divided_by: most }}%"></span>{% endfor -%}
-</div>
-{%- endif -%}
-{%- endfor %}
-<p class="muted">As of the last site build. The live schedule is on the <a href="/_debug/social/">debug page</a>.</p>
-{%- endif %}
-
-<h3>All calendars</h3>
-{%- assign calendars = site.html_pages | where: "layout", "events" | group_by: "type" -%}
-{%- for type in site.data.calendar_types %}
-<p>
-  <strong>{{ type[1].title }}</strong>:
-  {%- for group in calendars -%}{%- if group.name == type[0] -%}
-  {%- for page in group.items %}
-  {%- assign ics = "/" | append: page.path | replace: ".md", "/cal.ics" %}
-  <a href="{{ page.url }}">{{ page.title }}</a> (<a href="webcal://blr.today{{ ics }}">subscribe</a>){% unless forloop.last %},{% endunless %}
-  {%- endfor -%}
-  {%- endif -%}{%- endfor %}
-</p>
-{%- endfor %}
-</div>
+<script type="module">
+  import { subscribeButton } from "/assets/js/subscribe.js";
+  for (const button of document.querySelectorAll(".follow button[data-ics]")) {
+    subscribeButton(button.id, button.dataset.ics, button.dataset.title, { listStyle: "modal" });
+  }
+</script>

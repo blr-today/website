@@ -1,6 +1,7 @@
 ---
 title: Underline Center 🌟
 type: venue
+fedi: underline@fedi.blr.today
 tags: '["UNDERLINE"]'
 domain: underline.center
 links:

@@ -1,6 +1,7 @@
 ---
 title: Jayanagar
 type: neighbourhood
+fedi: jayanagar@fedi.blr.today
 tags: '["JAYANAGAR"]'
 --- 
 > Jayanagar is Jayanagar.

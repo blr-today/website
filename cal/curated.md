@@ -2,6 +2,8 @@
 tagFilter: true
 title: Curated 🍉
 type: collection
+atproto: curated.blr.today
+fedi: curated@fedi.blr.today
 permalink: /
 locationTagsOnly: true
 tags: '["ACEOFPUBS", "ATTAGALATTA", "BIC", "BLUETOKAI", "BSF", "SCIGALLERYBLR", "CHAMPACA", "CURATED", "COURTYARD", "CREATIVEMORNINGS", "GOETHE", "KOOTA", "MAP", "SISTERSINSWEAT/SESSION", "SOFAR", "SUMUKHA", "TOGETHER", "TROVE", "UNDERLINE", "URBANAUT", "PUTTINGSCENE", "WINDMILLS", "TPCC", "THEWHITEBOX", "LAVONNE", "BNGBIRDS", "PAINTBAR", "CONOSH", "T.IS", "PENCILJAM", "IIWC", "BAC", "BBB", "HSRMEETUPS"]'

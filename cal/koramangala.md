@@ -1,6 +1,7 @@
 ---
 title: Koramangala
 type: neighbourhood
+fedi: koramangala@fedi.blr.today
 tags: '["KORAMANGALA"]'
 --- 
 > Koramangala is the Bangalore neighbourhood with highest ratio of billionaires

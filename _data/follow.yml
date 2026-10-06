@@ -1,34 +1,8 @@
-# Social accounts on /follow/, see github.com/blr-today/scheduler
-# bluesky is the handle under .blr.today, fedi the account on fedi.blr.today
-- title: Areas
-  accounts:
-    - { name: Indiranagar, calendar: /cal/indiranagar/, bluesky: indiranagar, fedi: indiranagar }
-    - { name: Central Bengaluru, calendar: /cal/cbd/, bluesky: cbd, fedi: cbd }
-    - { name: Koramangala, calendar: /cal/koramangala/, fedi: koramangala }
-    - { name: HSR Layout, calendar: /cal/hsr/, fedi: hsr }
-    - { name: Jayanagar, calendar: /cal/jayanagar/, fedi: jayanagar }
-    - { name: JP Nagar, calendar: /cal/jpnagar/, fedi: jpnagar }
-    - { name: Whitefield, calendar: /cal/whitefield/, fedi: whitefield }
-    - { name: North Bengaluru, calendar: /cal/north/, fedi: north }
-- title: Topics
-  accounts:
-    - { name: Curated 🍉, calendar: /, bluesky: curated, fedi: curated }
-    - { name: Free events, bluesky: free, fedi: free }
-    - { name: Under ₹500, fedi: budget }
-    - { name: Fitness, calendar: /cal/fitness/, fedi: fitness }
-    - { name: Books, calendar: /cal/bookstores/, fedi: books }
-    - { name: Workshops, fedi: workshops }
-    - { name: Sports, fedi: sports }
-    - { name: Food, fedi: food }
-    - { name: Music, fedi: music }
-    - { name: Film, fedi: film }
-- title: Venues
-  accounts:
-    - { name: Underline Center, calendar: /cal/underline/, fedi: underline }
-    - { name: Bangalore International Centre, calendar: /cal/bic/, fedi: bic }
-    - { name: Sabha BLR, calendar: /cal/sabha/, fedi: sabha }
-    - { name: Science Gallery Bengaluru, calendar: /cal/scigallery/, fedi: scigallery }
-- title: Everything
-  accounts:
-    - { name: Last Call, about: Replies when an event is nearly sold out, bluesky: lastcall, fedi: lastcall }
-    - { name: All events, about: "Every event, 2–7 days ahead. Can't be followed on the fediverse, only boosted", bluesky: events, fedi: events }
+# Social accounts on /follow/ that have no calendar; calendars set atproto and fedi in their front matter
+- { name: Workshops, fedi: workshops@fedi.blr.today }
+- { name: Sports, fedi: sports@fedi.blr.today }
+- { name: Food, fedi: food@fedi.blr.today }
+- { name: Music, fedi: music@fedi.blr.today }
+- { name: Film, fedi: film@fedi.blr.today }
+- { name: Last Call, about: Replies when an event is nearly sold out, atproto: lastcall.blr.today, fedi: lastcall@fedi.blr.today }
+- { name: All events, about: "Every event, 2–7 days ahead. Boost-only on the fediverse", atproto: events.blr.today, fedi: events@fedi.blr.today }

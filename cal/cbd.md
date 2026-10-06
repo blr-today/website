@@ -2,6 +2,8 @@
 tagFilter: true
 title: Central Bangalore District
 type: neighbourhood
+atproto: cbd.blr.today
+fedi: cbd@fedi.blr.today
 tags: '["CBD"]'
 --- 
 > The Central Bangalore District is everything within a short auto ride of
