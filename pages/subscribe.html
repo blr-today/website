@@ -45,7 +45,12 @@ permalink: /subscribe/
   .digest-totals { display: flex; gap: 1em; flex-wrap: wrap; margin: 1em 0 .5em; }
   .digest-totals div { flex: 1 1 14em; border: 1px solid var(--cmed); border-radius: 2px; padding: .6em .9em; }
   .digest-totals b { display: block; font-size: 2.2em; line-height: 1.1; color: var(--cemph); font-variant-numeric: tabular-nums; }
-  #digest-peek .blr-tag { font-size: 70%; padding: 0 .35em; margin-left: .35em; border-radius: 2px; white-space: nowrap; }
+  .digest-show { background: none; border: 0; margin: 0 0 0 .4em; padding: 0; font: inherit; font-size: 80%; color: var(--clink);
+    text-decoration: underline; cursor: pointer; letter-spacing: normal; text-transform: none; }
+  .digest-events { margin: .3em 0 .6em; padding-left: 1.2em; font-size: 90%; }
+  .digest-events li { margin: .2em 0; }
+  .digest-events li.out { opacity: .45; }
+  #digest-peek .blr-tag, .digest-events .blr-tag { font-size: 70%; padding: 0 .35em; margin-left: .35em; border-radius: 2px; white-space: nowrap; }
   #digest-peek h4 { margin: .8em 0 .2em; font-size: 95%; }
   #digest-peek ul { padding-left: 1.2em; font-size: 90%; }
   #digest-peek li { margin: .2em 0; }
@@ -60,13 +65,15 @@ permalink: /subscribe/
     <legend>{{ group.title }}</legend>
     {%- for o in group.options %}
     <div class="digest-row">
-      <span id="digest-{{ o.id }}">{{ o.title }}{% if o.range %} <small>({{ o.range }})</small>{% endif %} <small class="digest-count" data-count="{{ o.id }}"></small></span>
+      <span id="digest-{{ o.id }}">{{ o.title }}{% if o.range %} <small>({{ o.range }})</small>{% endif %} <small class="digest-count" data-count="{{ o.id }}"></small>
+        <button type="button" class="digest-show" data-show="{{ o.id }}" aria-expanded="false" hidden>Show events this week</button></span>
       <span class="tri" role="radiogroup" aria-labelledby="digest-{{ o.id }}">
         <input type="radio" id="{{ o.id }}-always" name="{{ o.id }}" value="always"><label for="{{ o.id }}-always">Always<small class="delta" data-delta="{{ o.id }}-always"></small></label>
         <input type="radio" id="{{ o.id }}-curated" name="{{ o.id }}" value="curated" checked><label for="{{ o.id }}-curated">Curated<small class="delta" data-delta="{{ o.id }}-curated"></small></label>
         <input type="radio" id="{{ o.id }}-never" name="{{ o.id }}" value="never"><label for="{{ o.id }}-never">Never<small class="delta" data-delta="{{ o.id }}-never"></small></label>
       </span>
     </div>
+    <ul class="digest-events" data-events="{{ o.id }}" hidden></ul>
     {%- endfor %}
   </fieldset>
   {%- endfor %}
@@ -171,7 +178,7 @@ permalink: /subscribe/
   const price = new Set(["FREE", "BUDGET", "PRICEY"]);
   const areas = new Set(rules.groups.find((g) => g.id === "area").options.flatMap((o) => o.tags));
   const kind = (tag) => (areas.has(tag) ? "location" : price.has(tag) ? "price" : "other");
-  function item({ event, keys }) {
+  function item({ event, keys }, skip = null) {
     const li = document.createElement("li"), a = document.createElement("a");
     a.href = event.url;
     a.textContent = event.name;
@@ -182,13 +189,38 @@ permalink: /subscribe/
       const fc = { url: event.url, title: event.name, start: new Date(event.startDate), end: event.endDate ? new Date(event.endDate) : null };
       openEventModal(fc, [...new Set(event.keywords || [])].map((name) => ({ name, kind: kind(name) })), li);
     });
-    li.append(a, ...keys.map(badge));
+    li.append(a, ...keys.filter((k) => k !== skip).map(badge));
     return li;
   }
+  let open = null;
+  function rowEvents(shown) {
+    for (const ul of document.querySelectorAll("[data-events]")) {
+      ul.hidden = ul.dataset.events !== open;
+      if (ul.hidden) { ul.replaceChildren(); continue; }
+      const these = entries.filter(({ keys }) => keys.includes(open));
+      ul.replaceChildren(...these.map((x) => {
+        const li = item(x, open);
+        if (!shown.has(x)) { li.classList.add("out"); li.title = "Not in your emails with these choices"; }
+        return li;
+      }));
+    }
+    for (const b of document.querySelectorAll("[data-show]")) {
+      const on = b.dataset.show === open;
+      b.textContent = on ? "Hide events" : "Show events this week";
+      b.setAttribute("aria-expanded", on);
+    }
+  }
+  form.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-show]");
+    if (!b) return;
+    open = open === b.dataset.show ? null : b.dataset.show;
+    preview();
+  });
   function preview() {
     if (!entries) return;
     const c = choices(), always = new Set(c.always), never = new Set(c.never);
     const shown = picked(entries, always, never);
+    rowEvents(new Set(shown));
     for (const name of ["weekdays", "weekend"]) {
       const these = shown.filter(inside(win[name]));
       document.getElementById(`digest-${name}`).textContent = these.length;
@@ -204,6 +236,7 @@ permalink: /subscribe/
     addEvents(events);
     entries = week(events, rules, Math.min(win.weekdays[0], win.weekend[0]), Math.max(win.weekdays[1], win.weekend[1]));
     const n = counts(entries);
+    for (const b of document.querySelectorAll("[data-show]")) b.hidden = !n[b.dataset.show];
     for (const el of document.querySelectorAll("[data-count]")) { const k = n[el.dataset.count] || 0; el.textContent = `· (${k} ${k === 1 ? "event" : "events"} this week)`; }
     document.getElementById("digest-preview").hidden = false;
     preview();
