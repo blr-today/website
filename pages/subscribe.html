@@ -45,6 +45,7 @@ permalink: /subscribe/
   .digest-totals { display: flex; gap: 1em; flex-wrap: wrap; margin: 1em 0 .5em; }
   .digest-totals div { flex: 1 1 14em; border: 1px solid var(--cmed); border-radius: 2px; padding: .6em .9em; }
   .digest-totals b { display: block; font-size: 2.2em; line-height: 1.1; color: var(--cemph); font-variant-numeric: tabular-nums; }
+  #digest-peek .blr-tag { font-size: 70%; padding: 0 .35em; margin-left: .35em; border-radius: 2px; white-space: nowrap; }
   #digest-peek h4 { margin: .8em 0 .2em; font-size: 95%; }
   #digest-peek ul { padding-left: 1.2em; font-size: 90%; }
   #digest-peek li { margin: .2em 0; }
@@ -107,7 +108,7 @@ permalink: /subscribe/
 {%- assign unwanted = site.html_pages | where: "path", "cal/unwanted.md" | first -%}
 {%- assign options = "" | split: "" -%}{%- for g in site.data.digest.groups -%}{%- assign options = options | concat: g.options -%}{%- endfor %}
 <script type="application/json" id="digest-rules">
-  {"options": {{ options | jsonify }}, "curated": {{ curated.tags }}, "curatedExclude": {{ curated.excludeTags }}, "unwanted": {{ unwanted.tags }}}
+  {"groups": {{ site.data.digest.groups | jsonify }}, "options": {{ options | jsonify }}, "curated": {{ curated.tags }}, "curatedExclude": {{ curated.excludeTags }}, "unwanted": {{ unwanted.tags }}}
 </script>
 
 <script type="module">
@@ -152,17 +153,25 @@ permalink: /subscribe/
 
   const rules = JSON.parse(document.getElementById("digest-rules").textContent);
   const titles = Object.fromEntries(rules.options.map((o) => [o.id, o.title]));
+  const groupOf = Object.fromEntries(rules.groups.flatMap((g) => g.options.map((o) => [o.id, { group: g.id, tag: (o.tags || [])[0] }])));
+  function badge(id) {
+    const { group, tag } = groupOf[id], span = document.createElement("span");
+    span.className = group === "area" ? "blr-tag blr-tag--location" : "blr-tag";
+    if (tag) span.dataset.tag = tag;
+    span.textContent = titles[id];
+    return span;
+  }
   const day = new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kolkata" });
   const signed = (n) => (n > 0 ? `+${n}` : n < 0 ? `−${-n}` : "");
   const win = windows();
   const inside = ([a, b]) => ({ at }) => at >= a && at < b;
   let entries = null;
-  function item({ event }) {
+  function item({ event, keys }) {
     const li = document.createElement("li"), a = document.createElement("a"), t = document.createElement("time");
     t.textContent = day.format(new Date(event.startDate));
     a.href = event.url;
     a.textContent = event.name;
-    li.append(t, a);
+    li.append(t, a, ...keys.map(badge));
     return li;
   }
   function preview() {
