@@ -1,0 +1,119 @@
+---
+layout: default
+title: blr.today / weekly
+permalink: /subscribe/
+---
+<p id="digest-intro">
+  Get one email a week with the events you care about.
+  By default you get the <a href="/">Curated</a> events. For each choice below, pick:
+</p>
+<ul>
+  <li><b>Always</b>: include every event that matches, curated or not.</li>
+  <li><b>Curated</b>: include it only when it is a curated event (the default).</li>
+  <li><b>Never</b>: leave it out, even when curated. Never wins over Always.</li>
+</ul>
+
+<style>
+  .digest fieldset { border: 0; padding: 0; margin: 0 0 1.2em; }
+  .digest legend { font-weight: 600; padding: 0; margin-bottom: .3em; }
+  .digest-row { display: flex; align-items: center; justify-content: space-between; gap: .5em;
+    padding: .35em 0; border-bottom: 1px solid var(--cmed); }
+  .digest-row > span:first-child { min-width: 0; }
+  .tri { display: inline-flex; flex: none; }
+  .tri input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .tri label { margin: 0; padding: .3em .8em; font-size: 85%; cursor: pointer; border: 1px solid var(--cmed);
+    border-radius: 0; color: var(--cdark); background: none; }
+  .tri label:not(:first-of-type) { margin-left: -1px; }
+  .tri label:first-of-type { border-radius: 2px 0 0 2px; }
+  .tri label:last-of-type { border-radius: 0 2px 2px 0; }
+  .tri input:focus-visible + label { outline: 2px solid var(--cemph); outline-offset: 1px; }
+  .tri input[value=always]:checked + label { background: #dcfce7; border-color: #16a34a; color: #166534; position: relative; }
+  .tri input[value=curated]:checked + label { background: var(--cemphbg); border-color: var(--cemph); color: var(--cemph); position: relative; }
+  .tri input[value=never]:checked + label { background: #fee2e2; border-color: #dc2626; color: #991b1b; position: relative; }
+  @media (max-width: 600px) { .tri label { padding: .3em .5em; font-size: 80%; } }
+  .digest-email { display: flex; gap: .5em; flex-wrap: wrap; align-items: center; margin: 1em 0; }
+  .digest-email input[type=email] { flex: 1 1 16em; margin: 0; }
+  .digest-email button { margin: 0; }
+  .digest-trap { position: absolute; left: -10000px; }
+  #digest-status:empty { display: none; }
+  #digest-status { padding: .6em .8em; border-left: 3px solid var(--cemph); background: var(--cemphbg); }
+  #digest-status.error { border-color: #dc2626; background: #fee2e2; }
+</style>
+
+<form class="digest" id="digest-form">
+  {%- for group in site.data.digest.groups %}
+  <fieldset>
+    <legend>{{ group.title }}</legend>
+    {%- for o in group.options %}
+    <div class="digest-row">
+      <span id="digest-{{ o.id }}">{{ o.title }}</span>
+      <span class="tri" role="radiogroup" aria-labelledby="digest-{{ o.id }}">
+        <input type="radio" id="{{ o.id }}-always" name="{{ o.id }}" value="always"><label for="{{ o.id }}-always">Always</label>
+        <input type="radio" id="{{ o.id }}-curated" name="{{ o.id }}" value="curated" checked><label for="{{ o.id }}-curated">Curated</label>
+        <input type="radio" id="{{ o.id }}-never" name="{{ o.id }}" value="never"><label for="{{ o.id }}-never">Never</label>
+      </span>
+    </div>
+    {%- endfor %}
+  </fieldset>
+  {%- endfor %}
+  <label class="digest-trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+  <div class="digest-email">
+    <input type="email" name="email" id="digest-email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
+    <button type="submit" id="digest-submit">Subscribe</button>
+  </div>
+</form>
+
+<p id="digest-status" role="status"></p>
+
+<details id="digest-link-box">
+  <summary>Already subscribed? Get a link to change your choices</summary>
+  <form class="digest-email" id="digest-link">
+    <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
+    <button type="submit">Email me a link</button>
+  </form>
+</details>
+
+<script type="module">
+  const form = document.getElementById("digest-form");
+  const status = document.getElementById("digest-status");
+  const token = location.hash.slice(1);
+  const show = (text, error = false) => { status.textContent = text; status.className = error ? "error" : ""; };
+
+  const choices = () => {
+    const out = { always: [], never: [] };
+    for (const input of form.querySelectorAll(".tri input:checked")) if (out[input.value]) out[input.value].push(input.name);
+    return out;
+  };
+
+  async function call(action, body) {
+    const res = await fetch(`/api/digest/${action}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    const data = await res.json().catch(() => ({ error: "Something went wrong. Please try again later." }));
+    show(data.message || data.error, !res.ok);
+  }
+
+  if (token) {
+    const email = document.getElementById("digest-email");
+    email.required = false;
+    email.hidden = true;
+    document.getElementById("digest-submit").textContent = "Save choices";
+    const res = await fetch(`/api/digest/prefs?token=${encodeURIComponent(token)}`);
+    const data = await res.json().catch(() => ({}));
+    if (res.ok) {
+      document.getElementById("digest-intro").prepend(`Choices for ${data.email}. `);
+      for (const [value, ids] of [["always", data.always], ["never", data.never]])
+        for (const id of ids) { const input = document.getElementById(`${id}-${value}`); if (input) input.checked = true; }
+      if (!data.subscribed) show("Confirm your subscription from the email we sent, or these choices won't be used.", true);
+    } else show(data.error || "This link didn't work. Ask for a new one below.", true);
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const extra = { website: form.website.value };
+    call(token ? "prefs" : "subscribe", token ? { token, ...choices(), ...extra } : { email: form.email.value, ...choices(), ...extra });
+  });
+
+  document.getElementById("digest-link").addEventListener("submit", (e) => {
+    e.preventDefault();
+    call("link", { email: e.target.email.value });
+  });
+</script>

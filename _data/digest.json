@@ -1,0 +1,43 @@
+{
+  "groups": [
+    {
+      "id": "area",
+      "title": "Neighbourhood",
+      "options": [
+        { "id": "cbd", "title": "Central Bangalore", "tags": ["CBD"] },
+        { "id": "indiranagar", "title": "Indiranagar", "tags": ["INDIRANAGAR"] },
+        { "id": "koramangala", "title": "Koramangala", "tags": ["KORAMANGALA"] },
+        { "id": "hsr", "title": "HSR Layout", "tags": ["HSR"] },
+        { "id": "jayanagar", "title": "Jayanagar", "tags": ["JAYANAGAR"] },
+        { "id": "jpnagar", "title": "JP Nagar", "tags": ["JPNAGAR"] },
+        { "id": "whitefield", "title": "Whitefield", "tags": ["WHITEFIELD"] },
+        { "id": "north", "title": "North Bangalore", "tags": ["NORTHBLR"] }
+      ]
+    },
+    {
+      "id": "type",
+      "title": "Event type",
+      "options": [
+        { "id": "workshops", "title": "Workshops", "types": ["EducationEvent"] },
+        { "id": "music", "title": "Music", "types": ["MusicEvent"] },
+        { "id": "books", "title": "Books & talks", "types": ["LiteraryEvent"] },
+        { "id": "social", "title": "Meetups & social", "types": ["SocialEvent"] },
+        { "id": "sports", "title": "Sports & fitness", "types": ["SportsEvent"] },
+        { "id": "food", "title": "Food & drink", "types": ["FoodEvent"] },
+        { "id": "film", "title": "Film", "types": ["ScreeningEvent"] },
+        { "id": "stage", "title": "Theatre, dance & comedy", "types": ["TheaterEvent", "DanceEvent", "ComedyEvent"] },
+        { "id": "art", "title": "Art & exhibitions", "types": ["VisualArtsEvent", "ExhibitionEvent"] },
+        { "id": "kids", "title": "Kids", "types": ["ChildrensEvent"] }
+      ]
+    },
+    {
+      "id": "price",
+      "title": "Price",
+      "options": [
+        { "id": "free", "title": "Free", "tags": ["FREE"] },
+        { "id": "budget", "title": "Budget", "tags": ["BUDGET"] },
+        { "id": "pricey", "title": "Pricey", "tags": ["PRICEY"] }
+      ]
+    }
+  ]
+}
