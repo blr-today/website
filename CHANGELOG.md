@@ -7,6 +7,7 @@ title: changelog
 ## October 2026
 
 - `New` Follow blr.today on Bluesky and the fediverse, by area, topic or venue. The [follow](/follow/) page lists every account and calendar.
+- `Cal` Added new calendars for [Free](/cal/free/) and [Budget](/cal/budget/) events. Every calendar now has a short description on the [calendars](/calendars/) page.
 - `New` The [map](/map/) shows upcoming events by venue, coloured by event type, with curated events highlighted. Improved location of several venues.
 - `New` Clicking an event opens its details beside the calendar, with posters, tickets and an Add to Calendar button.
 - `New` Send feedback from the menu, the footer, the filter or an event popup.
