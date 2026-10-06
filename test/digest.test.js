@@ -145,6 +145,6 @@ test("each button shows how the total would change", async () => {
   ];
   assert.deepEqual(deltas(entries, new Set(), new Set(), "free"), { always: 2, curated: 0, never: -1 });
   assert.deepEqual(deltas(entries, new Set(), new Set(["music"]), "free"), { always: 1, curated: 0, never: -1 });
-  assert.equal(describe(3, 9, ["Free", "Music"], ["Pricey", "Kids"]), "You'd get 3 of this week's 9 events: our picks, plus all the Free and Music events. You're skipping anything Pricey or Kids.");
-  assert.equal(describe(5, 9, [], []), "You'd get 5 of this week's 9 events: our picks.");
+  assert.equal(describe(3, 9, ["Free", "Music"], ["Pricey", "Kids"]), "You'd get 3 of this week's 9 events: the Curated events, plus all the Free and Music events. You're skipping anything Pricey or Kids.");
+  assert.equal(describe(5, 9, [], []), "You'd get 5 of this week's 9 events: the Curated events.");
 });

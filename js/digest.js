@@ -60,6 +60,6 @@ const list = (items, word) => (items.length < 2 ? items.join("") : `${items.slic
 
 export function describe(shown, total, always, never) {
   const plus = always.length ? `, plus all the ${list(always, "and")} events` : "";
-  const lead = `You'd get ${shown} of this week's ${total} events: our picks${plus}.`;
+  const lead = `You'd get ${shown} of this week's ${total} events: the Curated events${plus}.`;
   return never.length ? `${lead} You're skipping anything ${list(never, "or")}.` : lead;
 }
