@@ -6,6 +6,7 @@ title: changelog
 
 ## October 2026
 
+- `New` A [weekly email](/subscribe/) every Wednesday morning. Pick Always, Curated or Never for each neighbourhood, event type and price.
 - `New` Follow blr.today on Bluesky and the fediverse, by area, topic or venue. The [follow](/follow/) page lists every account and calendar.
 - `Cal` Added new calendars for [Free](/cal/free/) and [Budget](/cal/budget/) events. Every calendar now has a short description on the [calendars](/calendars/) page.
 - `New` The [map](/map/) shows upcoming events by venue, coloured by event type, with curated events highlighted. Improved location of several venues.
