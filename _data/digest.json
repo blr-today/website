@@ -34,9 +34,9 @@
       "id": "price",
       "title": "Price",
       "options": [
-        { "id": "free", "title": "Free", "tags": ["FREE"] },
-        { "id": "budget", "title": "Budget", "tags": ["BUDGET"] },
-        { "id": "pricey", "title": "Pricey", "tags": ["PRICEY"] }
+        { "id": "free", "title": "Free", "range": "₹0", "tags": ["FREE"] },
+        { "id": "budget", "title": "Budget", "range": "under ₹500", "tags": ["BUDGET"] },
+        { "id": "pricey", "title": "Pricey", "range": "₹2,000 and up", "tags": ["PRICEY"] }
       ]
     }
   ]

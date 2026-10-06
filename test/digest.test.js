@@ -124,3 +124,27 @@ test("the page preview applies the email's rule", async () => {
   assert.deepEqual(urls([], []), ["c"]);
   assert.deepEqual(urls(["music"], ["free"]), ["m"]);
 });
+
+test("emails split the week at Friday 17:00 IST", async () => {
+  const { windows } = await import("../js/digest.js");
+  const iso = (ms) => new Date(ms + 5.5 * 3600e3).toISOString().slice(0, 16);
+  const wed = windows(Date.parse("2026-10-07T03:30:00+05:30"));
+  assert.deepEqual(wed.weekdays.map(iso), ["2026-10-07T03:30", "2026-10-09T17:00"]);
+  assert.deepEqual(wed.weekend.map(iso), ["2026-10-09T17:00", "2026-10-12T00:00"]);
+  const sat = windows(Date.parse("2026-10-10T12:00:00+05:30"));
+  assert.deepEqual(sat.weekend.map(iso), ["2026-10-10T12:00", "2026-10-12T00:00"]);
+  assert.deepEqual(sat.weekdays.map(iso), ["2026-10-12T00:00", "2026-10-16T17:00"]);
+  assert.deepEqual(windows(Date.parse("2026-10-09T18:00:00+05:30")).weekend.map(iso), ["2026-10-09T18:00", "2026-10-12T00:00"]);
+});
+
+test("each button shows how the total would change", async () => {
+  const { deltas, describe } = await import("../js/digest.js");
+  const entries = [
+    { keys: ["free"], curated: true }, { keys: ["free"], curated: false },
+    { keys: ["free", "music"], curated: false }, { keys: ["music"], curated: true },
+  ];
+  assert.deepEqual(deltas(entries, new Set(), new Set(), "free"), { always: 2, curated: 0, never: -1 });
+  assert.deepEqual(deltas(entries, new Set(), new Set(["music"]), "free"), { always: 1, curated: 0, never: -1 });
+  assert.equal(describe(3, 9, ["Free", "Music"], ["Pricey"]), "Showing 3 of 9 events: the curated ones, plus every Free and Music event. Leaving out Pricey events.");
+  assert.equal(describe(5, 9, [], []), "Showing 5 of 9 events: the curated ones.");
+});

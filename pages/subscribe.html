@@ -1,11 +1,12 @@
 ---
 layout: default
-title: blr.today / weekly
+title: blr.today / email
 permalink: /subscribe/
 ---
 <p id="digest-intro">
-  Get one email a week with the events you care about.
-  By default you get the <a href="/">Curated</a> events. For each choice below, pick:
+  Get two emails a week with the events you care about: on Monday morning for the week ahead,
+  and on Friday morning for the weekend. By default you get the <a href="/">Curated</a> events.
+  For each choice below, pick:
 </p>
 <ul>
   <li><b>Always</b>: include every event that matches, curated or not.</li>
@@ -30,12 +31,21 @@ permalink: /subscribe/
   .tri input[value=always]:checked + label { background: #dcfce7; border-color: #16a34a; color: #166534; position: relative; }
   .tri input[value=curated]:checked + label { background: var(--cemphbg); border-color: var(--cemph); color: var(--cemph); position: relative; }
   .tri input[value=never]:checked + label { background: #fee2e2; border-color: #dc2626; color: #991b1b; position: relative; }
-  @media (max-width: 600px) { .tri label { padding: .3em .5em; font-size: 80%; } }
+  @media (max-width: 600px) {
+    .digest-row { flex-wrap: wrap; }
+    .tri { width: 100%; }
+    .tri label { flex: 1; text-align: center; padding: .35em .3em; font-size: 80%; }
+  }
   .digest-email { display: flex; gap: .5em; flex-wrap: wrap; align-items: center; margin: 1em 0; }
   .digest-email input[type=email] { flex: 1 1 16em; margin: 0; }
   .digest-email button { margin: 0; }
   .digest-trap { position: absolute; left: -10000px; }
   .digest-count { color: var(--cdark); opacity: .7; }
+  .tri .delta:not(:empty) { margin-left: .35em; font-variant-numeric: tabular-nums; opacity: .75; }
+  .digest-totals { display: flex; gap: 1em; flex-wrap: wrap; margin: 1em 0 .5em; }
+  .digest-totals div { flex: 1 1 14em; border: 1px solid var(--cmed); border-radius: 2px; padding: .6em .9em; }
+  .digest-totals b { display: block; font-size: 2.2em; line-height: 1.1; color: var(--cemph); font-variant-numeric: tabular-nums; }
+  #digest-peek h4 { margin: .8em 0 .2em; font-size: 95%; }
   #digest-peek ul { padding-left: 1.2em; font-size: 90%; }
   #digest-peek li { margin: .2em 0; }
   #digest-peek time { color: var(--cdark); margin-right: .4em; }
@@ -50,22 +60,32 @@ permalink: /subscribe/
     <legend>{{ group.title }}</legend>
     {%- for o in group.options %}
     <div class="digest-row">
-      <span id="digest-{{ o.id }}">{{ o.title }} <small class="digest-count" data-count="{{ o.id }}"></small></span>
+      <span id="digest-{{ o.id }}">{{ o.title }}{% if o.range %} <small>({{ o.range }})</small>{% endif %} <small class="digest-count" data-count="{{ o.id }}"></small></span>
       <span class="tri" role="radiogroup" aria-labelledby="digest-{{ o.id }}">
-        <input type="radio" id="{{ o.id }}-always" name="{{ o.id }}" value="always"><label for="{{ o.id }}-always">Always</label>
-        <input type="radio" id="{{ o.id }}-curated" name="{{ o.id }}" value="curated" checked><label for="{{ o.id }}-curated">Curated</label>
-        <input type="radio" id="{{ o.id }}-never" name="{{ o.id }}" value="never"><label for="{{ o.id }}-never">Never</label>
+        <input type="radio" id="{{ o.id }}-always" name="{{ o.id }}" value="always"><label for="{{ o.id }}-always">Always<small class="delta" data-delta="{{ o.id }}-always"></small></label>
+        <input type="radio" id="{{ o.id }}-curated" name="{{ o.id }}" value="curated" checked><label for="{{ o.id }}-curated">Curated<small class="delta" data-delta="{{ o.id }}-curated"></small></label>
+        <input type="radio" id="{{ o.id }}-never" name="{{ o.id }}" value="never"><label for="{{ o.id }}-never">Never<small class="delta" data-delta="{{ o.id }}-never"></small></label>
       </span>
     </div>
     {%- endfor %}
   </fieldset>
   {%- endfor %}
-  <details id="digest-peek" hidden>
-    <summary id="digest-peek-summary"></summary>
-    <ul></ul>
-  </details>
-  <p id="digest-peek-note" hidden><small>The number beside each choice counts all its events in the next 7 days.
-    These numbers are as of today: what your emails contain will differ, sometimes a lot, as events get added.</small></p>
+  <div id="digest-preview" hidden>
+    <p id="digest-describe"></p>
+    <p>If we were to send these emails today:</p>
+    <div class="digest-totals">
+      <div><b id="digest-weekdays"></b>events in your Monday morning email, from Monday to Friday evening</div>
+      <div><b id="digest-weekend"></b>events in your weekend email, sent on Friday morning</div>
+    </div>
+    <details id="digest-peek">
+      <summary>See these events</summary>
+      <h4>Monday email</h4><ul data-window="weekdays"></ul>
+      <h4>Weekend email</h4><ul data-window="weekend"></ul>
+    </details>
+    <p><small>The number beside each choice counts all its events this week, and the +/− on each button is how your total
+      would change if you picked it. These numbers are as of today: what your emails contain will differ, sometimes a lot,
+      as events get added.</small></p>
+  </div>
   <label class="digest-trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
   <div class="digest-email">
     <input type="email" name="email" id="digest-email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
@@ -91,7 +111,7 @@ permalink: /subscribe/
 </script>
 
 <script type="module">
-  import { week, picked, counts } from "/assets/js/digest.js";
+  import { week, picked, counts, windows, deltas, describe } from "/assets/js/digest.js";
   const form = document.getElementById("digest-form");
   const status = document.getElementById("digest-status");
   const token = location.hash.slice(1);
@@ -131,28 +151,40 @@ permalink: /subscribe/
   });
 
   const rules = JSON.parse(document.getElementById("digest-rules").textContent);
-  const peek = document.getElementById("digest-peek");
+  const titles = Object.fromEntries(rules.options.map((o) => [o.id, o.title]));
   const day = new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kolkata" });
+  const signed = (n) => (n > 0 ? `+${n}` : n < 0 ? `−${-n}` : "");
+  const win = windows();
+  const inside = ([a, b]) => ({ at }) => at >= a && at < b;
   let entries = null;
+  function item({ event }) {
+    const li = document.createElement("li"), a = document.createElement("a"), t = document.createElement("time");
+    t.textContent = day.format(new Date(event.startDate));
+    a.href = event.url;
+    a.textContent = event.name;
+    li.append(t, a);
+    return li;
+  }
   function preview() {
     if (!entries) return;
-    const { always, never } = choices();
-    const shown = picked(entries, new Set(always), new Set(never));
-    document.getElementById("digest-peek-summary").textContent = `Next 7 days: ${shown.length} events match these choices`;
-    peek.querySelector("ul").replaceChildren(...shown.map(({ event }) => {
-      const li = document.createElement("li"), a = document.createElement("a"), t = document.createElement("time");
-      t.textContent = day.format(new Date(event.startDate));
-      a.href = event.url;
-      a.textContent = event.name;
-      li.append(t, a);
-      return li;
-    }));
+    const c = choices(), always = new Set(c.always), never = new Set(c.never);
+    const shown = picked(entries, always, never);
+    for (const name of ["weekdays", "weekend"]) {
+      const these = shown.filter(inside(win[name]));
+      document.getElementById(`digest-${name}`).textContent = these.length;
+      document.querySelector(`#digest-peek ul[data-window="${name}"]`).replaceChildren(...these.map(item));
+    }
+    document.getElementById("digest-describe").textContent = describe(shown.length, entries.length, c.always.map((id) => titles[id]), c.never.map((id) => titles[id]));
+    for (const o of rules.options) {
+      const d = deltas(entries, always, never, o.id);
+      for (const state of ["always", "curated", "never"]) document.querySelector(`[data-delta="${o.id}-${state}"]`).textContent = signed(d[state]);
+    }
   }
   fetch("/api/events.json").then((r) => r.json()).then((events) => {
-    entries = week(events, rules);
+    entries = week(events, rules, Math.min(win.weekdays[0], win.weekend[0]), Math.max(win.weekdays[1], win.weekend[1]));
     const n = counts(entries);
     for (const el of document.querySelectorAll("[data-count]")) el.textContent = `· ${n[el.dataset.count] || 0}`;
-    peek.hidden = document.getElementById("digest-peek-note").hidden = false;
+    document.getElementById("digest-preview").hidden = false;
     preview();
   }).catch(() => {});
   form.addEventListener("change", preview);
