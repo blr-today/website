@@ -109,10 +109,11 @@ li[data-eventcount="0"] {
 
 /* Bluesky and fediverse follow buttons, see _includes/follow-buttons.html */
 a.blr-follow {
-  display: inline-flex; align-items: center; gap: .4em; padding: .35em .8em;
-  border-radius: 999px; color: #fff; text-decoration: none; font-size: 85%; font-weight: 600; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: .4em; padding: .5em 1em;
+  border: 1px solid var(--brand); border-radius: 2px; color: var(--brand); background: none;
+  text-decoration: none; font-size: 85%; font-weight: 600; white-space: nowrap;
 }
-a.blr-follow:hover { color: #fff; filter: brightness(110%); }
+a.blr-follow:hover { color: var(--brand); background: color-mix(in srgb, var(--brand) 8%, transparent); }
 a.blr-follow svg { flex: none; width: 1.1em; height: 1.1em; min-width: 1.1em; fill: currentColor; }
-a.blr-follow--bsky { background: #1185fe; }
-a.blr-follow--fedi { background: #6364ff; }
+a.blr-follow--bsky { --brand: #1185fe; }
+a.blr-follow--fedi { --brand: #6364ff; }
