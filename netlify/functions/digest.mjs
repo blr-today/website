@@ -4,7 +4,7 @@ import digest from "../../_data/digest.json" with { type: "json" };
 const OPTIONS = new Set(digest.groups.flatMap((g) => g.options.map((o) => o.id)));
 const EMAIL = /^[^\s@"'<>\\]{1,64}@[a-z0-9.-]{1,253}\.[a-z]{2,}$/i;
 const TOKEN = /^(\d{1,10})\.([0-9a-f-]{36})$/;
-const SENT = "Check your inbox for an email from blr.today.";
+const SENT = "Thanks! Keep an eye on your inbox for an email from us.";
 
 export function parsePrefs(body) {
   const pick = (list) => [...new Set(Array.isArray(list) ? list : [])].filter((id) => OPTIONS.has(id)).sort();
@@ -66,7 +66,7 @@ async function sendLink(api, env, sub) {
 
 async function subscribe(api, env, body) {
   const email = parseEmail(body.email);
-  if (!email) return json(400, { error: "Please enter a valid email address." });
+  if (!email) return json(400, { error: "That email address doesn't look right. Mind checking it?" });
   const attribs = { digest: parsePrefs(body) };
   const sub = await byEmail(api, email);
   if (!sub) {
@@ -88,7 +88,7 @@ async function subscribe(api, env, body) {
 
 async function link(api, env, body) {
   const email = parseEmail(body.email);
-  if (!email) return json(400, { error: "Please enter a valid email address." });
+  if (!email) return json(400, { error: "That email address doesn't look right. Mind checking it?" });
   const sub = await byEmail(api, email);
   if (sub && weekly(env, sub)?.subscription_status === "confirmed") await sendLink(api, env, sub);
   return json(200, { message: SENT });
@@ -96,10 +96,10 @@ async function link(api, env, body) {
 
 async function prefs(api, env, body, method) {
   const sub = await byToken(api, parseToken(body.token));
-  if (!sub) return json(404, { error: "This link has expired. Ask for a new one below." });
+  if (!sub) return json(404, { error: "This link doesn't work any more. Grab a fresh one below." });
   if (method === "POST") {
     await api("PATCH", `/api/subscribers/${sub.id}`, { attribs: { digest: parsePrefs(body) } });
-    return json(200, { message: "Saved. The next weekly email will use these choices." });
+    return json(200, { message: "Saved! Your next email will use these choices." });
   }
   const saved = sub.attribs?.digest ?? {};
   return json(200, {
@@ -118,7 +118,7 @@ export async function handle(request, env, fetchImpl = fetch) {
     try {
       body = await request.json();
     } catch {
-      return json(400, { error: "Bad request." });
+      return json(400, { error: "Something went wrong. Please try again." });
     }
     if (body.website) return json(200, { message: SENT });
   } else {
@@ -130,7 +130,7 @@ export async function handle(request, env, fetchImpl = fetch) {
     if (action === "prefs") return await prefs(api, env, body, request.method);
   } catch (err) {
     console.error(err);
-    return json(502, { error: "Something went wrong on our side. Please try again later." });
+    return json(502, { error: "Something broke on our end. Please try again in a bit." });
   }
   return json(405, { error: "Not allowed." });
 }

@@ -2,7 +2,7 @@
   "groups": [
     {
       "id": "area",
-      "title": "Neighbourhood",
+      "title": "Where",
       "options": [
         { "id": "cbd", "title": "Central Bangalore", "tags": ["CBD"] },
         { "id": "indiranagar", "title": "Indiranagar", "tags": ["INDIRANAGAR"] },
@@ -16,7 +16,7 @@
     },
     {
       "id": "type",
-      "title": "Event type",
+      "title": "What kind",
       "options": [
         { "id": "workshops", "title": "Workshops", "types": ["EducationEvent"] },
         { "id": "music", "title": "Music", "types": ["MusicEvent"] },
@@ -32,7 +32,7 @@
     },
     {
       "id": "price",
-      "title": "Price",
+      "title": "How much",
       "options": [
         { "id": "free", "title": "Free", "range": "₹0", "tags": ["FREE"] },
         { "id": "budget", "title": "Budget", "range": "under ₹500", "tags": ["BUDGET"] },

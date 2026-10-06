@@ -4,14 +4,14 @@ title: blr.today / email
 permalink: /subscribe/
 ---
 <p id="digest-intro">
-  Get two emails a week with the events you care about: on Monday morning for the week ahead,
-  and on Friday morning for the weekend. By default you get the <a href="/">Curated</a> events.
-  For each choice below, pick:
+  Two emails a week, with just the events you care about. Monday morning's covers the week ahead,
+  and Friday morning's covers the weekend.
+  Everyone starts with <a href="/">our picks</a>, and you can tune it from there:
 </p>
 <ul>
-  <li><b>Always</b>: include every event that matches, curated or not.</li>
-  <li><b>Curated</b>: include it only when it is a curated event (the default).</li>
-  <li><b>Never</b>: leave it out, even when curated. Never wins over Always.</li>
+  <li><b>Always</b>: send me everything here, whether we picked it or not.</li>
+  <li><b>Curated</b>: only the ones we picked. Everything starts here.</li>
+  <li><b>Never</b>: skip these, even the ones we picked. Never beats Always.</li>
 </ul>
 
 <style>
@@ -40,6 +40,7 @@ permalink: /subscribe/
   .digest-email input[type=email] { flex: 1 1 16em; margin: 0; }
   .digest-email button { margin: 0; }
   .digest-trap { position: absolute; left: -10000px; }
+  [hidden] { display: none !important; }
   .digest-count { color: var(--cdark); opacity: .7; }
   .tri .delta:not(:empty) { margin-left: .35em; font-variant-numeric: tabular-nums; opacity: .75; }
   .digest-totals { display: flex; gap: 1em; flex-wrap: wrap; margin: 1em 0 .5em; }
@@ -66,7 +67,7 @@ permalink: /subscribe/
     {%- for o in group.options %}
     <div class="digest-row">
       <span id="digest-{{ o.id }}">{{ o.title }}{% if o.range %} <small>({{ o.range }})</small>{% endif %} <small class="digest-count" data-count="{{ o.id }}"></small>
-        <button type="button" class="digest-show" data-show="{{ o.id }}" aria-expanded="false" hidden>Show events this week</button></span>
+        <button type="button" class="digest-show" data-show="{{ o.id }}" aria-expanded="false" hidden>See this week's</button></span>
       <span class="tri" role="radiogroup" aria-labelledby="digest-{{ o.id }}">
         <input type="radio" id="{{ o.id }}-always" name="{{ o.id }}" value="always"><label for="{{ o.id }}-always">Always<small class="delta" data-delta="{{ o.id }}-always"></small></label>
         <input type="radio" id="{{ o.id }}-curated" name="{{ o.id }}" value="curated" checked><label for="{{ o.id }}-curated">Curated<small class="delta" data-delta="{{ o.id }}-curated"></small></label>
@@ -79,34 +80,34 @@ permalink: /subscribe/
   {%- endfor %}
   <div id="digest-preview" hidden>
     <p id="digest-describe"></p>
-    <p>If we were to send these emails today:</p>
+    <p>If we sent them today, you'd get:</p>
     <div class="digest-totals">
-      <div><b id="digest-weekdays"></b>events in your Monday morning email, from Monday to Friday evening</div>
-      <div><b id="digest-weekend"></b>events in your weekend email, sent on Friday morning</div>
+      <div><b id="digest-weekdays"></b>events on Monday morning, for the days up to Friday evening</div>
+      <div><b id="digest-weekend"></b>events on Friday morning, for the weekend</div>
     </div>
     <details id="digest-peek">
-      <summary>See these events</summary>
-      <h4>Monday email</h4><ul data-window="weekdays"></ul>
-      <h4>Weekend email</h4><ul data-window="weekend"></ul>
+      <summary>See them all</summary>
+      <h4>Monday's email</h4><ul data-window="weekdays"></ul>
+      <h4>Friday's email</h4><ul data-window="weekend"></ul>
     </details>
-    <p><small>The number beside each choice counts all its events this week, and the +/− on each button is how your total
-      would change if you picked it. These numbers are as of today: what your emails contain will differ, sometimes a lot,
-      as events get added.</small></p>
+    <p><small>Next to each option is how many events it has this week. The +/− on a button is how your total would
+      change if you picked it. All of this is based on what's listed today, and new events turn up all the time,
+      so your actual emails will look different.</small></p>
   </div>
   <label class="digest-trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
   <div class="digest-email">
     <input type="email" name="email" id="digest-email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
-    <button type="submit" id="digest-submit">Subscribe</button>
+    <button type="submit" id="digest-submit">Sign me up</button>
   </div>
 </form>
 
 <p id="digest-status" role="status"></p>
 
 <details id="digest-link-box">
-  <summary>Already subscribed? Get a link to change your choices</summary>
+  <summary>Already signed up? We'll email you a link to change your choices</summary>
   <form class="digest-email" id="digest-link">
     <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
-    <button type="submit">Email me a link</button>
+    <button type="submit">Send me the link</button>
   </form>
 </details>
 
@@ -136,7 +137,7 @@ permalink: /subscribe/
 
   async function call(action, body) {
     const res = await fetch(`/api/digest/${action}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
-    const data = await res.json().catch(() => ({ error: "Something went wrong. Please try again later." }));
+    const data = await res.json().catch(() => ({ error: "Something broke on our end. Please try again in a bit." }));
     show(data.message || data.error, !res.ok);
   }
 
@@ -144,15 +145,16 @@ permalink: /subscribe/
     const email = document.getElementById("digest-email");
     email.required = false;
     email.hidden = true;
-    document.getElementById("digest-submit").textContent = "Save choices";
+    document.getElementById("digest-link-box").hidden = true;
+    document.getElementById("digest-submit").textContent = "Save my choices";
     const res = await fetch(`/api/digest/prefs?token=${encodeURIComponent(token)}`);
     const data = await res.json().catch(() => ({}));
     if (res.ok) {
-      document.getElementById("digest-intro").prepend(`Choices for ${data.email}. `);
+      document.getElementById("digest-intro").prepend(`These are the choices for ${data.email}. `);
       for (const [value, ids] of [["always", data.always], ["never", data.never]])
         for (const id of ids) { const input = document.getElementById(`${id}-${value}`); if (input) input.checked = true; }
-      if (!data.subscribed) show("Confirm your subscription from the email we sent, or these choices won't be used.", true);
-    } else show(data.error || "This link didn't work. Ask for a new one below.", true);
+      if (!data.subscribed) show("One more step: click the link in the email we sent you, or we can't start sending.", true);
+    } else show(data.error || "That link didn't work. Grab a fresh one below.", true);
   }
 
   form.addEventListener("submit", (e) => {
@@ -200,13 +202,13 @@ permalink: /subscribe/
       const these = entries.filter(({ keys }) => keys.includes(open));
       ul.replaceChildren(...these.map((x) => {
         const li = item(x, open);
-        if (!shown.has(x)) { li.classList.add("out"); li.title = "Not in your emails with these choices"; }
+        if (!shown.has(x)) { li.classList.add("out"); li.title = "You'd miss this one with your current choices"; }
         return li;
       }));
     }
     for (const b of document.querySelectorAll("[data-show]")) {
       const on = b.dataset.show === open;
-      b.textContent = on ? "Hide events" : "Show events this week";
+      b.textContent = on ? "Hide them" : "See this week's";
       b.setAttribute("aria-expanded", on);
     }
   }

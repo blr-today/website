@@ -59,7 +59,7 @@ export function deltas(entries, always, never, id) {
 const list = (items, word) => (items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} ${word} ${items.at(-1)}`);
 
 export function describe(shown, total, always, never) {
-  const plus = always.length ? `, plus every ${list(always, "and")} event` : "";
-  const lead = `Showing ${shown} of ${total} events: the curated ones${plus}.`;
-  return never.length ? `${lead} Leaving out ${list(never, "and")} events.` : lead;
+  const plus = always.length ? `, plus all the ${list(always, "and")} events` : "";
+  const lead = `You'd get ${shown} of this week's ${total} events: our picks${plus}.`;
+  return never.length ? `${lead} You're skipping anything ${list(never, "or")}.` : lead;
 }
