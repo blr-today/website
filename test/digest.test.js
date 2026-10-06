@@ -97,7 +97,9 @@ test("an unconfirmed or unsubscribed address is reset, then updated once", async
 });
 
 test("subscribers outside the weekly list look like bad links", async () => {
-  const fetchImpl = async () => new Response(JSON.stringify({ message: "forbidden" }), { status: 403 });
-  const res = await handle(post("prefs", { token: `1.${UUID}` }), ENV, fetchImpl);
-  assert.equal(res.status, 404);
+  for (const status of [400, 403]) {
+    const fetchImpl = async () => new Response(JSON.stringify({ message: "not found" }), { status });
+    const res = await handle(post("prefs", { token: `1.${UUID}` }), ENV, fetchImpl);
+    assert.equal(res.status, 404);
+  }
 });

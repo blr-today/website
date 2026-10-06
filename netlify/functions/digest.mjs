@@ -34,8 +34,8 @@ function listmonk(env, fetchImpl) {
       headers: { authorization: auth, "content-type": "application/json" },
       body: body && JSON.stringify(body),
     });
-    // The API user only sees the weekly list, so other subscribers look forbidden
-    if (method === "GET" && [403, 404].includes(res.status)) return null;
+    // Missing subscribers, and those outside the weekly list, come back as 400 or 403
+    if (method === "GET" && [400, 403, 404].includes(res.status)) return null;
     if (!res.ok) throw new Error(`listmonk ${method} ${path}: ${res.status}`);
     return (await res.json()).data;
   };
