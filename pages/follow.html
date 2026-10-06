@@ -1,0 +1,84 @@
+---
+layout: default
+title: blr.today / follow
+permalink: /follow/
+---
+<p>
+  Subscribe to a calendar in your calendar app, or follow accounts on
+  <a href="https://bsky.app">Bluesky</a> or the fediverse (Mastodon and friends).
+  Accounts share each event 2–7 days before it happens, between 10am and 7pm.
+</p>
+
+<style>
+  .follow li { margin-bottom: 0.4em; }
+  .follow .muted { opacity: 0.7; font-size: 0.9em; }
+  .follow .days { display: flex; align-items: flex-end; gap: 2px; height: 4rem; }
+  .follow .days span { flex: 1; background: currentColor; opacity: 0.5; min-height: 1px; }
+</style>
+
+{%- assign reports = site.data.scheduler -%}
+<div class="follow">
+{%- for section in site.data.follow %}
+<h3>{{ section.title }}</h3>
+<ul>
+  {%- for a in section.accounts %}
+  <li>
+    <strong>{{ a.name }}</strong>
+    {%- if a.calendar -%}
+    {%- if a.calendar == "/" %}{% assign ics = "/cal/curated/cal.ics" %}{% else %}{% assign ics = a.calendar | append: "cal.ics" %}{% endif %}
+    · <a href="{{ a.calendar }}">calendar</a> (<a href="webcal://blr.today{{ ics }}">subscribe</a>)
+    {%- endif -%}
+    {%- if a.bluesky -%}
+    {%- assign handle = a.bluesky | append: ".blr.today" -%}
+    {%- assign n = reports.bluesky.stats.reposts[handle] %}
+    · <a href="https://bsky.app/profile/{{ handle }}" title="@{{ handle }}">Bluesky</a>
+    {%- if n %} <span class="muted">({{ n }} repost{% if n != 1 %}s{% endif %})</span>{% endif -%}
+    {%- endif -%}
+    {%- if a.fedi -%}
+    {%- assign n = reports.fedi.stats.reposts[a.fedi] %}
+    · <a rel="me" href="https://fedi.blr.today/{{ a.fedi }}" title="@{{ a.fedi }}@fedi.blr.today">Fediverse</a>
+    {%- if n %} <span class="muted">({{ n }} boost{% if n != 1 %}s{% endif %})</span>{% endif -%}
+    {%- endif -%}
+    {%- if a.about %}<br /><span class="muted">{{ a.about }}</span>{% endif %}
+  </li>
+  {%- endfor %}
+</ul>
+{%- endfor %}
+
+{%- if reports.bluesky.stats or reports.fedi.stats %}
+<h3>By the numbers</h3>
+{%- assign platforms = "bluesky,fedi" | split: "," -%}
+{%- for name in platforms -%}
+{%- assign r = reports[name] -%}
+{%- if r.stats %}
+{%- assign s = r.stats -%}
+<p>
+  <strong>{% if name == "fedi" %}Fediverse{% else %}Bluesky{% endif %}</strong>:
+  {{ s.posted }} events posted since {{ s.since | date: "%-d %b %Y" }}, {{ s.last_7_days }} in the last 7 days.
+  {% if name == "fedi" %}Posts follow the Bluesky schedule.{% else %}{{ r.pending }} queued{% if r.gap_minutes %}, one post every {{ r.gap_minutes | round }} minutes{% endif %}.{% endif %}
+  {{ s.last_calls }} Last Calls and {{ s.corrections }} corrections sent.
+</p>
+{%- assign most = 1 -%}
+{%- for d in s.by_day %}{% if d[1] > most %}{% assign most = d[1] %}{% endif %}{% endfor %}
+<div class="days" title="Posts per day over the last 30 days">
+  {%- for d in s.by_day %}<span title="{{ d[0] }}: {{ d[1] }}" style="height: {{ d[1] | times: 100 | divided_by: most }}%"></span>{% endfor -%}
+</div>
+{%- endif -%}
+{%- endfor %}
+<p class="muted">As of the last site build. The live schedule is on the <a href="/_debug/social/">debug page</a>.</p>
+{%- endif %}
+
+<h3>All calendars</h3>
+{%- assign calendars = site.html_pages | where: "layout", "events" | group_by: "type" -%}
+{%- for type in site.data.calendar_types %}
+<p>
+  <strong>{{ type[1].title }}</strong>:
+  {%- for group in calendars -%}{%- if group.name == type[0] -%}
+  {%- for page in group.items %}
+  {%- assign ics = "/" | append: page.path | replace: ".md", "/cal.ics" %}
+  <a href="{{ page.url }}">{{ page.title }}</a> (<a href="webcal://blr.today{{ ics }}">subscribe</a>){% unless forloop.last %},{% endunless %}
+  {%- endfor -%}
+  {%- endif -%}{%- endfor %}
+</p>
+{%- endfor %}
+</div>

@@ -4,6 +4,7 @@ publish = "_site"
 command = """
 set -e
 npm run fetch-calendar
+npm run fetch-social
 npm run build
 bundle exec jekyll build --trace
 npm test

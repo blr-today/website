@@ -9,3 +9,5 @@ assets/js
 .rollup.cache
 # This is built and published on the website
 assets/third-party-licenses.txt
+# Fetched at build time by scripts/fetch-social.js
+_data/scheduler

@@ -8,3 +8,24 @@ events_count{type="{{page.type}}", url="{{page.url}}", page="{{page.url|split:"/
 {% endfor %}
 total_events_count {{site.data.metrics[0].total}}
 
+{%- assign platforms = "bluesky,fedi" | split: "," -%}
+{%- for name in platforms -%}
+{%- assign r = site.data.scheduler[name] -%}
+{%- if r.stats %}
+social_posts_total{platform="{{name}}"} {{r.stats.posted}}
+social_posts_7d{platform="{{name}}"} {{r.stats.last_7_days}}
+social_queued{platform="{{name}}"} {{r.pending}}
+social_planned_7d{platform="{{name}}"} {{r.planned.size}}
+social_would_miss{platform="{{name}}"} {{r.would_miss.size}}
+social_gap_minutes{platform="{{name}}"} {{r.gap_minutes | default: 0}}
+social_last_calls_total{platform="{{name}}"} {{r.stats.last_calls}}
+social_corrections_total{platform="{{name}}"} {{r.stats.corrections}}
+social_report_timestamp_seconds{platform="{{name}}"} {{r.generated | date: "%s"}}
+{%- for a in r.stats.reposts %}
+social_reposts_total{platform="{{name}}", account="{{a[0]}}"} {{a[1]}}
+{%- endfor -%}
+{%- for s in r.stats.skipped %}
+social_skipped{platform="{{name}}", reason="{{s[0]}}"} {{s[1]}}
+{%- endfor -%}
+{%- endif -%}
+{%- endfor %}
