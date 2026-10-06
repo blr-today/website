@@ -1,0 +1,83 @@
+---
+layout: default
+title: blr.today / social schedule
+permalink: /_debug/social/
+noindex: true
+---
+<h2>Social posting schedule</h2>
+<p id="social-status">Loading the scheduler's latest report…</p>
+
+<style>
+  .social table { width: 100%; table-layout: fixed; }
+  .social td, .social th { white-space: normal; overflow-wrap: anywhere; vertical-align: top; }
+  .social td.when { width: 6em; }
+  .social .muted { opacity: 0.7; }
+</style>
+
+<div class="social" id="social"></div>
+
+<script>
+  // Rendered from the scheduler's JSON report, proxied from k3s by netlify
+  const IST = { timeZone: 'Asia/Kolkata' }
+  const day = s => new Date(s).toLocaleDateString('en-IN', { ...IST, weekday: 'short', day: 'numeric', month: 'short' })
+  const time = s => new Date(s).toLocaleTimeString('en-IN', { ...IST, hour: '2-digit', minute: '2-digit', hour12: false })
+  const when = s => s ? `${day(s)} ${time(s)}` : ''
+  const short = a => a.replace('.blr.today', '')
+
+  function el(tag, attrs = {}, ...children) {
+    const e = document.createElement(tag)
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v)
+    for (const c of children.flat()) if (c !== null && c !== undefined) e.append(c instanceof Node ? c : String(c))
+    return e
+  }
+
+  const link = r => el('a', { href: r.url, rel: 'noopener' }, r.name || r.url)
+
+  function table(headers, rows) {
+    return el('table', {}, el('thead', {}, el('tr', {}, headers.map(h => el('th', {}, h)))),
+      el('tbody', {}, rows.map(cells => el('tr', {}, cells.map((c, i) => el('td', i === 0 ? { class: 'when' } : {}, c))))))
+  }
+
+  function section(title, note, content) {
+    return [el('h3', {}, title), note ? el('p', { class: 'muted' }, note) : null, content]
+  }
+
+  async function render() {
+    const status = document.getElementById('social-status')
+    let report
+    try {
+      const res = await fetch('/_debug/social/bluesky.json', { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      report = await res.json()
+    } catch (e) {
+      status.textContent = `Could not load the report: ${e.message}`
+      return
+    }
+    status.textContent = `Bluesky report from ${when(report.generated)} IST${report.dry_run ? ' (dry run: nothing was posted)' : ''}. ` +
+      `${report.pending} events queued, a post every ${report.gap_minutes ?? '–'} minutes, ${report.would_miss.length} would miss their window.`
+    const root = document.getElementById('social')
+    const byDay = new Map()
+    for (const p of report.planned) {
+      const d = day(p.at)
+      if (!byDay.has(d)) byDay.set(d, [])
+      byDay.get(d).push(p)
+    }
+    root.append(...section('Recent posts', 'Posted in the last 48 hours.',
+      table(['Posted', 'Event', 'Starts', 'Reposted by'], report.recent.map(r => [
+        time(r.at), el('span', {}, link(r), ' · ', el('a', { href: r.post, rel: 'noopener' }, 'post')),
+        when(r.starts), [r.reposted.map(short).join(', '), r.last_call ? ' · last call' : ''].join('')]))))
+    if (report.would_miss.length) {
+      root.append(...section('Would miss their window', 'These cannot be posted 2 days before they start.',
+        table(['Deadline', 'Event', 'Starts', 'Accounts'], report.would_miss.map(r => [when(r.deadline), link(r), when(r.starts), r.accounts.map(short).join(', ')]))))
+    }
+    for (const [d, rows] of byDay) {
+      root.append(...section(`Planned for ${d}`, `${rows.length} posts if nothing new arrives.`,
+        table(['At', 'Event', 'Starts', 'Reposted by'], rows.map(r => [time(r.at), link(r), when(r.starts), r.accounts.map(short).join(', ')]))))
+    }
+    root.append(...section('Skipped', 'Events that sold out before their turn, or whose posting window closed. Use these to improve the ordering.',
+      table(['Noticed', 'Event', 'Starts', 'Why'], report.skipped.map(r => [when(r.noticed), link(r), when(r.starts),
+        `${r.reason}${r.postable_since ? `, queued since ${when(r.postable_since)}` : ''}`]))))
+  }
+
+  render()
+</script>

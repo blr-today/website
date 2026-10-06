@@ -9,6 +9,9 @@
 /.well-known/webfinger https://fedi.blr.today/.well-known/webfinger 200
 /.well-known/nodeinfo  https://fedi.blr.today/.well-known/nodeinfo 200
 
+# The scheduler's posting report, served from k3s, for /_debug/social/
+/_debug/social/bluesky.json https://scheduler.blr.today/bluesky.json 200
+
 /cal/carbon/ /cal/scigallery/
 /cal/carbon/cal.ics /cal/scigallery/cal.ics
 
