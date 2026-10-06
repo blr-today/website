@@ -86,3 +86,18 @@ test("the honeypot short-circuits without calling listmonk", async () => {
   assert.equal(res.status, 200);
   assert.equal(lm.calls.length, 0);
 });
+
+test("an unconfirmed or unsubscribed address is reset, then updated once", async () => {
+  const sub = { id: 12, uuid: UUID, email: "old@x.in", status: "enabled", lists: [{ id: 3, subscription_status: "unsubscribed" }] };
+  const lm = fakeListmonk([sub]);
+  await handle(post("subscribe", { email: "old@x.in", always: ["film"] }), ENV, lm.fetchImpl);
+  const writes = lm.calls.filter((c) => c.method !== "GET").map((c) => `${c.method} ${c.path}`);
+  assert.deepEqual(writes, ["PUT /api/subscribers/lists", "PATCH /api/subscribers/12"]);
+  assert.equal(lm.calls[1].body.status, "unconfirmed");
+});
+
+test("subscribers outside the weekly list look like bad links", async () => {
+  const fetchImpl = async () => new Response(JSON.stringify({ message: "forbidden" }), { status: 403 });
+  const res = await handle(post("prefs", { token: `1.${UUID}` }), ENV, fetchImpl);
+  assert.equal(res.status, 404);
+});

@@ -4,7 +4,7 @@ import digest from "../../_data/digest.json" with { type: "json" };
 const OPTIONS = new Set(digest.groups.flatMap((g) => g.options.map((o) => o.id)));
 const EMAIL = /^[^\s@"'<>\\]{1,64}@[a-z0-9.-]{1,253}\.[a-z]{2,}$/i;
 const TOKEN = /^(\d{1,10})\.([0-9a-f-]{36})$/;
-const SENT = "If that address can receive mail, a link is on its way.";
+const SENT = "Check your inbox for an email from blr.today.";
 
 export function parsePrefs(body) {
   const pick = (list) => [...new Set(Array.isArray(list) ? list : [])].filter((id) => OPTIONS.has(id)).sort();
@@ -34,7 +34,8 @@ function listmonk(env, fetchImpl) {
       headers: { authorization: auth, "content-type": "application/json" },
       body: body && JSON.stringify(body),
     });
-    if (res.status === 404) return null;
+    // The API user only sees the weekly list, so other subscribers look forbidden
+    if (method === "GET" && [403, 404].includes(res.status)) return null;
     if (!res.ok) throw new Error(`listmonk ${method} ${path}: ${res.status}`);
     return (await res.json()).data;
   };
@@ -73,14 +74,16 @@ async function subscribe(api, env, body) {
       email, name: email.split("@")[0], status: "enabled", lists: [Number(env.LISTMONK_LIST_ID)], attribs,
     });
   } else if (sub.status === "blocklisted") {
-    // Say the same thing either way, so the form can't be used to probe addresses
+    return json(200, { message: SENT });
   } else if (weekly(env, sub)?.subscription_status === "confirmed") {
     await sendLink(api, env, sub);
   } else {
-    await api("PATCH", `/api/subscribers/${sub.id}`, { attribs, lists: [Number(env.LISTMONK_LIST_ID)] });
-    await api("POST", `/api/subscribers/${sub.id}/optin`, {});
+    const list = Number(env.LISTMONK_LIST_ID);
+    await api("PUT", "/api/subscribers/lists", { ids: [sub.id], action: "add", target_list_ids: [list], status: "unconfirmed" });
+    // listmonk sends the opt-in email itself when an unconfirmed subscriber is updated
+    await api("PATCH", `/api/subscribers/${sub.id}`, { attribs });
   }
-  return json(200, { message: `${SENT} Confirm it to start getting the weekly email.` });
+  return json(200, { message: SENT });
 }
 
 async function link(api, env, body) {
@@ -117,7 +120,6 @@ export async function handle(request, env, fetchImpl = fetch) {
     } catch {
       return json(400, { error: "Bad request." });
     }
-    // Bots fill every field; people never see this one
     if (body.website) return json(200, { message: SENT });
   } else {
     body = { token: new URL(request.url).searchParams.get("token") };
