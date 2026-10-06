@@ -103,3 +103,24 @@ test("subscribers outside the weekly list look like bad links", async () => {
     assert.equal(res.status, 404);
   }
 });
+
+test("the page preview applies the email's rule", async () => {
+  const { week, picked, counts } = await import("../js/digest.js");
+  const rules = { options: [{ id: "free", tags: ["FREE"] }, { id: "music", types: ["MusicEvent"] }], curated: ["CURATED"], curatedExclude: ["WOOWOO"], unwanted: ["NOTINBLR"] };
+  const now = Date.parse("2026-10-07T10:00:00+05:30");
+  const at = (h) => new Date(now + h * 3600e3).toISOString();
+  const events = [
+    { url: "c", startDate: at(5), keywords: ["CURATED", "FREE"] },
+    { url: "c", startDate: at(2), keywords: ["CURATED", "FREE"] },
+    { url: "m", startDate: at(3), keywords: [], "@type": "MusicEvent" },
+    { url: "w", startDate: at(4), keywords: ["CURATED", "WOOWOO"] },
+    { url: "x", startDate: at(4), keywords: ["CURATED", "NOTINBLR"] },
+    { url: "late", startDate: at(200), keywords: ["CURATED"] },
+  ];
+  const entries = week(events, rules, now);
+  assert.deepEqual(entries.map((e) => e.event.url), ["c", "m", "w"]);
+  assert.deepEqual(counts(entries), { free: 1, music: 1 });
+  const urls = (a, n) => picked(entries, new Set(a), new Set(n)).map((e) => e.event.url);
+  assert.deepEqual(urls([], []), ["c"]);
+  assert.deepEqual(urls(["music"], ["free"]), ["m"]);
+});

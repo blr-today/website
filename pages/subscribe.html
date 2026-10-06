@@ -35,6 +35,10 @@ permalink: /subscribe/
   .digest-email input[type=email] { flex: 1 1 16em; margin: 0; }
   .digest-email button { margin: 0; }
   .digest-trap { position: absolute; left: -10000px; }
+  .digest-count { color: var(--cdark); opacity: .7; }
+  #digest-peek ul { padding-left: 1.2em; font-size: 90%; }
+  #digest-peek li { margin: .2em 0; }
+  #digest-peek time { color: var(--cdark); margin-right: .4em; }
   #digest-status:empty { display: none; }
   #digest-status { padding: .6em .8em; border-left: 3px solid var(--cemph); background: var(--cemphbg); }
   #digest-status.error { border-color: #dc2626; background: #fee2e2; }
@@ -46,7 +50,7 @@ permalink: /subscribe/
     <legend>{{ group.title }}</legend>
     {%- for o in group.options %}
     <div class="digest-row">
-      <span id="digest-{{ o.id }}">{{ o.title }}</span>
+      <span id="digest-{{ o.id }}">{{ o.title }} <small class="digest-count" data-count="{{ o.id }}"></small></span>
       <span class="tri" role="radiogroup" aria-labelledby="digest-{{ o.id }}">
         <input type="radio" id="{{ o.id }}-always" name="{{ o.id }}" value="always"><label for="{{ o.id }}-always">Always</label>
         <input type="radio" id="{{ o.id }}-curated" name="{{ o.id }}" value="curated" checked><label for="{{ o.id }}-curated">Curated</label>
@@ -56,6 +60,12 @@ permalink: /subscribe/
     {%- endfor %}
   </fieldset>
   {%- endfor %}
+  <details id="digest-peek" hidden>
+    <summary id="digest-peek-summary"></summary>
+    <ul></ul>
+  </details>
+  <p id="digest-peek-note" hidden><small>The number beside each choice counts all its events in the next 7 days.
+    These numbers are as of today: what your emails contain will differ, sometimes a lot, as events get added.</small></p>
   <label class="digest-trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
   <div class="digest-email">
     <input type="email" name="email" id="digest-email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
@@ -73,7 +83,15 @@ permalink: /subscribe/
   </form>
 </details>
 
+{%- assign curated = site.html_pages | where: "path", "cal/curated.md" | first -%}
+{%- assign unwanted = site.html_pages | where: "path", "cal/unwanted.md" | first -%}
+{%- assign options = "" | split: "" -%}{%- for g in site.data.digest.groups -%}{%- assign options = options | concat: g.options -%}{%- endfor %}
+<script type="application/json" id="digest-rules">
+  {"options": {{ options | jsonify }}, "curated": {{ curated.tags }}, "curatedExclude": {{ curated.excludeTags }}, "unwanted": {{ unwanted.tags }}}
+</script>
+
 <script type="module">
+  import { week, picked, counts } from "/assets/js/digest.js";
   const form = document.getElementById("digest-form");
   const status = document.getElementById("digest-status");
   const token = location.hash.slice(1);
@@ -111,6 +129,33 @@ permalink: /subscribe/
     const extra = { website: form.website.value };
     call(token ? "prefs" : "subscribe", token ? { token, ...choices(), ...extra } : { email: form.email.value, ...choices(), ...extra });
   });
+
+  const rules = JSON.parse(document.getElementById("digest-rules").textContent);
+  const peek = document.getElementById("digest-peek");
+  const day = new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kolkata" });
+  let entries = null;
+  function preview() {
+    if (!entries) return;
+    const { always, never } = choices();
+    const shown = picked(entries, new Set(always), new Set(never));
+    document.getElementById("digest-peek-summary").textContent = `Next 7 days: ${shown.length} events match these choices`;
+    peek.querySelector("ul").replaceChildren(...shown.map(({ event }) => {
+      const li = document.createElement("li"), a = document.createElement("a"), t = document.createElement("time");
+      t.textContent = day.format(new Date(event.startDate));
+      a.href = event.url;
+      a.textContent = event.name;
+      li.append(t, a);
+      return li;
+    }));
+  }
+  fetch("/api/events.json").then((r) => r.json()).then((events) => {
+    entries = week(events, rules);
+    const n = counts(entries);
+    for (const el of document.querySelectorAll("[data-count]")) el.textContent = `· ${n[el.dataset.count] || 0}`;
+    peek.hidden = document.getElementById("digest-peek-note").hidden = false;
+    preview();
+  }).catch(() => {});
+  form.addEventListener("change", preview);
 
   document.getElementById("digest-link").addEventListener("submit", (e) => {
     e.preventDefault();
