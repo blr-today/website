@@ -62,6 +62,14 @@ function loadIndex() {
   return index
 }
 
+function addEvents(events) {
+  let all = loadIndex()
+  for (let event of events) {
+    if (!all.has(event.url)) all.set(event.url, [])
+    all.get(event.url).push({ event, source: event.url, start: Date.parse(event.startDate) })
+  }
+}
+
 function findEvent(fcEvent) {
   let candidates = loadIndex().get(fcEvent.url) || []
   let start = fcEvent.start ? fcEvent.start.getTime() : 0
@@ -539,4 +547,4 @@ document.addEventListener('keydown', e => {
   if (!e.target.closest?.('[atcb-button-id], .blr-feedback')) dialog.close()
 })
 
-export { openEventModal, eventType }
+export { openEventModal, eventType, addEvents }

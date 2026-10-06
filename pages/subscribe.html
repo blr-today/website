@@ -49,7 +49,6 @@ permalink: /subscribe/
   #digest-peek h4 { margin: .8em 0 .2em; font-size: 95%; }
   #digest-peek ul { padding-left: 1.2em; font-size: 90%; }
   #digest-peek li { margin: .2em 0; }
-  #digest-peek time { color: var(--cdark); margin-right: .4em; }
   #digest-status:empty { display: none; }
   #digest-status { padding: .6em .8em; border-left: 3px solid var(--cemph); background: var(--cemphbg); }
   #digest-status.error { border-color: #dc2626; background: #fee2e2; }
@@ -107,12 +106,16 @@ permalink: /subscribe/
 {%- assign curated = site.html_pages | where: "path", "cal/curated.md" | first -%}
 {%- assign unwanted = site.html_pages | where: "path", "cal/unwanted.md" | first -%}
 {%- assign options = "" | split: "" -%}{%- for g in site.data.digest.groups -%}{%- assign options = options | concat: g.options -%}{%- endfor %}
+<link rel="stylesheet" href="/assets/event-modal.css">
+<script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
+<script type="application/json" id="blr-tag-info">{{ site.data.tags | jsonify }}</script>
 <script type="application/json" id="digest-rules">
   {"groups": {{ site.data.digest.groups | jsonify }}, "options": {{ options | jsonify }}, "curated": {{ curated.tags }}, "curatedExclude": {{ curated.excludeTags }}, "unwanted": {{ unwanted.tags }}}
 </script>
 
 <script type="module">
   import { week, picked, counts, windows, deltas, describe } from "/assets/js/digest.js";
+  import { openEventModal, addEvents } from "/assets/js/event-modal.js";
   const form = document.getElementById("digest-form");
   const status = document.getElementById("digest-status");
   const token = location.hash.slice(1);
@@ -161,17 +164,25 @@ permalink: /subscribe/
     span.textContent = titles[id];
     return span;
   }
-  const day = new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kolkata" });
   const signed = (n) => (n > 0 ? `+${n}` : n < 0 ? `−${-n}` : "");
   const win = windows();
   const inside = ([a, b]) => ({ at }) => at >= a && at < b;
   let entries = null;
+  const price = new Set(["FREE", "BUDGET", "PRICEY"]);
+  const areas = new Set(rules.groups.find((g) => g.id === "area").options.flatMap((o) => o.tags));
+  const kind = (tag) => (areas.has(tag) ? "location" : price.has(tag) ? "price" : "other");
   function item({ event, keys }) {
-    const li = document.createElement("li"), a = document.createElement("a"), t = document.createElement("time");
-    t.textContent = day.format(new Date(event.startDate));
+    const li = document.createElement("li"), a = document.createElement("a");
     a.href = event.url;
     a.textContent = event.name;
-    li.append(t, a, ...keys.map(badge));
+    a.addEventListener("click", (e) => {
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const fc = { url: event.url, title: event.name, start: new Date(event.startDate), end: event.endDate ? new Date(event.endDate) : null };
+      openEventModal(fc, [...new Set(event.keywords || [])].map((name) => ({ name, kind: kind(name) })), li);
+    });
+    li.append(a, ...keys.map(badge));
     return li;
   }
   function preview() {
@@ -190,6 +201,7 @@ permalink: /subscribe/
     }
   }
   fetch("/api/events.json").then((r) => r.json()).then((events) => {
+    addEvents(events);
     entries = week(events, rules, Math.min(win.weekdays[0], win.weekend[0]), Math.max(win.weekdays[1], win.weekend[1]));
     const n = counts(entries);
     for (const el of document.querySelectorAll("[data-count]")) el.textContent = `· ${n[el.dataset.count] || 0}`;
