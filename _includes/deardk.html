@@ -7,13 +7,14 @@
   .deardk::before { content: ""; position: absolute; left: 0; right: 0; top: -6px; height: 6px;
     background: repeating-linear-gradient(-45deg, #d02d6b 0 8px, #a81f52 8px 16px); }
   .deardk[hidden] { display: none; }
-  .deardk a { flex: 1; max-width: 60rem; margin: auto; color: inherit; text-decoration: none; }
-  .deardk b { display: inline-block; margin-left: .4rem; padding: 0 .6rem; border-radius: 1rem; background: #fff; color: #d02d6b; white-space: nowrap; }
+  .deardk a { flex: 1; display: flex; align-items: center; gap: 1rem; max-width: 72rem; margin: auto; color: inherit; text-decoration: none; }
+  .deardk b { flex: none; padding: .2rem .8rem; border: 1.5px solid #fff; border-radius: .3rem; white-space: nowrap; }
+  .deardk a:hover b { background: #fff; color: #d02d6b; }
   .deardk button { border: 0; background: none; color: inherit; font-size: 1.4em; line-height: 1; padding: 0 .3rem; cursor: pointer; }
   body:has(.deardk:not([hidden])) { padding-bottom: 6rem; }
 </style>
 <div class="deardk noprint" role="region" aria-label="Protest notice">
-  <a href="https://www.deardk.com/?ref=blr.today">More flyovers won't fix Bengaluru traffic. Join the human chain against the elevated corridors at KFC Signal, Indiranagar, Sun 11&nbsp;Oct, 11&nbsp;am. <b>Why →</b></a>
+  <a href="https://www.deardk.com/?ref=blr.today"><span>More flyovers won't fix Bengaluru traffic. Join the human chain against the elevated corridors at KFC Signal, Indiranagar, Sun 11&nbsp;Oct, 11&nbsp;am.</span> <b>Why →</b></a>
   <button type="button" aria-label="Dismiss" onclick="this.parentNode.hidden = true">×</button>
 </div>
 {%- endif -%}
