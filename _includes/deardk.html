@@ -1,0 +1,15 @@
+{%- assign today = site.time | date: "%Y%m%d" | plus: 0 -%}
+{%- if today <= 20261011 -%}
+<style>
+  .deardk { display: flex; align-items: center; gap: .6rem; margin: 0 0 1rem; padding: .5rem 0; font-size: 90%;
+    background: #d02d6b; color: #fff; box-shadow: 0 0 0 100vmax #d02d6b; clip-path: inset(0 -100vmax); }
+  .deardk[hidden] { display: none; }
+  .deardk a { flex: 1; color: inherit; text-align: center; text-decoration: none; }
+  .deardk b { text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+  .deardk button { border: 0; background: none; color: inherit; font-size: 1.4em; line-height: 1; padding: 0 .3rem; cursor: pointer; }
+</style>
+<div class="deardk noprint" role="region" aria-label="Protest notice">
+  <a href="https://www.deardk.com/?ref=blr.today">More flyovers won't fix Bengaluru traffic. Join the human chain against the elevated corridors at KFC Signal, Indiranagar, Sun 11&nbsp;Oct, 11&nbsp;am. <b>Why →</b></a>
+  <button type="button" aria-label="Dismiss" onclick="this.parentNode.hidden = true">×</button>
+</div>
+{%- endif -%}
