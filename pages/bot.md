@@ -18,6 +18,7 @@ engine's, but it only looks for events.
   - Key directory: <https://blr.today/.well-known/http-message-signatures-directory>
   - Ed25519 key, `keyid="R8TfVhfuDBF7Uj2s4LTgaRVn2SWEIeumlCWVeJi5g8Y"`
 - **Egress IP** is `139.59.48.222`, a static DigitalOcean IP in Bangalore.
+- Backup runs on Telekom-Deutschland, or GitHub Actions with no static IP.
 
 ## How it behaves
 
@@ -65,6 +66,6 @@ Shopify storefronts also accept Web Bot Auth directly:
 ## Contact
 
 If the crawler causes you trouble, or you'd like your events listed (or removed), write to
-[security@blr.today](mailto:security@blr.today). We'll slow down or stop the same day.
+[blrtoday@captnemo.in](mailto:blrtoday@captnemo.in). We'll slow down or stop within a day.
 
 [wba]: https://datatracker.ietf.org/doc/html/draft-ietf-webbotauth-httpsig-protocol
