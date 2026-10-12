@@ -204,18 +204,6 @@
   kind: activity
   parent: ART-CRAFT
 
-- id: TEXTILE-CRAFT
-  title: Textile Craft [Activity]
-  description: Crochet, knitting, embroidery, weaving, tufting and sewing
-  kind: activity
-  parent: ART-CRAFT
-
-- id: PAPER-CRAFT
-  title: Paper Craft [Activity]
-  description: Origami, bookbinding, zines and collage
-  kind: activity
-  parent: ART-CRAFT
-
 - id: PLANTS
   title: Plants [Activity]
   description: Terrariums, gardening and flower arranging
@@ -410,16 +398,6 @@
   description: Jigsaws, crosswords and Rubik's cubes
   kind: activity
 
-- id: MYSTERY-GAME
-  title: Mystery Game [Activity]
-  description: Murder mysteries, escape rooms and treasure hunts
-  kind: activity
-
-- id: PARTY-GAMES
-  title: Party Games [Activity]
-  description: Dumb charades, icebreakers and couple games
-  kind: activity
-
 - id: VIDEO-GAMES
   title: Video Games [Activity]
   description: Video games, esports and game development
@@ -551,11 +529,6 @@
   description: Wine, beer, whisky and cocktails
   kind: activity
 
-- id: TALK
-  title: Talk [Activity]
-  description: Talks, lectures and panels
-  kind: activity
-
 - id: BOOK-CLUB
   title: Book Club [Activity]
   description: Book clubs and reading together
@@ -591,24 +564,9 @@
   description: Sustainability, climate and conservation
   kind: activity
 
-- id: ARCHITECTURE-CITY
-  title: City & Architecture [Activity]
-  description: Architecture, urbanism and Bangalore civic issues
-  kind: activity
-
-- id: LANGUAGE
-  title: Language [Activity]
-  description: Learn or practise a language
-  kind: activity
-
 - id: FILMMAKING
   title: Filmmaking [Activity]
   description: Filmmaking, animation and video
-  kind: activity
-
-- id: NETWORKING
-  title: Networking [Activity]
-  description: Professional networking and careers
   kind: activity
 
 - id: DATING-MIXER
@@ -631,26 +589,6 @@
   description: Flea markets, bazaars and pop-ups
   kind: activity
 
-- id: FESTIVAL
-  title: Festival [Activity]
-  description: Onam, Durga Puja, Diwali and other celebrations
-  kind: activity
-
-- id: WELLBEING
-  title: Wellbeing [Activity]
-  description: Mental health, meditation and support circles
-  kind: activity
-
-- id: SPIRITUAL
-  title: Spiritual [Activity]
-  description: Religious and spiritual practice
-  kind: activity
-
-- id: VOLUNTEERING
-  title: Volunteering [Activity]
-  description: Volunteer and community service
-  kind: activity
-
 - id: KIDS
   title: Kids [Activity]
   description: Made for children
@@ -671,24 +609,9 @@
   description: Experimental shows mixing movement, video, music and words
   kind: activity
 
-- id: CONVERSATIONS
-  title: Conversations [Activity]
-  description: Discussion and listening circles
-  kind: activity
-
-- id: OPEN-STUDIO
-  title: Open Studio [Activity]
-  description: Bring your own project and work alongside others
-  kind: activity
-
 - id: BUSINESS/SKILLS
   title: Business Skills [Activity]
   description: Marketing, startups and money; hidden with BUSINESS events
-  kind: activity
-
-- id: CULTURE-WORKSHOP
-  title: Culture Workshop [Activity]
-  description: Hands-on sessions exploring art, design, film or culture
   kind: activity
 
 - id: COUPLES
