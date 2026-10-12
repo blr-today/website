@@ -19,6 +19,7 @@ title: changelog
 - `Removed` The screensaver button on calendar pages.
 - `Fixed` District, AllEvents and PUMA Runs calendars.
 - `Cal` Added new calendar for [North Bangalore](/cal/north).
+- `Cal` Added new calendars for [Ranga Shankara](/cal/rangashankara) and [Alliance Française de Bangalore](/cal/afbangalore), both included in [Curated](/). Ranga Shankara plays also show on [Theatre & Performance](/cal/stage).
 
 ## September 2026
 
