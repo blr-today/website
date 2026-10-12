@@ -6,7 +6,8 @@ title: changelog
 
 ## October 2026
 
-- `New` A [weekly email](/subscribe/) every Wednesday morning. Pick Always, Curated or Never for each neighbourhood, event type and price.
+- `Cal` Added 12 activity calendars, including [Board Games](/cal/boardgames), [Comedy & Improv](/cal/comedy), [Couples](/cal/couples), [Arts & Crafts](/cal/crafts), [Quizzing](/cal/quizzing) and [Kids](/cal/kids). Activity tags show in teal and can be filtered on.
+- `Cal` Added new calendars for [Ranga Shankara](/cal/rangashankara) and [Alliance Française de Bangalore](/cal/afbangalore), both included in [Curated](/). Ranga Shankara plays also show on [Theatre & Performance](/cal/stage).
 - `New` Follow blr.today on Bluesky and the fediverse, by area, topic or venue. The [follow](/follow/) page lists every account and calendar.
 - `Cal` Added new calendars for [Free](/cal/free/) and [Budget](/cal/budget/) events. Every calendar now has a short description on the [calendars](/calendars/) page.
 - `New` The [map](/map/) shows upcoming events by venue, coloured by event type, with curated events highlighted. Improved location of several venues.
@@ -19,7 +20,6 @@ title: changelog
 - `Removed` The screensaver button on calendar pages.
 - `Fixed` District, AllEvents and PUMA Runs calendars.
 - `Cal` Added new calendar for [North Bangalore](/cal/north).
-- `Cal` Added new calendars for [Ranga Shankara](/cal/rangashankara) and [Alliance Française de Bangalore](/cal/afbangalore), both included in [Curated](/). Ranga Shankara plays also show on [Theatre & Performance](/cal/stage).
 
 ## September 2026
 
