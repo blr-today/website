@@ -14,7 +14,7 @@ engine's, but it only looks for events.
 
 - **User-Agent** contains `blr.today-indexer (+https://blr.today/bot)`.
 - **Signed requests** use [Web Bot Auth][wba] (HTTP Message Signatures, RFC 9421):
-  - `Signature-Agent: "https://blr.today"`
+  - `Signature-Agent: "https://blr.today/.well-known/http-message-signatures-directory"`
   - Key directory: <https://blr.today/.well-known/http-message-signatures-directory>
   - Ed25519 key, `keyid="R8TfVhfuDBF7Uj2s4LTgaRVn2SWEIeumlCWVeJi5g8Y"`
 - **Egress IP** is `139.59.48.222`, a static DigitalOcean IP in Bangalore.
