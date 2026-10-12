@@ -137,8 +137,13 @@ export async function handle(request, env, fetchImpl = fetch) {
 
 const ENV = ["LISTMONK_URL", "LISTMONK_API_USER", "LISTMONK_API_TOKEN", "LISTMONK_LIST_ID", "LISTMONK_LINK_TEMPLATE_ID"];
 
+// SES has no production access yet, so nothing reaches listmonk
+const ENABLED = false;
+
 export default (request) =>
-  handle(request, { ...Object.fromEntries(ENV.map((k) => [k, Netlify.env.get(k)])), SITE_URL: Netlify.env.get("URL") });
+  ENABLED
+    ? handle(request, { ...Object.fromEntries(ENV.map((k) => [k, Netlify.env.get(k)])), SITE_URL: Netlify.env.get("URL") })
+    : json(503, { error: "Email sign-ups are paused for now." });
 
 export const config = {
   path: ["/api/digest/subscribe", "/api/digest/link", "/api/digest/prefs"],
