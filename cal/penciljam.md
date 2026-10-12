@@ -7,9 +7,9 @@ links:
 - url: https://discord.gg/B4SNzqMH3
   icon: discord
   title: Penciljam's Discord Server
-- url: https://chat.whatsapp.com/HLBUJDOxBNXIBpxH7xfngx
-  icon: whatsapp
-  title: Artzo India WhatsApp Community
+- url: https://linktr.ee/penciljam
+  icon: linktree
+  title: Penciljam Linktree
 - url: https://www.instagram.com/penciljam/
   icon: instagram
   title: Penciljam Instagram
