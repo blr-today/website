@@ -31,6 +31,8 @@ exclude:
   - test
   - scripts
   - netlify
+  # SES has no production access yet, so no email sign-up
+  - pages/subscribe.html
 timezone: Asia/Kolkata
 defaults:
   - scope:
