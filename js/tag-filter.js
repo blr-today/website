@@ -3,7 +3,7 @@ import { typeLabel } from './event-types.js'
 // Must tags OR within a group and AND across groups; any never tag hides an event
 const LABEL = { 1: 'Must', 0: 'Any', '-1': 'Never' }
 const CLS = { 1: 'must', 0: 'any', '-1': 'never' }
-const GROUPS = { type: 'Event type', location: 'Area', price: 'Price' }
+const GROUPS = { type: 'Event type', activity: 'Activity', location: 'Area', price: 'Price' }
 const PRICE_ORDER = ['FREE', 'BUDGET', 'VALUE', 'PRICEY']
 const PRICE_WORDS = { FREE: 'free', BUDGET: 'under ₹500', PRICEY: 'at least ₹2,000' }
 
@@ -37,7 +37,8 @@ function list(items, word) {
 
 function describe({ shown, total, must, never }) {
   let noun = n => n === 1 ? 'event' : 'events'
-  let types = must.type.length ? `${list(must.type, 'or')} ` : ''
+  let kinds = [...must.activity, ...must.type], skipped = [...never.activity, ...never.type]
+  let types = kinds.length ? `${list(kinds, 'or')} ` : ''
   let where = (must.location.length ? ` in ${list(must.location, 'or')}` : '') +
     (must.price.length ? ` where entry is ${list(must.price, 'or')}` : '')
   let all = total === 1 ? 'The only event is hidden.' : `All ${total} events are hidden.`
@@ -49,7 +50,7 @@ function describe({ shown, total, must, never }) {
     !must.price.length && never.price.length && `where entry is ${list(never.price, 'or')}`,
   ].filter(Boolean)
   let out = [
-    !must.type.length && never.type.length && `${list(never.type, 'and')} events`,
+    !kinds.length && skipped.length && `${list(skipped, 'and')} events`,
     place.length && `events ${place.join(never.location.length > 1 ? ', or ' : ' or ')}`,
   ].filter(Boolean)
   return out.length ? `${lead} Leaving out ${out.join(', as well as ')}.` : lead
@@ -68,6 +69,7 @@ function tagFilter(calendar, root, facetsOf) {
   let areas = areaNames()
   let words = {
     type: t => t.label.toLowerCase(),
+    activity: t => (areas.get(t.label) || t.label).toLowerCase(),
     location: t => areas.get(t.label) || t.label,
     price: t => PRICE_WORDS[t.label] || t.label.toLowerCase(),
   }
@@ -121,7 +123,8 @@ function tagFilter(calendar, root, facetsOf) {
   let label = t => [h('span', { class: 'blr-tf__name', text: t.label }), h('small', { text: t.count })]
   // Tap a chip to cycle any, must, never
   let chips = () => Object.entries(GROUPS).map(([g, title]) => {
-    let ts = tags.filter(t => t.group === g)
+    // Activities are many, so a chip needs at least two events
+    let ts = tags.filter(t => t.group === g && (g !== 'activity' || t.count > 1))
     return ts.length > 0 && h('div', { class: 'blr-tf__group' }, h('h4', { text: title }), h('div', { class: 'blr-tf__chips' }, ts.map(t => h('button', {
       type: 'button', class: `blr-tf__chip is-${CLS[get(t.key)]}`, 'data-group': t.group, title: `${t.label}: ${LABEL[get(t.key)]}`,
       onclick: () => set(t.key, { 0: 1, 1: -1, '-1': 0 }[get(t.key)]),

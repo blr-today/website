@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Free 🆓
 type: collection
 tags: '["FREE"]'

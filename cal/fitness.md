@@ -1,8 +1,9 @@
 ---
+tagFilter: true
 title: Fitness 💪
 type: collection
 fedi: fitness@fedi.blr.today
-tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS", "INDIARUNNING", "MAINMISSION"]'
+tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS", "INDIARUNNING", "MAINMISSION", "FITNESS"]'
 ---
 
 > Combined Fitness events from various sources: runs, rides and workouts

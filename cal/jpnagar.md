@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: JP Nagar
 type: neighbourhood
 fedi: jpnagar@fedi.blr.today

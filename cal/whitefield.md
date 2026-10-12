@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Whitefield
 type: neighbourhood
 fedi: whitefield@fedi.blr.today

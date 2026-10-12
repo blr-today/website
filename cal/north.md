@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: North Bangalore
 type: neighbourhood
 fedi: north@fedi.blr.today

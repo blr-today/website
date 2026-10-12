@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: District
 type: aggregator
 tags: '["DISTRICT"]'

@@ -101,6 +101,9 @@ li[data-eventcount="0"] {
     border-radius: 2px; text-decoration: none;
 }
 
+/* Activities are teal, apart from area hues and price ambers */
+.blr-tag--activity { --tag-bg: #ccfbf1; --tag-line: #0d9488; --tag-ink: #115e59; }
+
 /* Few seats left: red so it stands out from area and price */
 .blr-tag--lastcall { --tag-bg: #fee2e2; --tag-line: #dc2626; --tag-ink: #991b1b; }
 

@@ -10,10 +10,6 @@
   title: Bhaago India [Curated]
   description: Running events listed on Bhaago India
 
-- id: FITNESS
-  title: Fitness [Curated]
-  description: Combined Fitness events from various sources
-
 - id: CREATIVEMORNINGS
   title: Creative Mornings [Organizer]
   description: Creative Mornings Bangalore event calendar
@@ -53,11 +49,6 @@
 - id: ADIDAS
   title: Adidas Runners [Organizer]
   description: Running events hosted by the Adidas Runners Bangalore community
-
-- id: QUIZ
-  title: BLR.Today Quizzing Calendar
-  description: BLR.today calendar for various quizes. Currently tracks Ace Of Pubs quizes only
-  tags: ["QUIZ", "KQA"]
 
 - id: URBANAUT
   title: Urbanaut [Aggregator]
@@ -151,3 +142,577 @@
 - id: LASTCALL
   title: Last call [Seats]
   description: A tenth of the seats left, or 8 or fewer once three quarters are sold, or 8 or fewer when the total is unknown
+
+# Activity tags come from ingest's src/common/activities.py; parents are implied
+
+- id: ART-CRAFT
+  title: Art & Craft [Activity]
+  description: Hands-on sessions where you make something yourself
+  kind: activity
+
+- id: PAINTING-SKETCHING
+  title: Painting & Sketching [Activity]
+  description: Painting, drawing and sketching, including sip-and-paint
+  kind: activity
+  parent: ART-CRAFT
+
+- id: CALLIGRAPHY
+  title: Calligraphy [Activity]
+  description: Calligraphy, hand lettering and typography
+  kind: activity
+  parent: ART-CRAFT
+
+- id: PRINTMAKING
+  title: Printmaking [Activity]
+  description: Linocut, block printing, woodcut and cyanotype
+  kind: activity
+  parent: ART-CRAFT
+
+- id: POTTERY
+  title: Pottery [Activity]
+  description: Wheel pottery, hand-building and clay modelling
+  kind: activity
+  parent: ART-CRAFT
+
+- id: RESIN-ART
+  title: Resin Art [Activity]
+  description: Resin and epoxy art
+  kind: activity
+  parent: ART-CRAFT
+
+- id: KINTSUGI
+  title: Kintsugi [Activity]
+  description: Mending pottery with gold, the Japanese way
+  kind: activity
+  parent: ART-CRAFT
+
+- id: CANDLE-MAKING
+  title: Candle Making [Activity]
+  description: Make your own candles
+  kind: activity
+  parent: ART-CRAFT
+
+- id: JEWELLERY-MAKING
+  title: Jewellery Making [Activity]
+  description: Make earrings, necklaces and bracelets
+  kind: activity
+  parent: ART-CRAFT
+
+- id: PERFUMERY
+  title: Perfume & Soap [Activity]
+  description: Make perfume, soap or skincare
+  kind: activity
+  parent: ART-CRAFT
+
+- id: TEXTILE-CRAFT
+  title: Textile Craft [Activity]
+  description: Crochet, knitting, embroidery, weaving, tufting and sewing
+  kind: activity
+  parent: ART-CRAFT
+
+- id: PAPER-CRAFT
+  title: Paper Craft [Activity]
+  description: Origami, bookbinding, zines and collage
+  kind: activity
+  parent: ART-CRAFT
+
+- id: PLANTS
+  title: Plants [Activity]
+  description: Terrariums, gardening and flower arranging
+  kind: activity
+  parent: ART-CRAFT
+
+- id: EXHIBITION
+  title: Exhibition [Activity]
+  description: Art, photography and design exhibitions
+  kind: activity
+
+- id: PHOTOGRAPHY
+  title: Photography [Activity]
+  description: Photo walks and photography classes
+  kind: activity
+
+- id: THEATER
+  title: Theatre [Activity]
+  description: Plays, puppetry, and theatre and acting workshops
+  kind: activity
+
+- id: IMPROV
+  title: Improv [Activity]
+  description: Improv theatre and comedy
+  kind: activity
+
+- id: STANDUP-COMEDY
+  title: Stand-up Comedy [Activity]
+  description: Stand-up and sketch comedy shows
+  kind: activity
+
+- id: OPEN-MIC
+  title: Open Mic [Activity]
+  description: Sign up and perform
+  kind: activity
+
+- id: POETRY
+  title: Poetry [Activity]
+  description: Readings, slams and poetry circles
+  kind: activity
+
+- id: STORYTELLING
+  title: Storytelling [Activity]
+  description: Stories told aloud
+  kind: activity
+
+- id: MAGIC-SHOW
+  title: Magic [Activity]
+  description: Magic and mentalism shows
+  kind: activity
+
+- id: DANCE-PERFORMANCE
+  title: Dance Performance [Activity]
+  description: Contemporary and classical dance on stage
+  kind: activity
+
+- id: LIVE-MUSIC
+  title: Live Music [Activity]
+  description: Musicians playing live
+  kind: activity
+
+- id: INDIAN-CLASSICAL
+  title: Indian Classical [Activity]
+  description: Carnatic and Hindustani music
+  kind: activity
+  parent: LIVE-MUSIC
+
+- id: JAZZ
+  title: Jazz [Activity]
+  description: Jazz gigs
+  kind: activity
+  parent: LIVE-MUSIC
+
+- id: ROCK-METAL
+  title: Rock & Metal [Activity]
+  description: Rock, metal and punk gigs
+  kind: activity
+  parent: LIVE-MUSIC
+
+- id: SUFI-QAWWALI
+  title: Sufi & Qawwali [Activity]
+  description: Sufi, qawwali and ghazal
+  kind: activity
+  parent: LIVE-MUSIC
+
+- id: FOLK-MUSIC
+  title: Folk [Activity]
+  description: Folk music
+  kind: activity
+  parent: LIVE-MUSIC
+
+- id: DEVOTIONAL-MUSIC
+  title: Devotional Music [Activity]
+  description: Kirtan and bhajans, hidden from most calendars
+  kind: activity
+  parent: LIVE-MUSIC
+
+- id: DJ-NIGHT
+  title: DJ Night [Activity]
+  description: DJ sets, club nights and parties
+  kind: activity
+
+- id: BOLLYWOOD-NIGHT
+  title: Bollywood Night [Activity]
+  description: Parties playing Bollywood and other film music
+  kind: activity
+  parent: DJ-NIGHT
+
+- id: KARAOKE
+  title: Karaoke [Activity]
+  description: Karaoke nights
+  kind: activity
+
+- id: JAM-SESSION
+  title: Jam Session [Activity]
+  description: Jams, sing-alongs and choirs where you make music together
+  kind: activity
+
+- id: LISTENING-SESSION
+  title: Listening Session [Activity]
+  description: Album and vinyl listening sessions
+  kind: activity
+
+- id: MUSIC-LESSON
+  title: Music Lesson [Activity]
+  description: Learn an instrument or to sing
+  kind: activity
+
+- id: MOVIE-SCREENING
+  title: Film Screening [Activity]
+  description: Film and documentary screenings
+  kind: activity
+
+- id: SPORTS-SCREENING
+  title: Sports Screening [Activity]
+  description: Live sports on a big screen
+  kind: activity
+
+- id: F1-SCREENING
+  title: F1 Screening [Activity]
+  description: Formula 1 races on a big screen
+  kind: activity
+  parent: SPORTS-SCREENING
+
+- id: FOOTBALL-SCREENING
+  title: Football Screening [Activity]
+  description: Football matches on a big screen
+  kind: activity
+  parent: SPORTS-SCREENING
+
+- id: CRICKET-SCREENING
+  title: Cricket Screening [Activity]
+  description: Cricket matches on a big screen
+  kind: activity
+  parent: SPORTS-SCREENING
+
+- id: IPL-SCREENING
+  title: IPL Screening [Activity]
+  description: IPL matches on a big screen
+  kind: activity
+  parent: CRICKET-SCREENING
+
+- id: BOARDGAMES
+  title: Board Games [Activity]
+  description: Board, card and tabletop games
+  kind: activity
+
+- id: SOCIAL-DEDUCTION
+  title: Social Deduction [Activity]
+  description: Mafia, Werewolf and Blood on the Clocktower
+  kind: activity
+  parent: BOARDGAMES
+
+- id: TTRPG
+  title: Tabletop RPG [Activity]
+  description: Dungeons & Dragons and other role-playing games
+  kind: activity
+  parent: BOARDGAMES
+
+- id: CHESS
+  title: Chess [Activity]
+  description: Chess
+  kind: activity
+
+- id: QUIZZING
+  title: Quizzing [Activity]
+  description: Quizzes and trivia nights
+  kind: activity
+
+- id: PUZZLES
+  title: Puzzles [Activity]
+  description: Jigsaws, crosswords and Rubik's cubes
+  kind: activity
+
+- id: MYSTERY-GAME
+  title: Mystery Game [Activity]
+  description: Murder mysteries, escape rooms and treasure hunts
+  kind: activity
+
+- id: PARTY-GAMES
+  title: Party Games [Activity]
+  description: Dumb charades, icebreakers and couple games
+  kind: activity
+
+- id: VIDEO-GAMES
+  title: Video Games [Activity]
+  description: Video games, esports and game development
+  kind: activity
+
+- id: FITNESS
+  title: Fitness [Activity]
+  description: Workouts, sport and fitness sessions
+  kind: activity
+
+- id: RUNNING
+  title: Running [Activity]
+  description: Run clubs, fun runs and marathons
+  kind: activity
+  parent: FITNESS
+
+- id: CYCLING
+  title: Cycling [Activity]
+  description: Group rides
+  kind: activity
+  parent: FITNESS
+
+- id: YOGA
+  title: Yoga [Activity]
+  description: Yoga
+  kind: activity
+  parent: FITNESS
+
+- id: PILATES
+  title: Pilates [Activity]
+  description: Pilates
+  kind: activity
+  parent: FITNESS
+
+- id: MARTIAL-ARTS
+  title: Martial Arts [Activity]
+  description: Martial arts, boxing and self-defence
+  kind: activity
+  parent: FITNESS
+
+- id: CLIMBING
+  title: Climbing [Activity]
+  description: Bouldering and wall climbing
+  kind: activity
+  parent: FITNESS
+
+- id: RACKET-SPORTS
+  title: Racket Sports [Activity]
+  description: Badminton, pickleball, padel, squash and tennis
+  kind: activity
+  parent: FITNESS
+
+- id: TEAM-SPORTS
+  title: Team Sports [Activity]
+  description: Play football, basketball, cricket and more
+  kind: activity
+  parent: FITNESS
+
+- id: DANCE-CLASS
+  title: Dance Class [Activity]
+  description: Learn to dance, or dance socially
+  kind: activity
+
+- id: LATIN-DANCE
+  title: Latin Dance [Activity]
+  description: Salsa, bachata and kizomba
+  kind: activity
+  parent: DANCE-CLASS
+
+- id: GARBA
+  title: Garba [Activity]
+  description: Garba and dandiya
+  kind: activity
+  parent: DANCE-CLASS
+
+- id: ADVENTURE
+  title: Adventure [Activity]
+  description: Karting, paintball, kayaking, riding and shooting
+  kind: activity
+
+- id: LIVE-SPORTS
+  title: Live Sports [Activity]
+  description: Watch a match in the stadium
+  kind: activity
+
+- id: HERITAGE-WALK
+  title: Heritage Walk [Activity]
+  description: Heritage, history and city walks
+  kind: activity
+
+- id: NATURE-WALK
+  title: Nature Walk [Activity]
+  description: Tree, lake and nature walks
+  kind: activity
+
+- id: BIRDING
+  title: Birding [Activity]
+  description: Birdwatching
+  kind: activity
+  parent: NATURE-WALK
+
+- id: TREK
+  title: Trek [Activity]
+  description: Treks and hikes
+  kind: activity
+
+- id: STARGAZING
+  title: Stargazing [Activity]
+  description: Stargazing and astronomy
+  kind: activity
+
+- id: FOOD-TASTING
+  title: Food Tasting [Activity]
+  description: Tasting menus, pop-ups and food trails
+  kind: activity
+
+- id: COOKING-CLASS
+  title: Cooking Class [Activity]
+  description: Cooking and baking classes
+  kind: activity
+
+- id: COFFEE-TEA
+  title: Coffee & Tea [Activity]
+  description: Brewing, tasting and latte art
+  kind: activity
+
+- id: DRINKS-TASTING
+  title: Drinks Tasting [Activity]
+  description: Wine, beer, whisky and cocktails
+  kind: activity
+
+- id: TALK
+  title: Talk [Activity]
+  description: Talks, lectures and panels
+  kind: activity
+
+- id: BOOK-CLUB
+  title: Book Club [Activity]
+  description: Book clubs and reading together
+  kind: activity
+
+- id: AUTHOR-EVENT
+  title: Author Event [Activity]
+  description: Book launches, readings and signings
+  kind: activity
+
+- id: WRITING
+  title: Writing [Activity]
+  description: Writing workshops and circles
+  kind: activity
+
+- id: SCIENCE
+  title: Science [Activity]
+  description: About science
+  kind: activity
+
+- id: TECH
+  title: Tech [Activity]
+  description: Technology, coding and AI
+  kind: activity
+
+- id: HISTORY
+  title: History [Activity]
+  description: About history
+  kind: activity
+
+- id: ENVIRONMENT
+  title: Environment [Activity]
+  description: Sustainability, climate and conservation
+  kind: activity
+
+- id: ARCHITECTURE-CITY
+  title: City & Architecture [Activity]
+  description: Architecture, urbanism and Bangalore civic issues
+  kind: activity
+
+- id: LANGUAGE
+  title: Language [Activity]
+  description: Learn or practise a language
+  kind: activity
+
+- id: FILMMAKING
+  title: Filmmaking [Activity]
+  description: Filmmaking, animation and video
+  kind: activity
+
+- id: NETWORKING
+  title: Networking [Activity]
+  description: Professional networking and careers
+  kind: activity
+
+- id: DATING-MIXER
+  title: Dating Mixer [Activity]
+  description: Singles mixers and dating events
+  kind: activity
+
+- id: STRANGERS-MEETUP
+  title: Strangers Meetup [Activity]
+  description: Meet new people and make friends
+  kind: activity
+
+- id: PETS
+  title: Pets [Activity]
+  description: Puppy meetups and animals
+  kind: activity
+
+- id: MARKET
+  title: Market [Activity]
+  description: Flea markets, bazaars and pop-ups
+  kind: activity
+
+- id: FESTIVAL
+  title: Festival [Activity]
+  description: Onam, Durga Puja, Diwali and other celebrations
+  kind: activity
+
+- id: WELLBEING
+  title: Wellbeing [Activity]
+  description: Mental health, meditation and support circles
+  kind: activity
+
+- id: SPIRITUAL
+  title: Spiritual [Activity]
+  description: Religious and spiritual practice
+  kind: activity
+
+- id: VOLUNTEERING
+  title: Volunteering [Activity]
+  description: Volunteer and community service
+  kind: activity
+
+- id: KIDS
+  title: Kids [Activity]
+  description: Made for children
+  kind: activity
+
+- id: WOMEN-ONLY
+  title: Women Only [Activity]
+  description: Open only to women
+  kind: activity
+
+- id: QUEER
+  title: Queer [Activity]
+  description: Queer and LGBTQ+ events
+  kind: activity
+
+- id: PERFORMANCE-ART
+  title: Performance Art [Activity]
+  description: Experimental shows mixing movement, video, music and words
+  kind: activity
+
+- id: CONVERSATIONS
+  title: Conversations [Activity]
+  description: Discussion and listening circles
+  kind: activity
+
+- id: OPEN-STUDIO
+  title: Open Studio [Activity]
+  description: Bring your own project and work alongside others
+  kind: activity
+
+- id: BUSINESS/SKILLS
+  title: Business Skills [Activity]
+  description: Marketing, startups and money; hidden with BUSINESS events
+  kind: activity
+
+- id: CULTURE-WORKSHOP
+  title: Culture Workshop [Activity]
+  description: Hands-on sessions exploring art, design, film or culture
+  kind: activity
+
+- id: COUPLES
+  title: Couples [Activity]
+  description: Made for couples and dates
+  kind: activity
+
+- id: EXPO
+  title: Expo [Activity]
+  description: Trade expos and education fairs, hidden from most calendars
+  kind: activity
+
+- id: ATTRACTION
+  title: Attraction [Activity]
+  description: Play zones, arcades and karting tracks, hidden from most calendars
+  kind: activity
+
+- id: PROMOTION
+  title: Promotion [Activity]
+  description: Pub and restaurant deals, hidden from most calendars
+  kind: activity
+
+- id: TRIP
+  title: Trip [Activity]
+  description: Trips outside Bangalore, hidden from most calendars
+  kind: activity
+

@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Budget 🪙
 type: collection
 tags: '["BUDGET"]'

@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: AllEvents
 type: aggregator
 tags: '["ALLEVENTS"]'

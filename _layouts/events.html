@@ -79,5 +79,5 @@ title: blr.today
 </noscript>
 {% endif %}
 
-{% include sources.html tags=page.tags %}
+{% unless page.type == 'activity' %}{% include sources.html tags=page.tags %}{% endunless %}
 {% assign page.eventCount = eventCount %}

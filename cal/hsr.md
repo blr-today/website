@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: HSR Layout
 type: neighbourhood
 fedi: hsr@fedi.blr.today

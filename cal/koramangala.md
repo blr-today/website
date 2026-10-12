@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Koramangala
 type: neighbourhood
 fedi: koramangala@fedi.blr.today

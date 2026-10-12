@@ -2,6 +2,10 @@ collection:
   title: Collections
   description: Composite calendars containing events from multiple sources.
 
+activity:
+  title: Activities
+  description: Events of one kind, from every source.
+
 organizer:
   title: Organizers
   description: |

@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: HighApe 💃🏽
 type: aggregator
 tags: '["HIGHAPE"]'

@@ -6,6 +6,7 @@ excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO"]'
 --- 
 > F1, IPL and Football screenings across Bangalore.
 
-Currently F1/IPL/Football screenings are picked up automatically. Note that
+F1, cricket, IPL and football screenings are tagged automatically as
+F1-SCREENING, CRICKET-SCREENING, IPL-SCREENING and FOOTBALL-SCREENING. Note that
 these are not included in the Curated calendar, but are part of the
 neighbourhood calenders.

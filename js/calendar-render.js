@@ -25,11 +25,27 @@ function alignTimeColumn(calendarEl) {
 const PRICE_TAG = /^(FREE|BUDGET|PRICEY)$/
 const LASTCALL = 'LASTCALL'
 
-// Picks the tag colour: location, price or other
+// Activity tags and their parents come from _data/tags.yml
+function activityParents() {
+  try {
+    return new Map(JSON.parse(document.getElementById('blr-tag-info')?.textContent || '[]')
+      .filter(t => t.kind === 'activity').map(t => [t.id, t.parent || null]))
+  } catch { return new Map() }
+}
+const ACTIVITY = activityParents()
+
+// Picks the tag colour: location, price, activity or other
 function tagKind(tag, locationTags) {
   if (PRICE_TAG.test(tag)) return 'price'
   if (tag === LASTCALL) return 'lastcall'
+  if (ACTIVITY.has(tag)) return 'activity'
   return locationTags.includes(tag) ? 'location' : 'other'
+}
+
+// KINTSUGI already says ART-CRAFT, so rows show only the narrowest tags
+function narrowest(keywords) {
+  let parents = new Set([...keywords].map(k => ACTIVITY.get(k)).filter(Boolean))
+  return new Set([...keywords].filter(k => !parents.has(k)))
 }
 
 function visibleKeywords(event, pageTags, onlyTags) {
@@ -51,7 +67,7 @@ function visibleKeywords(event, pageTags, onlyTags) {
   }
 
   if (onlyTags) {
-    keywords = new Set([...keywords].filter(k => onlyTags.includes(k) || PRICE_TAG.test(k) || k === LASTCALL))
+    keywords = new Set([...keywords].filter(k => onlyTags.includes(k) || PRICE_TAG.test(k) || k === LASTCALL || ACTIVITY.has(k)))
   }
 
   // Some keywords are always hidden, even if available
@@ -111,11 +127,11 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
       let e = info.jsEvent
       if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return
       e.preventDefault()
-      openEventModal(info.event, tagged(visibleKeywords(info.event, pageTags, onlyTags)), info.el)
+      openEventModal(info.event, tagged(narrowest(visibleKeywords(info.event, pageTags, onlyTags))), info.el)
     },
     eventDidMount: function(info) {
       alignTimeColumn(calendarEl)
-      let keywords = tagged(visibleKeywords(info.event, pageTags, onlyTags))
+      let keywords = tagged(narrowest(visibleKeywords(info.event, pageTags, onlyTags)))
 
       let element = info.el
       markLiked(element, info.event)
@@ -144,7 +160,7 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
   calendar.render();
   let filterEl = document.getElementById('blr-tag-filter')
   let facets = e => [{ group: 'type', name: eventType(e) }].concat([...visibleKeywords(e, pageTags, onlyTags)]
-    .map(name => ({ group: tagKind(name, locationTags), name })).filter(f => ['location', 'price'].includes(f.group)))
+    .map(name => ({ group: tagKind(name, locationTags), name })).filter(f => ['activity', 'location', 'price'].includes(f.group)))
   if (filterEl) import('./tag-filter.js').then(m => m.tagFilter(calendar, filterEl, facets))
   document.fonts.ready.then(() => alignTimeColumn(calendarEl));
   return calendar;

@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Skillbox
 type: aggregator
 tags: '["SKILLBOXES"]'

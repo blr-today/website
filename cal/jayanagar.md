@@ -1,4 +1,5 @@
 ---
+tagFilter: true
 title: Jayanagar
 type: neighbourhood
 fedi: jayanagar@fedi.blr.today
