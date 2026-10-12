@@ -9,6 +9,9 @@
 /.well-known/webfinger https://fedi.blr.today/.well-known/webfinger 200
 /.well-known/nodeinfo  https://fedi.blr.today/.well-known/nodeinfo 200
 
+# Web Bot Auth key directory for the crawler, a Worker in nebula/cloudflare/webbot.tf
+/.well-known/http-message-signatures-directory https://webbot.bb8.fun/.well-known/http-message-signatures-directory 200
+
 # The scheduler's posting report, served from k3s, for /_debug/social/
 /_debug/social/bluesky.json https://scheduler.blr.today/bluesky.json 200
 
