@@ -60,5 +60,6 @@ remote_images = [
   'https://totalenv\.blob\.core\.windows\.net/te-music-events/.*',
   'https://firebasestorage\.googleapis\.com/v0/b/fmc-43566484-d5f6d\.firebasestorage\.app/.*',
   'https://pub-f8e735e64a9243758e016e976f361eb8\.r2\.dev/.*',
-  'https://bangalore\.afindia\.org/wp-content/.*'
+  'https://bangalore\.afindia\.org/wp-content/.*',
+  'https://fillum\.in/images/.*'
 ]
