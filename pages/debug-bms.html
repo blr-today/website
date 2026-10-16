@@ -1,0 +1,70 @@
+---
+layout: default
+title: blr.today / BookMyShow
+permalink: /_debug/bms/
+noindex: true
+sitemap: false
+sqlite:
+  - data: bms
+    file: events.db
+    query: |
+      SELECT
+        coalesce((
+          SELECT value FROM json_each(event_json->'$.sameAs')
+          WHERE value LIKE 'https://in.bookmyshow.com/%' LIMIT 1
+        ), url) AS url,
+        event_json->>'$.name' AS name,
+        event_json->>'$.startDate' AS startDate,
+        event_json->>'$."@type"' AS type,
+        event_json->>'$.location.name' AS venue,
+        event_json->>'$.description' AS description,
+        json_array_length(event_json->'$.sameAs') AS merged
+      FROM events
+      WHERE 'BOOKMYSHOW' IN (SELECT value FROM json_each(event_json->'$.keywords'))
+        AND NOT EXISTS (
+          SELECT 1 FROM json_each(event_json->'$.keywords')
+          WHERE value IN ('BUSINESS', 'LOW-QUALITY', 'NOTINBLR', 'DANDIYA', 'WOOWOO', 'SPORTS-SCREENING')
+        )
+        AND event_json->>'$.startDate' >= date('now')
+      ORDER BY event_json->>'$.startDate'
+---
+<h2>BookMyShow events</h2>
+<p>
+  {{ page.bms | size }} upcoming BookMyShow events are not tagged as unwanted,
+  so they show on the <a href="/cal/bookmyshow/">BookMyShow</a> calendar.
+  Events merged with another listing are marked ⧉. The rest are on
+  <a href="/cal/unwanted/">Unwanted</a>.
+</p>
+
+<style>
+  table.bms { width: 100%; table-layout: fixed; }
+  table.bms th, table.bms td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.bms th:first-child { width: 9em; }
+  table.bms th:nth-child(3) { width: 25%; }
+  table.bms th:last-child { width: 8em; }
+  table.bms small { opacity: 0.7; }
+</style>
+
+<table class="bms">
+  <thead>
+    <tr><th>When</th><th>Event</th><th>Venue</th><th>Type</th></tr>
+  </thead>
+  <tbody>
+  {%- for e in page.bms %}
+    <tr>
+      <td><time datetime="{{ e.startDate }}">{{ e.startDate | date: "%a %d %b %H:%M" }}</time></td>
+      <td>
+        <a href="{{ e.url }}" rel="noopener">{{ e.name }}</a>{% if e.merged > 0 %} ⧉{% endif %}<br>
+        <small>{{ e.description | strip_html | truncate: 200 }}</small>
+      </td>
+      <td>{{ e.venue }}</td>
+      <td>{{ e.type | remove: "Event" | default: "Event" }}</td>
+    </tr>
+  {%- endfor %}
+  </tbody>
+</table>
