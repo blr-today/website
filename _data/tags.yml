@@ -38,6 +38,30 @@
   title: Atta Galatta [Organizer]
   description: Events hosted by Atta Galatta, Indiranagar
 
+- id: TREEHOUSE
+  title: Treehouse [Venue]
+  description: Events at Treehouse, from its Instagram posts
+
+- id: ANIMECLUB
+  title: Bengaluru Anime Club [Organizer]
+  description: Anime meetups and Japan Habba, from the club's Instagram posts
+
+- id: PLANETARIUM
+  title: Jawaharlal Nehru Planetarium [Venue]
+  description: Talks and shows at the planetarium, from its Instagram posts
+
+- id: PAPERCRANELAB
+  title: Paper Crane Lab [Organizer]
+  description: Making workshops in Indiranagar, from Paper Crane Lab's Instagram posts
+
+- id: CREATIVECIRCUS
+  title: Bangalore Creative Circus [Venue]
+  description: Events at Bangalore Creative Circus, from its Instagram posts
+
+- id: WINEINAMILLION
+  title: Wine in a Million [Organizer]
+  description: Drinks festivals and tastings, from Wine in a Million's Instagram posts
+
 - id: GULLYTOURS
   title: Gully Tours [Organizer]
   description: Bangalore city tours hosted by gully.tours
