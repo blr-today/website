@@ -194,7 +194,10 @@ function images(event) {
 
 function cdnPrefixes() {
   if (cdnAllowed) return cdnAllowed
-  try { cdnAllowed = JSON.parse(document.getElementById('blr-image-cdn')?.textContent || '[]') } catch { cdnAllowed = [] }
+  let prefixes = []
+  try { prefixes = JSON.parse(document.getElementById('blr-image-cdn')?.textContent || '[]') } catch {}
+  // A * stands for part of a host name, since Instagram serves images from many hosts
+  cdnAllowed = prefixes.map(p => new RegExp('^' + p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replaceAll('\\*', '[^/]*')))
   return cdnAllowed
 }
 
@@ -207,7 +210,7 @@ function tagTip(tag) {
   return tagInfo.get(tag.name) || null
 }
 
-const onCdn = src => cdnPrefixes().some(p => src.startsWith(p))
+const onCdn = src => cdnPrefixes().some(p => p.test(src))
 
 function thumb(src) {
   if (!onCdn(src) || ['localhost', '127.0.0.1'].includes(location.hostname)) return src

@@ -1,4 +1,4 @@
-# Image URL prefixes resized by Netlify Image CDN, mirrored in netlify.toml
+# Image URL prefixes resized by Netlify Image CDN, mirrored in netlify.toml; * matches part of a host
 - https://highape.blr1.cdn.digitaloceanspaces.com/
 - https://www.highape.com/
 - https://d10y46cwh6y6x1.cloudfront.net/
@@ -31,3 +31,4 @@
 - https://bangalore.afindia.org/wp-content/
 - https://fillum.in/images/
 - https://assets-in.bmscdn.com/
+- https://scontent*.cdninstagram.com/
