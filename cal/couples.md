@@ -2,6 +2,7 @@
 tagFilter: true
 title: Couples 💑
 type: activity
+fedi: couples@fedi.blr.today
 tags: '["COUPLES"]'
 ---
 > Workshops, dinners and outings made for couples and dates.

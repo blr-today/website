@@ -1,6 +1,7 @@
 ---
 title: Bangalore Film Forum 🎥
 type: organizer
+fedi: fillum@fedi.blr.today
 tags: '["FILLUM"]'
 domain: fillum.in
 links:

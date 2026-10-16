@@ -2,6 +2,7 @@
 tagFilter: true
 title: Walks & Outdoors 🌳
 type: activity
+fedi: outdoors@fedi.blr.today
 tags: '["HERITAGE-WALK", "NATURE-WALK", "CYCLING", "STARGAZING"]'
 ---
 > Heritage walks, nature and bird walks, group rides and stargazing in and around the city.

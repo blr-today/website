@@ -1,6 +1,7 @@
 ---
 title: Ranga Shankara 🎭
 type: venue
+fedi: rangashankara@fedi.blr.today
 tags: '["RANGASHANKARA"]'
 domain: rangashankara.org
 links:

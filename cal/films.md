@@ -2,6 +2,7 @@
 tagFilter: true
 title: Film Screenings 🎬
 type: activity
+fedi: film@fedi.blr.today
 tags: '["MOVIE-SCREENING"]'
 ---
 > Film clubs, festivals and one-off screenings. For regular cinema shows, see the [cinemas page](/cinemas.html).

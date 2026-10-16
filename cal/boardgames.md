@@ -2,6 +2,7 @@
 tagFilter: true
 title: Board Games 🎲
 type: activity
+fedi: boardgames@fedi.blr.today
 tags: '["BOARDGAMES"]'
 ---
 > Board game nights, Mafia and Werewolf, Dungeons & Dragons and other tabletop games.

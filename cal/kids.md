@@ -2,6 +2,7 @@
 tagFilter: true
 title: Kids 🧒
 type: activity
+fedi: kids@fedi.blr.today
 tags: '["KIDS"]'
 ---
 > Events made for children. Play zones and other attractions are left out.

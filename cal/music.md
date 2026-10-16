@@ -2,6 +2,7 @@
 tagFilter: true
 title: Live Music 🎸
 type: activity
+fedi: music@fedi.blr.today
 tags: '["LIVE-MUSIC"]'
 ---
 > Gigs and concerts by musicians playing live, from Carnatic to indie to metal. DJ nights are not included.

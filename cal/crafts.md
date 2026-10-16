@@ -2,6 +2,7 @@
 tagFilter: true
 title: Arts & Crafts 🎨
 type: activity
+fedi: crafts@fedi.blr.today
 tags: '["ART-CRAFT"]'
 ---
 > Hands-on workshops where you make something: pottery, painting, resin, kintsugi, candles, crochet and more.

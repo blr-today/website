@@ -2,6 +2,7 @@
 tagFilter: true
 title: Comedy & Improv 😂
 type: activity
+fedi: comedy@fedi.blr.today
 tags: '["STANDUP-COMEDY", "IMPROV"]'
 ---
 > Stand-up shows, improv jams and comedy open mics.

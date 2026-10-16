@@ -2,6 +2,7 @@
 tagFilter: true
 title: Food & Drink 🍜
 type: activity
+fedi: food@fedi.blr.today
 tags: '["FOOD-TASTING", "COOKING-CLASS", "COFFEE-TEA", "DRINKS-TASTING"]'
 ---
 > Tasting menus, food pop-ups, cooking classes, coffee workshops and drinks tastings.

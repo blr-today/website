@@ -2,6 +2,7 @@
 tagFilter: true
 title: Quizzing 🙋
 type: activity
+fedi: quizzing@fedi.blr.today
 tags: '["QUIZZING"]'
 ---
 > Pub quizzes and trivia nights across Bangalore.

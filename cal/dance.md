@@ -2,6 +2,7 @@
 tagFilter: true
 title: Dance 💃
 type: activity
+fedi: dance@fedi.blr.today
 tags: '["DANCE-CLASS"]'
 ---
 > Dance classes and social dance nights, from salsa to garba.
