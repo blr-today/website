@@ -2,6 +2,7 @@
 tagFilter: true
 title: Whitefield
 type: neighbourhood
+atproto: whitefield.blr.today
 fedi: whitefield@fedi.blr.today
 tags: '["WHITEFIELD"]'
 --- 

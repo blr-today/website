@@ -1,6 +1,7 @@
 ---
 title: Bangalore International Center 🏛️
 type: venue
+atproto: bic.blr.today
 fedi: bic@fedi.blr.today
 tags: '["BIC"]'
 domain: bangaloreinternationalcentre.org

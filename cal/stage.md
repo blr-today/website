@@ -2,6 +2,7 @@
 tagFilter: true
 title: Theatre & Performance 🎭
 type: activity
+atproto: stage.blr.today
 fedi: stage@fedi.blr.today
 tags: '["THEATER", "DANCE-PERFORMANCE", "PERFORMANCE-ART", "STORYTELLING", "POETRY"]'
 ---

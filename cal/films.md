@@ -2,6 +2,7 @@
 tagFilter: true
 title: Film Screenings 🎬
 type: activity
+atproto: film.blr.today
 fedi: film@fedi.blr.today
 tags: '["MOVIE-SCREENING"]'
 ---

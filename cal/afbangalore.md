@@ -1,6 +1,7 @@
 ---
 title: Alliance Française de Bangalore 🇫🇷
 type: venue
+atproto: afbangalore.blr.today
 fedi: afbangalore@fedi.blr.today
 tags: '["ALLIANCEFRANCAISE"]'
 domain: bangalore.afindia.org

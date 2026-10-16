@@ -2,6 +2,7 @@
 tagFilter: true
 title: Walks & Outdoors 🌳
 type: activity
+atproto: outdoors.blr.today
 fedi: outdoors@fedi.blr.today
 tags: '["HERITAGE-WALK", "NATURE-WALK", "CYCLING", "STARGAZING"]'
 ---

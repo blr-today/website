@@ -3,6 +3,7 @@ tagFilter: true
 title: Budget 🪙
 type: collection
 tags: '["BUDGET"]'
+atproto: budget.blr.today
 fedi: budget@fedi.blr.today
 ---
 

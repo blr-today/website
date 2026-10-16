@@ -2,6 +2,7 @@
 tagFilter: true
 title: Kids 🧒
 type: activity
+atproto: kids.blr.today
 fedi: kids@fedi.blr.today
 tags: '["KIDS"]'
 ---

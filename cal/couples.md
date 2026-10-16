@@ -2,6 +2,7 @@
 tagFilter: true
 title: Couples 💑
 type: activity
+atproto: couples.blr.today
 fedi: couples@fedi.blr.today
 tags: '["COUPLES"]'
 ---

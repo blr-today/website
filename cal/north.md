@@ -2,6 +2,7 @@
 tagFilter: true
 title: North Bangalore
 type: neighbourhood
+atproto: north.blr.today
 fedi: north@fedi.blr.today
 tags: '["NORTHBLR"]'
 --- 

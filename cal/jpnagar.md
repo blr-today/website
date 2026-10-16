@@ -2,6 +2,7 @@
 tagFilter: true
 title: JP Nagar
 type: neighbourhood
+atproto: jpnagar.blr.today
 fedi: jpnagar@fedi.blr.today
 tags: '["JPNAGAR"]'
 --- 

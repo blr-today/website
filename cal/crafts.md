@@ -2,6 +2,7 @@
 tagFilter: true
 title: Arts & Crafts 🎨
 type: activity
+atproto: crafts.blr.today
 fedi: crafts@fedi.blr.today
 tags: '["ART-CRAFT"]'
 ---

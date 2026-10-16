@@ -2,6 +2,7 @@
 tagFilter: true
 title: Board Games 🎲
 type: activity
+atproto: boardgames.blr.today
 fedi: boardgames@fedi.blr.today
 tags: '["BOARDGAMES"]'
 ---

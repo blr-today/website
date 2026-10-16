@@ -2,6 +2,7 @@
 tagFilter: true
 title: Dance 💃
 type: activity
+atproto: dance.blr.today
 fedi: dance@fedi.blr.today
 tags: '["DANCE-CLASS"]'
 ---

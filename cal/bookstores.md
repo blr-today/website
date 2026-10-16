@@ -2,6 +2,7 @@
 tagFilter: true
 title: Books 📚
 type: collection
+atproto: books.blr.today
 fedi: books@fedi.blr.today
 tags: '["CHAMPACA", "ATTAGALATTA", "BBB", "BOOKS", "BOOK-CLUB", "AUTHOR-EVENT"]'
 --- 

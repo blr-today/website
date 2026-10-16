@@ -2,6 +2,7 @@
 tagFilter: true
 title: Fitness 💪
 type: collection
+atproto: fitness.blr.today
 fedi: fitness@fedi.blr.today
 tags: '["ADIDAS", "BHAAGOINDIA", "PUMARUN", "SISTERSINSWEAT/SPORTS", "INDIARUNNING", "MAINMISSION", "FITNESS"]'
 ---

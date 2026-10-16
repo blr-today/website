@@ -2,6 +2,7 @@
 tagFilter: true
 title: Jayanagar
 type: neighbourhood
+atproto: jayanagar.blr.today
 fedi: jayanagar@fedi.blr.today
 tags: '["JAYANAGAR"]'
 --- 

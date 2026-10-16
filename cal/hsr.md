@@ -2,6 +2,7 @@
 tagFilter: true
 title: HSR Layout
 type: neighbourhood
+atproto: hsr.blr.today
 fedi: hsr@fedi.blr.today
 tags: '["HSR"]'
 --- 

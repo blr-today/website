@@ -2,6 +2,7 @@
 tagFilter: true
 title: Koramangala
 type: neighbourhood
+atproto: koramangala.blr.today
 fedi: koramangala@fedi.blr.today
 tags: '["KORAMANGALA"]'
 --- 

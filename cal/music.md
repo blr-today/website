@@ -2,6 +2,7 @@
 tagFilter: true
 title: Live Music 🎸
 type: activity
+atproto: music.blr.today
 fedi: music@fedi.blr.today
 tags: '["LIVE-MUSIC"]'
 ---

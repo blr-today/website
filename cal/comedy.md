@@ -2,6 +2,7 @@
 tagFilter: true
 title: Comedy & Improv 😂
 type: activity
+atproto: comedy.blr.today
 fedi: comedy@fedi.blr.today
 tags: '["STANDUP-COMEDY", "IMPROV"]'
 ---

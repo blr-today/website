@@ -6,6 +6,7 @@ title: changelog
 
 ## October 2026
 
+- `New` Every calendar on the [follow](/follow/) page can now be followed on Bluesky too, from area and venue accounts to activities like [Quizzing](/cal/quizzing) and [Board Games](/cal/boardgames).
 - `New` Every activity calendar, Ranga Shankara, Alliance Française and Bangalore Film Forum can now be followed on the fediverse from the [follow](/follow/) page.
 - `Cal` Added a calendar for [Bangalore Film Forum](/cal/fillum), an arthouse film club on Fillum, included in [Curated](/) and [Film Screenings](/cal/films).
 - `Cal` Added 12 activity calendars, including [Board Games](/cal/boardgames), [Comedy & Improv](/cal/comedy), [Couples](/cal/couples), [Arts & Crafts](/cal/crafts), [Quizzing](/cal/quizzing) and [Kids](/cal/kids). Activity tags show in teal and can be filtered on.

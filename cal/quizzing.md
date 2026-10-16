@@ -2,6 +2,7 @@
 tagFilter: true
 title: Quizzing 🙋
 type: activity
+atproto: quizzing.blr.today
 fedi: quizzing@fedi.blr.today
 tags: '["QUIZZING"]'
 ---

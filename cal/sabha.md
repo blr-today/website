@@ -1,6 +1,7 @@
 ---
 title: Sabha BLR
 type: venue
+atproto: sabha.blr.today
 fedi: sabha@fedi.blr.today
 tags: '["SABHA"]'
 domain: sabhablr.in

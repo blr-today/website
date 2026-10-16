@@ -1,5 +1,5 @@
 # Social accounts on /follow/ that have no calendar; calendars set atproto and fedi in their front matter
-- { name: Workshops, fedi: workshops@fedi.blr.today }
-- { name: Sports, fedi: sports@fedi.blr.today }
+- { name: Workshops, atproto: workshops.blr.today, fedi: workshops@fedi.blr.today }
+- { name: Sports, atproto: sports.blr.today, fedi: sports@fedi.blr.today }
 - { name: Last Call, about: Replies when an event is nearly sold out, atproto: lastcall.blr.today, fedi: lastcall@fedi.blr.today }
 - { name: All events, about: "Every event, 2–7 days ahead. Boost-only on the fediverse", atproto: events.blr.today, fedi: events@fedi.blr.today }

@@ -2,6 +2,7 @@
 tagFilter: true
 title: Food & Drink 🍜
 type: activity
+atproto: food.blr.today
 fedi: food@fedi.blr.today
 tags: '["FOOD-TASTING", "COOKING-CLASS", "COFFEE-TEA", "DRINKS-TASTING"]'
 ---
