@@ -422,11 +422,6 @@
   description: Jigsaws, crosswords and Rubik's cubes
   kind: activity
 
-- id: VIDEO-GAMES
-  title: Video Games [Activity]
-  description: Video games, esports and game development
-  kind: activity
-
 - id: FITNESS
   title: Fitness [Activity]
   description: Workouts, sport and fitness sessions
