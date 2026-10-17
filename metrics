@@ -24,6 +24,9 @@ social_report_timestamp_seconds{platform="{{name}}"} {{r.generated | date: "%s"}
 {%- for a in r.stats.reposts %}
 social_reposts_total{platform="{{name}}", account="{{a[0]}}"} {{a[1]}}
 {%- endfor -%}
+{%- for a in r.stats.unshared %}
+social_unshared_total{platform="{{name}}", account="{{a[0]}}"} {{a[1]}}
+{%- endfor -%}
 {%- for s in r.stats.skipped %}
 social_skipped{platform="{{name}}", reason="{{s[0]}}"} {{s[1]}}
 {%- endfor -%}

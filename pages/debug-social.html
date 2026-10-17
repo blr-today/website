@@ -5,6 +5,7 @@ permalink: /_debug/social/
 noindex: true
 ---
 <h2>Social posting schedule</h2>
+<p><a href="?platform=bluesky">Bluesky</a> · <a href="?platform=fedi">Fedi</a></p>
 <p id="social-status">Loading the scheduler's latest report…</p>
 
 <style>
@@ -23,6 +24,9 @@ noindex: true
   const time = s => new Date(s).toLocaleTimeString('en-IN', { ...IST, hour: '2-digit', minute: '2-digit', hour12: false })
   const when = s => s ? `${day(s)} ${time(s)}` : ''
   const short = a => a.replace('.blr.today', '')
+  const PLATFORMS = { bluesky: 'Bluesky', fedi: 'Fedi' }
+  const asked = new URLSearchParams(location.search).get('platform')
+  const platform = asked in PLATFORMS ? asked : 'bluesky'
 
   function el(tag, attrs = {}, ...children) {
     const e = document.createElement(tag)
@@ -46,14 +50,14 @@ noindex: true
     const status = document.getElementById('social-status')
     let report
     try {
-      const res = await fetch('/_debug/social/bluesky.json', { cache: 'no-store' })
+      const res = await fetch(`/_debug/social/${platform}.json`, { cache: 'no-store' })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       report = await res.json()
     } catch (e) {
       status.textContent = `Could not load the report: ${e.message}`
       return
     }
-    status.textContent = `Bluesky report from ${when(report.generated)} IST${report.dry_run ? ' (dry run: nothing was posted)' : ''}. ` +
+    status.textContent = `${PLATFORMS[platform]} report from ${when(report.generated)} IST${report.dry_run ? ' (dry run: nothing was posted)' : ''}. ` +
       `${report.pending} events queued, a post every ${report.gap_minutes ?? '–'} minutes, ${report.would_miss.length} would miss their window.`
     const root = document.getElementById('social')
     const byDay = new Map()
@@ -65,7 +69,8 @@ noindex: true
     root.append(...section('Recent posts', 'Posted in the last 48 hours.',
       table(['Posted', 'Event', 'Starts', 'Reposted by'], report.recent.map(r => [
         time(r.at), el('span', {}, link(r), ' · ', el('a', { href: r.post, rel: 'noopener' }, 'post')),
-        when(r.starts), [r.reposted.map(short).join(', '), r.last_call ? ' · last call' : ''].join('')]))))
+        when(r.starts), [r.reposted.map(short).join(', '), r.unshared?.length ? ` · withdrawn from ${r.unshared.map(short).join(', ')}` : '',
+          r.last_call ? ' · last call' : ''].join('')]))))
     if (report.would_miss.length) {
       root.append(...section('Would miss their window', 'These cannot be posted 2 days before they start.',
         table(['Deadline', 'Event', 'Starts', 'Accounts'], report.would_miss.map(r => [when(r.deadline), link(r), when(r.starts), r.accounts.map(short).join(', ')]))))
@@ -77,6 +82,9 @@ noindex: true
     root.append(...section('Skipped', 'Events that sold out before their turn, or whose posting window closed. Use these to improve the ordering.',
       table(['Noticed', 'Event', 'Starts', 'Why'], report.skipped.map(r => [when(r.noticed), link(r), when(r.starts),
         `${r.reason}${r.postable_since ? `, queued since ${when(r.postable_since)}` : ''}`]))))
+    root.append(...section('Withdrawn reposts', 'Reposts undone in the last 30 days because the event left that account\'s calendar, with its tags at the time.',
+      table(['Withdrawn', 'Event', 'Account', 'Tags then'], (report.unshared || []).map(r => [when(r.at),
+        el('span', {}, link(r), ' · ', el('a', { href: r.post, rel: 'noopener' }, 'post')), short(r.account), r.keywords.join(', ')]))))
   }
 
   render()

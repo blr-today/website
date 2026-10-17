@@ -14,6 +14,7 @@
 
 # The scheduler's posting report, served from k3s, for /_debug/social/
 /_debug/social/bluesky.json https://scheduler.blr.today/bluesky.json 200
+/_debug/social/fedi.json https://scheduler.blr.today/fedi.json 200
 
 /cal/carbon/ /cal/scigallery/
 /cal/carbon/cal.ics /cal/scigallery/cal.ics
