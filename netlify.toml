@@ -63,5 +63,6 @@ remote_images = [
   'https://bangalore\.afindia\.org/wp-content/.*',
   'https://fillum\.in/images/.*',
   'https://assets-in\.bmscdn\.com/.*',
-  'https://scontent[^/]*\.cdninstagram\.com/.*'
+  'https://scontent[^/]*\.cdninstagram\.com/.*',
+  'https://i\.pinimg\.com/.*'
 ]
