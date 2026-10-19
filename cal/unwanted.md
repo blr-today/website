@@ -24,6 +24,7 @@ sqlite:
 subscribe: false
 # This is such a trash event page, that we don't want links here to impact our rankings
 noindex: true
+sitemap: false
 --- 
 > This is a meta calendar that lists events that have been excluded
 > from other calendars. This is primarily meant for debugging.

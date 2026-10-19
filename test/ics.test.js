@@ -59,3 +59,11 @@ test("listed event pages are in the sitemap with their JSON-LD", () => {
     assert.equal(sitemap.has(`/event/${dir}/`), !html.includes('name="robots" content="noindex'), `${dir} sitemap and noindex disagree`);
   }
 });
+
+test("the sitemap lists no noindex pages", () => {
+  for (const [, path] of read("sitemap.xml").matchAll(/<loc>https?:\/\/[^/]+\/([^<]*)<\/loc>/g)) {
+    const file = path === "" || path.endsWith("/") ? `${path}index.html` : path;
+    if (!file.endsWith(".html")) continue;
+    assert.ok(!read(file).includes('name="robots" content="noindex'), `${path} is noindex but in the sitemap`);
+  }
+});
