@@ -12,8 +12,8 @@ export default {
   output: {
     dir: "assets/js",
     format: "es",
-    preserveModules: true,
-    preserveModulesRoot: "js"
+    // Shared code goes in hashed chunks, so pages fetch fewer files in fewer round trips
+    chunkFileNames: "chunks/[name]-[hash].js"
   },
   plugins: [
     resolve({

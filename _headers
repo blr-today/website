@@ -6,3 +6,7 @@
 /api/*
 	access-control-allow-origin: *
 	cache-control: max-age=1800, no-transform, stale-while-revalidate, stale-if-error
+
+# rollup names chunks by content hash
+/assets/js/chunks/*
+	cache-control: public, max-age=31536000, immutable

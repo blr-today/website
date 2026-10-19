@@ -1,5 +1,3 @@
-import { atcb_action } from "add-to-calendar-button";
-
 function subscribeButton (elementId, icsFile, title, overrides = {}) {
   const config = {
     name: title,
@@ -15,7 +13,7 @@ function subscribeButton (elementId, icsFile, title, overrides = {}) {
   };
   const button = document.getElementById(elementId);
   if (button) {
-    button.addEventListener('click', () => atcb_action(config, button));
+    button.addEventListener('click', () => import('add-to-calendar-button').then(m => m.atcb_action(config, button)));
   }
 }
 

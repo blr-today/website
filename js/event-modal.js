@@ -1,4 +1,3 @@
-import 'add-to-calendar-button'
 import { likeKey, isLiked, toggleLike } from './likes.js'
 import { TYPE_COLORS } from './event-types.js'
 
@@ -512,6 +511,7 @@ function markRow(el, color) {
 }
 
 function openEventModal(fcEvent, keywords = [], row = null) {
+  import('add-to-calendar-button')
   let d = ensureDialog()
   let { color, images, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
   d.images = images

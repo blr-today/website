@@ -3,6 +3,10 @@
 <title>{{page.title}}</title>
 <link rel="stylesheet" href="/assets/classless.css" />
 <link rel="stylesheet" href="/assets/custom.css" />
+{%- if page.layout == "events" and page.events.size > 0 %}
+<link rel="modulepreload" href="/assets/js/calendar-render.js" />
+<link rel="preload" href="/{{ page.path | replace: ".md", "/" }}cal.ics" as="fetch" crossorigin />
+{%- endif %}
 
 <!-- Generated via https://realfavicongenerator.net/ -->
 <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=3">

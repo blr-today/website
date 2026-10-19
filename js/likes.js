@@ -2,10 +2,14 @@
 const LIKES = 'blr-likes'
 
 // FullCalendar gives floating ICS times in local time, so days are local too
-const isoDay = d => new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(d)
+const DAY = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' })
+const isoDay = d => DAY.format(d)
+
+let cache = null
+addEventListener('storage', e => { if (e.key === LIKES) cache = null })
 
 function read() {
-  try { return JSON.parse(localStorage.getItem(LIKES)) || {} } catch { return {} }
+  try { return cache ??= JSON.parse(localStorage.getItem(LIKES)) || {} } catch { return {} }
 }
 
 function likeKey(fcEvent) {
@@ -29,6 +33,7 @@ function toggleLike(fcEvent) {
     for (let [k, until] of Object.entries(likes)) if (until < today) delete likes[k]
     likes[key] = isoDay(fcEvent.end ? new Date(fcEvent.end - 1) : fcEvent.start)
   }
+  cache = likes
   try { localStorage.setItem(LIKES, JSON.stringify(likes)) } catch {}
   markRows(key, Boolean(likes[key]))
   return Boolean(likes[key])

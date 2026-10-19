@@ -21,6 +21,9 @@ function alignTimeColumn(calendarEl) {
   })
 }
 
+const DAY = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' })
+const WEEKDAY = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'short' })
+
 // Price tags from ingest, shown on every calendar
 const PRICE_TAG = /^(FREE|BUDGET|PRICEY)$/
 const LASTCALL = 'LASTCALL'
@@ -91,10 +94,7 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
       },
     },
     headerToolbar: false,
-    listDayFormat: ({ date }) => {
-      let fmt = opts => date.marker.toLocaleDateString('en-US', { timeZone: 'UTC', ...opts })
-      return `${fmt({ month: 'long', day: 'numeric', year: 'numeric' })} (${fmt({ weekday: 'short' })})`
-    },
+    listDayFormat: ({ date }) => `${DAY.format(date.marker)} (${WEEKDAY.format(date.marker)})`,
     listDaySideFormat: false,
     plugins: [
       listPlugin,
