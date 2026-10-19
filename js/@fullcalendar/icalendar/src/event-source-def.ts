@@ -104,6 +104,7 @@ function expandICalEvents(iCalExpander: IcalExpander, range: DateRange): EventIn
 
 function buildNonDateProps(iCalEvent: ICAL.Event): EventInput {
   return {
+    id: iCalEvent.uid,
     title: iCalEvent.summary,
     url: extractEventUrl(iCalEvent),
     color: iCalEvent.color,

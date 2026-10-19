@@ -1,5 +1,6 @@
 import { likeKey, isLiked, toggleLike } from './likes.js'
 import { TYPE_COLORS } from './event-types.js'
+import { shownTags } from './tags.js'
 
 const TZ = 'Asia/Kolkata'
 const ATTENDANCE = {
@@ -15,7 +16,10 @@ const AVAILABILITY = {
 
 const SIDE_BY_SIDE = matchMedia('(min-width: 60rem)')
 
-let index = null
+let index = new Map()
+let details = new Map()
+let current = null
+let reported = new Set()
 let cdnAllowed = null
 let tagInfo = null
 let dialog = null
@@ -42,43 +46,38 @@ const safeUrl = u => typeof u === 'string' && /^https?:\/\//i.test(u.trim()) ? u
 const host = u => { try { return new URL(u).hostname.replace(/^www\./, '') } catch { return u } }
 const humanize = s => s.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().replace(/^./, c => c.toUpperCase())
 
-// The page's <noscript> block already carries every event's JSON-LD
-function loadIndex() {
-  if (index) return index
-  index = new Map()
-  for (let ns of document.querySelectorAll('noscript')) {
-    if (!ns.textContent.includes('application/ld+json')) continue
-    let doc = new DOMParser().parseFromString(ns.textContent, 'text/html')
-    for (let script of doc.querySelectorAll('script[type="application/ld+json"]')) {
-      try {
-        let event = JSON.parse(script.textContent)
-        let entry = { event, source: script.dataset.url, start: Date.parse(event.startDate) }
-        if (!index.has(event.url)) index.set(event.url, [])
-        index.get(event.url).push(entry)
-      } catch { }
-    }
-  }
-  return index
-}
-
+// Pages without per-event files, like the digest preview, hand over their JSON-LD here
 function addEvents(events) {
-  let all = loadIndex()
   for (let event of events) {
-    if (!all.has(event.url)) all.set(event.url, [])
-    all.get(event.url).push({ event, source: event.url, start: Date.parse(event.startDate) })
+    if (!index.has(event.url)) index.set(event.url, [])
+    index.get(event.url).push({ event, source: event.url, start: Date.parse(event.startDate) })
   }
 }
 
 function findEvent(fcEvent) {
-  let candidates = loadIndex().get(fcEvent.url) || []
+  let candidates = index.get(fcEvent.url) || []
   let start = fcEvent.start ? fcEvent.start.getTime() : 0
   return candidates.reduce((best, c) =>
     !best || Math.abs(c.start - start) < Math.abs(best.start - start) ? c : best, null)
 }
 
-// schema.org type, read from the page data the modal already indexes
+const eventId = fcEvent => fcEvent?.id?.replace(/@blr\.today$/, '') || null
+const eventPage = fcEvent => eventId(fcEvent) && `/event/${eventId(fcEvent)}/`
+
+// Full JSON-LD lives at /event/<id>.json, fetched on hover or click
+function loadDetails(fcEvent) {
+  let id = eventId(fcEvent)
+  if (!id) return Promise.resolve(null)
+  if (!details.has(id)) {
+    details.set(id, fetch(`/event/${id}.json`).then(r => r.ok ? r.json() : null).catch(() => null)
+      .then(d => d && { event: d.event, source: d.source, start: Date.parse(d.event.startDate) }))
+  }
+  return details.get(id)
+}
+
+// schema.org type, from the X-BLR-TYPE the calendar feed carries
 function eventType(fcEvent) {
-  let type = findEvent(fcEvent)?.event['@type']
+  let type = fcEvent.extendedProps?.type || findEvent(fcEvent)?.event['@type']
   return (Array.isArray(type) ? type[0] : type) || 'Event'
 }
 
@@ -218,12 +217,10 @@ function thumb(src) {
   return `/img/600/${src.slice('https://'.length)}`
 }
 
-function reportUncached() {
-  let missed = new Set()
-  for (let entries of loadIndex().values()) {
-    for (let { event } of entries) images(event).filter(src => !onCdn(src)).forEach(src => missed.add(src))
-  }
-  if (missed.size) console.error(`blr.today: ${missed.size} event image(s) not in _data/image_cdn.yml, served unresized:`, [...missed])
+function reportUncached(event) {
+  let missed = images(event).filter(src => !onCdn(src) && !reported.has(src))
+  missed.forEach(src => reported.add(src))
+  if (missed.length) console.error(`blr.today: ${missed.length} event image(s) not in _data/image_cdn.yml, served unresized:`, missed)
 }
 
 function addressLines(place) {
@@ -333,8 +330,17 @@ function calendarButton(event, where) {
   })
 }
 
+// Until the JSON-LD arrives, the calendar feed has enough for a first look
+function feedEvent(fcEvent) {
+  let props = fcEvent.extendedProps || {}
+  return {
+    '@type': props.type, name: fcEvent.title, url: fcEvent.url, location: props.location, description: props.description,
+    startDate: fcEvent.start?.toISOString(), endDate: fcEvent.end?.toISOString(),
+  }
+}
+
 function build(fcEvent, entry, keywords) {
-  let event = entry?.event || { name: fcEvent.title, url: fcEvent.url, startDate: fcEvent.start?.toISOString(), endDate: fcEvent.end?.toISOString() }
+  let event = entry?.event || feedEvent(fcEvent)
   let type = event['@type'] && event['@type'] !== 'Event' ? event['@type'] : (event.additionalType || 'Event')
   let color = fcEvent.backgroundColor || TYPE_COLORS[event['@type']] || TYPE_COLORS.Event
   let status = tail(event.eventStatus)
@@ -421,7 +427,9 @@ function build(fcEvent, entry, keywords) {
     section('about', 'About', paragraphs(event.description)),
     section('listings', links.length > 1 ? `Listed on ${links.length} sites` : 'Listed on',
       h('ul', {}, links.map((u, i) => h('li', {}, h('a', { href: u, rel: 'noopener', target: '_blank', text: host(u) }), i === 0 && links.length > 1 ? ' (main listing)' : null)))),
-    h('p', { class: 'blr-event__feedback' }, h('button', { type: 'button', 'data-feedback': 'event', 'data-feedback-about': event.name, text: 'Send feedback' })))
+    h('p', { class: 'blr-event__feedback' },
+      eventPage(fcEvent) && location.pathname !== eventPage(fcEvent) && h('a', { class: 'blr-event__permalink', href: eventPage(fcEvent), text: 'Event page' }),
+      h('button', { type: 'button', 'data-feedback': 'event', 'data-feedback-about': event.name, text: 'Send feedback' })))
 
   return { color, images: pics, inner: h('div', { class: 'blr-event__inner' }, stub, media, content) }
 }
@@ -449,6 +457,7 @@ function ensureDialog() {
   })
   dialog.addEventListener('close', () => {
     if (swaps) return swaps--
+    current = null
     markRow(null)
     if (history.state?.blrEvent) history.back()
   })
@@ -510,22 +519,41 @@ function markRow(el, color) {
   el?.style.setProperty('--blr-event-color', color)
 }
 
-function openEventModal(fcEvent, keywords = [], row = null) {
-  import('add-to-calendar-button')
-  let d = ensureDialog()
-  let { color, images, inner } = build(fcEvent, findEvent(fcEvent), [...keywords])
-  d.images = images
-  d.style.setProperty('--blr-event-color', color)
-  markRow(row, color)
-  d.replaceChildren(h('button', { type: 'button', class: 'blr-event__close', 'aria-label': 'Close', text: '×' }), inner)
-  d.querySelectorAll('.blr-event__media img').forEach(img => img.addEventListener('error', () => {
+// The calendar's merged events link to this calendar's copy, as the feed does
+function withFeedUrl(fcEvent, entry) {
+  return entry && fcEvent.url ? { ...entry, event: { ...entry.event, url: fcEvent.url } } : entry
+}
+
+function fill(root, fcEvent, entry, keywords, ...before) {
+  let { color, images, inner } = build(fcEvent, entry, keywords)
+  if (entry) reportUncached(entry.event)
+  root.images = images
+  root.style.setProperty('--blr-event-color', color)
+  root.replaceChildren(...before, inner)
+  root.querySelectorAll('.blr-event__media img').forEach(img => img.addEventListener('error', () => {
     let original = img.dataset.original
     if (img.getAttribute('src') !== original) return img.setAttribute('src', original)
     let figure = img.closest('figure')
     img.closest('button').remove()
-    d.images = d.images.filter(src => src !== original)
+    root.images = root.images.filter(src => src !== original)
     if (figure && !figure.querySelector('img')) figure.parentElement.remove()
   }))
+  return color
+}
+
+function openEventModal(fcEvent, keywords = [], row = null) {
+  import('add-to-calendar-button')
+  let d = ensureDialog()
+  let close = () => h('button', { type: 'button', class: 'blr-event__close', 'aria-label': 'Close', text: '×' })
+  let entry = findEvent(fcEvent)
+  current = fcEvent
+  markRow(row, fill(d, fcEvent, entry, [...keywords], close()))
+  if (!entry) loadDetails(fcEvent).then(e => {
+    if (!e || current !== fcEvent || !d.open) return
+    let scroll = d.querySelector('.blr-event__inner').scrollTop
+    fill(d, fcEvent, withFeedUrl(fcEvent, e), [...keywords], close())
+    d.querySelector('.blr-event__inner').scrollTop = scroll
+  })
   if (!d.open) {
     history.pushState({ blrEvent: true }, '')
     // The page narrows beside the drawer, so keep the clicked row where it was
@@ -536,8 +564,27 @@ function openEventModal(fcEvent, keywords = [], row = null) {
   d.querySelector('.blr-event__inner').scrollTop = 0
 }
 
+// Event pages show the drawer's content as the page itself
+function renderEventPage(root, locationTags = []) {
+  import('add-to-calendar-button')
+  let event = JSON.parse(document.getElementById('blr-event-data').textContent)
+  let fcEvent = {
+    id: root.dataset.id, url: event.url, title: event.name,
+    start: new Date(event.startDate), end: event.endDate ? new Date(event.endDate) : null,
+  }
+  let keywords = typeof event.keywords === 'string' ? event.keywords.split(',') : list(event.keywords)
+  fill(root, fcEvent, { event, source: root.dataset.source }, shownTags(keywords, locationTags, [], locationTags))
+  root.addEventListener('click', e => {
+    let zoom = e.target.closest('.blr-event__zoom')
+    if (zoom) openLightbox(root.images, zoom.querySelector('img').dataset.original)
+  })
+  window.addEventListener('popstate', () => {
+    if (ignorePop) ignorePop = false
+    else if (lightbox?.open) lightbox.close()
+  })
+}
+
 SIDE_BY_SIDE.addEventListener('change', syncMode)
-;(window.requestIdleCallback || setTimeout)(reportUncached)
 
 document.addEventListener('click', e => {
   if (!dialog?.open || dialog.matches(':modal')) return
@@ -550,4 +597,4 @@ document.addEventListener('keydown', e => {
   if (!e.target.closest?.('[atcb-button-id], .blr-feedback')) dialog.close()
 })
 
-export { openEventModal, eventType, addEvents }
+export { openEventModal, renderEventPage, loadDetails, eventType, addEvents }

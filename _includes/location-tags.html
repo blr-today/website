@@ -1,0 +1,3 @@
+{%- assign locationTags = "" | split: "" %}
+{%- assign hoods = site.html_pages | where: "type", "neighbourhood" %}
+{%- for hood in hoods %}{% assign hoodTags = hood.tags | parse_json %}{% assign locationTags = locationTags | concat: hoodTags %}{% endfor %}

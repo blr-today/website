@@ -9,6 +9,6 @@ test("every coloured tag has a tooltip description", () => {
   const info = JSON.parse(html.match(/id="blr-tag-info">(.*?)<\/script>/s)[1]);
   const described = new Set(info.filter((t) => t.description).map((t) => t.id));
   const areas = JSON.parse(html.match(/var locationTags = (\[.*?\])/)[1]);
-  const prices = read("js/calendar-render.js").match(/PRICE_TAG = \/\^\((.*?)\)\$\//)[1].split("|");
+  const prices = read("js/tags.js").match(/PRICE_TAG = \/\^\((.*?)\)\$\//)[1].split("|");
   for (const tag of [...areas, ...prices]) assert.ok(described.has(tag), `${tag} missing from _data/tags.yml`);
 });

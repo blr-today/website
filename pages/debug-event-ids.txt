@@ -1,0 +1,9 @@
+---
+permalink: /_debug/event-ids.txt
+sitemap: false
+---
+{%- assign events = site.event | sort: "name" -%}
+{% for e in events %}{% unless e.noindex %}{{ e.source }} {{ e.name }}
+{% endunless %}{% endfor %}# unwanted
+{% for e in events %}{% if e.noindex %}{{ e.source }} {{ e.name }}
+{% endif %}{% endfor %}

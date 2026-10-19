@@ -2,6 +2,10 @@
 /**.ics
 	cache-control: max-age=1800, no-transform, stale-while-revalidate, stale-if-error
 
+# event pages and their JSON change with each build, like the calendars
+/event/*
+	cache-control: max-age=1800, no-transform, stale-while-revalidate, stale-if-error
+
 # let other sites read the JSON API, cached like the calendars
 /api/*
 	access-control-allow-origin: *

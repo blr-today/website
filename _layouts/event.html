@@ -1,0 +1,59 @@
+<!doctype html>
+{%- assign E = page.event %}
+<html lang="en">
+    <head data-theme="pure">
+        {% include head.html %}
+        <link rel="canonical" href="{{ page.url | absolute_url }}" />
+        <meta name="description" content="{{ E.description | strip_html | strip_newlines | truncate: 160 | escape }}" />
+        <link rel="stylesheet" href="/assets/event-modal.css" />
+        <link rel="modulepreload" href="/assets/js/event-modal.js" />
+    </head>
+    <body id="top">
+        <header>
+            <nav class="noprint">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li class=sticky><a href="/calendars/">Calendars</a></li>
+                    <li class=sticky><a href="/about/">About</a></li>
+                    <li class=sticky><a href="#feedback" data-feedback="nav">Feedback</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <article id="blr-event" class="blr-event blr-event--page" aria-labelledby="blr-event-title"
+                data-id="{{ page.name }}" data-source="{{ page.source | escape }}">
+                <div class="blr-event__inner">
+                    <div class="blr-event__content">
+                        <header class="blr-event__header">
+                            <h1 id="blr-event-title" class="blr-event__title">{{ E.name | escape }}</h1>
+                            <p class="blr-event__when"><time datetime="{{ E.startDate }}">
+                                {%- if E.startDate.size == 10 %}{{ E.startDate | date: "%A, %-d %B %Y" }}
+                                {%- else %}{{ E.startDate | date: "%A, %-d %B %Y, %-I:%M %P" }}{% endif -%}
+                            </time></p>
+                            {%- if page.where %}<p class="blr-event__where">{{ page.where | escape }}</p>{% endif %}
+                        </header>
+                        <div class="blr-event__actions">
+                            <a class="blr-event__button blr-event__button--primary" href="{{ E.url | escape }}" rel="noopener">Open on {{ page.host | default: 'the listing' }}</a>
+                        </div>
+                        {%- if E.description %}
+                        <section class="blr-event__section blr-event__about">
+                            <h3>About</h3>
+                            <div class="blr-event__section-body"><p>{{ E.description | strip_html | escape | newline_to_br }}</p></div>
+                        </section>
+                        {%- endif %}
+                    </div>
+                </div>
+            </article>
+        </main>
+        <script type="application/ld+json" id="blr-event-data">{{ page.event_json | replace: "</", "<\/" }}</script>
+        <script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
+        <script type="application/json" id="blr-tag-info">{{ site.data.tags | jsonify }}</script>
+        {%- include location-tags.html %}
+        <script type="module">
+            import { renderEventPage } from "/assets/js/event-modal.js";
+            renderEventPage(document.getElementById("blr-event"), {{ locationTags | jsonify }});
+        </script>
+        {% include footer.html %}
+        {% include feedback.html %}
+    </body>
+</html>

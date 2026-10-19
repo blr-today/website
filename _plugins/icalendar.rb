@@ -93,7 +93,7 @@ end
 # to a ICALENDAR object.
 module Jekyll
   module ToIcal
-    def to_ical(event_json)
+    def to_ical(event_json, id)
       ics = Icalendar::Event.new
       begin
         event = JSON.parse event_json
@@ -136,8 +136,8 @@ module Jekyll
       ics.dtend = Icalendar::Values::Date.new(ics.dtend.value + 1) if ics.dtend.is_a?(Icalendar::Values::Date)
       # Some sources end an event before it starts, which RFC 5545 forbids
       ics.dtend = nil if ics.dtend && ics.dtstart && ics.dtend.value < ics.dtstart.value
-      # TODO: Improve
-      ics.uid = "blr.today/#{event['url']}"
+      # Recurring events share a URL, but each occurrence has its own id
+      ics.uid = "#{id}@blr.today"
 
       ics.url = event['url']
       # # TODO: Move this to a method

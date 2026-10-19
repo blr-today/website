@@ -34,6 +34,11 @@ exclude:
   # SES has no production access yet, so no email sign-up
   - pages/subscribe.html
 timezone: Asia/Kolkata
+# Shared by every calendar, and event pages with these tags stay out of the sitemap
+excludeTags: &excludeTags '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO", "SPORTS-SCREENING"]'
+collections:
+  event:
+    output: true
 defaults:
   - scope:
       path: "cal/*.md"
@@ -42,7 +47,7 @@ defaults:
       permalink: /:path/:basename/
       subscribe: true
       domain: ""
-      excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO", "SPORTS-SCREENING"]'
+      excludeTags: *excludeTags
       layouts:
         - layout: icalendar.ics
           permalink: /:path/:basename/cal.ics
@@ -59,7 +64,7 @@ defaults:
             denylist_tags AS (
               SELECT value FROM json_each(:excludeTags)
             )
-            SELECT url,
+            SELECT url, id,
               -- Merged events link to the copy on this calendar's domain, if any
               coalesce((
                 SELECT json_set(event_json, '$.url', same_as.value)
@@ -93,6 +98,13 @@ defaults:
               )
             ORDER BY event_json -> '$.startDate';
 sqlite:
+  # ingest's src/event_ids.py fills events.id
+  - collection: event
+    file: events.db
+    query: |
+      SELECT id AS name, 'event' AS layout, '/event/' || id || '/' AS permalink,
+        (event_json ->> '$.name') || ' | blr.today' AS title, url AS source, event_json
+      FROM events
   - data: metrics
     file: events.db
     query: "SELECT COUNT(*) as total FROM events"

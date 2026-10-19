@@ -19,4 +19,4 @@ TZOFFSETTO:+0530
 TZNAME:IST
 END:STANDARD
 END:VTIMEZONE
-{%for row in page.events %}{{row.event_json|to_ical}}{%endfor%}END:VCALENDAR
+{%for row in page.events %}{{row.event_json | to_ical: row.id}}{%endfor%}END:VCALENDAR

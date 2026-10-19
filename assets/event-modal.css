@@ -178,3 +178,15 @@ html:has(dialog.blr-event[open]:not(:modal)) .fc-list-event.blr-event-current.bl
 .blr-lightbox__prev { left: .5rem; }
 .blr-lightbox__next { right: .5rem; }
 .blr-lightbox__count { position: absolute; bottom: 1rem; left: 50%; translate: -50% 0; font: 600 .9rem/1 system-ui, sans-serif; }
+
+/* Event pages show the drawer as a card on the page */
+.blr-event.blr-event--page {
+  position: static; inset: auto; z-index: auto; display: block;
+  width: 100%; max-width: 40rem; height: auto; max-height: none; margin: 0 auto;
+  border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: .25rem;
+  /* Clip without becoming a scroll container, which would swallow the page's scrolling */
+  overflow: clip; overscroll-behavior: auto;
+}
+.blr-event--page .blr-event__inner { height: auto; overflow: visible; }
+.blr-event--page .blr-event__stub { padding-right: 1rem; }
+.blr-event__permalink { margin-right: .75rem; font-size: .75rem; }

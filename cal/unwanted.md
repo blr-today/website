@@ -11,7 +11,7 @@ sqlite:
     allowlist_tags AS (
       SELECT value FROM json_each(:tags)
     )
-    SELECT *
+    SELECT url, id, event_json
     FROM events
     WHERE EXISTS (
         SELECT 1
