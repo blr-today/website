@@ -67,3 +67,13 @@ test("the sitemap lists no noindex pages", () => {
     assert.ok(!read(file).includes('name="robots" content="noindex'), `${path} is noindex but in the sitemap`);
   }
 });
+
+test("events on the unwanted calendar stay out of search", () => {
+  const sitemap = read("sitemap.xml");
+  const cal = new ICAL.Component(ICAL.parse(read("cal/unwanted/cal.ics")));
+  for (const vevent of cal.getAllSubcomponents("vevent")) {
+    const id = vevent.getFirstPropertyValue("uid").replace(/@blr\.today$/, "");
+    assert.ok(read(`event/${id}/index.html`).includes('name="robots" content="noindex'), `${id} is indexable`);
+    assert.ok(!sitemap.includes(`/event/${id}/`), `${id} is in the sitemap`);
+  }
+});

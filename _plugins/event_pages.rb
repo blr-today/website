@@ -8,7 +8,9 @@ module Jekyll
     def generate(site)
       events = site.collections['event']
       return unless events
-      hidden = JSON.parse(site.config['excludeTags'] || '[]')
+      # The unwanted calendar collects the rest, so its tags count even if excludeTags misses one
+      unwanted = site.pages.find { |p| p.relative_path == 'cal/unwanted.md' }
+      hidden = JSON.parse(site.config['excludeTags'] || '[]') | JSON.parse(unwanted&.data&.dig('tags') || '[]')
       events.docs.each do |doc|
         event = JSON.parse(doc.data['event_json'])
         unlisted = (Array(event['keywords']) & hidden).any?
