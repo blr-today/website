@@ -24,7 +24,7 @@ fi
 [[headers]]
   for = "/img/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    cache-control = "public, max-age=31536000, immutable"
     Netlify-CDN-Cache-Control = "public, durable, s-maxage=31536000"
     Netlify-Cache-ID = "thumbs"
 
