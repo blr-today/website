@@ -28,7 +28,7 @@ export default {
         module: "ESNext",
         moduleResolution: "bundler",
         strict: false,
-        lib: ["es6"]
+        lib: ["es2019"]
       },
     }),
     terser(),
