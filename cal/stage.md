@@ -5,6 +5,8 @@ type: activity
 atproto: stage.blr.today
 fedi: stage@fedi.blr.today
 tags: '["THEATER", "DANCE-PERFORMANCE", "PERFORMANCE-ART", "STORYTELLING", "POETRY"]'
+# Default exclusions plus dance classes, which belong on the dance calendar
+excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO", "SPORTS-SCREENING", "DANCE-CLASS"]'
 ---
 > Plays, dance performances, storytelling and poetry.
 
