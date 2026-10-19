@@ -18,7 +18,7 @@ title: changelog
 - `New` Send feedback from the menu, the footer, the filter or an event popup.
 - `New` Like events with ♥. Likes stay in your browser and liked events are highlighted on every calendar.
 - `New` Filter large calendars like [Curated](/) by event type, area and price.
-- `New` Events are deduplicated. The [duplicates](/duplicates/) page lists such combinations.
+- `New` Events are deduplicated. The [duplicates](/_debug/duplicates/) page lists such combinations.
 - `Fixed` Courtyard Koota event dates are read correctly again.
 - `Removed` The screensaver button on calendar pages.
 - `Fixed` District, AllEvents and PUMA Runs calendars.

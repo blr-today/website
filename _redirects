@@ -29,3 +29,4 @@
 
 # Latest dataset release, same file the site is built from
 /api/events.db https://github.com/blr-today/dataset/releases/latest/download/events.db 302
+/duplicates/ /_debug/duplicates/ 301
