@@ -102,11 +102,14 @@ module Jekyll
         print(event_json)
         return ""
       end
-      ics.color = COLOR_MAP[event['@type']]
+      type = Array(event['@type']).first
+      ics.color = COLOR_MAP[type]
+      ics.append_custom_property('X-BLR-TYPE', type) if type.is_a? String
       ics.description = event['description']
       # set geolocation if available in schema.org/Place
-      if event['location'].is_a?(Hash) && event['location']['geo']
-        ics.geo = event['location']['geo']['latitude'].to_s + ";" + event['location']['geo']['longitude'].to_s
+      if event['location'].is_a?(Hash) && event['location']['geo'].is_a?(Hash)
+        geo = event['location']['geo'].values_at('latitude', 'longitude')
+        ics.geo = geo.map(&:to_f) if geo.all? { |v| Float(v, exception: false) }
       end
 
       if event ['location'] && event['location'].is_a?(Array)
@@ -131,6 +134,8 @@ module Jekyll
       ics.dtend = parse_datetime(event['endDate'])
       # An all-day DTEND is exclusive, but schema.org endDate is the last day
       ics.dtend = Icalendar::Values::Date.new(ics.dtend.value + 1) if ics.dtend.is_a?(Icalendar::Values::Date)
+      # Some sources end an event before it starts, which RFC 5545 forbids
+      ics.dtend = nil if ics.dtend && ics.dtstart && ics.dtend.value < ics.dtstart.value
       # TODO: Improve
       ics.uid = "blr.today/#{event['url']}"
 
@@ -156,11 +161,9 @@ module Jekyll
       #   end
         
       # end
-      if event['keywords'].is_a? String
-        ics.categories = event['keywords']
-      end
-      if event['keywords'].is_a? Array
-        ics.categories = event['keywords'].join(",")
+      keywords = event['keywords'].is_a?(String) ? event['keywords'].split(',') : Array(event['keywords'])
+      unless keywords.empty?
+        ics.categories = [Icalendar::Values::Helpers::Array.new(keywords.map(&:to_s), Icalendar::Values::Text, {}, delimiter: ',')]
       end
       ics.to_ical
     end
@@ -168,3 +171,8 @@ module Jekyll
 end
 
 Liquid::Template.register_filter(Jekyll::ToIcal)
+
+# The layout's own lines end in LF, but RFC 5545 wants CRLF throughout
+Jekyll::Hooks.register :pages, :post_render do |page|
+  page.output = page.output.gsub(/\r?\n/, "\r\n") if page.output_ext == '.ics'
+end
