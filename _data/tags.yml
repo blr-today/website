@@ -163,6 +163,22 @@
   title: Whitefield [Area]
   description: Whitefield and East Bangalore, from KR Puram to ITPL
 
+- id: HEBBAL
+  title: Hebbal [Area]
+  description: Hebbal, part of North Bangalore
+
+- id: JAKKUR
+  title: Jakkur [Area]
+  description: Jakkur, part of North Bangalore
+
+- id: ECITY
+  title: Electronic City [Area]
+  description: Electronic City, off Hosur Road
+
+- id: KENGERI
+  title: Kengeri [Area]
+  description: Kengeri, West Bangalore
+
 - id: LASTCALL
   title: Last call [Seats]
   description: A tenth of the seats left, or 8 or fewer once three quarters are sold, or 8 or fewer when the total is unknown
