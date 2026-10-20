@@ -11,19 +11,23 @@ sqlite:
       SELECT url,
         event_json->>'$.name' AS name,
         event_json->>'$.startDate' AS startDate,
-        event_json->>'$.sameAs' AS sameAs
+        event_json->>'$.sameAs' AS sameAs,
+        COALESCE(event_json->>'$.keywords', '[]') AS keywords
       FROM events
       WHERE json_array_length(event_json->'$.sameAs') > 0
         AND event_json->>'$.startDate' >= date('now')
       ORDER BY event_json->>'$.startDate'
 ---
 {% assign count = page.duplicates | size %}
+{%- assign unwanted = site.pages | where: "path", "cal/unwanted.md" | first %}
+{%- assign hidden = unwanted.tags | parse_json %}
 <h2>Duplicates</h2>
 <p>
   {{ count }} upcoming events are listed on more than one site. blr.today shows
   each of them once. Calendars for a single source link to that source's
   listing, and the rest link to the first site below.
 </p>
+<p>🗑️ marks events tagged as <a href="/cal/unwanted/">UNWANTED</a>, which only show up on that calendar.</p>
 
 <style>
   table.duplicates { width: 100%; table-layout: fixed; }
@@ -48,7 +52,10 @@ sqlite:
     {%- assign dow = e.startDate | date: "%u" | plus: 0 %}
     <tr{% if dow > 5 %} class="weekend"{% endif %}>
       <td><time datetime="{{ e.startDate }}">{{ e.startDate | date: "%Y-%m-%d %H:%M" }}</time></td>
-      <td>{{ e.name }}</td>
+      {%- assign trash = false %}
+      {%- assign keywords = e.keywords | parse_json %}
+      {%- for k in keywords %}{% if hidden contains k %}{% assign trash = true %}{% break %}{% endif %}{% endfor %}
+      <td>{% if trash %}<span title="UNWANTED">🗑️</span> {% endif %}{{ e.name }}</td>
       <td>
         {%- assign urls = others | unshift: e.url %}
         {%- for u in urls %}
