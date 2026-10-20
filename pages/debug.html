@@ -1,0 +1,14 @@
+---
+layout: default
+title: blr.today / debug
+permalink: /_debug/
+noindex: true
+sitemap: false
+---
+<h2>Debug pages</h2>
+<ul>
+{%- assign pages = site.pages | where_exp: "p", "p.debug" | sort: "url" %}
+{%- for p in pages %}
+  <li><a href="{{ p.url }}">{{ p.url }}</a>: {{ p.debug }}</li>
+{%- endfor %}
+</ul>

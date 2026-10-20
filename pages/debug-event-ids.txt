@@ -1,4 +1,5 @@
 ---
+debug: Every event URL and its id, unwanted ones last
 permalink: /_debug/event-ids.txt
 sitemap: false
 ---
