@@ -1,0 +1,95 @@
+---
+debug: Events read from Instagram posts
+layout: default
+title: blr.today / Instagram
+permalink: /_debug/insta/
+noindex: true
+sitemap: false
+sqlite:
+  - data: insta
+    file: events.db
+    query: |
+      WITH links AS (
+        SELECT e.rowid AS id, l.value AS link
+        FROM events e, json_each(json_array(e.url)) l
+        UNION ALL
+        SELECT e.rowid, s.value
+        FROM events e, json_each(coalesce(e.event_json->'$.sameAs', '[]')) s
+      ), posts AS (
+        SELECT id,
+          min(link) FILTER (WHERE link LIKE 'https://www.instagram.com/p/%') AS post,
+          count(*) FILTER (WHERE link LIKE 'https://www.instagram.com/p/%') AS posts,
+          min(link) FILTER (WHERE link NOT LIKE 'https://www.instagram.com/%') AS listing
+        FROM links GROUP BY id
+      )
+      SELECT p.post, p.posts, p.listing,
+        event_json->>'$.name' AS name,
+        event_json->>'$.startDate' AS startDate,
+        event_json->>'$.description' AS description,
+        event_json->>'$.location.name' AS venue,
+        CASE WHEN event_json->>'$.organizer.url' LIKE 'https://www.instagram.com/%'
+          THEN event_json->>'$.organizer.name' END AS account,
+        CASE WHEN json_type(event_json->'$.image') = 'array'
+          THEN event_json->>'$.image[0]' ELSE event_json->>'$.image' END AS image,
+        coalesce(event_json->>'$.keywords', '[]') AS keywords
+      FROM events e JOIN posts p ON p.id = e.rowid
+      WHERE 'INSTAGRAM' IN (SELECT value FROM json_each(event_json->'$.keywords'))
+        AND event_json->>'$.startDate' >= date('now')
+      ORDER BY event_json->>'$.startDate'
+---
+{%- assign unwanted = site.pages | where: "path", "cal/unwanted.md" | first %}
+{%- assign hidden = unwanted.tags | parse_json %}
+{%- assign alone = 0 %}
+{%- for e in page.insta %}{% unless e.listing %}{% assign alone = alone | plus: 1 %}{% endunless %}{% endfor %}
+<h2>Instagram events</h2>
+<p>
+  {{ page.insta | size }} upcoming events came from Instagram posts by the
+  accounts in ingest's <code>in/known-hosts.yml</code>. {{ alone }} of them are
+  only on Instagram; the rest merged with another listing, linked under the name.
+  ×2 means more posts announced the same event. 🗑️ marks
+  <a href="/cal/unwanted/">unwanted</a> tags. Images expire a few days after a scrape.
+</p>
+
+<style>
+  table.insta { width: 100%; table-layout: fixed; }
+  table.insta th, table.insta td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.insta th:first-child { width: 7em; }
+  table.insta th:nth-child(2) { width: 112px; }
+  table.insta th:nth-child(4) { width: 20%; }
+  table.insta img { width: 100px; height: 100px; object-fit: cover; }
+  table.insta small { opacity: 0.7; }
+  table.insta tr.alone td:first-child { border-left: 3px solid var(--pink-glamour); }
+</style>
+
+<table class="insta">
+  <thead>
+    <tr><th>When</th><th>Post</th><th>Event</th><th>Account, venue, tags</th></tr>
+  </thead>
+  <tbody>
+  {%- for e in page.insta %}
+    {%- assign keywords = e.keywords | parse_json %}
+    <tr{% unless e.listing %} class="alone"{% endunless %}>
+      <td><time datetime="{{ e.startDate }}">{{ e.startDate | date: "%a %d %b" }}{% if e.startDate contains "T" %}<br>{{ e.startDate | date: "%H:%M" }}{% endif %}</time></td>
+      <td>
+        <a href="{{ e.post }}" rel="noopener">{% if e.image %}<img src="/.netlify/images?url={{ e.image | url_encode }}&amp;w=200" alt="" loading="lazy">{% else %}post{% endif %}</a>
+        {%- if e.posts > 1 %} ×{{ e.posts }}{% endif %}
+      </td>
+      <td>
+        <a href="{{ e.post }}" rel="noopener">{{ e.name }}</a>
+        {%- if e.listing %}<br><small>⧉ <a href="{{ e.listing }}" rel="noopener">{{ e.listing | split: "/" | slice: 2 | first | remove: "www." }}</a></small>{% endif %}<br>
+        <small>{{ e.description | strip_html | truncate: 240 }}</small>
+      </td>
+      <td>
+        {%- if e.account %}<a href="https://www.instagram.com/{{ e.account | remove_first: "@" }}/" rel="noopener">{{ e.account }}</a><br>{% endif %}
+        {%- if e.venue %}<small>{{ e.venue }}</small><br>{% endif %}
+        {%- for k in keywords %}{% if k == "INSTAGRAM" %}{% continue %}{% endif %}<small>{% if hidden contains k %}🗑️{% endif %}{{ k }}</small> {% endfor %}
+      </td>
+    </tr>
+  {%- endfor %}
+  </tbody>
+</table>
