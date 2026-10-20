@@ -1,0 +1,60 @@
+---
+debug: Listings per source, dedup, and tags by calendar
+layout: default
+title: blr.today / sources
+permalink: /_debug/sources/
+noindex: true
+sitemap: false
+---
+{%- assign t = page.bucket_totals %}
+{%- assign kept = t.Curated | plus: t.Others | plus: t.Unwanted %}
+<h2>Sources</h2>
+<p>
+  {{ kept | plus: t.Duplicate }} listings came in from {{ page.source_count }} sources.
+  Dedup merged {{ t.Duplicate }} of them into an event listed elsewhere, which leaves
+  {{ kept }} original events: {{ t.Curated }} on the <a href="/">curated</a> calendar,
+  {{ t.Unwanted }} <a href="/cal/unwanted/">unwanted</a>, and {{ t.Others }} others.
+  Duplicates are counted from each event's <code>sameAs</code>, so a copy is
+  credited to the site it came from.
+</p>
+
+<div class="scroll">{{ page.sankey }}</div>
+
+<h2 id="tags">Tags</h2>
+<p>
+  All {{ kept }} events by source, location and other tags, and how many of
+  each made the <a href="/">curated</a> or <a href="/cal/unwanted/">unwanted</a>
+  calendar. <em>No location</em> means the event carries none of the
+  neighbourhood tags. <em>Tag</em> lists every other tag on at least 3 events.
+  Cells are shaded by their share of the row; hover for the exact share.
+</p>
+<div id="tag-matrix" class="matrix"></div>
+
+<style>
+  .scroll { overflow-x: auto; }
+  .sankey { width: 100%; min-width: 720px; height: auto; font-size: 12px; }
+  .sankey text { dominant-baseline: middle; fill: var(--cfg); }
+  .sankey .halo { paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
+  .sankey .flow { opacity: .35; }
+  .sankey .flow:hover { opacity: .7; }
+  .sankey .src { fill: var(--cdark); }
+  .sankey .b0 { fill: #2a9d5c; }
+  .sankey .b1 { fill: #3b8bba; }
+  .sankey .b2 { fill: #c0392b; }
+  .sankey .b3 { fill: #999; }
+  /* The box scrolls both ways, so the header stays frozen over every block */
+  .matrix { overflow: auto; max-height: 85vh; }
+  table.heat { border-collapse: collapse; font-size: .75rem; width: auto; margin: 0; }
+  table.heat thead { position: sticky; top: 0; z-index: 1; background: var(--cbg); }
+  table.heat th, table.heat td { padding: .15rem .3rem; border: none; white-space: nowrap; }
+  table.heat td { min-width: 2rem; text-align: center; background: color-mix(in srgb, #4363d8 var(--heat, 0%), transparent); }
+  table.heat td.hot { color: #fff; }
+  table.heat tbody th { text-align: right; font-weight: normal; }
+  table.heat th.col { height: 7rem; vertical-align: bottom; font-weight: normal; }
+  table.heat th.col span { writing-mode: vertical-rl; transform: rotate(180deg); }
+  table.heat th.block { text-align: left; font-weight: bold; padding-top: .8rem; }
+  table.heat .gap { min-width: .8rem; background: none; }
+  table.heat .n { color: var(--cdark); }
+</style>
+<script type="application/json" id="tag-kinds">{{ page.tag_kinds | jsonify }}</script>
+<script type="module" src="/assets/js/tag-matrix.js"></script>
