@@ -64,5 +64,6 @@ remote_images = [
   'https://fillum\.in/images/.*',
   'https://assets-in\.bmscdn\.com/.*',
   'https://scontent[^/]*\.cdninstagram\.com/.*',
-  'https://i\.pinimg\.com/.*'
+  'https://i\.pinimg\.com/.*',
+  'https://gardencitywalks\.com/images/.*'
 ]
