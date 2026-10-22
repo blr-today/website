@@ -4,6 +4,7 @@ title: blr.today / map
 permalink: /map/
 ---
 <link rel="stylesheet" href="/assets/js/leaflet.css" />
+<link rel="stylesheet" href="/assets/event-modal.css">
 <style>
   #map { height: 70vh; min-height: 400px; }
   .map-popup ul { max-height: 260px; overflow-y: auto; margin: 0.5em 0 0; padding: 0; list-style: none; }
@@ -13,8 +14,17 @@ permalink: /map/
   .map-dot { display: inline-block; width: 0.7em; height: 0.7em; margin-right: 0.4em; border-radius: 50%; }
   #map-legend { display: flex; flex-wrap: wrap; gap: 0.3em 1.2em; padding: 0; list-style: none; font-size: 0.9em; }
 </style>
+<div class="card hint">
+  <p><strong>A note on design</strong></p>
+  <p>Maps are terrible User Interface for event discovery. Events happen at a datetime first, and a location later. Flipping them to be location first makes for a weird experience because it cannot use spatiality properly - two events close to each other might have very little in common. The colors on this page could be improved as well, but maps won't work for what you're trying.</p>
+  <p>Go to <a href="/follow/">blr.today/follow/</a> and subscribe to the calendar of your choice using your Calendar app instead. Calendars are datetime-first, and work perfectly well for event discovery (as long as there aren't too many events at the same time).</p>
+</div>
 <p id="map-summary">Loading events…</p>
 <div id="map"></div>
-<p>Circles are coloured by the most common event type at the venue, and get bigger with more events. Curated events are highlighted in the list.</p>
+<p>Circles are coloured by the most common event type at the venue, and get bigger with more events. Curated events are highlighted in the list. Click an event to see its details.</p>
 <ul id="map-legend"></ul>
+{%- include location-tags.html %}
+<script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
+<script type="application/json" id="blr-tag-info">{{ site.data.tags | jsonify }}</script>
+<script type="application/json" id="blr-location-tags">{{ locationTags | jsonify }}</script>
 <script type="module" src="/assets/js/map.js"></script>

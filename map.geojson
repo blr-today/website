@@ -6,9 +6,10 @@ sqlite:
     file: events.db
     query: |
       WITH e AS (
-        SELECT url,
+        SELECT url, id,
           event_json->>'$.name' AS name,
           event_json->>'$.startDate' AS start,
+          event_json->>'$.endDate' AS ends,
           coalesce(event_json->>'$."@type"[0]', event_json->>'$."@type"', 'Event') AS type,
           coalesce(
             event_json->>'$.location.name',
@@ -54,7 +55,7 @@ sqlite:
       "properties": {
         "venue": {{ place.items.first.venue | jsonify }},
         "events": [{% for e in place.items %}
-          { "name": {{ e.name | jsonify }}, "url": {{ e.url | jsonify }}, "start": {{ e.start | jsonify }}, "type": {{ e.type | jsonify }}, "keywords": {{ e.keywords }} }{% unless forloop.last %},{% endunless %}{% endfor %}
+          { "id": {{ e.id | jsonify }}, "name": {{ e.name | jsonify }}, "url": {{ e.url | jsonify }}, "start": {{ e.start | jsonify }}, "end": {{ e.ends | jsonify }}, "type": {{ e.type | jsonify }}, "keywords": {{ e.keywords }} }{% unless forloop.last %},{% endunless %}{% endfor %}
         ]
       },
       "geometry": {
