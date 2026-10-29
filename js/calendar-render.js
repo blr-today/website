@@ -3,6 +3,8 @@ import iCalendarPlugin from '@fullcalendar/icalendar'
 import listPlugin from '@fullcalendar/list'
 import adaptivePlugin from '@fullcalendar/adaptive'
 import { subscribeButton } from "./subscribe.js";
+import { dateJump } from "./date-jump.js";
+import { TYPE_COLORS } from "./event-types.js";
 import { openEventModal, loadDetails, eventType } from "./event-modal.js";
 import { markLiked } from "./likes.js";
 import { tagKind, visibleKeywords, shownTags } from "./tags.js";
@@ -84,6 +86,8 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
       let keywords = tagged(info.event)
 
       let element = info.el
+      element.dataset.type = eventType(info.event)
+      element.dataset.color = info.event.backgroundColor || TYPE_COLORS[element.dataset.type] || TYPE_COLORS.Event
       markLiked(element, info.event)
       // Tags sit below the time, wrapping within the time column's width
       let el = element.querySelector('.fc-list-event-time-outer')
@@ -108,6 +112,7 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
     schedulerLicenseKey: 'AGPL-My-Frontend-And-Backend-Is-Open-Source'
   });
   calendar.render();
+  dateJump(calendarEl)
   let filterEl = document.getElementById('blr-tag-filter')
   let facets = e => [{ group: 'type', name: eventType(e) }].concat([...visibleKeywords(e.extendedProps.keywords, pageTags, onlyTags)]
     .map(name => ({ group: tagKind(name, locationTags), name })).filter(f => ['activity', 'location', 'price'].includes(f.group)))

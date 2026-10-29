@@ -6,6 +6,7 @@ title: changelog
 
 ## October 2026
 
+- `New` Jump to any date from the calendar button at the bottom of every calendar. Days with events are marked with a bar coloured by event type, and hovering a day explains the colours.
 - `Cal` Added a calendar for [Garden City Walks](/cal/gardencitywalks), nature and heritage walks through Bangalore's neighbourhoods, included in [Curated](/).
 - `New` Every calendar on the [follow](/follow/) page can now be followed on Bluesky too, from area and venue accounts to activities like [Quizzing](/cal/quizzing) and [Board Games](/cal/boardgames).
 - `New` Every activity calendar, Ranga Shankara, Alliance Française and Bangalore Film Forum can now be followed on the fediverse from the [follow](/follow/) page.
