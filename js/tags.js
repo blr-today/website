@@ -27,9 +27,9 @@ function narrowest(keywords) {
 
 function visibleKeywords(all, pageTags = [], onlyTags = null) {
   // A proper keyword is in uppercase
-  // Sub-tags like SISTERSINSWEAT/SPORTS only route events to calendars
+  // Sub-tags like SISTERSINSWEAT/SPORTS and -CURATED only route events to calendars
   let keywords = new Set([...all].map(x => String(x).trim()).filter(x=>
-    x === x.toUpperCase() && x.length >= 3 && !x.includes('/')
+    x === x.toUpperCase() && x.length >= 3 && !x.includes('/') && !x.startsWith('-')
   ))
 
   // If this page only has a single tag

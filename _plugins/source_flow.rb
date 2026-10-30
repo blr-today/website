@@ -67,7 +67,7 @@ module Jekyll
       covered = (hoods + titled.call(/\[(Area|Venue|Organizer|Curated|Aggregator)\]/) + tagged.call(SOURCE_TYPES) - titled.call(/\[Activity\]/)).to_set
       events = rows.zip(buckets).map do |(url, event), bucket|
         keywords = Array(event['keywords']).map(&:to_s).uniq
-        other = keywords.select { |k| k == k.upcase && k.size >= 3 && !k.include?('/') && !covered.include?(k) }
+        other = keywords.select { |k| k == k.upcase && k.size >= 3 && !k.include?('/') && !k.start_with?('-') && !covered.include?(k) }
         [host(url), (keywords & hoods).first, bucket, other]
       end
       kinds = %w[Source Location Calendar Tag]
