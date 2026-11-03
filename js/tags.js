@@ -37,7 +37,7 @@ function visibleKeywords(all, pageTags = [], onlyTags = null) {
   // So that the Indiranagar Page does not use that tag for eg.
   let InvisibleKeywords = new Set([
     'HIGHAPE', 'SKILLBOXES', 'INSIDER', 
-    'MV EVENT', 'ALLEVENTS', 'DISTRICT']);
+    'MV EVENT', 'ALLEVENTS', 'DISTRICT', 'BOOKMYSHOW']);
 
   if (pageTags.length == 1) {
     keywords = keywords.difference(new Set(pageTags))
