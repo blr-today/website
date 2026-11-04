@@ -4,6 +4,14 @@ permalink: /changelog/
 title: changelog
 ---
 
+## November 2026
+
+- `New` Improved debug pages: </debug/>.
+- `New` Some calendars, like [Koramangala](/cal/koramangala) and [District](/cal/district), show how many events are listed and how many our filters left out.
+- `New` Event pages have clearer titles with the date and venue, link each tag to its calendar, and link to more events in the same area.
+- `Fixed` Old event links keep working after duplicate listings are merged. The 404 page links to the original listing, or to the source's calendar, for events that have ended.
+- `Fixed` Champaca and [Sofar Sounds](/cal/sofar) calendars were missing events.
+
 ## October 2026
 
 - `New` Jump to any date from the calendar button at the bottom of every calendar. Days with events are marked with a bar coloured by event type, and hovering a day explains the colours.
