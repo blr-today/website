@@ -69,18 +69,22 @@ function closePopover() {
   pop = null
 }
 
-function showPopover(title, events, { pageX, pageY }) {
+// Fixed to the viewport, since body is a centred, positioned box that offsets absolute children
+function showPopover(title, events, { clientX, clientY }) {
   closePopover()
   pop = h('div', { class: 'event-pop', role: 'dialog', 'aria-label': title },
     h('button', { type: 'button', class: 'event-pop__close', 'aria-label': 'Close', text: '×' }),
     eventList(`${title}: ${plural(events.length, 'event')}`, events))
   pop.querySelector('.event-pop__close').addEventListener('click', closePopover)
   document.body.append(pop)
-  let width = pop.offsetWidth
-  pop.style.left = `${Math.max(8, Math.min(pageX + 12, scrollX + innerWidth - width - 8))}px`
-  pop.style.top = `${pageY + 12}px`
+  let { offsetWidth: width, offsetHeight: height } = pop
+  let below = clientY + 12 + height <= innerHeight - 8
+  pop.style.left = `${Math.max(8, Math.min(clientX + 12, innerWidth - width - 8))}px`
+  pop.style.top = `${Math.max(8, below ? clientY + 12 : clientY - height - 12)}px`
 }
 
+addEventListener('scroll', closePopover)
+addEventListener('resize', closePopover)
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !document.querySelector('dialog[open]')) closePopover() })
 document.addEventListener('click', e => {
   if (pop && !pop.contains(e.target) && !e.target.closest('[data-events], dialog')) closePopover()
