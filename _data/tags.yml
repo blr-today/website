@@ -588,11 +588,6 @@
   description: About science
   kind: activity
 
-- id: TECH
-  title: Tech [Activity]
-  description: Technology, coding and AI
-  kind: activity
-
 - id: HISTORY
   title: History [Activity]
   description: About history
