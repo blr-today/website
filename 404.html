@@ -20,24 +20,49 @@ layout: default
 <div class="container">
   <h1>404</h1>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-  <p id="gone-event" hidden>This event has ended or is no longer listed.
-    <a id="gone-calendar" href="/">See upcoming events</a>.</p>
+  <p>We asked an auto to bring you to this page. It refused.</p>
+  <div id="gone-event" hidden>
+    <p>This event has wrapped up or moved, probably before the Silk Board traffic cleared.</p>
+    <p><a id="gone-original" href="" rel="noopener" hidden>Try the original listing</a></p>
+    <p><a id="gone-calendar" href="/">See upcoming events</a></p>
+    <p><a id="gone-search" href="" rel="noopener" hidden>Search for it</a></p>
+  </div>
+  <p><a href="/">Take me home, Namma Metro style</a></p>
 </div>
 
 {%- assign sources = site.html_pages | where: "layout", "events" | where_exp: "c", "c.domain and c.domain != ''" %}
 <script>
   // Event ids start with their source's reversed domain, like in.district
   const SOURCES = { {% for c in sources %}{{ c.domain | split: "." | reverse | join: "." | jsonify }}: [{{ c.url | jsonify }}, {{ c.title | jsonify }}]{% unless forloop.last %}, {% endunless %}{% endfor %} }
+  // Sources whose links can be rebuilt from the id, checked against ingest's data
+  const ORIGINAL = {
+    'in.district': k => `https://www.district.in/events/${k}-buy-tickets`,
+    'app.urbanaut': k => `https://urbanaut.app/spot/${k}`,
+    'in.allevents': k => `https://allevents.in/bangalore/${k}`,
+    'center.underline': k => `https://underline.center/t/${k}`,
+    'com.attagalatta': k => `https://attagalatta.com/event_page.php?eventid=${k.toUpperCase()}`,
+    'com.puttingscene': k => `https://puttingscene.com/events/${k.toUpperCase()}`,
+    'in.sabhablr': k => `https://www.sabhablr.in/event-details/${k}`,
+    'com.troveexperiences': k => `https://troveexperiences.com/products/${k}`,
+    'com.bangaloreastronomyclub': k => `https://bangaloreastronomyclub.com/event/${k}/`,
+    'in.co.adidas': k => `https://www.adidas.co.in/adidasrunners/events/event/${k}`,
+    'in.cksl': k => `https://cksl.in/?eid=${k}`,
+    'tours.gully': k => `https://www.gully.tours/tours/${k}`,
+    'com.total-environment': k => `https://www.total-environment.com/music-and-events/${k}`,
+  }
+  const longest = (keys, id) => keys.filter(p => id.startsWith(p + '.')).sort((a, b) => b.length - a.length)[0]
+  const show = (el, href, text) => { el.href = href; if (text) el.textContent = text; el.hidden = false }
   const id = location.pathname.match(/^\/event\/([^/]+)/)?.[1]
   if (id) {
     document.getElementById('gone-event').hidden = false
-    const prefix = Object.keys(SOURCES).filter(p => id.startsWith(p + '.')).sort((a, b) => b.length - a.length)[0]
-    if (prefix) {
-      const link = document.getElementById('gone-calendar')
-      link.href = SOURCES[prefix][0]
-      link.textContent = `See upcoming events from ${SOURCES[prefix][1]}`
-    }
+    const source = longest(Object.keys(SOURCES), id)
+    if (source) show(document.getElementById('gone-calendar'), SOURCES[source][0], `See upcoming events from ${SOURCES[source][1]}`)
+    const ns = longest(Object.keys(ORIGINAL), id)
+    // Repeats add the start time and venue, which the source's link never had
+    const key = ns && id.slice(ns.length + 1).replace(/\.\d{8}t\d{4}(\..*)?$/, '')
+    if (key) show(document.getElementById('gone-original'), ORIGINAL[ns](key))
+    const words = id.slice((ns || source || '').length + 1).replace(/\.\d{8}t\d{4}.*$/, '').replace(/[-_.]+/g, ' ')
+    const host = (ns || source || '').split('.').reverse().join('.')
+    if (!key && host && /[a-z]{3,} [a-z]{3,}/.test(words)) show(document.getElementById('gone-search'), `https://duckduckgo.com/?q=${encodeURIComponent(`site:${host} ${words}`)}`)
   }
 </script>
