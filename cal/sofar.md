@@ -2,6 +2,7 @@
 title: Sofar Sounds 🎤
 type: organizer
 tags: '["SOFAR"]'
+excludeTags: '[]'
 domain: sofarsounds.com
 links:
 - url: https://www.sofarsounds.com/cities/bangalore
