@@ -22,12 +22,12 @@ layout: default
 
   <p>We asked an auto to bring you to this page. It refused.</p>
   <div id="gone-event" hidden>
-    <p>This event has wrapped up or moved, probably before the Silk Board traffic cleared.</p>
+    <p>Event pages are removed once the event is over, or when the listing is taken down by its source.</p>
     <p><a id="gone-original" href="" rel="noopener" hidden>Try the original listing</a></p>
     <p><a id="gone-calendar" href="/">See upcoming events</a></p>
     <p><a id="gone-search" href="" rel="noopener" hidden>Search for it</a></p>
   </div>
-  <p><a href="/">Take me home, Namma Metro style</a></p>
+  <p><a href="/">Go to the homepage</a></p>
 </div>
 
 {%- assign sources = site.html_pages | where: "layout", "events" | where_exp: "c", "c.domain and c.domain != ''" %}
