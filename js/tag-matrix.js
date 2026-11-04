@@ -1,3 +1,5 @@
+import { showPopover } from './event-list.js'
+
 const data = JSON.parse(document.getElementById('tag-kinds').textContent)
 const [sources, locations, calendars, tags] = ['Source', 'Location', 'Calendar', 'Tag'].map(k => data.kinds[k].map(([name]) => name))
 const NO_LOCATION = locations.length
@@ -12,6 +14,12 @@ const ROWS = [
   { title: 'Tag', labels: tags, of: e => e[3], skip: null },
 ]
 
+const EVENTS = data.events.map((e, i) => {
+  const [id, name, start, type, url, keywords] = data.details[i]
+  return { id, name, start, type, url, keywords, curated: calendars[e[2]] === 'Curated' }
+})
+const pick = test => data.events.flatMap((e, i) => test(e) ? [EVENTS[i]] : [])
+
 function el(tag, props = {}, ...children) {
   const node = Object.assign(document.createElement(tag), props)
   node.append(...children)
@@ -21,7 +29,12 @@ function el(tag, props = {}, ...children) {
 function draw(root) {
   const head = el('thead', {},
     el('tr', {}, el('th'), ...COLUMNS.flatMap((c, i) => [i ? el('th', { className: 'gap' }) : '', el('th', { colSpan: c.labels.length, textContent: c.title })])),
-    el('tr', {}, el('th'), ...COLUMNS.flatMap((c, i) => [i ? el('th', { className: 'gap' }) : '', ...c.labels.map(l => el('th', { className: 'col' }, el('span', { textContent: l })))])))
+    el('tr', {}, el('th'), ...COLUMNS.flatMap((c, i) => [i ? el('th', { className: 'gap' }) : '', ...c.labels.map((l, k) => {
+      const th = el('th', { className: 'col' }, el('span', { textContent: l }))
+      th.dataset.events = ''
+      th.onclick = ev => showPopover(l, pick(e => c.of(e) === k), ev)
+      return th
+    })])))
   const table = el('table', { className: 'heat' }, head)
   for (const row of ROWS) {
     const grid = row.labels.map(() => COLUMNS.map(c => c.labels.map(() => 0)))
@@ -42,9 +55,14 @@ function draw(root) {
         const heat = Math.round(100 * n / totals[r])
         const td = el('td', { textContent: n, title: `${label} · ${col}: ${n} of ${totals[r]} events (${heat}%)`, className: heat > 55 ? 'hot' : '' })
         td.style.setProperty('--heat', `${heat}%`)
+        td.dataset.events = ''
+        td.onclick = ev => showPopover(`${label} · ${col}`, pick(e => row.of(e).includes(r) && c.of(e) === k), ev)
         return td
       })])
-      body.append(el('tr', {}, el('th', { textContent: `${label} ` }, el('span', { className: 'n', textContent: totals[r] })), ...cells))
+      const name = el('th', { textContent: `${label} ` }, el('span', { className: 'n', textContent: totals[r] }))
+      name.dataset.events = ''
+      name.onclick = ev => showPopover(label, pick(e => row.of(e).includes(r)), ev)
+      body.append(el('tr', {}, name, ...cells))
     })
     table.append(body)
   }
@@ -52,3 +70,15 @@ function draw(root) {
 }
 
 draw(document.getElementById('tag-matrix'))
+
+// The Sankey is drawn at build time; its flows and nodes name the hosts and calendar they hold
+document.querySelector('.sankey')?.addEventListener('click', ev => {
+  const part = ev.target.closest('[data-events]')
+  if (!part) return
+  const hosts = JSON.parse(part.dataset.hosts || 'null')?.map(h => sources.indexOf(h))
+  const kind = part.dataset.kind
+  const events = kind === 'Duplicate'
+    ? pick(e => e[4].some(s => hosts.includes(s)))
+    : pick(e => (!hosts || hosts.includes(e[0])) && (!kind || calendars[e[2]] === kind))
+  showPopover(part.dataset.title, events, ev)
+})

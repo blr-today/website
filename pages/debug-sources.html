@@ -8,6 +8,8 @@ sitemap: false
 ---
 {%- assign t = page.bucket_totals %}
 {%- assign kept = t.Curated | plus: t.Others | plus: t.Unwanted %}
+<link rel="stylesheet" href="/assets/event-modal.css">
+<link rel="stylesheet" href="/assets/event-list.css">
 <h2>Sources</h2>
 <p>
   {{ kept | plus: t.Duplicate }} listings came in from {{ page.source_count }} sources.
@@ -27,6 +29,7 @@ sitemap: false
   calendar. <em>No location</em> means the event carries none of the
   neighbourhood tags. <em>Tag</em> lists every other tag on at least 3 events.
   Cells are shaded by their share of the row; hover for the exact share.
+  Click a cell, a row or a column, or a flow in the chart above, to list its events.
 </p>
 <div id="tag-matrix" class="matrix"></div>
 
@@ -56,5 +59,9 @@ sitemap: false
   table.heat .gap { min-width: .8rem; background: none; }
   table.heat .n { color: var(--cdark); }
 </style>
+{%- include location-tags.html %}
+<script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
+<script type="application/json" id="blr-tag-info">{{ site.data.tags | jsonify }}</script>
+<script type="application/json" id="blr-location-tags">{{ locationTags | jsonify }}</script>
 <script type="application/json" id="tag-kinds">{{ page.tag_kinds | jsonify }}</script>
 <script type="module" src="/assets/js/tag-matrix.js"></script>

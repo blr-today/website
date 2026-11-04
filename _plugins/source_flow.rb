@@ -27,7 +27,7 @@ module Jekyll
       cal = ->(name) { site.pages.find { |p| p.relative_path == "cal/#{name}.md" }&.data || {} }
       tags = ->(data, key) { JSON.parse(data[key] || '[]') }
       curated, unwanted = cal.call('curated'), cal.call('unwanted')
-      rows = events.docs.map { |d| [d.data['source'], JSON.parse(d.data['event_json'])] }
+      rows = events.docs.map { |d| [d.data['source'], JSON.parse(d.data['event_json']), d.data['name']] }
       sources = rows.map { |url, _| host(url) }.to_set
 
       flows = Hash.new { |h, k| h[k] = Hash.new(0) }
@@ -68,7 +68,8 @@ module Jekyll
       events = rows.zip(buckets).map do |(url, event), bucket|
         keywords = Array(event['keywords']).map(&:to_s).uniq
         other = keywords.select { |k| k == k.upcase && k.size >= 3 && !k.include?('/') && !k.start_with?('-') && !covered.include?(k) }
-        [host(url), (keywords & hoods).first, bucket, other]
+        copies = Array(event['sameAs']).map { |u| host(u) }.uniq - [host(url)]
+        [host(url), (keywords & hoods).first, bucket, other, copies]
       end
       kinds = %w[Source Location Calendar Tag]
       lists = kinds.each_index.map { |i| events.flat_map { |e| Array(e[i]) }.tally.sort_by { |t, n| [-n, t] } }
@@ -76,16 +77,22 @@ module Jekyll
       index = lists.map { |l| l.each_with_index.to_h { |(t, _), j| [t, j] } }
       {
         'kinds' => kinds.zip(lists).to_h,
-        'events' => events.map { |s, l, b, t| [index[0][s], l ? index[1][l] : -1, index[2][b], t.filter_map { |x| index[3][x] }] }
+        'events' => events.map { |s, l, b, t, c| [index[0][s], l ? index[1][l] : -1, index[2][b], t.filter_map { |x| index[3][x] }, c.filter_map { |x| index[0][x] }] },
+        # Popups list events by name and open them in the drawer
+        'details' => rows.map do |url, event, id|
+          [id, event['name'].to_s, event['startDate'].to_s, event['@type'].to_s, url, Array(event['keywords']).map(&:to_s)]
+        end
       }
     end
 
+    # Each entry is [label, counts, hosts], so a folded row still knows its sources
     def fold_small(flows)
       big, small = flows.sort_by { |_, f| -f.values.sum }.partition { |_, f| f.values.sum >= MIN_LISTINGS }
-      return big + small if small.size < 2
+      big = big.map { |name, f| [name, f, [name]] }
+      return big + small.map { |name, f| [name, f, [name]] } if small.size < 2
       rest = Hash.new(0)
       small.each { |_, f| f.each { |b, n| rest[b] += n } }
-      big + [["#{small.size} smaller sources", rest]]
+      big + [["#{small.size} smaller sources", rest, small.map(&:first)]]
     end
 
     def stack(heights)
@@ -113,7 +120,7 @@ module Jekyll
       at_bucket = right.map(&:first)
       at_duplicate = middle[1][0]
 
-      bands = sources.each_with_index.flat_map do |(name, f), i|
+      bands = sources.each_with_index.flat_map do |(name, f, hosts), i|
         out = left[i][0]
         KINDS.each_with_index.filter_map do |kind, k|
           next if f[kind].zero?
@@ -127,12 +134,14 @@ module Jekyll
             at_bucket[k] += t
           end
           out += t
-          %(<path class="flow b#{k}" d="#{d}"><title>#{esc(name)} → #{kind}: #{f[kind]}</title></path>)
+          %(<path class="flow b#{k}" d="#{d}" data-events data-hosts="#{esc(hosts.to_json)}" data-kind="#{kind}" ) +
+            %(data-title="#{esc("#{name} → #{kind}")}"><title>#{esc(name)} → #{kind}: #{f[kind]}</title></path>)
         end
       end
-      nodes = sources.each_with_index.map do |(name, f), i|
+      nodes = sources.each_with_index.map do |(name, f, hosts), i|
         y, h = left[i]
-        node(xs[0], y, h, 'src') + label(xs[0] - 6, y + h / 2, 'end', "#{name} #{f.values.sum}")
+        data = %(data-events data-hosts="#{esc(hosts.to_json)}" data-title="#{esc(name)}")
+        node(xs[0], y, h, 'src', data) + label(xs[0] - 6, y + h / 2, 'end', "#{name} #{f.values.sum}")
       end
       nodes += [['Original', totals.first(3).sum, 'src'], ['Duplicate', totals[3], 'b3']].each_with_index.map do |(name, n, css), j|
         y, h = middle[j]
@@ -140,16 +149,16 @@ module Jekyll
       end
       nodes += BUCKETS.each_with_index.map do |b, j|
         y, h = right[j]
-        node(xs[2], y, h, "b#{j}") + label(xs[2] + NODE + 6, y + h / 2, 'start', "#{b} #{totals[j]}")
+        node(xs[2], y, h, "b#{j}", %(data-events data-kind="#{b}" data-title="#{b}")) + label(xs[2] + NODE + 6, y + h / 2, 'start', "#{b} #{totals[j]}")
       end
       %(<svg class="sankey" viewBox="0 -4 #{WIDTH} #{(height + 8).round}" role="img" ) +
         %(aria-label="#{totals.sum} listings from #{sources.size} sources, by bucket">) +
         bands.join + nodes.join + '</svg>'
     end
 
-    def node(x, y, h, css)
+    def node(x, y, h, css, data = '')
       return '' if h.zero?
-      %(<rect class="#{css}" x="#{x}" y="#{y.round(1)}" width="#{NODE}" height="#{[h, 1].max.round(1)}"/>)
+      %(<rect class="#{css}" x="#{x}" y="#{y.round(1)}" width="#{NODE}" height="#{[h, 1].max.round(1)}" #{data}/>)
     end
 
     def label(x, y, anchor, text, css = nil)

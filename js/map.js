@@ -1,7 +1,6 @@
 import { Map, TileLayer, GeoJSON, CircleMarker } from 'leaflet'
-import { TYPE_COLORS, typeLabel } from './event-types.js'
-import { openEventModal } from './event-modal.js'
-import { shownTags } from './tags.js'
+import { typeLabel } from './event-types.js'
+import { color, plural, h, eventList } from './event-list.js'
 
 const map = new Map('map').setView([12.97, 77.59], 11)
 
@@ -9,26 +8,6 @@ const ESRI = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/'
 const attribution = 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 new TileLayer(ESRI + 'World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, attribution }).addTo(map)
 new TileLayer(ESRI + 'World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16 }).addTo(map)
-
-const color = type => TYPE_COLORS[type] || TYPE_COLORS.Event
-const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`
-
-function h(tag, attrs = {}, ...children) {
-  let el = document.createElement(tag)
-  for (let [k, v] of Object.entries(attrs)) {
-    if (k === 'text') el.textContent = v
-    else if (k === 'style') Object.assign(el.style, v)
-    else el.setAttribute(k, v)
-  }
-  el.append(...children)
-  return el
-}
-
-function when(start) {
-  let opts = { timeZone: 'Asia/Kolkata', dateStyle: 'medium' }
-  if (start.length > 10) opts.timeStyle = 'short'
-  return new Date(start).toLocaleString('en-IN', opts)
-}
 
 function isCurated(event, { tags, excludeTags }) {
   return event.keywords.some(k => tags.includes(k)) && !event.keywords.some(k => excludeTags.includes(k))
@@ -41,38 +20,7 @@ function topType(events) {
   return Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] || 'Event'
 }
 
-let locationTags = []
-try { locationTags = JSON.parse(document.getElementById('blr-location-tags')?.textContent || '[]') } catch {}
-
-// The modal reads the same shape as a FullCalendar event
-function openEvent(e, row) {
-  let fcEvent = {
-    id: e.id, url: e.url, title: e.name, backgroundColor: color(e.type), extendedProps: { type: e.type },
-    start: new Date(e.start), end: e.end ? new Date(e.end) : null,
-  }
-  openEventModal(fcEvent, shownTags(e.keywords, locationTags), row)
-}
-
-function eventLink(e) {
-  let a = h('a', { href: e.url, target: '_blank', rel: 'noopener', text: e.name })
-  a.addEventListener('click', ev => {
-    if (ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.button === 1) return
-    ev.preventDefault()
-    ev.stopPropagation()
-    openEvent(e, a.closest('li'))
-  })
-  return a
-}
-
-function popup({ venue, events }) {
-  return h('div', { class: 'map-popup' },
-    h('strong', { text: venue || 'Unknown venue' }),
-    h('ul', {}, ...events.map(e => h('li', { class: e.curated ? 'is-curated' : '' },
-      h('span', { class: 'map-dot', style: { background: color(e.type) }, title: typeLabel(e.type) }),
-      eventLink(e),
-      e.curated ? h('span', { class: 'map-badge', text: 'Curated' }) : '',
-      h('br'), when(e.start)))))
-}
+const popup = ({ venue, events }) => eventList(venue || 'Unknown venue', events)
 
 function legend(types) {
   let el = document.getElementById('map-legend')

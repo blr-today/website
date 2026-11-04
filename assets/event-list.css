@@ -1,0 +1,10 @@
+/* Event lists on the map and the sources page, from js/event-list.js */
+.map-popup ul { max-height: 260px; overflow-y: auto; margin: 0.5em 0 0; padding: 0; list-style: none; }
+.map-popup li { margin-bottom: 0.3em; padding: 0.2em 0.4em; border-left: 3px solid transparent; }
+.map-popup li.is-curated { background: #fff6d6; border-left-color: #e0a800; }
+.map-badge { margin-left: 0.4em; padding: 0 0.4em; font-size: 0.75em; border-radius: 3px; background: #e0a800; color: #fff; }
+.map-dot { display: inline-block; width: 0.7em; height: 0.7em; margin-right: 0.4em; border-radius: 50%; }
+.event-pop { position: absolute; z-index: 20; width: min(340px, calc(100vw - 16px)); padding: 0.6em 0.8em; font-size: 0.85rem; background: var(--cbg, #fff); border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 4px 16px rgb(0 0 0 / 0.15); }
+.event-pop .map-popup ul { max-height: 50vh; }
+.event-pop__close { float: right; margin: -0.3em -0.4em 0 0.4em; padding: 0 0.4em; border: none; background: none; font-size: 1.2em; cursor: pointer; }
+[data-events] { cursor: pointer; }
