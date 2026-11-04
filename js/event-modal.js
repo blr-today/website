@@ -199,6 +199,12 @@ function cdnPrefixes() {
   return cdnAllowed
 }
 
+// Event pages link each tag to the calendar that lists it
+function tagItem(tag, link) {
+  let label = link ? h('a', { href: link.url, title: link.title, text: tag.name }) : tag.name
+  return h('li', { class: `blr-tag blr-tag--${tag.kind}`, 'data-tag': tag.name, 'data-tip': tagTip(tag), tabindex: !link && tagTip(tag) && 0 }, label)
+}
+
 // Coloured tags explain themselves from _data/tags.yml
 function tagTip(tag) {
   if (tag.kind === 'other') return null
@@ -380,8 +386,9 @@ function build(fcEvent, entry, keywords) {
     h('h2', { id: 'blr-event-title', class: 'blr-event__title', text: event.name }),
     h('p', { class: 'blr-event__when' }, whenText(event)),
     where[0] && h('p', { class: 'blr-event__where', text: where[0] }),
+    entry?.hood && h('p', { class: 'blr-event__hood' }, h('a', { href: entry.hood.url, text: `See more events in ${entry.hood.name}` })),
     price && h('p', { class: 'blr-event__price', text: price }),
-    keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => h('li', { class: `blr-tag blr-tag--${k.kind}`, 'data-tag': k.name, 'data-tip': tagTip(k), tabindex: tagTip(k) && 0, text: k.name }))))
+    keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => tagItem(k, entry?.tagLinks?.[k.name]))))
 
   let actions = h('div', { class: 'blr-event__actions' },
     primary && h('a', { class: 'blr-event__button blr-event__button--primary', href: primary, rel: 'noopener', target: '_blank', text: `Open on ${host(primary)}` }),
@@ -573,7 +580,9 @@ function renderEventPage(root, locationTags = []) {
     start: new Date(event.startDate), end: event.endDate ? new Date(event.endDate) : null,
   }
   let keywords = typeof event.keywords === 'string' ? event.keywords.split(',') : list(event.keywords)
-  fill(root, fcEvent, { event, source: root.dataset.source }, shownTags(keywords, locationTags, [], locationTags))
+  let json = id => { try { return JSON.parse(document.getElementById(id)?.textContent || 'null') } catch { return null } }
+  let tagLinks = Object.fromEntries((json('blr-event-links') || []).map(t => [t.name, t]))
+  fill(root, fcEvent, { event, source: root.dataset.source, tagLinks, hood: json('blr-event-hood') }, shownTags(keywords, locationTags, [], locationTags))
   root.addEventListener('click', e => {
     let zoom = e.target.closest('.blr-event__zoom')
     if (zoom) openLightbox(root.images, zoom.querySelector('img').dataset.original)
