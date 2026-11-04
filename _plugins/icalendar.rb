@@ -172,7 +172,21 @@ end
 
 Liquid::Template.register_filter(Jekyll::ToIcal)
 
+# RFC 5545 caps lines at 75 octets, so long ones continue on a line starting with a space
+def fold_ical_line(line)
+  return line if line.bytesize <= 75
+
+  parts = [+'']
+  line.each_char do |ch|
+    parts << +' ' if parts.last.bytesize + ch.bytesize > 75
+    parts.last << ch
+  end
+  parts.join("\r\n")
+end
+
 # The layout's own lines end in LF, but RFC 5545 wants CRLF throughout
 Jekyll::Hooks.register :pages, :post_render do |page|
-  page.output = page.output.gsub(/\r?\n/, "\r\n") if page.output_ext == '.ics'
+  next unless page.output_ext == '.ics'
+
+  page.output = page.output.split(/\r?\n/, -1).map { |l| fold_ical_line(l) }.join("\r\n")
 end
