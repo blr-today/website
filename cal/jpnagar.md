@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: JP Nagar
-description: "Events in JP Nagar, Bangalore, including plays at Ranga Shankara, workshops and community events."
+description: "What's happening in JP Nagar, from plays at Ranga Shankara to workshops, so you can stay close to home."
 type: neighbourhood
+showDropped: true
 atproto: jpnagar.blr.today
 fedi: jpnagar@fedi.blr.today
 tags: '["JPNAGAR"]'

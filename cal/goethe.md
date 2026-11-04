@@ -1,6 +1,6 @@
 ---
 title: Goethe Institut, Max Mueller Bhavan
-description: "Film screenings, exhibitions, concerts and talks at the Goethe-Institut / Max Mueller Bhavan, Bangalore."
+description: "Films, exhibitions, concerts and talks at the Goethe-Institut / Max Mueller Bhavan in Bangalore."
 type: venue
 tags: '["GOETHE"]'
 domain: goethe.de

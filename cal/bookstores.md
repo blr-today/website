@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Books 📚
-description: "Book clubs, launches, readings and author events in Bangalore, from Champaca, Atta Galatta and the city's book clubs."
+description: "Book clubs, launches and readings across Bangalore, gathered in one place for people who love books."
 type: collection
 atproto: books.blr.today
 fedi: books@fedi.blr.today

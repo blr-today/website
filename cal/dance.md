@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Dance 💃
-description: "Dance classes, workshops and social dance nights in Bangalore, from salsa and bachata to Bollywood."
+description: "Dance classes and social dance nights in Bangalore, from salsa to Bollywood, so you can find your next class."
 type: activity
 atproto: dance.blr.today
 fedi: dance@fedi.blr.today

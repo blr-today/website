@@ -1,6 +1,6 @@
 ---
 title: Paper Crane Lab 🦢
-description: "Hands-on making workshops by Paper Crane Lab in Indiranagar: 3D printing, code art walks and student challenges."
+description: "Making workshops by Paper Crane Lab in Indiranagar, like 3D printing and code art, for curious makers."
 type: organizer
 tags: '["PAPERCRANELAB"]'
 links:

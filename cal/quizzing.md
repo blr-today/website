@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Quizzing 🙋
-description: "Pub quizzes, trivia nights and quiz events happening across Bangalore."
+description: "Pub quizzes and trivia nights across Bangalore, so you can find a quiz to play this week."
 type: activity
 atproto: quizzing.blr.today
 fedi: quizzing@fedi.blr.today

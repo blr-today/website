@@ -1,6 +1,6 @@
 ---
 title: Tonight.is 🕺🏽
-description: "Curated gigs, DJ sets and music events in Bangalore from Tonight.is."
+description: "Gigs and music nights picked by Tonight.is, so you can find good music in Bangalore."
 type: curator
 tags: '["T.IS"]'
 links:

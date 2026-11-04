@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: Whitefield
-description: "Events in Whitefield and East Bangalore: Brookefield, Marathahalli, Bellandur, Sarjapur Road and around."
+description: "What's happening in Whitefield and East Bangalore, so you can find something to do close by."
 type: neighbourhood
+showDropped: true
 atproto: whitefield.blr.today
 fedi: whitefield@fedi.blr.today
 tags: '["WHITEFIELD"]'

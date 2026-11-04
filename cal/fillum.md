@@ -1,6 +1,6 @@
 ---
 title: Bangalore Film Forum 🎥
-description: "Arthouse, independent, foreign and classic film screenings by the Bangalore Film Forum, often with a discussion."
+description: "Arthouse and classic film screenings by the Bangalore Film Forum, usually followed by a good conversation."
 type: organizer
 atproto: fillum.blr.today
 fedi: fillum@fedi.blr.today

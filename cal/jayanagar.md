@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: Jayanagar
-description: "Events in Jayanagar, Bangalore: performances, talks, workshops and community events in South Bangalore."
+description: "What's happening in Jayanagar, so South Bangalore folks can find something to do close by."
 type: neighbourhood
+showDropped: true
 atproto: jayanagar.blr.today
 fedi: jayanagar@fedi.blr.today
 tags: '["JAYANAGAR"]'

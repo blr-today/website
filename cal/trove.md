@@ -1,6 +1,6 @@
 ---
 title: Trove Experiences 🎁
-description: "Lifestyle experiences in Bangalore by Trove: perfume making, mixology, farm-to-fork dinners and more."
+description: "Perfume making, mixology and farm-to-fork experiences by Trove, for trying something new."
 type: organizer
 tags: '["TROVE"]'
 domain: troveexperiences.com

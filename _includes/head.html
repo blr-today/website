@@ -1,6 +1,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>{{page.title}}</title>
+{%- if page.seoTitle %}
+<title>{{ page.seoTitle }}</title>
+{%- elsif page.layout == "events" %}
+<title>{{ page.title }} · Bangalore events | blr.today</title>
+{%- else %}
+<title>{{ page.title }}</title>
+{%- endif %}
 {%- unless page.layout == "event" %}
 {% seo title=false %}
 {%- endunless %}

@@ -1,6 +1,6 @@
 ---
 title: Paint Bar
-description: "Guided painting sessions and art workshops in Bangalore by Paint Bar, where anyone can paint."
+description: "Guided painting sessions by Paint Bar, where anyone can paint, even if you've never held a brush."
 type: organizer
 tags: '["PAINTBAR"]'
 links:

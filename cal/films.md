@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Film Screenings 🎬
-description: "Film club screenings, film festivals and one-off movie screenings across Bangalore, beyond the regular cinemas."
+description: "Film club screenings and festivals across Bangalore, for films you won't find at the multiplex."
 type: activity
 atproto: film.blr.today
 fedi: film@fedi.blr.today

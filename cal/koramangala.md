@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: Koramangala
-description: "Events in Koramangala, Bangalore: gigs, comedy, workshops, board games, talks and meetups."
+description: "What's happening in Koramangala, so you can find something to do close by."
 type: neighbourhood
+showDropped: true
 atproto: koramangala.blr.today
 fedi: koramangala@fedi.blr.today
 tags: '["KORAMANGALA"]'

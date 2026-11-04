@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: North Bangalore
-description: "Events in North Bangalore: Hebbal, RT Nagar, Kalyan Nagar, Jakkur, Yelahanka and around."
+description: "What's happening in North Bangalore, from Hebbal to Yelahanka, so you can find something close by."
 type: neighbourhood
+showDropped: true
 atproto: north.blr.today
 fedi: north@fedi.blr.today
 tags: '["NORTHBLR"]'

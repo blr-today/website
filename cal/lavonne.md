@@ -1,6 +1,6 @@
 ---
 title: Lavonne Baking Academy 🥐
-description: "Baking and pastry classes and workshops at Lavonne Academy of Baking Science and Pastry Arts, Bangalore."
+description: "Baking and pastry classes at Lavonne Academy, for anyone who wants to learn to bake properly."
 type: organizer
 tags: '["LAVONNE"]'
 domain: lavonne.in

@@ -1,6 +1,6 @@
 ---
 title: Gully Tours
-description: "Walking tours and heritage tours in Bangalore and Mysore by Gully Tours."
+description: "Walking tours of Bangalore and Mysore by Gully Tours, to discover the city's streets and stories."
 type: organizer
 tags: '["GULLYTOURS"]'
 domain: gully.tours

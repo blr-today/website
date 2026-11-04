@@ -1,6 +1,6 @@
 ---
 title: India Running 👟
-description: "Road races, marathons and running events in Bengaluru, listed on India Running."
+description: "Road races and marathons in Bengaluru from India Running, so you can sign up for your next race."
 type: curator
 tags: '["INDIARUNNING"]'
 domain: indiarunning.com

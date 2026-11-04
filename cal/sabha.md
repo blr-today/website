@@ -1,6 +1,6 @@
 ---
 title: Sabha BLR
-description: "Arts, ideas and community events at Sabha BLR, in a restored 160-year-old school building in Bangalore."
+description: "Arts and community events at Sabha BLR, a cultural space in a restored 160-year-old school."
 type: venue
 atproto: sabha.blr.today
 fedi: sabha@fedi.blr.today

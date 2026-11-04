@@ -1,6 +1,6 @@
 ---
 title: Alliance Française de Bangalore 🇫🇷
-description: "Films, concerts, exhibitions, talks and festivals at Alliance Française de Bangalore on Thimmaiah Road, Vasanth Nagar."
+description: "What's on at Alliance Française de Bangalore: French films, concerts, exhibitions and talks, so you never miss a show."
 type: venue
 atproto: afbangalore.blr.today
 fedi: afbangalore@fedi.blr.today

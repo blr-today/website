@@ -1,6 +1,6 @@
 ---
 title: Blr Birders 🐦
-description: "Bird walks and field trips by Blr Birders, the Birdwatchers' Field Club of Bangalore, earlier BNG Birds."
+description: "Bird walks and field trips by Blr Birders, so beginners and old hands can go birding together."
 type: organizer
 tags: '["BLRBIRDERS"]'
 domain: blrbirders.com

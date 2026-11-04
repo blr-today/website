@@ -1,6 +1,6 @@
 ---
 title: Conosh 🍽️
-description: "Supper clubs, food pop-ups, dining experiences and food workshops in Bengaluru by Conosh."
+description: "Supper clubs and food pop-ups in Bengaluru by Conosh, for people who like meeting over good food."
 type: organizer
 tags: '["CONOSH"]'
 domain: conosh.com

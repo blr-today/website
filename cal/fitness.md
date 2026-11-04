@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Fitness 💪
-description: "Group runs, rides and workouts in Bangalore from running clubs and fitness communities like Adidas Runners and Puma."
+description: "Group runs, rides and workouts in Bangalore from running clubs and fitness communities, so you can join one."
 type: collection
 atproto: fitness.blr.today
 fedi: fitness@fedi.blr.today

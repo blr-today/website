@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: AllEvents
-description: "Bangalore events listed on AllEvents, filtered to drop low-quality listings, business events and trips out of the city."
+description: "Bangalore events from AllEvents, with spam, business meetups and out-of-town trips taken out so the good ones stand out."
 type: aggregator
+showDropped: true
 tags: '["ALLEVENTS"]'
 domain: allevents.in
 links:

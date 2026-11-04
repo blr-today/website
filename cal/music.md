@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Live Music 🎸
-description: "Live music in Bangalore: gigs and concerts from Carnatic and Hindustani to indie, jazz and metal. No DJ nights."
+description: "Live gigs and concerts in Bangalore, from Carnatic to indie to metal, so you can catch musicians playing live."
 type: activity
 atproto: music.blr.today
 fedi: music@fedi.blr.today

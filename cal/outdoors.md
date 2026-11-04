@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Walks & Outdoors 🌳
-description: "Heritage walks, nature and bird walks, group bike rides and stargazing in and around Bangalore."
+description: "Heritage walks, bird walks, group rides and stargazing in and around Bangalore, for a morning outdoors."
 type: activity
 atproto: outdoors.blr.today
 fedi: outdoors@fedi.blr.today

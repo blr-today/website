@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: District
-description: "Bangalore events from District by Zomato, filtered to drop low-quality listings, promotions and business events."
+description: "Bangalore events from District, with promotions, spam and business events taken out."
 type: aggregator
+showDropped: true
 tags: '["DISTRICT"]'
 domain: district.in
 links:

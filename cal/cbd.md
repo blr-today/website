@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: Central Bangalore District
-description: "Events in central Bangalore around MG Road, Church Street, Ulsoor, Cubbon Park, Shivajinagar and Cox Town."
+description: "What's happening around MG Road, Church Street and Cubbon Park, so you can find something close by."
 type: neighbourhood
+showDropped: true
 atproto: cbd.blr.today
 fedi: cbd@fedi.blr.today
 tags: '["CBD"]'

@@ -1,6 +1,6 @@
 ---
 title: Pedal In Tandem 🚴🏽
-description: "Cycling tours, group rides and bicycle trips by Pedal In Tandem, from Indiranagar, Bangalore."
+description: "Cycling tours and rides by Pedal In Tandem, for anyone who wants to explore on two wheels."
 type: organizer
 tags: '["PEDALINTANDEM"]'
 domain: pedalintandem.com

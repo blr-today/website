@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Food & Drink 🍜
-description: "Tasting menus, food pop-ups, cooking classes, coffee workshops and drinks tastings in Bangalore."
+description: "Tastings, food pop-ups, cooking classes and coffee workshops in Bangalore, for curious eaters."
 type: activity
 atproto: food.blr.today
 fedi: food@fedi.blr.today

@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Couples 💑
-description: "Workshops, dinners and outings in Bangalore made for couples and dates."
+description: "Workshops, dinners and outings across Bangalore that work well as a date, so you can plan something together."
 type: activity
 atproto: couples.blr.today
 fedi: couples@fedi.blr.today

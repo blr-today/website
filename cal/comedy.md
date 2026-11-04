@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Comedy & Improv 😂
-description: "Stand-up comedy shows, improv nights and comedy open mics happening across Bangalore."
+description: "Stand-up shows, improv nights and comedy open mics across Bangalore, so you can find your next laugh."
 type: activity
 atproto: comedy.blr.today
 fedi: comedy@fedi.blr.today

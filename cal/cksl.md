@@ -1,6 +1,6 @@
 ---
 title: Choe Khor Sum Ling Centre 🧘🏽
-description: "Buddhist teachings, meditation and study programmes at Choe Khor Sum Ling Centre, in person and online."
+description: "Buddhist teachings and meditation at Choe Khor Sum Ling Centre, for anyone who wants to learn or practise."
 type: organizer
 tags: '["CKSL"]'
 domain: cksl.in

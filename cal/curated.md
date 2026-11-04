@@ -1,7 +1,8 @@
 ---
 tagFilter: true
 title: Curated 🍉
-description: "Hand-picked events in Bangalore from independent venues, organisers and communities, without the aggregator noise."
+seoTitle: "blr.today: curated events in Bangalore this week"
+description: "Hand-picked Bangalore events from venues and communities we trust, without the aggregator noise."
 type: collection
 atproto: curated.blr.today
 fedi: curated@fedi.blr.today

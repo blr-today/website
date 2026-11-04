@@ -1,6 +1,6 @@
 ---
 title: Putting Scenes 🤩
-description: "Social experiences, workshops, gigs and meetups in Bangalore curated by Putting Scene."
+description: "Workshops, gigs and social events in Bangalore picked by Putting Scene, so you can find a fun evening out."
 type: curator
 tags: '["PUTTINGSCENE"]'
 domain: puttingscene.com

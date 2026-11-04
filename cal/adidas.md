@@ -1,6 +1,6 @@
 ---
 title: Adidas Runners 👟
-description: "Upcoming Adidas Runners Bengaluru community runs, training sessions and running events, updated daily."
+description: "All the upcoming Adidas Runners community runs in Bengaluru, so you can find a group run that fits your week."
 type: organizer
 tags: '["ADIDAS"]'
 domain: adidas.co.in

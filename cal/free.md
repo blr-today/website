@@ -1,7 +1,7 @@
 ---
 tagFilter: true
 title: Free 🆓
-description: "Free events in Bangalore: no ticket needed, or a free ticket, across every source on blr.today."
+description: "Free events across Bangalore, with no ticket or a free one, so you can go out without spending."
 type: collection
 tags: '["FREE"]'
 atproto: free.blr.today

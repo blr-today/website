@@ -1,6 +1,6 @@
 ---
 title: Garden City Walks 🌳
-description: "Small-group nature and heritage walks through Bangalore's neighbourhoods by Garden City Walks."
+description: "Small nature and heritage walks by Garden City Walks, to see your own neighbourhood with new eyes."
 type: organizer
 tags: '["GCW"]'
 links:

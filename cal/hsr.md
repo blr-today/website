@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: HSR Layout
-description: "Events in HSR Layout, Bangalore: workshops, gigs, comedy, board games, meetups and more."
+description: "What's happening in HSR Layout, so you can find something to do without crossing the city."
 type: neighbourhood
+showDropped: true
 atproto: hsr.blr.today
 fedi: hsr@fedi.blr.today
 tags: '["HSR"]'

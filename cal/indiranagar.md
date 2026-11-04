@@ -1,8 +1,9 @@
 ---
 tagFilter: true
 title: Indiranagar
-description: "Events in Indiranagar and Domlur, Bangalore: gigs, comedy, workshops, talks and community events."
+description: "What's happening in Indiranagar and Domlur, so you can find something to do close by."
 type: neighbourhood
+showDropped: true
 atproto: indiranagar.blr.today
 fedi: indiranagar@fedi.blr.today
 tags: '["INDIRANAGAR"]'

@@ -1,6 +1,6 @@
 ---
 title: Courtyard Koota 🎭
-description: "Performances, workshops and community gatherings at Courtyard Koota, a culture space in Bangalore."
+description: "Performances, workshops and gatherings at Courtyard Koota, so you know what's on at this culture space."
 type: venue
 tags: '["KOOTA"]'
 domain: courtyardkoota.com

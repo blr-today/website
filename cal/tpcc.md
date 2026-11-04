@@ -1,6 +1,6 @@
 ---
 title: The Parallel Cinema Club 🎦
-description: "International, independent and experimental film screenings by The Parallel Cinema Club in Bangalore."
+description: "Independent and international film screenings by The Parallel Cinema Club, for films off the mainstream."
 type: organizer
 layout: events
 tags: '["TPCC"]'

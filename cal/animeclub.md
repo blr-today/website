@@ -1,6 +1,6 @@
 ---
 title: Bengaluru Anime Club 🎌
-description: "Bengaluru Anime Club meetups and Japan Habba, the city's festival of anime and Japanese pop culture."
+description: "Meetups and Japan Habba by Bengaluru Anime Club, for anyone who loves anime and wants to meet other fans."
 type: organizer
 tags: '["ANIMECLUB"]'
 links:

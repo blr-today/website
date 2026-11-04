@@ -98,6 +98,19 @@ defaults:
                 )
               )
             ORDER BY event_json -> '$.startDate';
+        # Calendars with showDropped say how many events curation left out
+        - data: dropped_rows
+          file: events.db
+          query: |
+            SELECT COUNT(*) AS total FROM events
+            WHERE EXISTS (
+                SELECT 1 FROM json_each(:excludeTags) AS d
+                JOIN json_each(event_json->'$.keywords') AS k ON k.value = d.value
+              )
+              AND EXISTS (
+                SELECT 1 FROM json_each(:tags) AS a
+                JOIN json_each(event_json->'$.keywords') AS k ON k.value = a.value
+              );
 sqlite:
   # ingest's src/event_ids.py fills events.id
   - collection: event

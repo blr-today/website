@@ -1,6 +1,6 @@
 ---
 title: The White Box 🎁
-description: "Mixology, chocolate making, sushi rolling and wine tasting workshops in Bangalore by The White Box."
+description: "Mixology, chocolate and sushi workshops by The White Box, for a hands-on evening out."
 type: organizer
 tags: '["THEWHITEBOX"]'
 links:
