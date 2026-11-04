@@ -22,4 +22,22 @@ layout: default
 
   <p><strong>Page not found :(</strong></p>
   <p>The requested page could not be found.</p>
+  <p id="gone-event" hidden>This event has ended or is no longer listed.
+    <a id="gone-calendar" href="/">See upcoming events</a>.</p>
 </div>
+
+{%- assign sources = site.html_pages | where: "layout", "events" | where_exp: "c", "c.domain and c.domain != ''" %}
+<script>
+  // Event ids start with their source's reversed domain, like in.district
+  const SOURCES = { {% for c in sources %}{{ c.domain | split: "." | reverse | join: "." | jsonify }}: [{{ c.url | jsonify }}, {{ c.title | jsonify }}]{% unless forloop.last %}, {% endunless %}{% endfor %} }
+  const id = location.pathname.match(/^\/event\/([^/]+)/)?.[1]
+  if (id) {
+    document.getElementById('gone-event').hidden = false
+    const prefix = Object.keys(SOURCES).filter(p => id.startsWith(p + '.')).sort((a, b) => b.length - a.length)[0]
+    if (prefix) {
+      const link = document.getElementById('gone-calendar')
+      link.href = SOURCES[prefix][0]
+      link.textContent = `See upcoming events from ${SOURCES[prefix][1]}`
+    }
+  }
+</script>
