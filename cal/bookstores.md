@@ -5,7 +5,7 @@ description: "Book clubs, launches and readings across Bangalore, gathered in on
 type: collection
 atproto: books.blr.today
 fedi: books@fedi.blr.today
-tags: '["CHAMPACA", "ATTAGALATTA", "BBB", "BOOKS", "BOOK-CLUB", "AUTHOR-EVENT"]'
+tags: '["CHAMPACA", "ATTAGALATTA", "BBB", "BOOKS", "BOOKS/BOOK-CLUB", "BOOKS/AUTHOR-TALK"]'
 --- 
 > Events hosted by bookstores and bookish spaces, like Champaca and Atta
 > Galatta, plus book clubs, launches and readings listed anywhere else,

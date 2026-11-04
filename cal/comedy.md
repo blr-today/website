@@ -5,7 +5,7 @@ description: "Stand-up shows, improv nights and comedy open mics across Bangalor
 type: activity
 atproto: comedy.blr.today
 fedi: comedy@fedi.blr.today
-tags: '["STANDUP-COMEDY", "IMPROV"]'
+tags: '["SHOW/STANDUP", "SHOW/IMPROV"]'
 ---
 > Stand-up shows, improv jams and comedy open mics.
 

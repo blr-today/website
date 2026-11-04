@@ -2,7 +2,7 @@
 title: Bangalore Chess Club ♟️
 description: "Chess meetups and tournaments by Bangalore Chess Club, for every level, so you can find a game near you."
 type: organizer
-tags: '["CHESS", "BCC"]'
+tags: '["GAMES/CHESS", "BCC"]'
 domain: bangalorechessclub.in
 links:
 - url: https://bangalorechessclub.in/events/

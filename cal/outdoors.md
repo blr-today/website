@@ -5,7 +5,7 @@ description: "Heritage walks, bird walks, group rides and stargazing in and arou
 type: activity
 atproto: outdoors.blr.today
 fedi: outdoors@fedi.blr.today
-tags: '["HERITAGE-WALK", "NATURE-WALK", "CYCLING", "STARGAZING"]'
+tags: '["OUTDOORS/HERITAGE-WALK", "OUTDOORS/NATURE-WALK", "OUTDOORS/BIRDING", "FITNESS/CYCLING", "OUTDOORS/STARGAZING"]'
 ---
 > Heritage walks, nature and bird walks, group rides and stargazing in and around the city.
 

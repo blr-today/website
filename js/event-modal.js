@@ -1,6 +1,6 @@
 import { likeKey, isLiked, toggleLike } from './likes.js'
 import { TYPE_COLORS } from './event-types.js'
-import { shownTags } from './tags.js'
+import { shownTags, tagTip } from './tags.js'
 
 const TZ = 'Asia/Kolkata'
 const ATTENDANCE = {
@@ -21,7 +21,7 @@ let details = new Map()
 let current = null
 let reported = new Set()
 let cdnAllowed = null
-let tagInfo = null
+let tagLinks = null
 let dialog = null
 let swaps = 0
 
@@ -199,20 +199,21 @@ function cdnPrefixes() {
   return cdnAllowed
 }
 
-// Event pages link each tag to the calendar that lists it
-function tagItem(tag, link) {
-  let label = link ? h('a', { href: link.url, title: link.title, text: tag.name }) : tag.name
-  return h('li', { class: `blr-tag blr-tag--${tag.kind}`, 'data-tag': tag.name, 'data-tip': tagTip(tag), tabindex: !link && tagTip(tag) && 0 }, label)
+// Each tag links to the calendar that lists it, from _plugins/event_pages.rb
+function tagLink(tag) {
+  if (!tagLinks) {
+    try { tagLinks = JSON.parse(document.getElementById('blr-tag-links')?.textContent || '{}') || {} } catch { tagLinks = {} }
+  }
+  return tagLinks[tag.id] || null
 }
 
-// Coloured tags explain themselves from _data/tags.yml
-function tagTip(tag) {
-  if (tag.kind === 'other') return null
-  if (!tagInfo) {
-    try { tagInfo = new Map(JSON.parse(document.getElementById('blr-tag-info')?.textContent || '[]').map(t => [t.id, t.description])) } catch { tagInfo = new Map() }
-  }
-  return tagInfo.get(tag.name) || null
+// The tip names the whole tag, since JAZZ alone hides its LIVE-MUSIC parent
+function tagItem(tag, link) {
+  let tip = [tagTip(tag), link && `More on ${link.title}`].filter(Boolean).join(' · ')
+  let label = link ? h('a', { href: link.url, text: tag.name }) : tag.name
+  return h('li', { class: `blr-tag blr-tag--${tag.kind}`, 'data-tag': tag.id, 'data-tip': tip, tabindex: !link && 0 }, label)
 }
+
 
 const onCdn = src => cdnPrefixes().some(p => p.test(src))
 
@@ -371,7 +372,7 @@ function build(fcEvent, entry, keywords) {
     isAllDay(event) ? null : h('span', { class: 'blr-event__time', text: fmt(start, { hour: 'numeric', minute: '2-digit' }) }),
     price && h('span', { class: 'blr-event__stub-price', text: price }))
 
-  let seats = keywords.some(k => k.name === 'LASTCALL') ? seatsLeft(event) : undefined
+  let seats = keywords.some(k => k.id === 'LASTCALL') ? seatsLeft(event) : undefined
   let ribbon = seats === undefined || seats === 0 ? null
     : h('span', { class: 'blr-event__ribbon', text: seats ? `${seats} ${seats === 1 ? 'seat' : 'seats'} left` : 'Last few seats' })
   let media = pics.length ? h('div', { class: 'blr-event__media-wrap' }, h('figure', { class: 'blr-event__media' },
@@ -388,7 +389,7 @@ function build(fcEvent, entry, keywords) {
     where[0] && h('p', { class: 'blr-event__where', text: where[0] }),
     entry?.hood && h('p', { class: 'blr-event__hood' }, h('a', { href: entry.hood.url, text: `See more events in ${entry.hood.name}` })),
     price && h('p', { class: 'blr-event__price', text: price }),
-    keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => tagItem(k, entry?.tagLinks?.[k.name]))))
+    keywords.length > 0 && h('ul', { class: 'blr-event__tags', 'aria-label': 'Tags' }, keywords.map(k => tagItem(k, tagLink(k)))))
 
   let actions = h('div', { class: 'blr-event__actions' },
     primary && h('a', { class: 'blr-event__button blr-event__button--primary', href: primary, rel: 'noopener', target: '_blank', text: `Open on ${host(primary)}` }),
@@ -581,8 +582,7 @@ function renderEventPage(root, locationTags = []) {
   }
   let keywords = typeof event.keywords === 'string' ? event.keywords.split(',') : list(event.keywords)
   let json = id => { try { return JSON.parse(document.getElementById(id)?.textContent || 'null') } catch { return null } }
-  let tagLinks = Object.fromEntries((json('blr-event-links') || []).map(t => [t.name, t]))
-  fill(root, fcEvent, { event, source: root.dataset.source, tagLinks, hood: json('blr-event-hood') }, shownTags(keywords, locationTags, [], locationTags))
+  fill(root, fcEvent, { event, source: root.dataset.source, hood: json('blr-event-hood') }, shownTags(keywords, locationTags, [], locationTags))
   root.addEventListener('click', e => {
     let zoom = e.target.closest('.blr-event__zoom')
     if (zoom) openLightbox(root.images, zoom.querySelector('img').dataset.original)

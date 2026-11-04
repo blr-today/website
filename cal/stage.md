@@ -5,9 +5,9 @@ description: "Plays, dance performances, storytelling and poetry across Bangalor
 type: activity
 atproto: stage.blr.today
 fedi: stage@fedi.blr.today
-tags: '["THEATER", "DANCE-PERFORMANCE", "PERFORMANCE-ART", "STORYTELLING", "POETRY"]'
+tags: '["SHOW/THEATER", "SHOW/DANCE", "SHOW/PERFORMANCE-ART", "SHOW/STORYTELLING", "SHOW/POETRY"]'
 # Default exclusions plus dance classes, which belong on the dance calendar
-excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO", "SPORTS-SCREENING", "DANCE-CLASS"]'
+excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO", "SPORTS-SCREENING", "DANCING"]'
 ---
 > Plays, dance performances, storytelling and poetry.
 

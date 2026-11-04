@@ -14,6 +14,11 @@ module Jekyll
       hidden = JSON.parse(site.config['excludeTags'] || '[]') | JSON.parse(unwanted&.data&.dig('tags') || '[]')
       calendars = site.pages.select { |p| p.data['layout'] == 'events' && p != unwanted }
       by_tag = calendar_for_tags(calendars)
+      links = by_tag.transform_values { |cal| { 'url' => cal.url, 'title' => cal.data['title'] } }
+      activities = Array(site.data['tags']).select { |t| t['kind'] == 'activity' }.map { |t| t['id'] }
+      activities.each { |tag| links[tag] ||= inherited(links, tag) }
+      # Every drawer links tags by this, so calendars and event pages agree
+      site.data['tag_calendars'] = links.compact
       hoods = calendars.select { |p| p.data['type'] == 'neighbourhood' }
       events.docs.each do |doc|
         event = JSON.parse(doc.data['event_json'])
@@ -28,8 +33,8 @@ module Jekyll
         hood = hoods.find { |h| (JSON.parse(h.data['tags'] || '[]') & keywords).any? }
         doc.data['hood'] = { 'name' => hood.data['title'], 'url' => hood.url } if hood
         doc.data['tag_links'] = (keywords - hidden).filter_map do |tag|
-          cal = by_tag[tag]
-          { 'name' => tag, 'url' => cal.url, 'title' => cal.data['title'] } if cal
+          link = links[tag] || inherited(links, tag)
+          { 'name' => tag }.merge(link) if link
         end
         doc.data['noindex'] = unlisted
         doc.data['sitemap'] = !unlisted
@@ -38,6 +43,12 @@ module Jekyll
     end
 
     private
+
+    # LIVE-MUSIC/JAZZ has no calendar of its own, so it links to LIVE-MUSIC's
+    def inherited(links, tag)
+      tag = tag.rpartition('/').first while tag.include?('/') && !links[tag.rpartition('/').first]
+      links[tag.rpartition('/').first] if tag.include?('/')
+    end
 
     # Each tag links to the narrowest calendar that lists it
     def calendar_for_tags(calendars)

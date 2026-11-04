@@ -5,7 +5,7 @@ description: "Dance classes and social dance nights in Bangalore, from salsa to 
 type: activity
 atproto: dance.blr.today
 fedi: dance@fedi.blr.today
-tags: '["DANCE-CLASS"]'
+tags: '["DANCING"]'
 ---
 > Dance classes and social dance nights, from salsa to garba.
 

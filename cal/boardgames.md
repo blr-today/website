@@ -5,7 +5,7 @@ description: "Board game nights, Mafia and D&D sessions across Bangalore, so you
 type: activity
 atproto: boardgames.blr.today
 fedi: boardgames@fedi.blr.today
-tags: '["BOARDGAMES"]'
+tags: '["GAMES/BOARDGAMES", "GAMES/SOCIAL-DEDUCTION", "GAMES/TTRPG"]'
 ---
 > Board game nights, Mafia and Werewolf, Dungeons & Dragons and other tabletop games.
 

@@ -7,7 +7,7 @@ import { dateJump } from "./date-jump.js";
 import { TYPE_COLORS } from "./event-types.js";
 import { openEventModal, loadDetails, eventType } from "./event-modal.js";
 import { markLiked } from "./likes.js";
-import { tagKind, visibleKeywords, shownTags } from "./tags.js";
+import { tagKind, tagTip, visibleKeywords, shownTags } from "./tags.js";
 
 // FullCalendar's shared time width is unreliable, so size the column ourselves
 let alignScheduled = false
@@ -94,10 +94,12 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
       if (el && keywords.length > 0) {
         let keywordsElement = document.createElement('div');
         keywordsElement.className = 'fc-list-event-keywords';
-        for (let { name, kind } of keywords) {
+        for (let tag of keywords) {
+          let { id, name, kind } = tag
           let keywordElement = document.createElement('span');
           keywordElement.className = `keyword blr-tag blr-tag--${kind}`;
-          keywordElement.dataset.tag = name;
+          keywordElement.dataset.tag = id;
+          keywordElement.dataset.tip = tagTip(tag);
           keywordElement.textContent = name;
           keywordsElement.appendChild(keywordElement);
         }

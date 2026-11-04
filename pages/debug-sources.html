@@ -62,6 +62,7 @@ sitemap: false
 {%- include location-tags.html %}
 <script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
 <script type="application/json" id="blr-tag-info">{{ site.data.tags | jsonify }}</script>
+<script type="application/json" id="blr-tag-links">{{ site.data.tag_calendars | jsonify }}</script>
 <script type="application/json" id="blr-location-tags">{{ locationTags | jsonify }}</script>
 <script type="application/json" id="tag-kinds">{{ page.tag_kinds | jsonify }}</script>
 <script type="module" src="/assets/js/tag-matrix.js"></script>

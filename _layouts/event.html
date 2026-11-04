@@ -56,9 +56,9 @@
         </main>
         <script type="application/ld+json" id="blr-event-data">{{ page.event_json | replace: "</", "<\/" }}</script>
         <script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
-        <script type="application/json" id="blr-event-links">{{ page.tag_links | jsonify }}</script>
         <script type="application/json" id="blr-event-hood">{{ page.hood | jsonify }}</script>
         <script type="application/json" id="blr-tag-info">{{ site.data.tags | jsonify }}</script>
+        <script type="application/json" id="blr-tag-links">{{ site.data.tag_calendars | jsonify }}</script>
         {%- include location-tags.html %}
         <script type="module">
             import { renderEventPage } from "/assets/js/event-modal.js";

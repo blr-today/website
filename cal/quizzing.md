@@ -5,7 +5,7 @@ description: "Pub quizzes and trivia nights across Bangalore, so you can find a 
 type: activity
 atproto: quizzing.blr.today
 fedi: quizzing@fedi.blr.today
-tags: '["QUIZZING"]'
+tags: '["GAMES/QUIZ"]'
 ---
 > Pub quizzes and trivia nights across Bangalore.
 

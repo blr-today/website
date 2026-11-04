@@ -5,7 +5,7 @@ description: "Tastings, food pop-ups, cooking classes and coffee workshops in Ba
 type: activity
 atproto: food.blr.today
 fedi: food@fedi.blr.today
-tags: '["FOOD-TASTING", "COOKING-CLASS", "COFFEE-TEA", "DRINKS-TASTING"]'
+tags: '["TASTING", "COOKING"]'
 ---
 > Tasting menus, food pop-ups, cooking classes, coffee workshops and drinks tastings.
 

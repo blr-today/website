@@ -64,10 +64,11 @@ module Jekyll
       tagged = ->(types) { cals.select { |p| types.include?(p.data['type']) }.flat_map { |p| JSON.parse(p.data['tags'] || '[]') } }
       titled = ->(re) { (site.data['tags'] || []).select { |t| t['title'].to_s =~ re }.map { |t| t['id'] } }
       hoods = tagged.call(%w[neighbourhood])
+      activity = (site.data['tags'] || []).select { |t| t['kind'] == 'activity' }.map { |t| t['id'] }.to_set
       covered = (hoods + titled.call(/\[(Area|Venue|Organizer|Curated|Aggregator)\]/) + tagged.call(SOURCE_TYPES) - titled.call(/\[Activity\]/)).to_set
       events = rows.zip(buckets).map do |(url, event), bucket|
         keywords = Array(event['keywords']).map(&:to_s).uniq
-        other = keywords.select { |k| k == k.upcase && k.size >= 3 && !k.include?('/') && !k.start_with?('-') && !covered.include?(k) }
+        other = keywords.select { |k| k == k.upcase && k.size >= 3 && (!k.include?('/') || activity.include?(k)) && !k.start_with?('-') && !covered.include?(k) }
         copies = Array(event['sameAs']).map { |u| host(u) }.uniq - [host(url)]
         [host(url), (keywords & hoods).first, bucket, other, copies]
       end

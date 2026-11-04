@@ -116,6 +116,7 @@ permalink: /subscribe/
 <link rel="stylesheet" href="/assets/event-modal.css">
 <script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
 <script type="application/json" id="blr-tag-info">{{ site.data.tags | jsonify }}</script>
+<script type="application/json" id="blr-tag-links">{{ site.data.tag_calendars | jsonify }}</script>
 <script type="application/json" id="digest-rules">
   {"groups": {{ site.data.digest.groups | jsonify }}, "options": {{ options | jsonify }}, "curated": {{ curated.tags }}, "curatedExclude": {{ curated.excludeTags }}, "unwanted": {{ unwanted.tags }}}
 </script>

@@ -187,431 +187,569 @@
   title: Last call [Seats]
   description: A tenth of the seats left, or 8 or fewer once three quarters are sold, or 8 or fewer when the total is unknown
 
-# Activity tags come from ingest's src/common/activities.py; parents are implied
+# Activity tags come from ingest's src/common/activities.py; a slash names the parent
 
 - id: ART-CRAFT
   title: Art & Craft [Activity]
   description: Hands-on sessions where you make something yourself
   kind: activity
+  mode: participatory
 
-- id: PAINTING-SKETCHING
+- id: ART-CRAFT/PAINTING
   title: Painting & Sketching [Activity]
   description: Painting, drawing and sketching, including sip-and-paint
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: CALLIGRAPHY
+- id: ART-CRAFT/CALLIGRAPHY
   title: Calligraphy [Activity]
   description: Calligraphy, hand lettering and typography
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: PRINTMAKING
+- id: ART-CRAFT/PRINTMAKING
   title: Printmaking [Activity]
   description: Linocut, block printing, woodcut and cyanotype
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: POTTERY
+- id: ART-CRAFT/POTTERY
   title: Pottery [Activity]
   description: Wheel pottery, hand-building and clay modelling
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: RESIN-ART
+- id: ART-CRAFT/RESIN
   title: Resin Art [Activity]
   description: Resin and epoxy art
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: KINTSUGI
+- id: ART-CRAFT/KINTSUGI
   title: Kintsugi [Activity]
   description: Mending pottery with gold, the Japanese way
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: CANDLE-MAKING
+- id: ART-CRAFT/CANDLES
   title: Candle Making [Activity]
   description: Make your own candles
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: JEWELLERY-MAKING
+- id: ART-CRAFT/JEWELLERY
   title: Jewellery Making [Activity]
   description: Make earrings, necklaces and bracelets
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: PERFUMERY
+- id: ART-CRAFT/PERFUMERY
   title: Perfume & Soap [Activity]
   description: Make perfume, soap or skincare
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
-- id: PLANTS
+- id: ART-CRAFT/PLANTS
   title: Plants [Activity]
   description: Terrariums, gardening and flower arranging
   kind: activity
-  parent: ART-CRAFT
+  mode: participatory
 
 - id: EXHIBITION
   title: Exhibition [Activity]
   description: Art, photography and design exhibitions
   kind: activity
+  mode: experiential
 
 - id: PHOTOGRAPHY
   title: Photography [Activity]
   description: Photo walks and photography classes
   kind: activity
+  mode: participatory
 
-- id: THEATER
+- id: FILMMAKING
+  title: Filmmaking [Activity]
+  description: Filmmaking, animation and video
+  kind: activity
+  mode: participatory
+
+- id: SHOW
+  title: Show [Activity]
+  description: Sit in the audience and watch a performance
+  kind: activity
+  mode: experiential
+
+- id: SHOW/THEATER
   title: Theatre [Activity]
-  description: Plays, puppetry, and theatre and acting workshops
+  description: Watch plays, drama and puppetry
   kind: activity
+  mode: experiential
 
-- id: IMPROV
-  title: Improv [Activity]
-  description: Improv theatre and comedy
-  kind: activity
-
-- id: STANDUP-COMEDY
-  title: Stand-up Comedy [Activity]
-  description: Stand-up and sketch comedy shows
-  kind: activity
-
-- id: OPEN-MIC
-  title: Open Mic [Activity]
-  description: Sign up and perform
-  kind: activity
-
-- id: POETRY
-  title: Poetry [Activity]
-  description: Readings, slams and poetry circles
-  kind: activity
-
-- id: STORYTELLING
-  title: Storytelling [Activity]
-  description: Stories told aloud
-  kind: activity
-
-- id: MAGIC-SHOW
-  title: Magic [Activity]
-  description: Magic and mentalism shows
-  kind: activity
-
-- id: DANCE-PERFORMANCE
+- id: SHOW/DANCE
   title: Dance Performance [Activity]
   description: Contemporary and classical dance on stage
   kind: activity
+  mode: experiential
+
+- id: SHOW/STANDUP
+  title: Stand-up Comedy [Activity]
+  description: Stand-up and sketch comedy shows
+  kind: activity
+  mode: experiential
+
+- id: SHOW/IMPROV
+  title: Improv Show [Activity]
+  description: Watch improvised comedy and theatre
+  kind: activity
+  mode: experiential
+
+- id: SHOW/MAGIC
+  title: Magic [Activity]
+  description: Magic and mentalism shows
+  kind: activity
+  mode: experiential
+
+- id: SHOW/STORYTELLING
+  title: Storytelling [Activity]
+  description: Stories told aloud
+  kind: activity
+  mode: experiential
+
+- id: SHOW/POETRY
+  title: Poetry [Activity]
+  description: Poets read and recite to an audience
+  kind: activity
+  mode: experiential
+
+- id: SHOW/PERFORMANCE-ART
+  title: Performance Art [Activity]
+  description: Experimental shows mixing movement, video, music and words
+  kind: activity
+  mode: experiential
+
+- id: ON-STAGE
+  title: On Stage [Activity]
+  description: You perform, or learn to
+  kind: activity
+  mode: participatory
+
+- id: ON-STAGE/OPEN-MIC
+  title: Open Mic [Activity]
+  description: Sign up and perform
+  kind: activity
+  mode: participatory
+
+- id: ON-STAGE/ACTING
+  title: Acting [Activity]
+  description: Theatre and acting workshops
+  kind: activity
+  mode: participatory
+
+- id: ON-STAGE/IMPROV
+  title: Improv Class [Activity]
+  description: Improv classes and jams where you play
+  kind: activity
+  mode: participatory
 
 - id: LIVE-MUSIC
   title: Live Music [Activity]
   description: Musicians playing live
   kind: activity
+  mode: experiential
 
-- id: INDIAN-CLASSICAL
+- id: LIVE-MUSIC/INDIAN-CLASSICAL
   title: Indian Classical [Activity]
   description: Carnatic and Hindustani music
   kind: activity
-  parent: LIVE-MUSIC
+  mode: experiential
 
-- id: JAZZ
+- id: LIVE-MUSIC/JAZZ
   title: Jazz [Activity]
   description: Jazz gigs
   kind: activity
-  parent: LIVE-MUSIC
+  mode: experiential
 
-- id: ROCK-METAL
+- id: LIVE-MUSIC/ROCK-METAL
   title: Rock & Metal [Activity]
   description: Rock, metal and punk gigs
   kind: activity
-  parent: LIVE-MUSIC
+  mode: experiential
 
-- id: SUFI-QAWWALI
+- id: LIVE-MUSIC/SUFI-QAWWALI
   title: Sufi & Qawwali [Activity]
   description: Sufi, qawwali and ghazal
   kind: activity
-  parent: LIVE-MUSIC
+  mode: experiential
 
-- id: FOLK-MUSIC
+- id: LIVE-MUSIC/FOLK
   title: Folk [Activity]
   description: Folk music
   kind: activity
-  parent: LIVE-MUSIC
+  mode: experiential
 
-- id: DEVOTIONAL-MUSIC
+- id: LIVE-MUSIC/DEVOTIONAL
   title: Devotional Music [Activity]
   description: Kirtan and bhajans, hidden from most calendars
   kind: activity
-  parent: LIVE-MUSIC
-
-- id: DJ-NIGHT
-  title: DJ Night [Activity]
-  description: DJ sets, club nights and parties, hidden from most calendars
-  kind: activity
-
-- id: BOLLYWOOD-NIGHT
-  title: Bollywood Night [Activity]
-  description: Parties playing Bollywood and other film music
-  kind: activity
-  parent: DJ-NIGHT
-
-- id: KARAOKE
-  title: Karaoke [Activity]
-  description: Karaoke nights
-  kind: activity
-
-- id: JAM-SESSION
-  title: Jam Session [Activity]
-  description: Jams, sing-alongs and choirs where you make music together
-  kind: activity
+  mode: experiential
 
 - id: LISTENING-SESSION
   title: Listening Session [Activity]
   description: Album and vinyl listening sessions
   kind: activity
+  mode: experiential
 
-- id: MUSIC-LESSON
+- id: MUSIC-MAKING
+  title: Music Making [Activity]
+  description: Play or sing, rather than listen
+  kind: activity
+  mode: participatory
+
+- id: MUSIC-MAKING/JAM
+  title: Jam Session [Activity]
+  description: Jams, sing-alongs and choirs where you make music together
+  kind: activity
+  mode: participatory
+
+- id: MUSIC-MAKING/LESSON
   title: Music Lesson [Activity]
   description: Learn an instrument or to sing
+  kind: activity
+  mode: participatory
+
+- id: NIGHTLIFE
+  title: Nightlife [Activity]
+  description: Club nights, parties and karaoke, hidden from most calendars
+  kind: activity
+
+- id: NIGHTLIFE/DJ
+  title: DJ Night [Activity]
+  description: DJ sets, club nights and parties, hidden from most calendars
+  kind: activity
+
+- id: NIGHTLIFE/BOLLYWOOD
+  title: Bollywood Night [Activity]
+  description: Parties playing Bollywood and other film music
+  kind: activity
+
+- id: NIGHTLIFE/KARAOKE
+  title: Karaoke [Activity]
+  description: Karaoke nights
   kind: activity
 
 - id: MOVIE-SCREENING
   title: Film Screening [Activity]
   description: Film and documentary screenings
   kind: activity
+  mode: experiential
 
 - id: SPORTS-SCREENING
   title: Sports Screening [Activity]
   description: Live sports on a big screen
   kind: activity
+  mode: experiential
 
-- id: F1-SCREENING
+- id: SPORTS-SCREENING/F1
   title: F1 Screening [Activity]
   description: Formula 1 races on a big screen
   kind: activity
-  parent: SPORTS-SCREENING
+  mode: experiential
 
-- id: FOOTBALL-SCREENING
+- id: SPORTS-SCREENING/FOOTBALL
   title: Football Screening [Activity]
   description: Football matches on a big screen
   kind: activity
-  parent: SPORTS-SCREENING
+  mode: experiential
 
-- id: CRICKET-SCREENING
+- id: SPORTS-SCREENING/CRICKET
   title: Cricket Screening [Activity]
-  description: Cricket matches on a big screen
+  description: Cricket matches, IPL included, on a big screen
   kind: activity
-  parent: SPORTS-SCREENING
-
-- id: IPL-SCREENING
-  title: IPL Screening [Activity]
-  description: IPL matches on a big screen
-  kind: activity
-  parent: CRICKET-SCREENING
-
-- id: BOARDGAMES
-  title: Board Games [Activity]
-  description: Board, card and tabletop games
-  kind: activity
-
-- id: SOCIAL-DEDUCTION
-  title: Social Deduction [Activity]
-  description: Mafia, Werewolf and Blood on the Clocktower
-  kind: activity
-  parent: BOARDGAMES
-
-- id: TTRPG
-  title: Tabletop RPG [Activity]
-  description: Dungeons & Dragons and other role-playing games
-  kind: activity
-  parent: BOARDGAMES
-
-- id: CHESS
-  title: Chess [Activity]
-  description: Chess
-  kind: activity
-
-- id: QUIZZING
-  title: Quizzing [Activity]
-  description: Quizzes and trivia nights
-  kind: activity
-
-- id: PUZZLES
-  title: Puzzles [Activity]
-  description: Jigsaws, crosswords and Rubik's cubes
-  kind: activity
-
-- id: FITNESS
-  title: Fitness [Activity]
-  description: Workouts, sport and fitness sessions
-  kind: activity
-
-- id: RUNNING
-  title: Running [Activity]
-  description: Run clubs, fun runs and marathons
-  kind: activity
-  parent: FITNESS
-
-- id: CYCLING
-  title: Cycling [Activity]
-  description: Group rides
-  kind: activity
-  parent: FITNESS
-
-- id: YOGA
-  title: Yoga [Activity]
-  description: Yoga
-  kind: activity
-  parent: FITNESS
-
-- id: PILATES
-  title: Pilates [Activity]
-  description: Pilates
-  kind: activity
-  parent: FITNESS
-
-- id: MARTIAL-ARTS
-  title: Martial Arts [Activity]
-  description: Martial arts, boxing and self-defence
-  kind: activity
-  parent: FITNESS
-
-- id: CLIMBING
-  title: Climbing [Activity]
-  description: Bouldering and wall climbing
-  kind: activity
-  parent: FITNESS
-
-- id: RACKET-SPORTS
-  title: Racket Sports [Activity]
-  description: Badminton, pickleball, padel, squash and tennis
-  kind: activity
-  parent: FITNESS
-
-- id: TEAM-SPORTS
-  title: Team Sports [Activity]
-  description: Play football, basketball, cricket and more
-  kind: activity
-  parent: FITNESS
-
-- id: DANCE-CLASS
-  title: Dance Class [Activity]
-  description: Learn to dance, or dance socially
-  kind: activity
-
-- id: LATIN-DANCE
-  title: Latin Dance [Activity]
-  description: Salsa, bachata and kizomba
-  kind: activity
-  parent: DANCE-CLASS
-
-- id: GARBA
-  title: Garba [Activity]
-  description: Garba and dandiya
-  kind: activity
-  parent: DANCE-CLASS
-
-- id: ADVENTURE
-  title: Adventure [Activity]
-  description: Karting, paintball, kayaking, riding and shooting
-  kind: activity
+  mode: experiential
 
 - id: LIVE-SPORTS
   title: Live Sports [Activity]
   description: Watch a match in the stadium
   kind: activity
+  mode: experiential
 
-- id: HERITAGE-WALK
+- id: GAMES
+  title: Games [Activity]
+  description: Play board games, quizzes, chess and puzzles
+  kind: activity
+  mode: participatory
+
+- id: GAMES/BOARDGAMES
+  title: Board Games [Activity]
+  description: Board, card and tabletop games
+  kind: activity
+  mode: participatory
+
+- id: GAMES/SOCIAL-DEDUCTION
+  title: Social Deduction [Activity]
+  description: Mafia, Werewolf and Blood on the Clocktower
+  kind: activity
+  mode: participatory
+
+- id: GAMES/TTRPG
+  title: Tabletop RPG [Activity]
+  description: Dungeons & Dragons and other role-playing games
+  kind: activity
+  mode: participatory
+
+- id: GAMES/CHESS
+  title: Chess [Activity]
+  description: Chess
+  kind: activity
+  mode: participatory
+
+- id: GAMES/QUIZ
+  title: Quizzing [Activity]
+  description: Quizzes and trivia nights
+  kind: activity
+  mode: participatory
+
+- id: GAMES/PUZZLES
+  title: Puzzles [Activity]
+  description: Jigsaws, crosswords and Rubik's cubes
+  kind: activity
+  mode: participatory
+
+- id: FITNESS
+  title: Fitness [Activity]
+  description: Workouts, sport and fitness sessions
+  kind: activity
+  mode: participatory
+
+- id: FITNESS/RUNNING
+  title: Running [Activity]
+  description: Run clubs, fun runs and marathons
+  kind: activity
+  mode: participatory
+
+- id: FITNESS/CYCLING
+  title: Cycling [Activity]
+  description: Group rides
+  kind: activity
+  mode: participatory
+
+- id: FITNESS/YOGA
+  title: Yoga [Activity]
+  description: Yoga
+  kind: activity
+  mode: participatory
+
+- id: FITNESS/PILATES
+  title: Pilates [Activity]
+  description: Pilates
+  kind: activity
+  mode: participatory
+
+- id: FITNESS/MARTIAL-ARTS
+  title: Martial Arts [Activity]
+  description: Martial arts, boxing and self-defence
+  kind: activity
+  mode: participatory
+
+- id: FITNESS/CLIMBING
+  title: Climbing [Activity]
+  description: Bouldering and wall climbing
+  kind: activity
+  mode: participatory
+
+- id: FITNESS/RACKET-SPORTS
+  title: Racket Sports [Activity]
+  description: Badminton, pickleball, padel, squash and tennis
+  kind: activity
+  mode: participatory
+
+- id: FITNESS/TEAM-SPORTS
+  title: Team Sports [Activity]
+  description: Play football, basketball, cricket and more
+  kind: activity
+  mode: participatory
+
+- id: DANCING
+  title: Dancing [Activity]
+  description: Dance yourself, in a class or a social night
+  kind: activity
+  mode: participatory
+
+- id: DANCING/LATIN
+  title: Latin Dance [Activity]
+  description: Salsa, bachata and kizomba
+  kind: activity
+  mode: participatory
+
+- id: DANCING/SWING-BALLROOM
+  title: Swing & Ballroom [Activity]
+  description: Lindy hop, tango, waltz and other partner dances
+  kind: activity
+  mode: participatory
+
+- id: DANCING/BOLLYWOOD
+  title: Bollywood Dance [Activity]
+  description: Learn Bollywood choreography
+  kind: activity
+  mode: participatory
+
+- id: DANCING/HIPHOP
+  title: Hip-hop Dance [Activity]
+  description: Hip-hop, street dance and K-pop
+  kind: activity
+  mode: participatory
+
+- id: DANCING/CONTEMPORARY
+  title: Contemporary Dance [Activity]
+  description: Contemporary, jazz dance and ballet
+  kind: activity
+  mode: participatory
+
+- id: DANCING/INDIAN-CLASSICAL
+  title: Indian Classical Dance [Activity]
+  description: Bharatanatyam, Kathak and more
+  kind: activity
+  mode: participatory
+
+- id: DANCING/GARBA
+  title: Garba [Activity]
+  description: Garba and dandiya
+  kind: activity
+  mode: participatory
+
+- id: OUTDOORS
+  title: Outdoors [Activity]
+  description: Walks, treks, birding and adventures
+  kind: activity
+  mode: participatory
+
+- id: OUTDOORS/ADVENTURE
+  title: Adventure [Activity]
+  description: Karting, paintball, kayaking, riding and shooting
+  kind: activity
+  mode: participatory
+
+- id: OUTDOORS/HERITAGE-WALK
   title: Heritage Walk [Activity]
   description: Heritage, history and city walks
   kind: activity
+  mode: participatory
 
-- id: NATURE-WALK
+- id: OUTDOORS/NATURE-WALK
   title: Nature Walk [Activity]
   description: Tree, lake and nature walks
   kind: activity
+  mode: participatory
 
-- id: BIRDING
+- id: OUTDOORS/BIRDING
   title: Birding [Activity]
   description: Birdwatching
   kind: activity
-  parent: NATURE-WALK
+  mode: participatory
 
-- id: TREK
+- id: OUTDOORS/TREK
   title: Trek [Activity]
   description: Treks and hikes
   kind: activity
+  mode: participatory
 
-- id: STARGAZING
+- id: OUTDOORS/STARGAZING
   title: Stargazing [Activity]
   description: Stargazing and astronomy
   kind: activity
+  mode: participatory
 
-- id: FOOD-TASTING
+- id: TASTING
+  title: Tasting [Activity]
+  description: Eat and drink what someone else made
+  kind: activity
+  mode: experiential
+
+- id: TASTING/FOOD
   title: Food Tasting [Activity]
   description: Tasting menus, pop-ups and food trails
   kind: activity
+  mode: experiential
 
-- id: COOKING-CLASS
+- id: TASTING/DRINKS
+  title: Drinks Tasting [Activity]
+  description: Wine, beer and whisky tastings
+  kind: activity
+  mode: experiential
+
+- id: TASTING/COFFEE-TEA
+  title: Coffee & Tea Tasting [Activity]
+  description: Coffee and tea tastings and cuppings
+  kind: activity
+  mode: experiential
+
+- id: COOKING
+  title: Cooking [Activity]
+  description: Cook, bake or mix it yourself
+  kind: activity
+  mode: participatory
+
+- id: COOKING/CLASS
   title: Cooking Class [Activity]
   description: Cooking and baking classes
   kind: activity
+  mode: participatory
 
-- id: COFFEE-TEA
-  title: Coffee & Tea [Activity]
-  description: Brewing, tasting and latte art
+- id: COOKING/MIXOLOGY
+  title: Mixology [Activity]
+  description: Mix your own cocktails
+  kind: activity
+  mode: participatory
+
+- id: COOKING/COFFEE
+  title: Coffee Brewing [Activity]
+  description: Brew coffee and tea, and make latte art
+  kind: activity
+  mode: participatory
+
+- id: BOOKS
+  title: Books [Activity]
+  description: Book clubs, author talks and writing
   kind: activity
 
-- id: DRINKS-TASTING
-  title: Drinks Tasting [Activity]
-  description: Wine, beer, whisky and cocktails
-  kind: activity
-
-- id: BOOK-CLUB
+- id: BOOKS/BOOK-CLUB
   title: Book Club [Activity]
   description: Book clubs and reading together
   kind: activity
+  mode: participatory
 
-- id: AUTHOR-EVENT
-  title: Author Event [Activity]
+- id: BOOKS/AUTHOR-TALK
+  title: Author Talk [Activity]
   description: Book launches, readings and signings
   kind: activity
+  mode: experiential
 
-- id: WRITING
+- id: BOOKS/WRITING
   title: Writing [Activity]
   description: Writing workshops and circles
   kind: activity
+  mode: participatory
 
-- id: SCIENCE
-  title: Science [Activity]
-  description: About science
+
+
+
+- id: SOCIAL
+  title: Social [Activity]
+  description: Meet new people
   kind: activity
+  mode: participatory
 
-- id: HISTORY
-  title: History [Activity]
-  description: About history
-  kind: activity
-
-- id: ENVIRONMENT
-  title: Environment [Activity]
-  description: Sustainability, climate and conservation
-  kind: activity
-
-- id: FILMMAKING
-  title: Filmmaking [Activity]
-  description: Filmmaking, animation and video
-  kind: activity
-
-- id: DATING-MIXER
+- id: SOCIAL/DATING-MIXER
   title: Dating Mixer [Activity]
   description: Singles mixers and dating events
   kind: activity
+  mode: participatory
 
-- id: STRANGERS-MEETUP
+- id: SOCIAL/STRANGERS-MEETUP
   title: Strangers Meetup [Activity]
   description: Meet new people and make friends
   kind: activity
+  mode: participatory
 
 - id: PETS
   title: Pets [Activity]
@@ -622,35 +760,26 @@
   title: Market [Activity]
   description: Flea markets, bazaars and pop-ups
   kind: activity
+  mode: experiential
 
 - id: KIDS
   title: Kids [Activity]
   description: Made for children
   kind: activity
 
+- id: COUPLES
+  title: Couples [Activity]
+  description: Made for couples and dates
+  kind: activity
+
 - id: WOMEN-ONLY
   title: Women Only [Activity]
-  description: Open only to women
-  kind: activity
-
-- id: QUEER
-  title: Queer [Activity]
-  description: Queer and LGBTQ+ events
-  kind: activity
-
-- id: PERFORMANCE-ART
-  title: Performance Art [Activity]
-  description: Experimental shows mixing movement, video, music and words
+  description: Open only to women, going by the organizer
   kind: activity
 
 - id: BUSINESS/SKILLS
   title: Business Skills [Activity]
   description: Marketing, startups and money; hidden with BUSINESS events
-  kind: activity
-
-- id: COUPLES
-  title: Couples [Activity]
-  description: Made for couples and dates
   kind: activity
 
 - id: EXPO
@@ -672,4 +801,3 @@
   title: Trip [Activity]
   description: Trips outside Bangalore, hidden from most calendars
   kind: activity
-

@@ -83,6 +83,7 @@ li[data-eventcount="0"] {
 
 /* Tags: a hue per area, green for free, pale amber budget, deep amber pricey */
 .blr-tag { --tag-bg: #f0f0f0; --tag-line: #8a8a8a; --tag-ink: #555; background: var(--tag-bg); border: 1px solid var(--tag-line); color: var(--tag-ink); }
+.blr-tag a { color: inherit; text-decoration: none; }
 /* Areas take their Namma Metro line colour; a new area falls back to slate */
 .blr-tag--location { --tag-bg: #e2e8f0; --tag-line: #64748b; --tag-ink: #334155; }
 .blr-tag--location[data-tag="CBD"] { --tag-bg: #fce7f3; --tag-line: #db2777; --tag-ink: #9d174d; }
@@ -99,6 +100,13 @@ li[data-eventcount="0"] {
 .fc-list-event-keywords .blr-tag {
     display: inline-block; font-size: .5em; padding: 2px; margin: 0 5px 2px 0;
     border-radius: 2px; text-decoration: none;
+}
+/* Same dark tip as the event drawer, naming the whole tag */
+.fc-list-event-keywords .blr-tag[data-tip] { position: relative; cursor: help; }
+.fc-list-event-keywords .blr-tag[data-tip]:hover::after {
+    content: attr(data-tip); position: absolute; z-index: 5; left: 0; top: calc(100% + 2px);
+    width: max-content; max-width: 16rem; padding: .35rem .5rem; border-radius: 3px;
+    background: #222; color: #fff; font-size: .75rem; line-height: 1.3; white-space: normal; pointer-events: none;
 }
 
 /* Activities are teal, apart from area hues and price ambers */

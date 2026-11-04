@@ -2,14 +2,18 @@
 const PRICE_TAG = /^(FREE|BUDGET|PRICEY)$/
 const LASTCALL = 'LASTCALL'
 
-// Activity tags and their parents come from _data/tags.yml
-function activityParents() {
-  try {
-    return new Map(JSON.parse(document.getElementById('blr-tag-info')?.textContent || '[]')
-      .filter(t => t.kind === 'activity').map(t => [t.id, t.parent || null]))
-  } catch { return new Map() }
+// Tags come from _data/tags.yml, and a slash in an activity names its parent
+function tagInfo() {
+  try { return JSON.parse(document.getElementById('blr-tag-info')?.textContent || '[]') } catch { return [] }
 }
-const ACTIVITY = activityParents()
+const INFO = tagInfo()
+const ACTIVITY = new Set(INFO.filter(t => t.kind === 'activity').map(t => t.id))
+const DESCRIPTION = new Map(INFO.map(t => [t.id, t.description]))
+
+// Hover text names the whole tag, then says what it means
+function tagTip(tag) {
+  return [tag.id, tag.kind !== 'other' && DESCRIPTION.get(tag.id)].filter(Boolean).join(' · ')
+}
 
 // Picks the tag colour: location, price, activity or other
 function tagKind(tag, locationTags) {
@@ -19,17 +23,24 @@ function tagKind(tag, locationTags) {
   return locationTags.includes(tag) ? 'location' : 'other'
 }
 
-// KINTSUGI already says ART-CRAFT, so rows show only the narrowest tags
-function narrowest(keywords) {
-  let parents = new Set([...keywords].map(k => ACTIVITY.get(k)).filter(Boolean))
-  return new Set([...keywords].filter(k => !parents.has(k)))
+// LIVE-MUSIC/JAZZ shows as LIVE-MUSIC and JAZZ, each keeping its full id
+function splitTags(keywords) {
+  let seen = new Map()
+  for (let k of keywords) {
+    let parts = ACTIVITY.has(k) ? k.split('/') : [k]
+    parts.forEach((name, i) => {
+      let id = parts.slice(0, i + 1).join('/')
+      if (!seen.has(id)) seen.set(id, name)
+    })
+  }
+  return [...seen].map(([id, name]) => ({ id, name }))
 }
 
 function visibleKeywords(all, pageTags = [], onlyTags = null) {
   // A proper keyword is in uppercase
   // Sub-tags like SISTERSINSWEAT/SPORTS and -CURATED only route events to calendars
   let keywords = new Set([...all].map(x => String(x).trim()).filter(x=>
-    x === x.toUpperCase() && x.length >= 3 && !x.includes('/') && !x.startsWith('-')
+    x === x.toUpperCase() && x.length >= 3 && (!x.includes('/') || ACTIVITY.has(x)) && !x.startsWith('-')
   ))
 
   // If this page only has a single tag
@@ -53,7 +64,7 @@ function visibleKeywords(all, pageTags = [], onlyTags = null) {
 
 // Tags as the calendar rows and the event modal show them
 function shownTags(keywords, locationTags, pageTags = [], onlyTags = null) {
-  return [...narrowest(visibleKeywords(keywords, pageTags, onlyTags))].map(name => ({ name, kind: tagKind(name, locationTags) }))
+  return splitTags(visibleKeywords(keywords, pageTags, onlyTags)).map(t => ({ ...t, kind: tagKind(t.id, locationTags) }))
 }
 
-export { PRICE_TAG, tagKind, visibleKeywords, shownTags }
+export { PRICE_TAG, tagKind, tagTip, visibleKeywords, shownTags }
