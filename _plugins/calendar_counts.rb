@@ -12,7 +12,8 @@ module Jekyll
         base = page.data['base_description'] ||= page.data['description'].to_s
         page.data['listed'] = listed
         page.data['dropped'] = dropped
-        page.data['description'] = "#{base} #{listed} events listed, #{dropped} more left out by our filters."
+        page.data['counts'] = "#{listed} events listed, #{dropped} more left out by our filters."
+        page.data['description'] = "#{base} #{page.data['counts']}"
       end
     end
   end

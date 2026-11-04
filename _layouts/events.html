@@ -9,8 +9,8 @@ title: blr.today
     <img height=100px src="/img/apple-touch-icon.png" alt="blr.today logo" />
 </div>
 
-{%- if page.description %}
-<p class="blr-summary">{{ page.description }}</p>
+{%- if page.counts %}
+<p class="blr-summary">{{ page.counts }}</p>
 {%- endif %}
 
 {{ content | extract_element:'.card.warn' | first }}
