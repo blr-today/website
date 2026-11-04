@@ -190,3 +190,7 @@ Jekyll::Hooks.register :pages, :post_render do |page|
 
   page.output = page.output.split(/\r?\n/, -1).map { |l| fold_ical_line(l) }.join("\r\n")
 end
+
+Jekyll::Hooks.register :site, :post_read do |site|
+  site.data['type_colors'] = COLOR_MAP
+end

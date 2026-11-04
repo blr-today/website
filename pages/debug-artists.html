@@ -1,0 +1,103 @@
+---
+debug: Events that name their performers
+layout: default
+title: blr.today / Artists
+permalink: /_debug/artists/
+noindex: true
+sitemap: false
+sqlite:
+  - data: artists
+    file: events.db
+    query: |
+      WITH performers AS (
+        SELECT e.rowid AS rid, json_group_array(json_object(
+          'name', trim(CASE p.type WHEN 'object' THEN p.value->>'$.name' ELSE p.value END),
+          'kind', CASE p.type WHEN 'object' THEN p.value->>'$."@type"' END,
+          'url', CASE p.type WHEN 'object' THEN trim(p.value->>'$.url') END
+        )) AS list, count(*) AS n
+        FROM events e, json_each(CASE json_type(e.event_json->'$.performer')
+          WHEN 'array' THEN e.event_json->'$.performer'
+          ELSE json_array(e.event_json->'$.performer') END) p
+        WHERE json_type(e.event_json->'$.performer') IN ('array', 'object', 'text')
+        GROUP BY e.rowid
+      )
+      SELECT e.id, e.url,
+        event_json->>'$.name' AS name,
+        event_json->>'$.startDate' AS startDate,
+        event_json->>'$."@type"' AS type,
+        event_json->>'$.location.name' AS venue,
+        event_json->>'$.description' AS description,
+        coalesce(event_json->>'$.keywords', '[]') AS keywords,
+        p.list AS performers, p.n
+      FROM events e JOIN performers p ON p.rid = e.rowid
+      WHERE p.n > 0 AND event_json->>'$.startDate' >= date('now')
+        AND NOT EXISTS (
+          SELECT 1 FROM json_each(event_json->'$.keywords')
+          WHERE value IN ('LOW-QUALITY', 'NOTINBLR', 'WOOWOO', 'DANDIYA', 'BUSINESS')
+        )
+      ORDER BY event_json->>'$.startDate'
+---
+{%- assign colors = site.data.type_colors %}
+{%- assign types = page.artists | group_by: "type" | sort: "size" | reverse %}
+{%- assign total = 0 %}
+{%- for e in page.artists %}{% assign total = total | plus: e.n %}{% endfor %}
+<h2>Artists</h2>
+<p>
+  {{ page.artists | size }} upcoming events name {{ total }} performers in
+  schema.org's <code>performer</code>, as people, groups or plain names.
+  Rows are coloured by event type, the same colours as the calendar.
+  Performer links come from the source. Events on
+  <a href="/cal/unwanted/">Unwanted</a> are left out.
+</p>
+<p class="artist-types">
+  {%- for t in types %}
+  <span style="--c: {{ colors[t.name] | default: colors.Event }}">{{ t.name | remove: "Event" | default: "Uncategorized" }} {{ t.size }}</span>
+  {%- endfor %}
+</p>
+
+<style>
+  .artist-types span { display: inline-block; margin: 0 0.5em 0.3em 0; padding: 0 0.4em; border-left: 0.8em solid var(--c); }
+  table.artists { width: 100%; table-layout: fixed; }
+  table.artists th, table.artists td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.artists th:first-child { width: 7em; }
+  table.artists th:nth-child(3) { width: 25%; }
+  table.artists th:last-child { width: 20%; }
+  table.artists td:first-child { border-left: 6px solid var(--c); }
+  table.artists small { opacity: 0.7; }
+  table.artists ul { margin: 0; padding-left: 1em; }
+</style>
+
+<table class="artists">
+  <thead>
+    <tr><th>When</th><th>Event</th><th>Performers</th><th>Type, venue, tags</th></tr>
+  </thead>
+  <tbody>
+  {%- for e in page.artists %}
+    {%- assign keywords = e.keywords | parse_json %}
+    {%- assign performers = e.performers | parse_json %}
+    <tr style="--c: {{ colors[e.type] | default: colors.Event }}">
+      <td><time datetime="{{ e.startDate }}">{{ e.startDate | date: "%a %d %b" }}{% if e.startDate contains "T" %}<br>{{ e.startDate | date: "%H:%M" }}{% endif %}</time></td>
+      <td>
+        <a href="/event/{{ e.id }}/">{{ e.name }}</a>
+        <small>(<a href="{{ e.url }}" rel="noopener">{{ e.url | split: "/" | slice: 2 | first | remove: "www." }}</a>)</small><br>
+        <small>{{ e.description | strip_html | truncate: 200 }}</small>
+      </td>
+      <td><ul>
+        {%- for p in performers %}
+        <li>{% if p.url %}<a href="{{ p.url }}" rel="noopener">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}{% if p.kind %} <small>{{ p.kind }}</small>{% endif %}</li>
+        {%- endfor %}
+      </ul></td>
+      <td>
+        {{ e.type | remove: "Event" | default: "Uncategorized" }}<br>
+        {%- if e.venue %}<small>{{ e.venue }}</small><br>{% endif %}
+        {%- for k in keywords %}<small>{{ k }}</small> {% endfor %}
+      </td>
+    </tr>
+  {%- endfor %}
+  </tbody>
+</table>
