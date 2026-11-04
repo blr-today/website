@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "jekyll", "~> 4.4.1"
 gem 'jekyll-sqlite'
 gem 'jekyll-sitemap'
+gem "jekyll-seo-tag", "~> 2.8"
 gem "jekyll-datapage-generator", "~> 1.4"
 gem "icalendar", "~> 2.10"
 

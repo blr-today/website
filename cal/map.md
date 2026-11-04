@@ -1,5 +1,6 @@
 ---
 title: Musuem of Art & Photograph 📸
+description: "Exhibitions, talks, workshops and film screenings at MAP, the Museum of Art & Photography in Bengaluru."
 type: museum
 tags: '["MAP"]'
 domain: map-india.org

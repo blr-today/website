@@ -1,5 +1,6 @@
 ---
 title: Paint Bar
+description: "Guided painting sessions and art workshops in Bangalore by Paint Bar, where anyone can paint."
 type: organizer
 tags: '["PAINTBAR"]'
 links:

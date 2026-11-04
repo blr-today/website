@@ -1,5 +1,6 @@
 ---
 title: Sumukha Exhibition [Venue]
+description: "Contemporary art exhibitions at Gallery Sumukha, Bangalore."
 type: museum
 tags: '["SUMUKHA"]'
 domain: sumukha.com

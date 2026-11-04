@@ -1,5 +1,6 @@
 ---
 title: Puma Running 👟
+description: "PUMA Nitro community runs and running events in Bangalore by Puma Running."
 type: organizer
 tags: '["PUMARUN"]'
 links:

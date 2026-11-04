@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Couples 💑
+description: "Workshops, dinners and outings in Bangalore made for couples and dates."
 type: activity
 atproto: couples.blr.today
 fedi: couples@fedi.blr.today

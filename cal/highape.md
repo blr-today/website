@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: HighApe 💃🏽
+description: "Bangalore nightlife and events from HighApe, filtered to drop club promotions and low-quality listings."
 type: aggregator
 tags: '["HIGHAPE"]'
 domain: highape.com

@@ -1,5 +1,6 @@
 ---
 title: Sports Screenings 📺
+description: "F1, IPL, cricket and football screenings at pubs, cafes and venues across Bangalore."
 type: collection
 tags: '["SPORTS-SCREENING"]'
 excludeTags: '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO"]'

@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Jayanagar
+description: "Events in Jayanagar, Bangalore: performances, talks, workshops and community events in South Bangalore."
 type: neighbourhood
 atproto: jayanagar.blr.today
 fedi: jayanagar@fedi.blr.today

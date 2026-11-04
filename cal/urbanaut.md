@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Urbanaut 🎟️
+description: "Bangalore experiences and events from Urbanaut's local partners, from workshops to walks and gigs."
 type: aggregator
 tags: '["URBANAUT"]'
 domain: urbanaut.app

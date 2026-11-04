@@ -1,5 +1,6 @@
 ---
 title: Ranga Shankara 🎭
+description: "Plays in Kannada, English, Hindi and more at Ranga Shankara, JP Nagar, with a play almost every evening."
 type: venue
 atproto: rangashankara.blr.today
 fedi: rangashankara@fedi.blr.today

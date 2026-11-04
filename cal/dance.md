@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Dance 💃
+description: "Dance classes, workshops and social dance nights in Bangalore, from salsa and bachata to Bollywood."
 type: activity
 atproto: dance.blr.today
 fedi: dance@fedi.blr.today

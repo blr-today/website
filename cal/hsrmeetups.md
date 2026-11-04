@@ -1,5 +1,6 @@
 ---
 title: HSR Meetups 🎲
+description: "Board game socials around HSR Layout by HSR Meetups, with game masters who pick games and teach the rules."
 type: organizer
 tags: '["HSRMEETUPS"]'
 links:

@@ -1,5 +1,6 @@
 ---
 title: Sofar Sounds 🎤
+description: "Sofar Sounds secret concerts in Bangalore: intimate live music in unexpected venues."
 type: organizer
 tags: '["SOFAR"]'
 excludeTags: '[]'

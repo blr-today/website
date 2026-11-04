@@ -1,5 +1,6 @@
 ---
 title: Bengaluru Sustainability Forum ♻️
+description: "Talks, workshops and events on sustainability and the environment by the Bengaluru Sustainability Forum."
 type: curator
 tags: '["BSF"]'
 links:

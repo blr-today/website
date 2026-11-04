@@ -1,5 +1,6 @@
 ---
 title: Underline Center 🌟
+description: "Talks, workshops, screenings, board games and community events at Underline Center, Bangalore."
 type: venue
 atproto: underline.blr.today
 fedi: underline@fedi.blr.today

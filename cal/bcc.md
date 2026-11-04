@@ -1,5 +1,6 @@
 ---
 title: Bangalore Chess Club ♟️
+description: "Chess meetups, casual games and tournaments by Bangalore Chess Club, India's largest offline chess community."
 type: organizer
 tags: '["CHESS", "BCC"]'
 domain: bangalorechessclub.in

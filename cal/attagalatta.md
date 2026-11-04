@@ -1,5 +1,6 @@
 ---
 title: Atta Galatta [Organizer]
+description: "Book launches, readings, workshops and performances at Atta Galatta, the Indian language bookstore in Indiranagar."
 type: bookstore
 tags: '["ATTAGALATTA"]'
 domain: attagalatta.com

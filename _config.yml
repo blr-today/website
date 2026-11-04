@@ -9,6 +9,7 @@ plugins:
   - jekyll_sqlite
   - jekyll-datapage-generator
   - jekyll-sitemap
+  - jekyll-seo-tag
 
 include:
   - _headers

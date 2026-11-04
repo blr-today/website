@@ -1,5 +1,6 @@
 ---
 title: Sisters In Sweat 🦸🏽‍♀️
+description: "Women-only sports and wellness sessions in Bangalore by Sisters In Sweat."
 type: organizer
 tags: '["SISTERSINSWEAT"]'
 domain: sistersinsweat.com

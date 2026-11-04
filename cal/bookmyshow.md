@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: BookMyShow
+description: "Bangalore events, plays and activities from BookMyShow, filtered to drop low-quality listings, promotions and business events."
 type: aggregator
 tags: '["BOOKMYSHOW"]'
 domain: in.bookmyshow.com

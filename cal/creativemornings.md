@@ -1,5 +1,6 @@
 ---
 title: Creative Mornings 🎨
+description: "Free monthly CreativeMornings talks by the Bengaluru chapter of the global creative community."
 type: organizer
 tags: '["CREATIVEMORNINGS"]'
 domain: creativemornings.com

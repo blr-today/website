@@ -1,5 +1,6 @@
 ---
 title: Bangalore Astronomy Club 🔭
+description: "Stargazing sessions, meteor shower nights, telescope workshops and star parties by the Bangalore Astronomy Club."
 type: organizer
 tags: '["BAC"]'
 domain: bangaloreastronomyclub.com

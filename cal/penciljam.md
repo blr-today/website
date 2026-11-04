@@ -1,5 +1,6 @@
 ---
 title: Penciljam
+description: "Weekend urban sketching meetups by Penciljam, for people in Bangalore who love drawing on location."
 type: organizer
 tags: '["PENCILJAM"]'
 domain: penciljam.com

@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Budget 🪙
+description: "Bangalore events where the cheapest ticket costs under ₹500, across every source on blr.today."
 type: collection
 tags: '["BUDGET"]'
 atproto: budget.blr.today

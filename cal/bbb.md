@@ -1,5 +1,6 @@
 ---
 title: Broke Bibliophiles Bangalore 📚
+description: "Monthly book club meetups by Broke Bibliophiles Bangalore, one of the city's longest-running book clubs."
 type: organizer
 tags: '["BBB"]'
 links:

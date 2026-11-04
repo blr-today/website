@@ -1,5 +1,6 @@
 ---
 title: Windmills 🎶
+description: "Live jazz and music at Windmills, the craft brewery and jazz theatre in Whitefield, Bangalore."
 type: venue
 tags: '["WINDMILLS"]'
 --- 

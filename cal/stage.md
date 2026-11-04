@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Theatre & Performance 🎭
+description: "Plays, theatre, dance performances, storytelling and poetry events across Bangalore."
 type: activity
 atproto: stage.blr.today
 fedi: stage@fedi.blr.today

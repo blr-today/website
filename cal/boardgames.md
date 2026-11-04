@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Board Games 🎲
+description: "Board game nights, Mafia and Werewolf, Dungeons & Dragons and other tabletop game events across Bangalore."
 type: activity
 atproto: boardgames.blr.today
 fedi: boardgames@fedi.blr.today

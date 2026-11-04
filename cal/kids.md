@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Kids 🧒
+description: "Workshops, shows and activities in Bangalore made for children, without play zones and attractions."
 type: activity
 atproto: kids.blr.today
 fedi: kids@fedi.blr.today

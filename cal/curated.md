@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Curated 🍉
+description: "Hand-picked events in Bangalore from independent venues, organisers and communities, without the aggregator noise."
 type: collection
 atproto: curated.blr.today
 fedi: curated@fedi.blr.today

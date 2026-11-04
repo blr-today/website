@@ -1,5 +1,6 @@
 ---
 title: Indian Institute of World Culture 🏛️
+description: "Talks, music and dance recitals, poetry readings and exhibitions at the Indian Institute of World Culture, Basavanagudi."
 type: venue
 tags: '["IIWC"]'
 domain: iiwc.in

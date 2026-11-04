@@ -1,5 +1,6 @@
 ---
 title: Science Gallery Bengaluru [Organizer]
+description: "Exhibitions, talks and workshops at Science Gallery Bengaluru, where science meets art and society."
 type: museum
 atproto: scigallery.blr.today
 fedi: scigallery@fedi.blr.today

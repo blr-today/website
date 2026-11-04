@@ -1,5 +1,6 @@
 ---
 title: Treehouse 🌳
+description: "Workshops, food gatherings and pop-ups at Treehouse, a community space in Bengaluru."
 type: venue
 tags: '["TREEHOUSE"]'
 links:

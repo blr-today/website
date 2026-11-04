@@ -1,5 +1,6 @@
 ---
 title: Wine in a Million 🍷
+description: "Wine, spirits, beer and non-alcoholic drinks events, festivals and tastings in Bengaluru by Wine in a Million."
 type: organizer
 tags: '["WINEINAMILLION"]'
 links:

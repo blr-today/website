@@ -1,5 +1,6 @@
 ---
 title: Artzo
+description: "Art workshops and classes hosted by Artzo, the Bangalore art supplies store formerly known as Art Materials."
 type: organizer
 tags: '["ARTZO"]'
 domain: artzo.in

@@ -1,5 +1,6 @@
 ---
 title: The Courtyard, Shantinagar
+description: "Food pop-ups, film screenings, art and culture events at The Courtyard in Shantinagar, Bangalore."
 type: venue
 tags: '["COURTYARD"]'
 links:

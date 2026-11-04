@@ -1,5 +1,6 @@
 ---
 title: Jawaharlal Nehru Planetarium 🪐
+description: "Sky shows, astronomy talks, telescope programmes and lectures at the Jawaharlal Nehru Planetarium, Bengaluru."
 type: venue
 tags: '["PLANETARIUM"]'
 links:

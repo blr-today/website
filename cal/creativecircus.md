@@ -1,5 +1,6 @@
 ---
 title: Bangalore Creative Circus 🎪
+description: "Monthly carnivals, pop-up markets, workshops and performances at Bangalore Creative Circus."
 type: venue
 tags: '["CREATIVECIRCUS"]'
 links:

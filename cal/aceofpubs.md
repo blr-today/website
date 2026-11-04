@@ -1,5 +1,6 @@
 ---
 title: Ace of Pubs 🙋🏽
+description: "Upcoming Ace of Pubs pub quizzes and trivia nights in Bengaluru, from one of India's biggest quizzing communities."
 type: organizer
 tags: '["ACEOFPUBS"]'
 domain: aceofpubs.com

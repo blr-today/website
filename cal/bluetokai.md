@@ -1,5 +1,6 @@
 ---
 title: Blue Tokai ☕
+description: "Coffee workshops, cuppings and brewing classes at Blue Tokai cafes and roasteries in Bengaluru."
 type: organizer
 tags: '["BLUETOKAI"]'
 domain: bluetokaicoffee.com

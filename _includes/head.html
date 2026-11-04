@@ -1,6 +1,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{page.title}}</title>
+{%- unless page.layout == "event" %}
+{% seo title=false %}
+{%- endunless %}
 <link rel="stylesheet" href="/assets/classless.css" />
 <link rel="stylesheet" href="/assets/custom.css" />
 {%- if page.layout == "events" and page.events.size > 0 %}

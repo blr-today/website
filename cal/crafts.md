@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Arts & Crafts 🎨
+description: "Hands-on arts and crafts workshops in Bangalore: pottery, painting, resin, kintsugi, candle making, crochet and more."
 type: activity
 atproto: crafts.blr.today
 fedi: crafts@fedi.blr.today

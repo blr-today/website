@@ -1,5 +1,6 @@
 ---
 title: Unwanted Events 👻
+description: "Bangalore events blr.today leaves out of its other calendars: low-quality listings, trips, business and pseudoscience."
 type: collection
 tags: '["LOW-QUALITY", "NOTINBLR", "WOOWOO", "DANDIYA", "BUSINESS"]'
 excludeTags: '[]'

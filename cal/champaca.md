@@ -1,5 +1,6 @@
 ---
 title: Champaca Bookstore 📚
+description: "Readings, book launches, children's events and talks at Champaca, the independent women-run bookstore in Bengaluru."
 type: bookstore
 tags: '["CHAMPACA"]'
 domain: champaca.in

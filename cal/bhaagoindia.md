@@ -1,5 +1,6 @@
 ---
 title: Bhaago India 👟
+description: "Upcoming runs, marathons and running events in Bengaluru, listed by Bhaago India for runners of every level."
 type: curator
 tags: '["BHAAGOINDIA"]'
 domain: bhaagoindia.com

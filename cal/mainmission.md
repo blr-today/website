@@ -1,5 +1,6 @@
 ---
 title: Main Mission 🏃
+description: "Weekly community runs in Cubbon Park, brand runs and HYROX training by Main Mission, from Indiranagar Run Club."
 type: organizer
 tags: '["MAINMISSION"]'
 domain: mainmission.in

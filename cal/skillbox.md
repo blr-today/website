@@ -1,6 +1,7 @@
 ---
 tagFilter: true
 title: Skillbox
+description: "Bangalore gigs, concerts and events listed on Skillbox, filtered to drop low-quality listings."
 type: aggregator
 tags: '["SKILLBOXES"]'
 domain: skillboxes.com

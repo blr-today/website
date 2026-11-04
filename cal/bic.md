@@ -1,5 +1,6 @@
 ---
 title: Bangalore International Center 🏛️
+description: "Talks, performances, film screenings and exhibitions at the Bangalore International Centre (BIC) in Domlur."
 type: venue
 atproto: bic.blr.today
 fedi: bic@fedi.blr.today
