@@ -65,5 +65,6 @@ remote_images = [
   'https://assets-in\.bmscdn\.com/.*',
   'https://scontent[^/]*\.cdninstagram\.com/.*',
   'https://i\.pinimg\.com/.*',
-  'https://gardencitywalks\.com/images/.*'
+  'https://gardencitywalks\.com/images/.*',
+  'https://offlyn-storage\.s3\.ap-south-1\.amazonaws\.com/images/.*'
 ]

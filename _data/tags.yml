@@ -82,6 +82,10 @@
   title: Urbanaut [Aggregator]
   description: Events listed on the Urbanaut platform.
 
+- id: OFFLYN
+  title: Offlyn [Aggregator]
+  description: Hosted experiences listed on the Offlyn app.
+
 - id: COURTYARD
   title: The Courtyard [Venue]
   description: Venue - The Courtyard, Shanthinagar
