@@ -109,14 +109,42 @@ li[data-eventcount="0"] {
     background: #222; color: #fff; font-size: .75rem; line-height: 1.3; white-space: normal; pointer-events: none;
 }
 
-/* Activities are teal, apart from area hues and price ambers */
+/* One hue per family of the tag ontology, children share their parent's hue */
 .blr-tag--activity { --tag-bg: #ccfbf1; --tag-line: #0d9488; --tag-ink: #115e59; }
+.blr-tag--activity:is([data-tag^="ART-CRAFT"], [data-tag^="EXHIBITION"], [data-tag^="PHOTOGRAPHY"], [data-tag^="FILMMAKING"]) { --tag-bg: #ffedd5; --tag-line: #ea580c; --tag-ink: #9a3412; }
+.blr-tag--activity:is([data-tag^="SHOW"], [data-tag^="ON-STAGE"]) { --tag-bg: #fae8ff; --tag-line: #c026d3; --tag-ink: #86198f; }
+.blr-tag--activity:is([data-tag^="LIVE-MUSIC"], [data-tag^="MUSIC-MAKING"], [data-tag^="LISTENING-SESSION"], [data-tag^="NIGHTLIFE"]) { --tag-bg: #ffe4e6; --tag-line: #e11d48; --tag-ink: #9f1239; }
+.blr-tag--activity:is([data-tag^="MOVIE-SCREENING"], [data-tag^="SPORTS-SCREENING"], [data-tag^="LIVE-SPORTS"]) { --tag-bg: #e0f2fe; --tag-line: #0284c7; --tag-ink: #075985; }
+.blr-tag--activity[data-tag^="GAMES"] { --tag-bg: #fef9c3; --tag-line: #ca8a04; --tag-ink: #713f12; }
+.blr-tag--activity:is([data-tag^="FITNESS"], [data-tag^="DANCING"]) { --tag-bg: #ecfccb; --tag-line: #65a30d; --tag-ink: #3f6212; }
+.blr-tag--activity:is([data-tag^="TASTING"], [data-tag^="COOKING"]) { --tag-bg: #efe3d6; --tag-line: #8b5e34; --tag-ink: #5c3a1e; }
+.blr-tag--activity:is([data-tag^="BOOKS"], [data-tag^="BUSINESS"]) { --tag-bg: #e0e7ff; --tag-line: #4f46e5; --tag-ink: #3730a3; }
+.blr-tag--activity:is([data-tag^="SOCIAL"], [data-tag^="KIDS"], [data-tag^="COUPLES"], [data-tag^="WOMEN-ONLY"], [data-tag^="PETS"]) { --tag-bg: #fce7f3; --tag-line: #db2777; --tag-ink: #9d174d; }
+.blr-tag--activity:is([data-tag^="MARKET"], [data-tag^="EXPO"], [data-tag^="ATTRACTION"], [data-tag^="PROMOTION"]) { --tag-bg: #f5f5f4; --tag-line: #78716c; --tag-ink: #44403c; }
 
 /* Few seats left: red so it stands out from area and price */
 .blr-tag--lastcall { --tag-bg: #fee2e2; --tag-line: #dc2626; --tag-ink: #991b1b; }
 
 /* Liked rows get a pink tint and a red bar */
 .fc-list-event.blr-liked { background: #fff1f2; box-shadow: inset 4px 0 0 #e11d48; }
+
+/* Sticky day heading paints above the positioned chips scrolling under it */
+.fc-list-day-outer-sticky { z-index: 2; }
+
+/* Tags wrap under the title, so the time column stays narrow; small screens give them the whole row */
+.fc-list-event-keywords { display: flex; flex-wrap: wrap; gap: 2px 5px; min-width: 0; padding: 0 14px 8px; }
+.fc-list-event-keywords .blr-tag { flex: none; margin: 0; font-size: 9px; line-height: 12px; padding: 1px 3px; }
+.fc-list-event { display: grid; grid-template-columns: var(--blr-time-width, auto) auto 1fr; align-items: start; }
+.fc-list-event-time-outer { display: contents; }
+.fc-list-event-time { grid-area: 1 / 1; }
+.fc-list-event-dot-outer { grid-area: 1 / 2; }
+.fc-list-event-title { grid-area: 1 / 3; }
+.fc-list-event:has(.fc-list-event-keywords) .fc-list-event-title { padding-bottom: 2px; }
+.fc-list-event-keywords { grid-area: 2 / 3; }
+@media (max-width: 40rem) {
+    .fc-list-event-keywords { grid-area: 2 / 1 / 2 / -1; }
+    .fc-list-event-keywords .blr-tag--parent { display: none; }
+}
 
 /* Bluesky and fediverse follow buttons, see _includes/follow-buttons.html */
 a.blr-follow {
