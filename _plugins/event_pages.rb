@@ -40,7 +40,7 @@ module Jekyll
         end
         doc.data['noindex'] = unlisted
         doc.data['image'] = thumbnail(site, event)
-        doc.data['description'] = event['description'].to_s.gsub(/<[^>]*>/, ' ').gsub(/\s+/, ' ').strip[0, 160]
+        doc.data['description'] = meta_description(event, place, hood, keywords)
         doc.data['sitemap'] = !unlisted
         site.pages << json_page(site, doc.data['name'], doc.data['source'], event)
       end
@@ -80,6 +80,29 @@ module Jekyll
         doc.data['similar'] = scores.sort_by { |other, score| [-score, other.data['event']['startDate'].to_s] }
           .first(5).map { |other, _| summary(other) }
       end
+    end
+
+    PRICE_WORDS = { 'FREE' => 'Free', 'BUDGET' => 'Under ₹500', 'PRICEY' => '₹2,000 and up' }.freeze
+
+    # Day, time, venue and price come first, since that is what people scan in search results
+    def meta_description(event, place, hood, keywords)
+      start = Time.parse(event['startDate'].to_s) rescue nil
+      stamp = start && start.strftime(event['startDate'].to_s.size > 10 ? '%a %-d %b, %-l:%M %P' : '%a %-d %b')
+      venue = place.is_a?(Hash) ? place['name'].to_s.split(/[:|]/).first.to_s.strip : place.to_s
+      venue = '' if venue.match?(/\A(bengaluru|bangalore)\z/i)
+      where = [venue, hood&.data&.dig('title')].reject { |x| x.to_s.empty? }.uniq.join(', ')
+      lead = [stamp, where.empty? ? nil : "at #{where}"].compact.join(' ').squeeze(' ')
+      price = PRICE_WORDS[(keywords & PRICE_WORDS.keys).first] || cheapest(event['offers'])
+      blurb = event['description'].to_s.gsub(/<[^>]*>/, ' ').gsub(/\s+/, ' ').strip
+      text = [lead, price, blurb].reject { |x| x.to_s.empty? }.join('. ')
+      text.size > 160 ? text[0, 157].sub(/\s+\S*\z/, '') + '…' : text
+    end
+
+    def cheapest(offers)
+      list = offers.is_a?(Array) ? offers : [offers]
+      prices = list.filter_map { |o| o.is_a?(Hash) && o['price'].to_s.match?(/\A\d+(\.\d+)?\z/) ? o['price'].to_f : nil }
+      return nil if prices.empty?
+      prices.min.zero? ? 'Free' : "From ₹#{prices.min.round}"
     end
 
     # Social cards take the first image, resized by the image CDN when its host is listed
