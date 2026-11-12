@@ -83,7 +83,7 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
     eventMouseEnter: info => { loadDetails(info.event) },
     eventDidMount: function(info) {
       alignTimeColumn(calendarEl)
-      let keywords = tagged(info.event)
+      let keywords = shownTags(info.event.extendedProps.keywords, locationTags, pageTags, onlyTags, info.event.title)
 
       let element = info.el
       element.dataset.type = eventType(info.event)
@@ -95,9 +95,9 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
         let keywordsElement = document.createElement('div');
         keywordsElement.className = 'fc-list-event-keywords';
         for (let tag of keywords) {
-          let { id, name, kind } = tag
+          let { id, name, kind, parent } = tag
           let keywordElement = document.createElement('span');
-          keywordElement.className = `keyword blr-tag blr-tag--${kind}`;
+          keywordElement.className = `keyword blr-tag blr-tag--${kind}${parent ? ' blr-tag--parent' : ''}`;
           keywordElement.dataset.tag = id;
           keywordElement.dataset.tip = tagTip(tag);
           keywordElement.textContent = name;

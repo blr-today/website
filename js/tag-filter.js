@@ -84,7 +84,9 @@ function tagFilter(calendar, root, facetsOf) {
     },
   }, 'Filter ', count)
   let desc = h('p', { class: 'blr-tf__desc', 'aria-live': 'polite', hidden: true })
-  root.append(toggle, panel, desc)
+  // The one tag a group must have is on every shown row, so its chips say nothing
+  let queried = h('style')
+  root.append(toggle, panel, desc, queried)
 
   const get = key => state.get(key) || 0
   const groupOf = key => key.slice(0, key.indexOf(':'))
@@ -108,6 +110,10 @@ function tagFilter(calendar, root, facetsOf) {
   }
 
   function apply() {
+    let musts = [...state].filter(([, v]) => v > 0).map(([k]) => k)
+    let sole = Object.keys(GROUPS).filter(g => g !== 'type').map(g => musts.filter(k => groupOf(k) === g))
+      .filter(w => w.length === 1).map(w => w[0].slice(w[0].indexOf(':') + 1))
+    queried.textContent = sole.length ? `.fc-list-event-keywords .blr-tag:is(${sole.map(t => `[data-tag="${t}"]`).join(',')}) { display: none }` : ''
     let next = new Set(events.filter(e => !keep(e)))
     calendar.batchRendering(() => events.forEach(e => {
       if (next.has(e) !== hidden.has(e)) e.setProp('display', next.has(e) ? 'none' : 'auto')

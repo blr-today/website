@@ -50,9 +50,7 @@ function visibleKeywords(all, pageTags = [], onlyTags = null) {
     'HIGHAPE', 'SKILLBOXES', 'INSIDER', 
     'MV EVENT', 'ALLEVENTS', 'DISTRICT', 'BOOKMYSHOW']);
 
-  if (pageTags.length == 1) {
-    keywords = keywords.difference(new Set(pageTags))
-  }
+  keywords = keywords.difference(new Set(pageTags))
 
   if (onlyTags) {
     keywords = new Set([...keywords].filter(k => onlyTags.includes(k) || PRICE_TAG.test(k) || k === LASTCALL || ACTIVITY.has(k)))
@@ -62,9 +60,39 @@ function visibleKeywords(all, pageTags = [], onlyTags = null) {
   return keywords.difference(InvisibleKeywords)
 }
 
-// Tags as the calendar rows and the event modal show them
-function shownTags(keywords, locationTags, pageTags = [], onlyTags = null) {
-  return splitTags(visibleKeywords(keywords, pageTags, onlyTags)).map(t => ({ ...t, kind: tagKind(t.id, locationTags) }))
+// A tag another tag on the event already implies, across families
+const IMPLIED = {
+  'FITNESS/RUNNING': ['OUTDOORS'], 'FITNESS/CYCLING': ['OUTDOORS'],
+  'OUTDOORS/TREK': ['FITNESS', 'OUTDOORS/NATURE-WALK'], 'OUTDOORS/BIRDING': ['OUTDOORS/NATURE-WALK'],
+  'OUTDOORS/STARGAZING': ['OUTDOORS/NATURE-WALK'],
+  'MUSIC-MAKING/JAM': ['LIVE-MUSIC'], 'NIGHTLIFE/KARAOKE': ['MUSIC-MAKING'],
+  'COOKING/COFFEE': ['TASTING/COFFEE-TEA', 'TASTING'], 'COOKING/MIXOLOGY': ['TASTING/DRINKS', 'TASTING'],
+  'COOKING/CLASS': ['TASTING/FOOD', 'TASTING'],
+  'BOOKS/AUTHOR-TALK': ['BOOKS/BOOK-CLUB'], 'SOCIAL/DATING-MIXER': ['COUPLES'],
+  'GAMES/BOARDGAMES': ['SOCIAL'], 'GAMES/QUIZ': ['SOCIAL'], 'GAMES/SOCIAL-DEDUCTION': ['SOCIAL'],
+  'ON-STAGE/OPEN-MIC': ['SHOW'], 'ON-STAGE/IMPROV': ['SHOW/IMPROV', 'SHOW'],
 }
 
-export { PRICE_TAG, tagKind, tagTip, visibleKeywords, shownTags }
+function implied(tags) {
+  return new Set(tags.flatMap(t => IMPLIED[t.id] || []))
+}
+
+// A tag the title already spells out, as HERITAGE-WALK on a heritage walk, says nothing new
+function obvious(name, title) {
+  let words = title.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
+  return name.toLowerCase().split('-').every(w =>
+    words.some(x => x === w || (Math.min(x.length, w.length) >= 4 && (x.startsWith(w) || w.startsWith(x)))))
+}
+
+// Tags as the calendar rows and the event modal show them; a title drops the obvious ones
+function shownTags(keywords, locationTags, pageTags = [], onlyTags = null, title = '') {
+  // Every event here has the page's tags, and so their parents, as SHOW on the comedy calendar
+  let queried = new Set(pageTags.flatMap(p => p.split('/').map((_, i, a) => a.slice(0, i + 1).join('/'))))
+  let tags = splitTags(visibleKeywords(keywords, pageTags, onlyTags)).filter(t => !queried.has(t.id))
+  let redundant = title ? implied(tags) : new Set()
+  tags = tags.filter(t => !title || PRICE_TAG.test(t.id) || t.id === LASTCALL || !(redundant.has(t.id) || obvious(t.name, title)))
+  // A parent with a child shown, so small screens can show the child alone
+  return tags.map(t => ({ ...t, kind: tagKind(t.id, locationTags), parent: tags.some(o => o.id.startsWith(t.id + '/')) }))
+}
+
+export { PRICE_TAG, IMPLIED, tagKind, tagTip, visibleKeywords, shownTags, obvious }
