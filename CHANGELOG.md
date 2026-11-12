@@ -6,6 +6,7 @@ title: changelog
 
 ## November 2026
 
+- `Removed` Townscript 🪦 shut down along with Townhall in November 2026. We tracked a handful of hosts on it, such as Lahe Lahe, Pet Fed India and Broke Bibliophiles.
 - `Cal` Added a calendar for [Offlyn](/cal/offlyn), small hosted plans across Bangalore, from bar lectures to supper clubs and house parties.
 - `New` Improved debug pages: </debug/>.
 - `New` Some calendars, like [Koramangala](/cal/koramangala) and [District](/cal/district), show how many events are listed and how many our filters left out.
