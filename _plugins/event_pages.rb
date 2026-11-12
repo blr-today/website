@@ -13,6 +13,8 @@ module Jekyll
       unwanted = site.pages.find { |p| p.relative_path == 'cal/unwanted.md' }
       hidden = JSON.parse(site.config['excludeTags'] || '[]') | JSON.parse(unwanted&.data&.dig('tags') || '[]')
       calendars = site.pages.select { |p| p.data['layout'] == 'events' && p != unwanted }
+      # Calendars change with every build, which the sitemap's lastmod should say
+      calendars.each { |cal| cal.data['last_modified_at'] ||= site.time }
       by_tag = calendar_for_tags(calendars)
       links = by_tag.transform_values { |cal| { 'url' => cal.url, 'title' => cal.data['title'] } }
       activities = Array(site.data['tags']).select { |t| t['kind'] == 'activity' }.map { |t| t['id'] }

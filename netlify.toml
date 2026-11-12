@@ -15,6 +15,10 @@ if [ -z "$event_count" ] || [ "$event_count" -eq "0" ]; then
 fi
 """
 
+# Submits the sitemap's URLs to IndexNow after each production deploy, see plugins/indexnow
+[[plugins]]
+  package = "./plugins/indexnow"
+
 # Short thumbnail paths, cached for a year in browsers and the shared durable cache
 [[redirects]]
   from = "/img/600/*"
