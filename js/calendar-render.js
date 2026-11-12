@@ -114,6 +114,8 @@ function renderCalendar(url, pageTags = [], onlyTags = null, locationTags = []){
     schedulerLicenseKey: 'AGPL-My-Frontend-And-Backend-Is-Open-Source'
   });
   calendar.render();
+  // The static list is for readers and crawlers without the calendar
+  document.getElementById('blr-upcoming')?.remove()
   dateJump(calendarEl)
   let filterEl = document.getElementById('blr-tag-filter')
   let facets = e => [{ group: 'type', name: eventType(e) }].concat([...visibleKeywords(e.extendedProps.keywords, pageTags, onlyTags)]

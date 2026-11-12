@@ -21,3 +21,10 @@ test("social handles point at blr.today accounts", () => {
     }
   }
 });
+
+test("calendar pages link their upcoming events without scripts", () => {
+  const html = readFileSync(new URL("../_site/cal/comedy/index.html", import.meta.url), "utf8");
+  const links = html.match(/<ol class="blr-upcoming"[\s\S]*?<\/ol>/)?.[0].match(/href="\/event\/[^"]+\/"/g) || [];
+  assert.ok(links.length >= 5, `only ${links.length} event links`);
+  assert.ok(html.includes('"@type":"ItemList"'));
+});

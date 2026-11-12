@@ -146,6 +146,13 @@ li[data-eventcount="0"] {
     .fc-list-event-keywords .blr-tag--parent { display: none; }
 }
 
+/* The next events as plain links until the calendar script replaces them */
+.blr-upcoming { display: grid; gap: .3rem; margin: 1rem 0; padding: 0; list-style: none; }
+.blr-upcoming time { color: var(--muted, #666); margin-right: .5rem; font-variant-numeric: tabular-nums; }
+.blr-upcoming span { color: var(--muted, #666); font-size: .85em; }
+.blr-upcoming span::before { content: ' · '; }
+html.blr-js .blr-upcoming { display: none; }
+
 /* Bluesky and fediverse follow buttons, see _includes/follow-buttons.html */
 a.blr-follow {
   display: inline-flex; align-items: center; gap: .4em; padding: .5em 1em;

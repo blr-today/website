@@ -41,6 +41,30 @@ title: blr.today
 
 {% endif %}
 {% if eventCount > 0 %}
+{%- assign today = site.time | date: '%Y-%m-%d' %}
+{%- assign shown = 0 %}
+<script>document.documentElement.classList.add('blr-js')</script>
+<ol class="blr-upcoming" id="blr-upcoming" aria-label="Upcoming events">
+{%- for row in page.events %}
+{%- if shown >= 60 %}{% break %}{% endif %}
+{%- assign E = row.event_json | parse_json %}
+{%- assign day = E.endDate | default: E.startDate | slice: 0, 10 %}
+{%- if day < today %}{% continue %}{% endif %}
+{%- assign shown = shown | plus: 1 %}
+<li><time datetime="{{ E.startDate }}">{{ E.startDate | date: '%a %-d %b' }}</time> <a href="/event/{{ row.id }}/">{{ E.name | escape }}</a>{% if E.location.name %} <span>{{ E.location.name | escape }}</span>{% endif %}</li>
+{%- endfor %}
+</ol>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":{{ page.title | jsonify }},"itemListElement":[
+{%- assign shown = 0 %}
+{%- for row in page.events %}
+{%- if shown >= 60 %}{% break %}{% endif %}
+{%- assign E = row.event_json | parse_json %}
+{%- assign day = E.endDate | default: E.startDate | slice: 0, 10 %}
+{%- if day < today %}{% continue %}{% endif %}
+{%- if shown > 0 %},{% endif %}
+{%- assign shown = shown | plus: 1 %}
+{"@type":"ListItem","position":{{ shown }},"url":"{{ site.url }}/event/{{ row.id }}/","name":{{ E.name | jsonify }}}
+{%- endfor %}]}</script>
 <div id="calendar"></div>
 {% else %}
 <p>There are no events to display.</p>
