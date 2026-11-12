@@ -37,6 +37,8 @@ module Jekyll
           { 'name' => tag }.merge(link) if link
         end
         doc.data['noindex'] = unlisted
+        doc.data['image'] = thumbnail(site, event)
+        doc.data['description'] = event['description'].to_s.gsub(/<[^>]*>/, ' ').gsub(/\s+/, ' ').strip[0, 160]
         doc.data['sitemap'] = !unlisted
         site.pages << json_page(site, doc.data['name'], doc.data['source'], event)
       end
@@ -78,6 +80,16 @@ module Jekyll
       end
     end
 
+    # Social cards take the first image, resized by the image CDN when its host is listed
+    def thumbnail(site, event)
+      first = Array(event['image']).first
+      url = first.is_a?(Hash) ? first['url'] || first['contentUrl'] : first
+      return nil unless url.is_a?(String) && url.start_with?('https://')
+      prefixes = Array(site.data['image_cdn']).map { |p| Regexp.new('\\A' + Regexp.escape(p).gsub('\\*', '[^/]*')) }
+      return url unless prefixes.any? { |re| url.match?(re) }
+      "#{site.config['url']}/img/600/#{url.delete_prefix('https://')}"
+    end
+
     def summary(doc)
       event = doc.data['event']
       start = Time.parse(event['startDate'].to_s) rescue nil
@@ -106,7 +118,7 @@ module Jekyll
       venue = place.is_a?(Hash) ? place['name'].to_s.split(/[:|]/).first.to_s.strip : ''
       venue = '' if venue.match?(/\A(bengaluru|bangalore)\z/i)
       details = [start&.strftime('%a %-d %b'), venue].reject { |x| x.nil? || x.empty? }.join(', ')
-      [event['name'].to_s.strip, details].reject(&:empty?).join(' · ') + ' | blr.today'
+      [event['name'].to_s.strip, details].reject(&:empty?).join(' · ')
     end
 
     def json_page(site, id, source, event)

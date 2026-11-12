@@ -3,8 +3,6 @@
 <html lang="en">
     <head data-theme="pure">
         {% include head.html %}
-        <link rel="canonical" href="{{ page.url | absolute_url }}" />
-        <meta name="description" content="{{ E.description | strip_html | strip_newlines | truncate: 160 | escape }}" />
         {%- unless page.noindex %}
         <meta name="robots" content="unavailable_after: {{ E.endDate | default: E.startDate | date: '%Y-%m-%d' }}" />
         {%- endunless %}

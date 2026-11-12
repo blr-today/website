@@ -4,12 +4,12 @@
 <title>{{ page.seoTitle }}</title>
 {%- elsif page.layout == "events" %}
 <title>{{ page.title }} · Bangalore events | blr.today</title>
+{%- elsif page.layout == "event" %}
+<title>{{ page.title }} | blr.today</title>
 {%- else %}
 <title>{{ page.title }}</title>
 {%- endif %}
-{%- unless page.layout == "event" %}
 {% seo title=false %}
-{%- endunless %}
 <link rel="stylesheet" href="/assets/classless.css" />
 <link rel="stylesheet" href="/assets/custom.css" />
 {%- if page.layout == "events" and page.events.size > 0 %}
