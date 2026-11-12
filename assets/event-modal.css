@@ -120,6 +120,7 @@ html:has(dialog.blr-event:modal) { overflow: hidden; }
 .blr-event__section-body { display: grid; gap: .5rem; }
 .blr-event__section-body ul { display: grid; gap: .25rem; }
 .blr-event__facts { display: grid; gap: .2rem; }
+.blr-event__similar small { display: block; font-size: .8rem; color: var(--muted); }
 .blr-event__facts div { display: flex; gap: .5rem; justify-content: space-between; border-bottom: 1px dotted var(--line); }
 .blr-event__facts dt { font-size: .85rem; color: var(--muted); font-weight: 400; }
 .blr-event__facts dd { font-weight: 600; }

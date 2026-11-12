@@ -40,9 +40,51 @@ module Jekyll
         doc.data['sitemap'] = !unlisted
         site.pages << json_page(site, doc.data['name'], doc.data['source'], event)
       end
+      similar_events(events.docs, activities, hoods, hidden)
     end
 
     private
+
+    SOURCES = %w[HIGHAPE SKILLBOXES INSIDER ALLEVENTS DISTRICT BOOKMYSHOW URBANAUT OFFLYN CURATED].freeze
+
+    # Upcoming listed events sharing the most tags, a specific activity counting more than an area
+    def similar_events(docs, activities, hoods, hidden)
+      today = Date.today.to_s
+      areas = hoods.flat_map { |h| JSON.parse(h.data['tags'] || '[]') }
+      weight = lambda do |tag|
+        next 0 if hidden.include?(tag) || SOURCES.include?(tag) || !tag.match?(/\A[A-Z][A-Z0-9\/-]+\z/)
+        next 0 if tag.match?(/\A(FREE|BUDGET|VALUE|PRICEY|LASTCALL)\z/)
+        next(tag.include?('/') ? 3 : 2) if activities.include?(tag)
+        areas.include?(tag) ? 1 : 2
+      end
+      by_tag = Hash.new { |h, k| h[k] = [] }
+      docs.each do |doc|
+        event = doc.data['event']
+        next if doc.data['noindex'] || (event['endDate'] || event['startDate']).to_s[0, 10] < today
+        Array(event['keywords']).map(&:to_s).uniq.each { |tag| by_tag[tag] << doc }
+      end
+      docs.each do |doc|
+        scores = Hash.new(0)
+        Array(doc.data['event']['keywords']).map(&:to_s).uniq.each do |tag|
+          w = weight.call(tag)
+          by_tag[tag].each { |other| scores[other] += w } if w > 0
+        end
+        # Another date of the same series comes first; a shared venue and area alone is not similar
+        name = doc.data['event']['name'].to_s.strip.downcase
+        scores.each_key { |other| scores[other] += 4 if other.data['event']['name'].to_s.strip.downcase == name }
+        scores.delete_if { |other, score| other == doc || score < 4 }
+        doc.data['similar'] = scores.sort_by { |other, score| [-score, other.data['event']['startDate'].to_s] }
+          .first(5).map { |other, _| summary(other) }
+      end
+    end
+
+    def summary(doc)
+      event = doc.data['event']
+      start = Time.parse(event['startDate'].to_s) rescue nil
+      place = event['location'].is_a?(Array) ? event['location'].first : event['location']
+      venue = place.is_a?(Hash) ? place['name'].to_s.split(/[:|]/).first.to_s.strip : ''
+      { 'url' => doc.url, 'name' => event['name'].to_s.strip, 'when' => start&.strftime('%a %-d %b'), 'where' => venue }
+    end
 
     # LIVE-MUSIC/JAZZ has no calendar of its own, so it links to LIVE-MUSIC's
     def inherited(links, tag)

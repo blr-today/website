@@ -50,6 +50,16 @@
                             <div class="blr-event__section-body"><p>{{ E.description | strip_html | escape | newline_to_br }}</p></div>
                         </section>
                         {%- endif %}
+                        {%- if page.similar.size > 0 %}
+                        <section class="blr-event__section blr-event__similar">
+                            <h3>Similar</h3>
+                            <div class="blr-event__section-body"><ul>
+                                {%- for s in page.similar %}
+                                <li><a href="{{ s.url }}">{{ s.name | escape }}</a><small>{{ s.when }}{% if s.where != '' %} · {{ s.where | escape }}{% endif %}</small></li>
+                                {%- endfor %}
+                            </ul></div>
+                        </section>
+                        {%- endif %}
                     </div>
                 </div>
             </article>
