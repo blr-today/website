@@ -6,7 +6,7 @@ title: blr.today
     <div style="margin-top:5px;text-align: left;flex: 1;">
         {{content | extract_element:'blockquote' | first | extract_element:'p' }}
     </div>
-    <img height=100px src="/img/apple-touch-icon.png" alt="blr.today logo" />
+    <img width="100" height="100" src="/img/apple-touch-icon.png" alt="blr.today logo" />
 </div>
 
 {%- if page.counts %}
@@ -33,7 +33,7 @@ title: blr.today
 {% endif %}
 {% include follow-buttons.html atproto=page.atproto fedi=page.fedi %}
 {% if page.tagFilter and eventCount > 0 %}
-<link rel="stylesheet" href="/assets/tag-filter.css">
+<link rel="stylesheet" href="/assets/tag-filter.css" media="print" onload="this.media='all'">
 <div id="blr-tag-filter" class="blr-tf" hidden></div>
 {% endif %}
 </div>
@@ -77,8 +77,8 @@ title: blr.today
 {% include social.html links = page.links %}
 
 {% if eventCount > 0 %}
-<link rel="stylesheet" href="/assets/event-modal.css">
-<link rel="stylesheet" href="/assets/date-jump.css">
+<link rel="stylesheet" href="/assets/event-modal.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/assets/date-jump.css" media="print" onload="this.media='all'">
 <script type="application/json" id="blr-image-cdn">{{ site.data.image_cdn | jsonify }}</script>
 <script type="application/json" id="blr-tag-info">{{ site.data.tags | jsonify }}</script>
 <script type="application/json" id="blr-tag-links">{{ site.data.tag_calendars | jsonify }}</script>

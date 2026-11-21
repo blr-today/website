@@ -2,7 +2,7 @@
 .blr-dj__fab {
   position: fixed; z-index: 20; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));
   display: inline-flex; align-items: center; gap: .45rem; margin: 0; padding: .7rem 1rem; min-height: 3rem;
-  border: 0; border-radius: 999px; background: var(--cemph, #1f8dd6); color: #fff;
+  border: 0; border-radius: 999px; background: #1a6aa6; color: #fff;
   font: 600 .95rem/1 system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; letter-spacing: normal; text-transform: none;
   box-shadow: 0 4px 14px rgb(0 0 0 / .25); cursor: pointer;
 }
@@ -45,7 +45,7 @@
 
 .blr-dj__grid { display: grid; gap: 2px; }
 .blr-dj__row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
-.blr-dj__wd { padding: .25rem 0; font-size: .75rem; font-weight: 600; text-align: center; color: #777; }
+.blr-dj__wd { padding: .25rem 0; font-size: .75rem; font-weight: 600; text-align: center; color: #595959; }
 .blr-dj__wd.is-weekend { color: #c2410c; }
 .blr-dj__row > [role="gridcell"] { display: block; }
 .blr-dj__day {

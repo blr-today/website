@@ -209,7 +209,7 @@ function dateJump(calendarEl) {
       fab.hidden = !any
       let here = current()
       label.textContent = here ? SHORT.format(parse(here)) : 'Dates'
-      fab.setAttribute('aria-label', here ? `Jump to date, now at ${LONG.format(parse(here))}` : 'Jump to date')
+      fab.setAttribute('aria-label', here ? `${label.textContent}, jump to date (now at ${LONG.format(parse(here))})` : 'Dates, jump to date')
     })
   }
   addEventListener('scroll', refresh, { passive: true })

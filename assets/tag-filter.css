@@ -3,7 +3,7 @@
 .blr-tf:not([hidden]) { display: contents; }
 .blr-tf__toggle { white-space: nowrap; }
 .blr-tf.is-filtering .blr-tf__toggle { border-color: #16a34a; }
-.blr-tf__count { font-weight: 400; opacity: .8; }
+.blr-tf__count { font-weight: 400; }
 .blr-tf__panel:not([hidden]) {
   display: grid; gap: .75rem; flex-basis: 100%; padding: .75rem; margin-bottom: .5rem;
   border: 1px solid #e6e6e6; border-radius: .4rem; background: #fafafa; font-size: .85rem;
@@ -15,7 +15,7 @@
   display: inline-flex; align-items: center; gap: .3rem; padding: .15rem .55rem;
   border: 1px solid #c7c7c7; border-radius: 999px; background: #fff; color: #333; font: inherit; font-size: .8rem; cursor: pointer;
 }
-.blr-tf__chip small { color: #777; font-size: .7rem; }
+.blr-tf__chip small { color: #595959; font-size: .7rem; }
 .blr-tf__chip.is-must { background: #dcfce7; border-color: #16a34a; color: #14532d; }
 .blr-tf__chip.is-never { background: #fee2e2; border-color: #dc2626; color: #7f1d1d; }
 .blr-tf__chip.is-never .blr-tf__name { text-decoration: line-through; }
