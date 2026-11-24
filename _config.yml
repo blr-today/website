@@ -32,8 +32,6 @@ exclude:
   - test
   - scripts
   - netlify
-  # SES has no production access yet, so no email sign-up
-  - pages/subscribe.html
 timezone: Asia/Kolkata
 # Shared by every calendar, and event pages with these tags stay out of the sitemap
 excludeTags: &excludeTags '["BUSINESS", "LOW-QUALITY", "NOTINBLR", "DANDIYA", "WOOWOO", "SPORTS-SCREENING"]'
