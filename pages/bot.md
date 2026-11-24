@@ -24,7 +24,7 @@ engine's, but it only looks for events.
 
 - Reads `robots.txt` first and obeys it, including `Crawl-delay`.
 - Fetches robots.txt, then sitemaps, then individual event pages. It doesn't brute-force URLs.
-- One request at a time per host, with at least 10 seconds between page loads.
+- One request at a time per host, with 4 to 8 seconds between page loads.
 - Runs four times a day (00:17, 06:17, 12:17 and 18:17 UTC).
 - Never logs in, books tickets, submits forms or bypasses access controls.
 - Keeps only public event details: title, dates, venue, price and a link back to you.
