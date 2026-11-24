@@ -4,7 +4,7 @@ The site is published at <https://blr.today>
 
 ## Setup
 
-Please see <HACKING.md>.
+Please see <HACKING.md>. Contributions follow our [Code of Conduct](CODE_OF_CONDUCT.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## LICENSE
 

@@ -11,4 +11,11 @@
         See <a href="/changelog">recent updates</a> or
         <a href="#feedback" data-feedback="footer">send feedback</a>.
     </p>
+    {% if page.url == "/" %}
+    <p>
+        <a href="/license">Open source</a> ·
+        <a href="https://github.com/blr-today/website/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a> ·
+        <a href="https://www.netlify.com/">This site is powered by Netlify</a>
+    </p>
+    {% endif %}
 </footer>
