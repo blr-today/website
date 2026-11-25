@@ -1,6 +1,6 @@
 ---
 title: Jawaharlal Nehru Planetarium 🪐
-description: "Sky shows, talks and telescope sessions at the Jawaharlal Nehru Planetarium, for curious minds of every age."
+description: "Daily sky shows, talks and telescope sessions at the Jawaharlal Nehru Planetarium, for curious minds of every age."
 type: venue
 tags: '["PLANETARIUM"]'
 links:
@@ -11,4 +11,5 @@ links:
 > The Jawaharlal Nehru Planetarium in Bengaluru runs sky shows, talks and
   lecture series on astronomy and science.
 
-Events on this page are read from the planetarium's Instagram posts.
+Events on this page are read from the planetarium's Instagram posts and its
+BookMyShow listings of the daily sky shows.
